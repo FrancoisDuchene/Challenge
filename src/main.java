@@ -1,3 +1,5 @@
+import java.util.*;
+
 
 public class main
 {
@@ -25,6 +27,7 @@ public class main
 		{
 			case 1 : 
 					System.out.println("\n C'est partit !");
+					jeu();
 				break;
 			case 2 :
 					System.out.println("\nMenu des Options");
@@ -41,11 +44,36 @@ public class main
 		
 		}while(choix <= 0 || choix >= 5);
 	}
-	public void jeu()
+	public static void jeu()
 	{
+		// Differentes variables utilisées
+		String MotSecret = "fromage";	
+		String MotUser = "un";
+		Scanner sc = new Scanner(System.in);
+		
 		/*
 		 * 	Texte dédié Interface utilisateur
 		 */
+		System.out.println("Trouvez le mot secret !");
+		
+		for(byte coup = 0; coup != 10; coup++ )
+		{
+			System.out.println("Il vous reste : " + (10-coup) + " coups pour trouver la solution");
+			MotUser = sc.nextLine();
+			
+			if(MotUser.equals(MotSecret))
+			{
+				System.out.println("Félicitation, vous avez trouvé le mot " + MotSecret + " en " + coup + " coups !!!");	
+				coup = 10;
+				break;
+			}		
+		
+		}
+		
+		
+		System.out.println("Program ended correctly");
 		
 	}
+	
+	
 }
