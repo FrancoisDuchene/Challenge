@@ -1,3 +1,9 @@
+/*
+ * @author Duchene Francois
+ * @version 0.1
+ * 
+ */
+
 import java.util.*;
 
 
@@ -17,6 +23,12 @@ public class main
 		 * 
 		 * jeu destiné à faire un pendu. Ici il s'agit de la classa mère où
 		 * tout se déroulera 
+		 * 
+		 * Le programme se sépare actuellement en 3 fonctions
+		 * 
+		 * 1) main
+		 * 2) jeu où se déroule le jeu
+		 * 3) menu
 		 */
 		System.out.println("==========================\n\t LE PENDU \n==========================");
 		System.out.println("1.Jouer \n2.Options \n3.Crédits \n4.Quitter");
@@ -72,6 +84,10 @@ public class main
 		
 		
 		System.out.println("Program ended correctly");
+		
+	}
+	public static void menu()
+	{
 		
 	}
 	
