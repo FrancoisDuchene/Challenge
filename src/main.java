@@ -14,7 +14,6 @@ public class main
 		/* 	
 		 * Déclaration des variables
 		 */
-		byte choix = 1;
 		
 		/*	
 		 * ==========================
@@ -30,31 +29,8 @@ public class main
 		 * 2) jeu où se déroule le jeu
 		 * 3) menu
 		 */
-		System.out.println("==========================\n\t LE PENDU \n==========================");
-		System.out.println("1.Jouer \n2.Options \n3.Crédits \n4.Quitter");
+				menu();				
 		
-		do
-		{
-		switch(choix)
-		{
-			case 1 : 
-					System.out.println("\n C'est partit !");
-					jeu();
-				break;
-			case 2 :
-					System.out.println("\nMenu des Options");
-				break;
-			case 3 :
-					System.out.println("Dev : f.Duchene");
-				break;
-			case 4 :
-				break;
-			default :
-					System.out.println("Veuillez indiquer 1,2,3 ou 4 !");
-				break;
-		}
-		
-		}while(choix <= 0 || choix >= 5);
 	}
 	public static void jeu()
 	{
@@ -88,7 +64,35 @@ public class main
 	}
 	public static void menu()
 	{
+		byte choix = 0;
+		Scanner scr = new Scanner(System.in);		
 		
+		System.out.println("==========================\n\t LE PENDU \n==========================");
+		System.out.println("1.Jouer \n2.Options \n3.Crédits \n4.Quitter");
+		choix = scr.nextByte();
+		
+		do
+		{
+		switch(choix)
+		{
+			case 1 : 
+					System.out.println("\n C'est partit !");
+					jeu();
+				break;
+			case 2 :
+					System.out.println("\nMenu des Options");
+				break;
+			case 3 :
+					System.out.println("Dev : f.Duchene");
+				break;
+			case 4 :
+				break;
+			default :
+					System.out.println("Veuillez indiquer 1,2,3 ou 4 !");
+				break;
+		}
+		
+		}while(choix <= 0 || choix >= 5);
 	}
 	
 	
