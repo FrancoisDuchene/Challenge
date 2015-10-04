@@ -69,6 +69,7 @@ public class main
 		
 		System.out.println("==========================\n\t LE PENDU \n==========================");
 		System.out.println("1.Jouer \n2.Options \n3.Crédits \n4.Quitter");
+		System.out.println("bonjour");
 		choix = scr.nextByte();
 		
 		do
