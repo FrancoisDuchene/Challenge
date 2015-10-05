@@ -93,7 +93,7 @@ public class main
 				break;
 		}
 		
-		}while(choix <= 0 || choix >= 5);
+		}while(choix <= 0 || choix >= 4);
 	}
 	
 	
