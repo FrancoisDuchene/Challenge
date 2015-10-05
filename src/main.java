@@ -109,7 +109,7 @@ public class Main
  public static void main (String [] args)
  {
   /*  
-   * Declaration of the variables
+   * Declaration of the variable
    */
   
   /* 
