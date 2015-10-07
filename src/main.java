@@ -75,16 +75,14 @@ public class Main
 		System.out.println("Trouvez le mot secret !");	
 		
 		while( vies != 0)
-		{
-			
+		{			
 			System.out.println(String.format("\n\n\nIl reste : %d vie(s)",(vies)));
 			System.out.println(MotUser);
 			System.out.println("Vous avez déjà proposé les lettres suivantes: " + LettresFausses);
 						
 			System.out.println("Ecrivez une lettre : ");
 			same = false;
-			re = true;
-			
+			re = true;			
 			
 			LettreUser = TextIO.getChar();
 	
@@ -119,8 +117,8 @@ public class Main
 			
 			if(vies == 0)
 			{
-				System.out.println("==========================\n\t GAME OVER\n==========================");
-			}
+				System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n\t GAME OVER\n~~~~~~~~~~~~~~~~~~~~~~~~~~");
+			}						
 		}
 		
 	}
