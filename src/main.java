@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 /*
  * @author Duchene Francois && Tascon Gutierrez Luis
  * @version 1.1
@@ -48,9 +50,9 @@ public class Main
 	  * @post: play the game
 	  */
 	public static void jeu()
-	{
+	{		
 		// all the variables used
-		String MotSecret = "zigote";	
+		String MotSecret = "zygote";	
 		String MotUser = "";
 		String LettresFausses = "";
 		char LettreUser = 'A';	
@@ -186,6 +188,19 @@ public class Main
 					option2();
 					break;
 				case 3:
+					break;
+				case 4:
+					try {
+						Dico.lectureMots();
+					} catch (Exception e) {
+						
+						e.printStackTrace();
+					}
+					break;
+				case 5:
+					double nbrRandom = 1.0;
+					nbrRandom = Math.random();
+					System.out.println(nbrRandom);
 					break;
 				default:
 					System.out.println("Veuillez indiquer 1,2 ou 3 !");

@@ -5,18 +5,40 @@ public class Fichier
 {
 	private BufferedWriter fW;
 	private BufferedReader fR;
-	private char mode;
+	private char mode = 'X';
 	
+	/**
+	 * @param mode == 'R' | 'L' | 'W' | 'E'
+	 * @see print the current mode
+	 */
+	public void modeAffiche(char mode)
+	{
+		System.out.println("Le Mode Actuel est : " + mode);
+	}
+	public int longueurFichier()
+	{
+		String str1 = lire();
+		int longueur = 0;
+		for(int i=0; ;i++)
+		{
+			if(str1.equals("EOF"))
+			{
+				longueur = i;
+				break;
+			}
+		}
+		return longueur;
+	}
 	/*
 	 * @pre -
 	 * @post Cette méthode ouvre un flux. Renvoie True si tout s'est déroulé correctement et false si une erreur est apparue
 	 */
-	public boolean ouvrir(String nomDuFichier, String s)
-	{
-		try
-		{	
+	public void ouvrir(String nomDuFichier, String s)
+	{			
 			mode = (s.toUpperCase()).charAt(0);
 		
+		try
+		{
 			if(mode == 'R' || mode == 'L')		
 			{		
 				fR = new BufferedReader(new FileReader(new File(nomDuFichier)));		
@@ -25,14 +47,19 @@ public class Fichier
 			{		
 				fW = new BufferedWriter(new FileWriter(new File(nomDuFichier)));		
 			}
-			return true;
 		}
 		catch(IOException e)
 		{
-			return false;
+			e.printStackTrace();
+			System.out.println("\nIOException ERROR");
 		}
+		
+		
 	}
-	
+	/*
+	 * @pre -
+	 * @post ecrit dans le fichier le int reçu en paramètre
+	 */	
 	public void ecrireInt(int tmp) throws IOException
 	{
 		String chaine = "";
@@ -43,12 +70,15 @@ public class Fichier
 			fW.newLine();
 		}
 	}
+	/*
+	 * @pre tmp != NULL
+	 * @post ecrit dans le fichier le string reçu en paramètre
+	 */
 	public void ecrireString(String tmp) throws IOException
-	{
-		String chaine = "";
-		if(chaine != null)
+	{		
+		if(tmp != null)
 		{
-			fW.write(chaine, 0, chaine.length());
+			fW.write(tmp, 0, tmp.length());
 			fW.newLine();
 		}
 	}
@@ -69,17 +99,45 @@ public class Fichier
 			return "Error IOException";
 		}
 	}
-	public void fermer() throws IOException
+	public String lire(int n)
 	{
-		if(mode == 'R' || mode == 'L')
+		try
 		{
-			fR.close();
+			String chaine = "";
+			for(int i =0; i<n;i++)
+			{
+			chaine = fR.readLine();				
+			}
+			return chaine;
 		}
-		else if(mode == 'W' || mode == 'E')
+		catch(IOException e)
 		{
-			fW.close();
+			return "Error IOException";
 		}
-		
+	}
+	/*
+	 * @pre avoir ouvert un flux
+	 * @post ferme le flux précédemment ouvert
+	 */
+	public boolean fermer()
+	{
+		try
+		{
+			if(mode == 'R' || mode == 'L')
+			{
+				fR.close();
+			}	
+			else if(mode == 'W' || mode == 'E')
+			{
+				fW.close();
+			}
+			return true;
+		}
+		catch(IOException e)
+		{
+			System.out.println("ERROR : IOEXCEPTION");
+			return false;
+		}
 	}
 
 }

@@ -267,3 +267,4 @@ enfoncer
 sexe
 cloche
 noeud-papillon
+EOF
