@@ -11,7 +11,7 @@ public class Dico
 		Fichier fi = new Fichier();	
 		
 		fi.ouvrir(nomFichier, "Lecture");				
-		int nbrRandom = nbrRandom(fi);								
+		int nbrRandom = nbrRandom(fi);			
 		str = fi.lire(nbrRandom);				
 		try {
 				fi.fermer();
@@ -25,11 +25,7 @@ public class Dico
 	public static int nbrRandom(Fichier fi)
 	{
 		double nbr = Math.random();
-		nbr = nbr*1000;
-		while(nbr > fi.longueurFichier())
-		{
-			nbr = (nbr/2) + (0.5*fi.longueurFichier()) -186.4;			
-		}
+		nbr = nbr*fi.longueurFichier();		
 		int nbrRandom = (int) nbr;
 		return Math.abs(nbrRandom);		
 	}

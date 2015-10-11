@@ -154,7 +154,7 @@ public class Fichier
 		}
 	}
 	/*
-	 * @pre avoir ouvert un flux
+	 * @pre avoir ouvert un flux						
 	 * @post ferme le flux précédemment ouvert
 	 */
 	public void fermer()
