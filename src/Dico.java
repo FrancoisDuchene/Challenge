@@ -5,20 +5,16 @@ public class Dico
 	public static String lectureMots()
 	{
 		//Gestion des Flux I/O
-		boolean condiError = false;
+		
 		String str = "";
 		String nomFichier = "src/dico.txt";
 		Fichier fi = new Fichier();	
 		
-		fi.ouvrir(nomFichier, "Lecture");
-		int longueur = fi.longueurFichier();
-		
-		int nbrRandom = nbrRandom(fi);
-		System.out.println(nbrRandom);						
-		str = fi.lire(nbrRandom);
-		System.out.println(str);		
+		fi.ouvrir(nomFichier, "Lecture");				
+		int nbrRandom = nbrRandom(fi);								
+		str = fi.lire(nbrRandom);				
 		try {
-				condiError = fi.fermer();
+				fi.fermer();
 			}
 		catch (Exception e) 
 			{					

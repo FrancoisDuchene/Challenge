@@ -157,7 +157,7 @@ public class Fichier
 	 * @pre avoir ouvert un flux
 	 * @post ferme le flux précédemment ouvert
 	 */
-	public boolean fermer()
+	public void fermer()
 	{
 		try
 		{
@@ -168,13 +168,11 @@ public class Fichier
 			else if(mode == 'W' || mode == 'E')
 			{
 				fW.close();
-			}
-			return true;
+			}			
 		}
 		catch(IOException e)
 		{
-			System.out.println("ERROR : IOEXCEPTION");
-			return false;
+			System.out.println("ERROR : IOEXCEPTION");			
 		}
 	}
 

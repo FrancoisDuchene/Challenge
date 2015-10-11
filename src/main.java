@@ -56,6 +56,7 @@ public class main
 		String LettresFausses = "";
 		char LettreUser = 'A';	
 		int LongueurMot = MotSecret.length();
+		int vies_tmp = vies;
 		boolean re = true, same = false;	
 					
 		if (joueurs == 2)
@@ -63,8 +64,9 @@ public class main
 		      //ask the first player to enter a word
 		}
 		else
-		{
-		      //Take a word in a file
+		{ 
+		      MotSecret = dico();
+		      LongueurMot = MotSecret.length();
 		}
 		/*
 		 * 	Texte dédié Interface utilisateur
@@ -75,9 +77,9 @@ public class main
 		  }
 		System.out.println("Trouvez le mot secret !");	
 		
-		while( vies != 0)
+		while( vies_tmp != 0)
 		{			
-			System.out.println(String.format("\n\n\nIl reste : %d vie(s)",(vies)));
+			System.out.println(String.format("\n\n\nIl reste : %d vie(s)",(vies_tmp)));
 			System.out.println(MotUser);
 			System.out.println("Vous avez déjà proposé les lettres suivantes: " + LettresFausses);
 						
@@ -106,17 +108,17 @@ public class main
 			
 			if(MotUser.equals(MotSecret))
 			{
-				System.out.println("Félicitation, vous avez trouvé le mot " + MotSecret + " avec encore " + (vies) + " vie(s) !!!");						
+				System.out.println("Félicitation, vous avez trouvé le mot " + MotSecret + " avec encore " + (vies_tmp) + " vie(s) !!!");						
 				break;
 			}	
 			
 			if (re && !same) //if the letters was wrong, minus 1 life
 			{
-				vies--;
+				vies_tmp--;
 				LettresFausses = LettresFausses + LettreUser + " ";
 			}
 			
-			if(vies == 0)
+			if(vies_tmp == 0)
 			{
 				System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n\t GAME OVER\n~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			}						
