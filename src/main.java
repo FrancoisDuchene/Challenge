@@ -120,6 +120,7 @@ public class main
 			
 			if(vies_tmp == 0)
 			{
+				System.out.println("Il fallait trouver : " + MotSecret + "\n");
 				System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n\t GAME OVER\n~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			}						
 		}
