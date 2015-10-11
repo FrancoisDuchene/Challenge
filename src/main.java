@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 /*
  * @author Duchene Francois && Tascon Gutierrez Luis
  * @version 1.1
@@ -13,10 +11,11 @@ import java.io.IOException;
 /*
  * import java.util.*;
  * import java.lang.*; 
+ * import java.io.IOException;
  */
 
 
-public class Main
+public class main
 {
 	public static int vies = 7;
 	public static byte joueurs = 1;
@@ -134,6 +133,21 @@ public class Main
 	}
 	/*
 	 * @pre -
+	 * @post Retourne un String venant de la classe Dico.java
+	 */
+	public static String dico()
+	{
+		String str = "";
+		try {
+			str = Dico.lectureMots();
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		return str;
+	}
+	/*
+	 * @pre -
 	 * @post give a menu to user and then redirect him
 	 */
 	public static void menu()
@@ -169,6 +183,10 @@ public class Main
 		}while(choix != 4);
 	}
 	//All of the following instructions are about the option menu
+	/*
+	 * @pre -
+	 * @post Renvoie l'utilisateur sur l'option préalablement choisi
+	 */
 	public static void menuOption()
 	{
 		byte choix = 0;		
@@ -188,20 +206,7 @@ public class Main
 					option2();
 					break;
 				case 3:
-					break;
-				case 4:
-					try {
-						Dico.lectureMots();
-					} catch (Exception e) {
-						
-						e.printStackTrace();
-					}
-					break;
-				case 5:
-					double nbrRandom = 1.0;
-					nbrRandom = Math.random();
-					System.out.println(nbrRandom);
-					break;
+					break;				
 				default:
 					System.out.println("Veuillez indiquer 1,2 ou 3 !");
 					break;

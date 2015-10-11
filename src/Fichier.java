@@ -1,11 +1,12 @@
 import java.io.*;
-import java.lang.Exception.*;
+//import java.lang.Exception.*;
 
 public class Fichier
 {
 	private BufferedWriter fW;
 	private BufferedReader fR;
 	private char mode = 'X';
+	private String nomFichier = "";
 	
 	/**
 	 * @param mode == 'R' | 'L' | 'W' | 'E'
@@ -15,19 +16,58 @@ public class Fichier
 	{
 		System.out.println("Le Mode Actuel est : " + mode);
 	}
+	/*
+	 * @pre necessite le mode Lecture
+	 * @post retoure la longueur du Fichier
+	 */
 	public int longueurFichier()
 	{
-		String str1 = lire();
-		int longueur = 0;
+		String str1 = "";
+		int longueur = 0;		
 		for(int i=0; ;i++)
-		{
+		{			
+			str1 = lire();
 			if(str1.equals("EOF"))
 			{
-				longueur = i;
+				longueur = i;		
+				try {
+					fR = new BufferedReader(new FileReader(new File(nomFichier)));
+				} catch (FileNotFoundException e) {
+					
+					e.printStackTrace();
+				}
 				break;
 			}
 		}
 		return longueur;
+	}
+	public void setNewBufferedReader()
+	{
+		try {
+			fR = new BufferedReader(new FileReader(new File(nomFichier)));
+		} catch (FileNotFoundException e) 
+		{			
+			e.printStackTrace();
+		}
+	}
+	public void setNewBufferedWriter()
+	{
+		try {
+			fW = new BufferedWriter(new FileWriter(new File(nomFichier)));
+		} catch (IOException e) {			
+			e.printStackTrace();
+		}
+	}
+	public void setMark(int n)
+	{
+		try
+		{
+			fR.mark(n);
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}				
 	}
 	/*
 	 * @pre -
@@ -35,13 +75,13 @@ public class Fichier
 	 */
 	public void ouvrir(String nomDuFichier, String s)
 	{			
-			mode = (s.toUpperCase()).charAt(0);
-		
+			mode = (s.toUpperCase()).charAt(0);		
+			nomFichier = nomDuFichier;
 		try
 		{
 			if(mode == 'R' || mode == 'L')		
 			{		
-				fR = new BufferedReader(new FileReader(new File(nomDuFichier)));		
+				fR = new BufferedReader(new FileReader(new File(nomDuFichier)));					
 			}		
 			else if(mode == 'W' || mode == 'E')		
 			{		
@@ -52,9 +92,7 @@ public class Fichier
 		{
 			e.printStackTrace();
 			System.out.println("\nIOException ERROR");
-		}
-		
-		
+		}		
 	}
 	/*
 	 * @pre -
