@@ -440,4 +440,5 @@ reponse
 reponses
 croyance
 pratique
+croyant
 EOF
