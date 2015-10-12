@@ -330,6 +330,10 @@ magasin
 rare
 cher
 opera
+pure
+pur
+purete
+puree
 anticonstitutionnellement
 prout
 pet
@@ -379,7 +383,7 @@ veste
 veston
 vestiaire
 vestibule
-téléphone
+telephone
 gsm
 connexion
 connecter
@@ -387,14 +391,14 @@ wi-fi
 bande passante
 bander
 bande
-débandade
-débit
-crédit
+debandade
+debit
+credit
 ramollir
 missionnaire
 espagnol
 flamand
-néerlandophone
+neerlandophone
 francophone
 anglais
 allemand
