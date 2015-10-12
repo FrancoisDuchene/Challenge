@@ -7,10 +7,7 @@ public class Dico
 		//Gestion des Flux I/O
 		
 		String str = "";
-		String nomFichier = "src/dico.txt";
-		Fichier fi = new Fichier();	
-		
-		fi.ouvrir(nomFichier, "Lecture");				
+		Fichier fi = ouvrirDico();				
 		int nbrRandom = nbrRandom(fi);			
 		str = fi.lire(nbrRandom);				
 		try {
@@ -21,6 +18,18 @@ public class Dico
 				e.printStackTrace();
 			}			
 		return str;
+	}
+	public static Fichier ouvrirDico()
+	{
+		String nomFichier = "src/dico.txt";
+		Fichier fi = new Fichier();
+		fi.ouvrir(nomFichier, "Lecture");
+		return fi;
+	}
+	public static void ecritureMot(String mot)
+	{
+		Fichier fi = ouvrirDico();
+		fi.toEnd();		
 	}
 	public static int nbrRandom(Fichier fi)
 	{
