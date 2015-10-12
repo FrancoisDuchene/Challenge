@@ -196,7 +196,7 @@ public class main
 		do
 		{
 			System.out.println("************************\n\tOptions:\n************************");
-			System.out.println("Voulez-vous Changer :\n1. le nombre de vies ?\n2. le nombre de joueurs ?");
+			System.out.println("Voulez-vous Changer :\n1. le nombre de vies ?\n2. le nombre de joueurs ?\n ajouter un mot dans le dictionnaire ?");
 			System.out.println("\n3. Retourner en arrière");
 			choix = TextIO.getByte();
 		
@@ -209,12 +209,14 @@ public class main
 					option2();
 					break;
 				case 3:
-					break;				
+					break;	
+				case 4:
+					break;
 				default:
-					System.out.println("Veuillez indiquer 1,2 ou 3 !");
+					System.out.println("Veuillez indiquer 1,2,3 ou 4 !");
 					break;
 				}
-		}while(choix != 3);
+		}while(choix != 4);
 	}
 	/*
 	 * @pre -
@@ -224,8 +226,12 @@ public class main
 	{	
 		System.out.println("Vous avez actuellement " + vies + " vies");
 		System.out.println("Combien voulez vous de vies ?");
-		vies = TextIO.getInt();		
-		if(vies == 0)
+		vies = TextIO.getInt();	
+		if(vies > 26)
+		{
+			vies = 26;
+		}
+		else if(vies == 0)
 		{
 			vies = 1;
 		}
@@ -243,6 +249,10 @@ public class main
 		{
 			joueurs = 1;
 		}
+	}
+	public static void option3()
+	{
+		
 	}
 	
 }
