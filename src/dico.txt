@@ -459,11 +459,11 @@ presentations
 puissance
 puissances
 anterieur
-anterieurs
-anterieure
-anterieures
 ulterieur
-ulterieurs
-ulterieure
-ulterieures
+posterieur
+secularisation
+societe
+magie
+magique
+magicien
 EOF
