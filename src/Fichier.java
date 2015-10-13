@@ -30,16 +30,19 @@ public class Fichier
 			if(str1.equals("EOF"))
 			{
 				longueur = i;		
-				try {
-					fR = new BufferedReader(new FileReader(new File(nomFichier)));
-				} catch (FileNotFoundException e) {
-					
-					e.printStackTrace();
-				}
+				setNewBufferedReader();
 				break;
 			}
 		}
 		return longueur;
+	}
+	public void toEnd()
+	{
+		String str1 = "";
+		for(int i=0;str1.equals("EOF") ;i++)
+		{
+			str1 = lire();			
+		}
 	}
 	public void setNewBufferedReader()
 	{
@@ -68,7 +71,7 @@ public class Fichier
 		{
 			e.printStackTrace();
 		}				
-	}
+	}	
 	/*
 	 * @pre -
 	 * @post Cette méthode ouvre un flux. Renvoie True si tout s'est déroulé correctement et false si une erreur est apparue
@@ -152,6 +155,20 @@ public class Fichier
 		{
 			return "Error IOException";
 		}
+	}
+	public boolean equalsMots(String mot1, Fichier fi)
+	{		
+		for(int i = 0; i < fi.longueurFichier();i++)
+		{
+			setNewBufferedReader();
+			String mot2 = lire(i);
+			if(mot1.equals(mot2))
+			{
+				return false;
+			}
+			
+		}
+		return true;
 	}
 	/*
 	 * @pre avoir ouvert un flux						
