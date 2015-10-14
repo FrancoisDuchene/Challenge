@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 //import java.io.IOException;
 
 public class Dico 
@@ -29,7 +31,21 @@ public class Dico
 	public static void ecritureMot(String mot)
 	{
 		Fichier fi = ouvrirDico();
-		fi.toEnd();		
+		if(fi.equalsMots(mot, fi))
+		{
+			fi.toEnd();
+			fi.introduireEspace();
+			try {
+				fi.ecrireString(mot);
+			} catch (IOException e) {			
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			System.out.println("Desole ce mot existe déjà dans le dictionnaire");
+		}
+		
 	}
 	public static int nbrRandom(Fichier fi)
 	{

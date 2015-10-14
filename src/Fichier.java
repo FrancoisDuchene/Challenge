@@ -119,8 +119,19 @@ public class Fichier
 	{		
 		if(tmp != null)
 		{
-			fW.write(tmp, 0, tmp.length());
+			fW.write(tmp, 1, (tmp.length()-1));
 			fW.newLine();
+		}
+	}
+	public void introduireEspace()
+	{
+		if(mode == 'W' || mode == 'E')
+		{
+			try {
+				fW.newLine();
+			} catch (IOException e) {				
+				e.printStackTrace();
+			}
 		}
 	}
 	/*
@@ -158,15 +169,15 @@ public class Fichier
 	}
 	public boolean equalsMots(String mot1, Fichier fi)
 	{		
+		setNewBufferedReader();
+		String mot2 = "";
 		for(int i = 0; i < fi.longueurFichier();i++)
-		{
-			setNewBufferedReader();
-			String mot2 = lire(i);
+		{			
+			mot2 = lire(i);
 			if(mot1.equals(mot2))
 			{
 				return false;
-			}
-			
+			}			
 		}
 		return true;
 	}

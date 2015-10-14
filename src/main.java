@@ -199,8 +199,8 @@ public class main
         do
         {
             System.out.println("************************\n\tOptions:\n************************");
-            System.out.println("Voulez-vous Changer :\n1. le nombre de vies ?\n2. le nombre de joueurs ?");
-            System.out.println("\n3. Retourner en arrière");
+            System.out.println("Voulez-vous Changer :\n1. le nombre de vies ?\n2. le nombre de joueurs ?\n3. [Still in Dev]ajouter un mot au dico");
+            System.out.println("\n4. Retourner en arrière");
             choix = TextIO.getByte();
         
                 switch(choix)
@@ -212,11 +212,12 @@ public class main
                     option2();
                     break;
                 case 3:
+                	option3();
                     break;
                 case 4:
                 	break;
                 default:
-                    System.out.println("Veuillez indiquer 1,2 ou 3 !");
+                    System.out.println("Veuillez indiquer 1,2,3 ou 4 !");
                     break;
                 }
         }while(choix != 4);
@@ -247,9 +248,10 @@ public class main
     }
     public static void option3()
     {
-    	
-    }
-    
+    	System.out.println("Veuillez indiquer ci-dessous quel mot vous voudriez ajouter au dictionnaire");
+    	String mot = TextIO.getWord();
+    	Dico.ecritureMot(mot);
+    }    
     /*
      * @pre -
      * @post clear the screen
@@ -257,8 +259,7 @@ public class main
     public static void clear(){
        for (int i = 0; i<25; i++)
        {System.out.println("\n");}
-    }
-    
+    }    
     /*
      * @pre Take a char
      * @post Return the LowerCase of the char if it's an UpperCase and the char itself if it's a LowerCase.
