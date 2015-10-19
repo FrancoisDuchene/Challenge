@@ -68,7 +68,7 @@ public class main
     	do
     	{
     		System.out.println("    LISTE DE JEUX\n^^^^^^^^^^^^^^^^^^^^^^^^^^");
-    		System.out.println("1. Pendu\n2. Quitter");
+    		System.out.println("1. Pendu\n2. PlusMoins\n3. Quitter");
     		choix = TextIO.getByte();
     		switch(choix)
     		{
@@ -77,13 +77,16 @@ public class main
     			pendu.menu();
     			break;
     		case 2 :
-    			System.out.println("Retour");
+    			clear();
+    			plusMoins.menu();
+    			break;
+    		case 3 :    			
     			break;
     		default :
     			System.out.println("Veuillez indiquer 1 ou 2 !");
     			break;
     		}
-    	}while(choix != 2);
+    	}while(choix != 3);
     }
     public static void credit()
     {
