@@ -644,4 +644,285 @@ tilleul
 violet
 eveque
 violine
+afghanistan
+afrique du sud
+albanie
+algerie
+allemagne
+andorre
+angola
+arabie saoudite
+argentine
+armenie
+australie
+autriche
+azerbaidjan
+bahamas
+bahrein
+bangladesh
+belgique
+belize
+benin
+bhoutan
+belarus
+bielorussie
+birmanie
+myanmar
+bolivie
+bosnie-herzegovine
+botswana
+bresil
+brunei
+bulgarie
+burkina Faso
+burundi
+cambodge
+cameroun
+cap-vert
+republique centrafricaine
+centrafrique
+chili
+chine
+chypre
+colombie
+comores
+congo
+republique democratique du congo
+iles cook
+coree du nord
+coree du sud
+republique populaire democratique de coree
+republique du coree
+coree
+costa rica
+cote d ivoire
+croatie
+cuba
+danemark
+djibouti
+republique de djibouti
+republique dominicaine
+dominique
+egypte
+emirats arabes unis
+federation des emirats arabes unis
+equateur
+erythree
+espagne
+estonie
+etats-unis
+etats-unis d amerique
+ethiopie
+fidji
+iles fidji
+finlande
+france
+gabon
+gambie
+georgie
+ghana
+grece
+grenade
+guatemala
+guinee
+guyana
+haiti
+honduras
+hongrie
+inde
+indonesie
+irak
+iraq
+iran
+republique islamique d iran
+irlande
+islande
+israel
+italie
+japon
+jamaique
+jordanie
+kazakhstan
+kazakstan
+kenya
+kirghizstan
+kiribati
+koweit
+kuwait
+laos
+lesotho
+lettonie
+liban
+liberia
+libye
+liechtenstein
+lituanie
+luxembourg
+macedoine
+madagascar
+malaisie
+malawi
+maldives
+mali
+malte
+maroc
+marshall
+iles marshall
+archipel marshall
+maurice
+mauritainie
+mexique
+micronesie
+etats federes de micronesie
+moldavie
+monaco
+principaute de monaco
+mongolie
+montenegro
+mozambique
+namibie
+nauru
+nepal
+nicaragua
+niger
+nigeria
+norvege
+nouvelle-zelande
+oman
+ouganda
+ouzbekistan
+pakistan
+palaos
+etat de palestine
+panama
+papouasie-nouvelle-guinee
+paraguay
+pays-bas
+perou
+philippines
+pologne
+portugal
+qatar
+katar
+roumanie
+royaume-uni
+grande-bretagne
+royaume-uni de grande-bretagne et d irlande du nord
+russie
+federation de russie
+rwanda
+saint-marin
+iles salomon
+salvador
+samoa
+senegal
+serbie
+seychelles
+sierra leone
+singapour
+slovaquie
+slovenie
+somalie
+soudan
+soudan du sud
+sri lanka
+suede
+suisse
+suriname
+swaziland
+syrie
+republique arabe syrienne
+tadjikstan
+tanzanie
+tchad
+republique tcheque
+tchequie
+thailande
+togo
+tongo
+trinite-et-tobago
+timor oriental
+tunisie
+turkmenistan
+turquie
+tuvalu
+ukraine
+uruguay
+vanuatu
+vatican
+saint-siege
+etat de la cite du vatican
+cite du vatican
+venezuela
+republique bolivarienne du venezuela
+viet nam
+vietnam
+yemen
+zambie
+zimbabwe
+anglais
+arabe
+chinois
+espagnol
+francais
+russe
+albanais
+allemand
+armenien
+cataln
+coreen
+croate
+danois
+finnois
+grec
+hongrois
+italien
+malais
+mongol
+neerlandais
+ourdou
+persan
+portugais
+quechua
+roumain
+serbe
+slovaque
+suedois
+turc
+afrikaans
+bielorusse
+birman
+bulgare
+estonnien
+filipio
+hebreu
+hindi
+indonesien
+irlandais
+islandais
+signes
+signe
+letton
+lituanien
+luxembourgeois
+luxembourg
+macedonien
+maltais
+maori
+montenegrin
+polonais
+tcheque
+somali
+tetoum
+thai
+ukrainien
+vietnamien
+basque
+cantonais
+galicien
+gallois
+hawaien
+japonais
+tibetain
+zoulou
 EOF
