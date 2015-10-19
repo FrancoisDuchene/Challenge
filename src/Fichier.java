@@ -8,17 +8,38 @@ public class Fichier
 	private char mode = 'X';
 	private String nomFichier = "";
 	
+	//The Constructor
 	/**
-	 * @param mode == 'R' | 'L' | 'W' | 'E'
-	 * @see print the current mode
+	 * @category Constructor
+	 */
+	public Fichier()
+	{				
+			try {
+				fR = new BufferedReader(new FileReader(new File("src/dico.txt")));
+			} catch (FileNotFoundException e1) {
+				
+				e1.printStackTrace();
+			}			
+			try {
+				fW = new BufferedWriter(new FileWriter(new File("src/dico.txt"),true));
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}	
+	}
+	//Other Routines
+	/**
+	 * @param mode who need R or L for Reading and W or E for Writing
+	 * Print the mode currently used
 	 */
 	public void modeAffiche(char mode)
 	{
+		assert(mode != 'X') : "Un objet de type FIchier n'a pas été ouvert correctement et le mode n'est pas initialise !";
 		System.out.println("Le Mode Actuel est : " + mode);
 	}
-	/*
-	 * @pre necessite le mode Lecture
-	 * @post retoure la longueur du Fichier
+	/**
+	 * @return Int
+	 *  The function return the length of the file currently used 
 	 */
 	public int longueurFichier()
 	{
@@ -27,7 +48,7 @@ public class Fichier
 		for(int i=0; ;i++)
 		{			
 			str1 = lire();
-			if(str1.equals("EOF"))
+			if(str1 == null)
 			{
 				longueur = i;		
 				setNewBufferedReader();
@@ -36,14 +57,20 @@ public class Fichier
 		}
 		return longueur;
 	}
+	/**
+	 * Go to the end of File
+	 */
 	public void toEnd()
 	{
 		String str1 = "";
-		for(int i=0;str1.equals("EOF") ;i++)
+		do
 		{
 			str1 = lire();			
-		}
+		}while(str1 != null);
 	}
+	/**
+	 * Create a new Buffered Reader with the name of the file stocked in the object Fichier
+	 */
 	public void setNewBufferedReader()
 	{
 		try {
@@ -53,43 +80,51 @@ public class Fichier
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Create a new Buffered Writer with the name of the file stocked in the object Fichier
+	 */
 	public void setNewBufferedWriter()
 	{
 		try {
-			fW = new BufferedWriter(new FileWriter(new File(nomFichier)));
+			fW = new BufferedWriter(new FileWriter(new File(nomFichier),true));
 		} catch (IOException e) {			
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Set a new Mark in the file at n position
+	 * @param n
+	 */
 	public void setMark(int n)
 	{
-		try
-		{
+		try	{
 			fR.mark(n);
-		}
-		catch(IOException e)
-		{
+		} catch(IOException e) {
 			e.printStackTrace();
 		}				
 	}	
-	/*
-	 * @pre -
-	 * @post Cette méthode ouvre un flux. Renvoie True si tout s'est déroulé correctement et false si une erreur est apparue
+	/**
+	 * Open the file with the specified name and the specified mode (Reading or Writing)
+	 * @param nomDuFichier
+	 * @param s
 	 */
 	public void ouvrir(String nomDuFichier, String s)
 	{			
 			mode = (s.toUpperCase()).charAt(0);		
 			nomFichier = nomDuFichier;
+			
 		try
 		{
+			
 			if(mode == 'R' || mode == 'L')		
 			{		
 				fR = new BufferedReader(new FileReader(new File(nomDuFichier)));					
 			}		
 			else if(mode == 'W' || mode == 'E')		
 			{		
-				fW = new BufferedWriter(new FileWriter(new File(nomDuFichier)));		
+				fW = new BufferedWriter(new FileWriter(new File(nomDuFichier),true));		
 			}
+			
 		}
 		catch(IOException e)
 		{
@@ -97,19 +132,19 @@ public class Fichier
 			System.out.println("\nIOException ERROR");
 		}		
 	}
+	
 	/*
 	 * @pre -
 	 * @post ecrit dans le fichier le int reçu en paramètre
 	 */	
 	public void ecrireInt(int tmp) throws IOException
 	{
+		
 		String chaine = "";
 		chaine = String.valueOf(tmp);
-		if(chaine != null)
-		{
+		assert(chaine != null) : "Cette chaine est nulle !";
 			fW.write(chaine, 0, chaine.length());
-			fW.newLine();
-		}
+			fW.newLine();		
 	}
 	/*
 	 * @pre tmp != NULL
@@ -117,14 +152,16 @@ public class Fichier
 	 */
 	public void ecrireString(String tmp) throws IOException
 	{		
-		if(tmp != null)
-		{
-			fW.write(tmp, 1, (tmp.length()-1));
-			fW.newLine();
-		}
+		assert(tmp != null) : "Il s'agit d'un String vide !";
+			fW.write(tmp);
+			fW.newLine();		
 	}
+	/*
+	 * @pre mode = W or E
+	 * @post add a new space at the current line
+	 */
 	public void introduireEspace()
-	{
+	{		
 		if(mode == 'W' || mode == 'E')
 		{
 			try {
