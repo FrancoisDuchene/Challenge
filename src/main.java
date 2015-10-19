@@ -1,14 +1,7 @@
-/*
- * @author Duchene Francois && Tascon Gutierrez Luis
- * @version 1.1
+/**
+ * @author Vinsifroid && Bivisi
+ * @version 1.0 - beta
  */
-/*
- * import java.util.*;
-  import java.lang.*; 
-  import java.io.IOException;
- */
-
-
 public class main
 {
     
@@ -46,7 +39,7 @@ public class main
     System.out.println("\t\tCHALLENGE - MINIGAMES");
     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     System.out.println("\nMenu Principal :\n====================");
-    System.out.println("1. Jouer\n2. Quitter");    
+    System.out.println("1. Jouer\n2. Credits\n3. Quitter");    
         
     choix = TextIO.getByte();
     switch(choix)
@@ -56,14 +49,17 @@ public class main
             menuJeu();                                                 
             break;
         case 2 :                    
-                System.out.println("\n\tGOODBYE");         
-            break;                 
+            credit();
+            break;   
+        case 3:
+        	System.out.println("\n\tGOODBYE"); 
+        	break;
         default :
-                System.out.println("Veuillez indiquer 1 ou 2 !");
+            System.out.println("Veuillez indiquer 1 ou 2 !");
             break;
     }
     
-    }while(choix != 2);
+    }while(choix != 3);
     }
     
     public static void menuJeu()
@@ -88,6 +84,11 @@ public class main
     			break;
     		}
     	}while(choix != 2);
+    }
+    public static void credit()
+    {
+    	System.out.println("Developpeurs Principaux :\n=====================");
+    	System.out.println("Vinsifroid\nBivisi\nMelvinMajor");
     }
     /*
      * @pre -

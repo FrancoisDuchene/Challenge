@@ -133,7 +133,7 @@ public class pendu {
        do
        {
        System.out.println("==========================\n\t LE PENDU \n==========================");
-       System.out.println("1.Jouer \n2.Options \n3.Crédits \n4.Quitter");
+       System.out.println("1.Jouer \n2.Options \n3.Quitter");
            
        choix = TextIO.getByte();
        switch(choix)
@@ -144,18 +144,15 @@ public class pendu {
                break;
            case 2 :                    
                    menuOption();           
-               break;
-           case 3 :
-               System.out.println("Developpement : F.Duchene && L.Tascon Gutierrez \nVersion du pendu 1.0");                   
-               break;
-           case 4 :               
+               break;           
+           case 3 :               
                break;          
            default :
                    System.out.println("Veuillez indiquer 1,2,3 ou 4 !");
                break;
        }
        
-       }while(choix != 4);
+       }while(choix != 3);
    }
    //All of the following instructions are about the option menu
    /*
@@ -216,7 +213,7 @@ public class pendu {
        joueurs = TextIO.getByte();
    }
    /*
-    * !!!ATTENTION!!! DON'T WORK AT ALL
+    * !!!ATTENTION!!! Bug
     */
    public static void option3()
    {    	
