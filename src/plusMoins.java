@@ -8,7 +8,7 @@
 		 do
 		 {
 			 System.out.println("\tPlusMoins\n/////////////////////////////");
-			 System.out.println("1.Jouer\n2.Quitter");
+			 System.out.println("1.Jouer\n2. Option\n3.Quitter");
 			 choix = TextIO.getByte();
 			 
 			 switch(choix)
@@ -17,6 +17,7 @@
 				 jeu();
 				 break;
 			 case 2 :
+				 menuOption();
 				 break;
 			 default :
 				 System.out.println("Veuillez choisir 1 ou 2 !");
@@ -105,7 +106,7 @@
 		    	 }
 		    	 catch(Exception e)
 		    	 {
-		    		 e.printStackTrace(); 
+		    		 e.printStackTrace();
 		    		 System.exit(0);
 		    	 }		    	 
 		     }
@@ -117,6 +118,33 @@
 		    	 
 		 }while(victoire == false);
 		 
+	 }
+	 public static void menuOption()
+	 {
+		 byte choix = 0;
+		 do
+		 {
+			 System.out.println("************************\n\tOptions:\n************************");
+			 System.out.println("1. Limites\n2. Quitter");
+			 choix = TextIO.getByte();
+			 switch(choix)
+			 {
+			 case 1 :
+				 option();
+				 break;
+			 case 2 :
+				 break;
+			 default:
+				 System.out.println("Veuillez indiquer 1 ou 2");
+				 break;
+			 }
+		 }while(choix != 2);		 
+	 }
+	 public static void option()
+	 {
+		 System.out.println("Quelle serait la limite ?");
+		 limMax = TextIO.getInt();
+		 System.out.println("La nouvelle limite est de " + limMax);
 	 }
 	 public static int nbrRandom()
 	 {
