@@ -53,6 +53,7 @@ public class main
             break;   
         case 3:
         	System.out.println("\n\tGOODBYE"); 
+        	System.exit(0);
         	break;
         default :
             System.out.println("Veuillez indiquer 1 ou 2 !");

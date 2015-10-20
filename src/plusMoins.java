@@ -29,7 +29,7 @@
 		 int nbrAleatoire = 0;
 		 int nbrUser = 0;
 		 int coup = 0;
-		 byte joueurs = 1;
+		 byte joueurs = 1, ee = 0;
 		 boolean victoire = false;
 		 
 		 System.out.println("Mode 1 ou 2 Joueurs ???");
@@ -45,10 +45,12 @@
 			 nbrAleatoire = TextIO.getInt();
 		 }		 
 		 do
-		 {
+		 {			 
 			 coup++;
-			 System.out.println("Essayez !");
-		     nbrUser = TextIO.getInt();
+			 System.out.println("Essayez ! (-1 pour sortir)");
+		     nbrUser = TextIO.getInt(); 
+		     if(nbrUser == -1)
+		     {break;}
 		     if(nbrUser < nbrAleatoire)
 		     {
 		    	 System.out.println("Plus");
@@ -56,11 +58,16 @@
 		     else if(nbrUser > nbrAleatoire)
 		     {
 		    	 System.out.println("Moins");
-		     }		    
+		     }	    
 		     switch(nbrUser)
-		     {
+		     {		    	 
+		     case 3 :
+		    	 System.out.println("TRIANGLE !!!");
+		    	 ee++;
+		    	 break;
 		     case 13 :
 		    	 System.out.println("Serions-nous superstitieux ?!");
+		    	 ee++;		    	 
 		    	 break;
 		     case 42 :
 		    	 System.out.println("La réponse à la vie, à l'univers et à tout le reste\nn'est pas forcément la réponse à tout");
@@ -71,8 +78,36 @@
 		    	 System.out.println("\tCochonne !");
 		    	 break;
 		     case 666 :
-		    	 System.out.println("Espece de Sataniste de merde !!!");
+		    	 System.out.println("Espece de Sataniste de merde !!!");		    	 
+		    	 ee++;		    	 
 		    	 break;
+		     }		     
+		     if(ee == 3)
+		     {		    
+		    	 System.out.println(ee);
+		    	 try{
+		    		 Thread.sleep(3000);
+		    		 System.out.println("         .          ");
+		    		 Thread.sleep(300);
+		    		 System.out.println("        / \\        ");
+		    		 Thread.sleep(300);
+		    		 System.out.println("       /   \\       ");    
+		    		 Thread.sleep(300);
+		    		 System.out.println("      /  O  \\      ");
+		    		 Thread.sleep(300);
+		    		 System.out.println("     /       \\     ");
+		    		 Thread.sleep(300);
+		    		 System.out.println("     =========      ");
+		    		 Thread.sleep(400);
+		    		 System.out.println("   ILLUMINATIS !!!  ");
+		    		 Thread.sleep(300);
+		    		 ee++;
+		    	 }
+		    	 catch(Exception e)
+		    	 {
+		    		 e.printStackTrace(); 
+		    		 System.exit(0);
+		    	 }		    	 
 		     }
 		     if(nbrUser == nbrAleatoire)
 		     {
