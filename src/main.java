@@ -33,6 +33,13 @@ public class main
     byte choix = 0;
 	do
     {    	
+	System.out.println("#  $$$$  $$ $$   $$$   $$    $$    $$$$$  $   $   $$$$  $$$$$");
+	System.out.println("# $$     $$ $$  $$ $$  $$    $$    $$     $$  $  $$     $$");
+	System.out.println("# $      $$$$$  $$$$$  $$    $$    $$$$   $ $ $  $   $$ $$$");
+	System.out.println("# $$     $$ $$  $$ $$  $$    $$    $$     $  $$  $$   $ $$");
+	System.out.println("#  $$$$  $$ $$  $$ $$  $$$$$ $$$$$ $$$$$  $   $   $$$$  $$$$$");
+	 
+	
     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     System.out.println("\t\tCHALLENGE - MINIGAMES");
     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");

@@ -138,13 +138,20 @@ public class Fichier
 	 * @post ecrit dans le fichier le int reçu en paramètre
 	 */	
 	public void ecrireInt(int tmp) throws IOException
-	{
-		
+	{		
 		String chaine = "";
 		chaine = String.valueOf(tmp);
 		assert(chaine != null) : "Cette chaine est nulle !";
 			fW.write(chaine, 0, chaine.length());
 			fW.newLine();		
+	}
+	public void ecrireDouble(double tmp) throws IOException
+	{
+		String chaine = "";
+		chaine = String.valueOf(tmp);
+		assert(chaine != null) : "Cette chaine est nulle !";
+			fW.write(chaine, 0, chaine.length());
+			fW.newLine();
 	}
 	/*
 	 * @pre tmp != NULL

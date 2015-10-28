@@ -32,7 +32,7 @@ public class Dico
 	{
 		Fichier fi = ouvrirDico();
 		if(fi.equalsMots(mot, fi))
-		{
+		{			
 			fi.toEnd();
 			fi.introduireEspace();
 			try {

@@ -23,7 +23,7 @@
 				 System.out.println("Veuillez choisir 1 ou 2 !");
 				 break;				
 			 }
-		 }while(choix != 2);
+		 }while(choix != 3);
 	 }
 	 public static void jeu()
 	 {				
