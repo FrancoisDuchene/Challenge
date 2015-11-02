@@ -95,7 +95,7 @@ public class main
     		{
     		case 1 :
     			clear();
-    			pendu.menu();
+    			pendu.menu(j);
     			break;
     		case 2 :
     			clear();
