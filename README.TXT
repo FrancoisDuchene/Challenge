@@ -23,6 +23,7 @@ LANGUAGE : FRENCH (for now)
 THE GREAT INQUISITOR: vinsifroid
 THE FINDER OF CLUES: Bivisi
 THE MASTER OF THE DICTIONNARY: melvinmajor
+*** THE MUSE *** : OrvalInspiration
 
 ------------------------------------------------------------------------
                 	HOW TO START THIS PROJECT
