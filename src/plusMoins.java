@@ -29,14 +29,14 @@
 		 byte joueurs = 1, ee = 0;
 		 boolean victoire = false;
 
-		 System.out.println("Mode 1 ou 2 Joueurs ???");
+		 System.out.println("Mode 1 ou 2 Joueurs ?");
 		 joueurs = TextIO.getByte();
 
 		 if(joueurs == 1) {
 			  nbrAleatoire = nbrRandom() ;
 		 }
 		 else if (joueurs == 2) {
-			 System.out.println("Joueur 1. Intoduisez une valeur pour Joueur 2");
+			 System.out.println("Joueur 1. Intoduisez une valeur pour le 2eme joueur :");
 			 nbrAleatoire = TextIO.getInt();
 		 }
 		 do {
@@ -53,6 +53,18 @@
 		    	 System.out.println("Moins");
 		     }
 		     switch(nbrUser) {
+			 case 0 :
+			  	 System.out.println("Vous etes nul !");
+				 Thread.sleep(300);
+				 System.out.println("Ou vous voulez tricher...");
+				 ee++;
+				 break;
+			 case 1 :
+			 	 System.out.println("Vous etes serieux ?!?");
+				 Thread.sleep(300);
+				 System.out.println("Grosse feignasse !!!");
+				 ee++;
+				 break;
 			 case 2 :
 			 	 System.out.println("On aime ce qui va de paire !!!");
 				 ee++;
@@ -73,7 +85,7 @@
 				 break;
 		     case 13 :
 		    	 System.out.println("Serions-nous superstitieux ?!");
-		    	 ee++;		    	 
+		    	 ee++;
 		    	 break;
 		     case 42 :
 		    	 System.out.println("La réponse à la vie, à l'univers et à tout le reste\nn'est pas forcément la réponse à tout");
@@ -83,6 +95,7 @@
 		    	 break;
 		     case 69 :
 		    	 System.out.println("\tCochonne !");
+				 Thread.sleep(300);
 				 System.out.println("\tPervers !");
 		    	 break;
 		     case 666 :
