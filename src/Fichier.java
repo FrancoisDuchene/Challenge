@@ -31,7 +31,7 @@ public class Fichier {
 	 * Print the mode currently used
 	 */
 	public void modeAffiche(char mode) {
-		assert(mode != 'X') : "Un objet de type /"Fichier/" n'a pas été ouvert correctement et le mode n'est pas initialise !";
+		assert(mode != 'X') : "Un objet de type \"Fichier\" n'a pas été ouvert correctement et le mode n'est pas initialise !";
 		System.out.println("Le Mode Actuel est : " + mode);
 	}
 

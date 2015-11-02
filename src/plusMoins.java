@@ -55,13 +55,23 @@
 		     switch(nbrUser) {
 			 case 0 :
 			  	 System.out.println("Vous etes nul !");
-				 Thread.sleep(300);
+				 try {
+					Thread.sleep(300);
+				} catch (InterruptedException e1) {
+					
+					e1.printStackTrace();
+				}
 				 System.out.println("Ou vous voulez tricher...");
 				 ee++;
 				 break;
 			 case 1 :
 			 	 System.out.println("Vous etes serieux ?!?");
-				 Thread.sleep(300);
+				 try {
+					Thread.sleep(300);
+				} catch (InterruptedException e1) {
+					
+					e1.printStackTrace();
+				}
 				 System.out.println("Grosse feignasse !!!");
 				 ee++;
 				 break;
@@ -75,7 +85,11 @@
 		    	 break;
 			 case 4 :
 			 	 System.out.println("13 chinois !!!");
-				 Thread.sleep(300);
+				 try {
+					Thread.sleep(300);
+				} catch (InterruptedException e1) {					
+					e1.printStackTrace();
+				}
 				 System.out.println("Le 4 en chinois se prononce \"si\" et est\nphonetiquement tres proche du mot \"mort\"...");
 				 ee++;
 				 break;
@@ -95,7 +109,11 @@
 		    	 break;
 		     case 69 :
 		    	 System.out.println("\tCochonne !");
-				 Thread.sleep(300);
+				 try {
+					Thread.sleep(300);
+				} catch (InterruptedException e1) {					
+					e1.printStackTrace();
+				}
 				 System.out.println("\tPervers !");
 		    	 break;
 		     case 666 :
