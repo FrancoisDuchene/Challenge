@@ -1,6 +1,6 @@
 /**
  * @author Vinsifroid && Bivisi
- * @version 1.1
+ * @version 1.2 beta
  */
 public class main
 {        
