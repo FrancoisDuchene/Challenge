@@ -6,7 +6,7 @@
 		 byte choix = 0;
 		 do {
 			 System.out.println("\tPlusMoins\n/////////////////////////////");
-			 System.out.println("1.Jouer\n2. Option\n3.Quitter");
+			 System.out.println("1.Jouer\n2.Option\n3.Quitter");
 			 choix = TextIO.getByte();
 
 			 switch(choix) {
@@ -34,6 +34,7 @@
 
 		 if(joueurs == 1) {
 			  nbrAleatoire = nbrRandom() ;
+			  System.out.println("Le nombre que vous recherchez est compris entre 0 et " + limMax + "\n");
 		 }
 		 else if (joueurs == 2) {
 			 System.out.println("Joueur 1. Intoduisez une valeur pour le 2eme joueur :");
@@ -52,26 +53,21 @@
 		     else if(nbrUser > nbrAleatoire) {
 		    	 System.out.println("Moins");
 		     }
-		     switch(nbrUser) {
+		     switch(nbrUser) 
+		     {
+		     case -2:
+		    	 System.out.println("Bien essayé mais nan");
+		    	 System.out.println("\n          ;p");
+		    	 break;
 			 case 0 :
 			  	 System.out.println("Vous etes nul !");
-				 try {
-					Thread.sleep(300);
-				} catch (InterruptedException e1) {
-					
-					e1.printStackTrace();
-				}
+			  	 main.dormirSystem(300);
 				 System.out.println("Ou vous voulez tricher...");
 				 ee++;
 				 break;
 			 case 1 :
 			 	 System.out.println("Vous etes serieux ?!?");
-				 try {
-					Thread.sleep(300);
-				} catch (InterruptedException e1) {
-					
-					e1.printStackTrace();
-				}
+			 	 main.dormirSystem(300);
 				 System.out.println("Grosse feignasse !!!");
 				 ee++;
 				 break;
@@ -85,11 +81,7 @@
 		    	 break;
 			 case 4 :
 			 	 System.out.println("13 chinois !!!");
-				 try {
-					Thread.sleep(300);
-				} catch (InterruptedException e1) {					
-					e1.printStackTrace();
-				}
+			 	 main.dormirSystem(300);
 				 System.out.println("Le 4 en chinois se prononce \"si\" et est\nphonetiquement tres proche du mot \"mort\"...");
 				 ee++;
 				 break;
@@ -109,11 +101,7 @@
 		    	 break;
 		     case 69 :
 		    	 System.out.println("\tCochonne !");
-				 try {
-					Thread.sleep(300);
-				} catch (InterruptedException e1) {					
-					e1.printStackTrace();
-				}
+		    	 main.dormirSystem(300);
 				 System.out.println("\tPervers !");
 		    	 break;
 		     case 666 :

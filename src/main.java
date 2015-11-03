@@ -24,7 +24,7 @@ public class main
            * 5) option1 to decide the number of lifes
            * 6) option2 to decide the number of players
            */
-        		profil();
+        	//	profil();
                 menuPrincipal();             
         
     }
@@ -34,12 +34,7 @@ public class main
     	String n = TextIO.getlnWord();
     	j.setName(n);
     	System.out.println("Bonjour " + j.getName() + " et bienvenue sur ");
-    	try {
-			Thread.sleep(1200);
-		} catch (InterruptedException e) 
-    	{			
-			e.printStackTrace();
-		}
+    	dormirSystem(1200);
     	clear();
     }
     
@@ -121,5 +116,14 @@ public class main
     public static void clear(){
        for (int i = 0; i<25; i++)
        {System.out.println("\n");}
-    }  
+    }
+    public static void dormirSystem(long n)
+    {
+    	try
+    	{
+    		Thread.sleep(n);
+    	}catch(InterruptedException e){
+    		e.printStackTrace();
+    	}
+    }
 }
