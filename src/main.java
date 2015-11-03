@@ -1,9 +1,10 @@
 /**
  * @author Vinsifroid && Bivisi
- * @version 1.1
+ * @version 1.2 beta
  */
 public class main
 {        
+	public static Joueur j = new Joueur();
     public static void main (String [] args)
     {
           /* 
@@ -23,9 +24,23 @@ public class main
            * 5) option1 to decide the number of lifes
            * 6) option2 to decide the number of players
            */
-        
+        		profil();
                 menuPrincipal();             
         
+    }
+    public static void profil()
+    {
+    	System.out.println("Veuillez Indiquer votre nom ! :");
+    	String n = TextIO.getlnWord();
+    	j.setName(n);
+    	System.out.println("Bonjour " + j.getName() + " et bienvenue sur ");
+    	try {
+			Thread.sleep(1200);
+		} catch (InterruptedException e) 
+    	{			
+			e.printStackTrace();
+		}
+    	clear();
     }
     
     public static void menuPrincipal()
@@ -80,7 +95,7 @@ public class main
     		{
     		case 1 :
     			clear();
-    			pendu.menu();
+    			pendu.menu(j);
     			break;
     		case 2 :
     			clear();

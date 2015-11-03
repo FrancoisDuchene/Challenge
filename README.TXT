@@ -23,6 +23,7 @@ LANGUAGE : FRENCH (for now)
 THE GREAT INQUISITOR: vinsifroid
 THE FINDER OF CLUES: Bivisi
 THE MASTER OF THE DICTIONNARY: melvinmajor
+*** THE MUSE *** : OrvalInspiration
 
 ------------------------------------------------------------------------
                 	HOW TO START THIS PROJECT
@@ -40,3 +41,5 @@ USER INSTRUCTIONS:
 Here is the list of all current available games:
 1.) Pendu (= Hangman).
 2.) Plus ou moins (= Highlow).
+3.) MasterMind (soon)
+4.) Tetris (soon)
