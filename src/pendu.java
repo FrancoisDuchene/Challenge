@@ -25,8 +25,9 @@ public class pendu {
 	   byte choix = 0;
 	   do
 	   {
-		   System.out.println("Dans le mode deux joueurs, soit\n[1] l'un des joueurs choisit le mot à chercher pour l'autre");
-		   System.out.println("[2] ou alors les deux joueurs jouent simultanément\n\nQue préferez-vous ?");
+		   System.out.println("\nDans le mode deux joueurs, soit\n1. l'un des joueurs choisit le mot à chercher pour l'autre");
+		   System.out.println("2. ou alors les deux joueurs jouent simultanément\n\nQue préferez-vous ?");
+		   System.out.println("(3 pour sortir)");
 		   choix = TextIO.getByte();
 		   switch(choix)
 		   {
@@ -34,10 +35,12 @@ public class pendu {
 			   UnJoueur((byte) (2));
 			   break;
 		   case 2:
-			   DeuxJoueur();
+			   DeuxJoueur();			   
+			   break;
+		   case 3:
 			   break;
 		   }
-	   }while(choix !=1 || choix !=2);
+	   }while(choix !=3);
 	   
 	   
    }
@@ -151,7 +154,7 @@ public class pendu {
 	   motUser1 = remplaceEtoiles(MotSecret1);
 	   motUser2 = remplaceEtoiles(MotSecret2);
 	   
-	   while(vies_tmp1 != 0 && vies_tmp2 != 0)
+	   while(vies_tmp1 != 0 || vies_tmp2 != 0)
 	   {		   
 		   //PLAYER 1
 		   
@@ -223,7 +226,7 @@ public class pendu {
            {   
                if (LettreUser == MotSecret2.charAt(i)) //if it's ok => fonction to replace the chain
                {               
-                   motUser1 = replaceCharAt(motUser2, LettreUser, i);
+                   motUser2 = replaceCharAt(motUser2, LettreUser, i);
                    re = false;
                //  changeChar(MotUser,i,LettreUser);
                }
@@ -239,11 +242,11 @@ public class pendu {
            
            if (re && !same) //if the letters was wrong and different of the wrong letters's string, minus 1 life
            {
-               vies_tmp1--;
+               vies_tmp2--;
                LettresFausses2 = LettresFausses2 + LettreUser + " ";
            }
            
-           if(vies_tmp1 == 0)
+           if(vies_tmp2 == 0)
            {
            	main.clear();
            	pendre(vies_tmp2);
