@@ -17,7 +17,7 @@ for fun, don't take it too seriously.
 
 PROJECT TITLE: Challenge - Classics games
 PURPOSE OF PROJECT: Create little games for fun :D
-VERSION or DATE: 1.1
+VERSION or DATE: 1.2
 LANGUAGE : FRENCH (for now)
 
 THE GREAT INQUISITOR: vinsifroid
