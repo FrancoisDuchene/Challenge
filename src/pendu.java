@@ -9,10 +9,41 @@ public class pendu {
      * @pre : number of lifes (n>0) and number of players (1 or 2)
      * @post: play the game
      */
-   public static int jeu()
-   {       
-       // all the variables used
-       String MotSecret = "zygote";    
+   public static void jeu()
+   {   
+	   if(joueurs == 1)
+	   {
+		   UnJoueur((byte) 1);		   
+	   }
+	   else if(joueurs == 2)
+	   {
+		   choix2Jr();
+	   }       
+   }
+   public static void choix2Jr()
+   {
+	   byte choix = 0;
+	   do
+	   {
+		   System.out.println("Dans le mode deux joueurs, soit\n[1] l'un des joueurs choisit le mot à chercher pour l'autre");
+		   System.out.println("[2] ou alors les deux joueurs jouent simultanément\n\nQue préferez-vous ?");
+		   choix = TextIO.getByte();
+		   switch(choix)
+		   {
+		   case 1:			   
+			   UnJoueur((byte) (2));
+			   break;
+		   case 2:
+			   DeuxJoueur();
+			   break;
+		   }
+	   }while(choix !=1 || choix !=2);
+	   
+	   
+   }
+   public static void UnJoueur(byte nbrJ)
+   {
+	   String MotSecret = "zygote";    
        String MotUser = "";
        String LettresFausses = "";
        char LettreUser = 'a';  
@@ -87,12 +118,7 @@ public class pendu {
             System.out.println("Il fallait trouver : " + MotSecret + "\n");
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n\t GAME OVER\n~~~~~~~~~~~~~~~~~~~~~~~~~~");
            }                       
-       }
-       return vies_tmp;
-   }
-   public static void UnJoueur()
-   {
-	   
+       }       
    }
    public static void DeuxJoueur()
    {
@@ -100,7 +126,8 @@ public class pendu {
 	   String MotSecret2 = "couille";
 	   String motUser1 = "";
 	   String motUser2 = "";
-	   String LettresFausses = "";
+	   String LettresFausses1 = "";
+	   String LettresFausses2 = "";
        char LettreUser = 'a';       
        short vies_tmp1 = vies;
        short vies_tmp2 = vies;
@@ -125,13 +152,15 @@ public class pendu {
 	   motUser2 = remplaceEtoiles(MotSecret2);
 	   
 	   while(vies_tmp1 != 0 && vies_tmp2 != 0)
-	   {
+	   {		   
+		   //PLAYER 1
+		   
 		   main.clear();
            pendre(vies_tmp1);
            System.out.println("JOUEUR 1");
            System.out.println(String.format("\n\n\nIl reste : %d vie(s)",(vies_tmp1)));
            System.out.println(motUser1);
-           System.out.println("Vous avez déjà proposé les lettres suivantes: " + LettresFausses);
+           System.out.println("Vous avez déjà proposé les lettres suivantes: " + LettresFausses1);
            
            System.out.println("Ecrivez une lettre : ");
            same = false;
@@ -150,9 +179,9 @@ public class pendu {
                //  changeChar(MotUser,i,LettreUser);
                }
            }
-           for(int l=0; l < LettresFausses.length(); l++) // String with the wrong letters
+           for(int l=0; l < LettresFausses1.length(); l++) // String with the wrong letters
            {
-               if(LettreUser == LettresFausses.charAt(l))
+               if(LettreUser == LettresFausses1.charAt(l))
                {
                    same = true;
                }
@@ -162,7 +191,7 @@ public class pendu {
            if (re && !same) //if the letters was wrong and different of the wrong letters's string, minus 1 life
            {
                vies_tmp1--;
-               LettresFausses = LettresFausses + LettreUser + " ";
+               LettresFausses1 = LettresFausses1 + LettreUser + " ";
            }
            
            if(vies_tmp1 == 0)
@@ -170,6 +199,55 @@ public class pendu {
            	main.clear();
            	pendre(vies_tmp1);
             System.out.println("Il fallait trouver : " + MotSecret1 + "\n");
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n\t GAME OVER\n~~~~~~~~~~~~~~~~~~~~~~~~~~");
+           }
+           
+           //PLAYER 2
+           
+           main.clear();
+           pendre(vies_tmp2);
+           System.out.println("JOUEUR 2");
+           System.out.println(String.format("\n\n\nIl reste : %d vie(s)",(vies_tmp2)));
+           System.out.println(motUser2);
+           System.out.println("Vous avez déjà proposé les lettres suivantes: " + LettresFausses2);
+           
+           System.out.println("Ecrivez une lettre : ");
+           same = false;
+           re = true;          
+           
+           LettreUser = TextIO.getChar();
+           //If ASCII of letter is between 65 and 90 it's an UpperCase so we need to convert in a LowerCase
+           LettreUser = minuscule(LettreUser);
+   
+           for(byte i=0; i < MotSecret2.length(); i++) //loop to test all the string
+           {   
+               if (LettreUser == MotSecret2.charAt(i)) //if it's ok => fonction to replace the chain
+               {               
+                   motUser1 = replaceCharAt(motUser2, LettreUser, i);
+                   re = false;
+               //  changeChar(MotUser,i,LettreUser);
+               }
+           }
+           for(int l=0; l < LettresFausses2.length(); l++) // String with the wrong letters
+           {
+               if(LettreUser == LettresFausses2.charAt(l))
+               {
+                   same = true;
+               }
+           }
+           if(victoire(motUser2, MotSecret2, vies_tmp2)) {break;}                       
+           
+           if (re && !same) //if the letters was wrong and different of the wrong letters's string, minus 1 life
+           {
+               vies_tmp1--;
+               LettresFausses2 = LettresFausses2 + LettreUser + " ";
+           }
+           
+           if(vies_tmp1 == 0)
+           {
+           	main.clear();
+           	pendre(vies_tmp2);
+            System.out.println("Il fallait trouver : " + MotSecret2 + "\n");
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n\t GAME OVER\n~~~~~~~~~~~~~~~~~~~~~~~~~~");
            }
 	   }
@@ -239,9 +317,10 @@ public class pendu {
        {
            case 1 : 
                    System.out.println("\n C'est parti !");
-                   j.ajouteScoreSPd(jeu());                                  
+                   jeu();
+                   j.ajouteScoreSPd(0);                                  
                break;
-           case 2 :                    
+           case 2 :   
                    menuOption();           
                break;           
            case 3 :               
@@ -256,7 +335,7 @@ public class pendu {
    //All of the following instructions are about the option menu
    /*
     * @pre -
-    * @post Renvoie l'utilisateur sur l'option pr�alablement choisi
+    * @post Renvoie l'utilisateur sur l'option prealablement choisi
     */
    public static void menuOption()
    {
@@ -277,7 +356,7 @@ public class pendu {
                    option2();
                    break;
                case 3:
-               	option3();
+               	   option3();
                    break;
                case 4:
                	break;
@@ -300,7 +379,7 @@ public class pendu {
        {
            vies = 1;
        }
-   }    
+   }
    /*
     * @pre -
     * @post change the value of the member variable joueurs
