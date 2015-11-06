@@ -117,5 +117,30 @@ public class Joueur {
 	{
 		return scorePlusMoins;
 	}
-
+	public String toString()
+	{
+		return ("Nom : " + name + " - Score Pendu : " + scorePenduTotal() + " - Score PlusMoins : " + scorePlusMoinsTotal() + " - Score Total : " + scoreTotal() );
+	}
+	public int scoreTotal()
+	{		
+		return scorePenduTotal()+scorePlusMoinsTotal();
+	}
+	public int scorePenduTotal()
+	{
+		int a = 0;
+		for(int i = 0; i < scorePendu.length; i++)
+		{
+			a += scorePendu[i];
+		}
+		return a;
+	}
+	public int scorePlusMoinsTotal()
+	{
+		int b = 0;
+		for(int i = 0; i< scorePlusMoins.length; i++)
+		{
+			b += scorePlusMoins[i];
+		}
+		return b;
+	}
 }

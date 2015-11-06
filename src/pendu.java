@@ -305,7 +305,7 @@ public class pendu {
     * @pre -
     * @post give a menu to user and then redirect him
     */
-   public static void menu(Joueur j)
+   public static void menu()
    {
        byte choix = 0;         
        int score = 0;
@@ -320,8 +320,7 @@ public class pendu {
        {
            case 1 : 
                    System.out.println("\n C'est parti !");
-                   jeu();
-                   j.ajouteScoreSPd(0);                                  
+                   jeu();                                                   
                break;
            case 2 :   
                    menuOption();           

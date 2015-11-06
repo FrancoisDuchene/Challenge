@@ -1,10 +1,10 @@
 /**
  * @author Vinsifroid && Bivisi
- * @version 1.1
+ * @version 1.2
  */
 public class main
 {        
-    public static Joueur j = new Joueur();
+    public static boolean connecter = false;
     public static void main (String [] args)
     {
           /* 
@@ -25,20 +25,20 @@ public class main
            * 6) option2 to decide the number of players
            */
 
-        	//	profil();
-                menuPrincipal();             
+        	menuPrincipal();             
         
-    }
-    public static void profil()
+    }     
+    public static String connecte()
     {
-    	System.out.println("Veuillez Indiquer votre nom ! :");
-    	String n = TextIO.getlnWord();
-    	j.setName(n);
-    	System.out.println("Bonjour " + j.getName() + " et bienvenue sur ");
-    	dormirSystem(1500);
-    	clear();
-    }
-    
+    	if(connecter == true)
+    	{
+    		return "connecte";
+    	}
+    	else
+    	{
+    		return "non connecte";
+    	}
+    }    
     public static void menuPrincipal()
     {
     byte choix = 0;
@@ -55,7 +55,8 @@ public class main
     System.out.println("\t\tCHALLENGE - MINIGAMES");
     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     System.out.println("\nMenu Principal :\n====================");
-    System.out.println("1. Jouer\n2. Credits\n3. Quitter");    
+    System.out.println("\nStatut : " + connecte() );
+    System.out.println("\n1. Jouer\n2. Credits\n3. Profil\n4. Quitter");    
         
     choix = TextIO.getByte();
     switch(choix)
@@ -66,8 +67,11 @@ public class main
             break;
         case 2 :                    
             credit();
-            break;   
+            break;
         case 3:
+        	profilGestion.gestion();
+        	break;
+        case 4:
             System.out.println("\n\tGOODBYE"); 
             System.exit(0);
             break;
@@ -76,7 +80,7 @@ public class main
             break;
     }
     
-    }while(choix != 3);
+    }while(choix != 4);
     }
     
     public static void menuJeu()
@@ -92,7 +96,7 @@ public class main
             {
             case 1 :
                 clear();
-                pendu.menu(j);
+                pendu.menu();
                 break;
             case 2 :
                 clear();
