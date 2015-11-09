@@ -645,13 +645,13 @@ violet
 eveque
 violine
 afghanistan
-afrique du sud
+afrique-du-sud
 albanie
 algerie
 allemagne
 andorre
 angola
-arabie saoudite
+arabie
 argentine
 armenie
 australie
@@ -674,12 +674,12 @@ botswana
 bresil
 brunei
 bulgarie
-burkina Faso
+burkina-Faso
 burundi
 cambodge
 cameroun
 cap-vert
-republique centrafricaine
+republique-centrafricaine
 centrafrique
 chili
 chine
@@ -687,34 +687,25 @@ chypre
 colombie
 comores
 congo
-republique democratique du congo
-iles cook
-coree du nord
-coree du sud
-republique populaire democratique de coree
-republique du coree
+republique-democratique-du-congo
 coree
-costa rica
-cote d ivoire
+costa-rica
+cote-d'ivoire
 croatie
 cuba
 danemark
 djibouti
-republique de djibouti
-republique dominicaine
 dominique
 egypte
-emirats arabes unis
-federation des emirats arabes unis
+emirats-arabes-unis
 equateur
 erythree
 espagne
 estonie
 etats-unis
-etats-unis d amerique
+etats-unis
 ethiopie
 fidji
-iles fidji
 finlande
 france
 gabon
@@ -734,7 +725,6 @@ indonesie
 irak
 iraq
 iran
-republique islamique d iran
 irlande
 islande
 israel
@@ -1191,4 +1181,3 @@ thon
 truite
 turbot
 saumon
-EOF
