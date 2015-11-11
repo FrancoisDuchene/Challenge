@@ -85,7 +85,7 @@ public class Mastermind
                 }
 
                 verification(couleur, entree);
-                main.clear();
+                challenge.clear();
 
                 description = "   bien placees:"+bienPlace + "   mal placees:" + malPlace;
                 lignes[lignes.length - viesTmp] += description + "   vies restantes:" + (viesTmp-1);
@@ -229,7 +229,7 @@ public class Mastermind
                 regles();
                 break;
                 case 4:
-                main.menuJeu();
+                challenge.menuJeu();
                 break;
                 default :
                 System.out.println("Veuillez introduire 1,2,3 ou 4!");
@@ -271,7 +271,7 @@ public class Mastermind
     public static void option1()
     {
         boolean re = true;
-        main.clear();
+        challenge.clear();
         System.out.printf("Vous etes actuellement en difficulte %2d .\n", difficulte);
         System.out.println("Quelle niveau de difficulte voulez vous?\n1. facile\n2. normal\n3. difficile");
         do
@@ -291,7 +291,7 @@ public class Mastermind
     public static void option2()
     {
         boolean re = true;
-        main.clear();
+        challenge.clear();
         System.out.printf("Vous avez actuellement %2d lignes pour resoudre le jeu.\n", vies);
         System.out.println("Combien de lignes voulez vous avoir pour trouver la combinaison?");
         do
@@ -314,7 +314,7 @@ public class Mastermind
 
     public static void regles()
     {
-        main.clear();
+        challenge.clear();
         System.out.println("^^^^^^^^^^^^^^ But du jeu ^^^^^^^^^^^^^^");
         System.out.println("Le but du Mastermind est de gagner en un minimum de manches.\n" +
             "Le joueur qui doit trouver la combinaison secrete gagne une manche des lors qu’il y parvient en maximum 12 coups."+

@@ -5,8 +5,7 @@ public class Fichier {
 	private BufferedWriter fW;
 	private BufferedReader fR;
 	private char mode = 'X';
-	private String nomFichier = "";
-
+	private String nomFichier = "";	
 	/**
 	 * @category Constructor
 	 */
@@ -49,7 +48,7 @@ public class Fichier {
 				setNewBufferedReader();
 				break;
 			}
-		}
+		}		
 		return longueur;
 	}
 
@@ -205,7 +204,6 @@ public class Fichier {
 		}
 		return true;
 	}
-
 	/*
 	 * @pre avoir ouvert un flux						
 	 * @post ferme le flux précédemment ouvert

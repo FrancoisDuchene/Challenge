@@ -21,4 +21,8 @@ public class profilGestion {
 		}
 		
 	}
+	public static boolean existe()
+	{
+		return existe;			
+	}
 }

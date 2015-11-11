@@ -3,14 +3,16 @@ public class pendu {
 	
 	public static short vies = 7;
     public static byte joueurs = 1;
+    public static byte connecte = 0;
     	
 	 /*
      * subroutine to play the game
      * @pre : number of lifes (n>0) and number of players (1 or 2)
      * @post: play the game
      */
-   public static void jeu()
+   public static int jeu()
    {   
+	   int score = 0;
 	   if(joueurs == 1)
 	   {
 		   UnJoueur((byte) 1);		   
@@ -18,7 +20,8 @@ public class pendu {
 	   else if(joueurs == 2)
 	   {
 		   choix2Jr();
-	   }       
+	   }
+	   return score;
    }
    public static void choix2Jr()
    {
@@ -40,17 +43,16 @@ public class pendu {
 		   case 3:
 			   break;
 		   }
-	   }while(choix !=3);
-	   
-	   
+	   }while(choix !=3);	   
    }
-   public static void UnJoueur(byte nbrJ)
+   public static int UnJoueur(byte nbrJ)
    {
 	   String MotSecret = "zygote";    
        String MotUser = "";
        String LettresFausses = "";
        char LettreUser = 'a';  
        int LongueurMot = MotSecret.length();
+       int score = 0;
        short vies_tmp = vies;
        boolean re = true, same = false;    
                    
@@ -58,7 +60,7 @@ public class pendu {
        {//condition to define the word
              System.out.println("Le joueur 1 peut entrer un mot\nNe pas mettre d'accent!!");
              MotSecret = TextIO.getWord();
-             main.clear();
+             challenge.clear();
              System.out.println("Le joueur 2 doit essayer de deviner le mot rentre par le joueur 1");
        }
        else
@@ -75,7 +77,7 @@ public class pendu {
        
        while( vies_tmp != 0)
        {           
-    	   main.clear();
+    	   challenge.clear();
            pendre(vies_tmp);
            System.out.println(String.format("\n\n\nIl reste : %d vie(s)",(vies_tmp)));
            System.out.println(MotUser);
@@ -106,7 +108,11 @@ public class pendu {
                }
            }
            
-           if(victoire(MotUser, MotSecret, vies_tmp)) {break;}   
+           if(victoire(MotUser, MotSecret, vies_tmp)) 
+           {        	   
+        	   score = calculScore(MotSecret.length(), vies_tmp);
+        	   return score;
+           }   
            
            if (re && !same) //if the letters was wrong and different of the wrong letters's string, minus 1 life
            {
@@ -116,12 +122,15 @@ public class pendu {
            
            if(vies_tmp == 0)
            {
-           	main.clear();
+           	challenge.clear();
            	pendre(vies_tmp);
             System.out.println("Il fallait trouver : " + MotSecret + "\n");
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n\t GAME OVER\n~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            challenge.dormirSystem(2500);
+            return score;
            }                       
-       }       
+       }
+       return score;
    }
    public static void DeuxJoueur()
    {
@@ -137,16 +146,16 @@ public class pendu {
        boolean re = true, same = false;
 	   
 	   System.out.println("Joueur 1");
-	   main.dormirSystem(2500);
+	   challenge.dormirSystem(2500);
 	   System.out.println("Veuillez indiquer le mot à chercher pour le joueur 2");
 	   MotSecret1 = TextIO.getlnWord();
-	   main.clear();
+	   challenge.clear();
 	   
 	   System.out.println("Joueur 2");
-	   main.dormirSystem(2500);
+	   challenge.dormirSystem(2500);
 	   System.out.println("Veuillez indiquer le mot à chercher pour le joueur 1");
 	   MotSecret2 = TextIO.getlnWord();
-	   main.clear();
+	   challenge.clear();
 	   
 	   MotSecret1.toLowerCase();
 	   MotSecret2.toLowerCase();
@@ -156,110 +165,141 @@ public class pendu {
 	   
 	   while(vies_tmp1 != 0 || vies_tmp2 != 0)
 	   {		   
-		   //PLAYER 1
+		   boolean perdu = false;
+		   if(perdu == false)
+		   {
+			   //PLAYER 1
+			   
+			   challenge.clear();
+	           pendre(vies_tmp1);
+	           System.out.println("JOUEUR 1");
+	           System.out.println(String.format("\n\n\nIl reste : %d vie(s)",(vies_tmp1)));
+	           System.out.println(motUser1);
+	           System.out.println("Vous avez déjà proposé les lettres suivantes: " + LettresFausses1);
+	           
+	           System.out.println("Ecrivez une lettre : ");
+	           same = false;
+	           re = true;          
+	           
+	           LettreUser = TextIO.getChar();
+	           //If ASCII of letter is between 65 and 90 it's an UpperCase so we need to convert in a LowerCase
+	           LettreUser = minuscule(LettreUser);
+	   
+	           for(byte i=0; i < MotSecret1.length(); i++) //loop to test all the string
+	           {   
+	               if (LettreUser == MotSecret1.charAt(i)) //if it's ok => fonction to replace the chain
+	               {               
+	                   motUser1 = replaceCharAt(motUser1, LettreUser, i);
+	                   re = false;
+	               //  changeChar(MotUser,i,LettreUser);
+	               }
+	           }
+	           for(int l=0; l < LettresFausses1.length(); l++) // String with the wrong letters
+	           {
+	               if(LettreUser == LettresFausses1.charAt(l))
+	               {
+	                   same = true;
+	               }
+	           }
+	           if(victoire(motUser1, MotSecret1, vies_tmp1)) {break;}                       
+	           
+	           if (re && !same) //if the letters was wrong and different of the wrong letters's string, minus 1 life
+	           {
+	               vies_tmp1--;
+	               LettresFausses1 = LettresFausses1 + LettreUser + " ";
+	           }
+	           
+	           if(vies_tmp1 == 0)
+	           {
+	        	perdu = true;
+	        	challenge.clear();
+	           	pendre(vies_tmp1);	           	
+	            System.out.println("Il fallait trouver : " + MotSecret1 + "\n");
+	            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n\t GAME OVER\n~~~~~~~~~~~~~~~~~~~~~~~~~~");
+	           } 
+		   }
 		   
-		   main.clear();
-           pendre(vies_tmp1);
-           System.out.println("JOUEUR 1");
-           System.out.println(String.format("\n\n\nIl reste : %d vie(s)",(vies_tmp1)));
-           System.out.println(motUser1);
-           System.out.println("Vous avez déjà proposé les lettres suivantes: " + LettresFausses1);
-           
-           System.out.println("Ecrivez une lettre : ");
-           same = false;
-           re = true;          
-           
-           LettreUser = TextIO.getChar();
-           //If ASCII of letter is between 65 and 90 it's an UpperCase so we need to convert in a LowerCase
-           LettreUser = minuscule(LettreUser);
-   
-           for(byte i=0; i < MotSecret1.length(); i++) //loop to test all the string
-           {   
-               if (LettreUser == MotSecret1.charAt(i)) //if it's ok => fonction to replace the chain
-               {               
-                   motUser1 = replaceCharAt(motUser1, LettreUser, i);
-                   re = false;
-               //  changeChar(MotUser,i,LettreUser);
-               }
-           }
-           for(int l=0; l < LettresFausses1.length(); l++) // String with the wrong letters
+           if(perdu == false)
            {
-               if(LettreUser == LettresFausses1.charAt(l))
+        	 //PLAYER 2
+               
+        	   challenge.clear();
+               pendre(vies_tmp2);
+               System.out.println("JOUEUR 2");
+               System.out.println(String.format("\n\n\nIl reste : %d vie(s)",(vies_tmp2)));
+               System.out.println(motUser2);
+               System.out.println("Vous avez déjà proposé les lettres suivantes: " + LettresFausses2);
+               
+               System.out.println("Ecrivez une lettre : ");
+               same = false;
+               re = true;          
+               
+               LettreUser = TextIO.getChar();
+               //If ASCII of letter is between 65 and 90 it's an UpperCase so we need to convert in a LowerCase
+               LettreUser = minuscule(LettreUser);
+       
+               for(byte i=0; i < MotSecret2.length(); i++) //loop to test all the string
+               {   
+                   if (LettreUser == MotSecret2.charAt(i)) //if it's ok => fonction to replace the chain
+                   {               
+                       motUser2 = replaceCharAt(motUser2, LettreUser, i);
+                       re = false;
+                   //  changeChar(MotUser,i,LettreUser);
+                   }
+               }
+               for(int l=0; l < LettresFausses2.length(); l++) // String with the wrong letters
                {
-                   same = true;
+                   if(LettreUser == LettresFausses2.charAt(l))
+                   {
+                       same = true;
+                   }
                }
-           }
-           if(victoire(motUser1, MotSecret1, vies_tmp1)) {break;}                       
-           
-           if (re && !same) //if the letters was wrong and different of the wrong letters's string, minus 1 life
-           {
-               vies_tmp1--;
-               LettresFausses1 = LettresFausses1 + LettreUser + " ";
-           }
-           
-           if(vies_tmp1 == 0)
-           {
-           	main.clear();
-           	pendre(vies_tmp1);
-            System.out.println("Il fallait trouver : " + MotSecret1 + "\n");
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n\t GAME OVER\n~~~~~~~~~~~~~~~~~~~~~~~~~~");
-           }
-           
-           //PLAYER 2
-           
-           main.clear();
-           pendre(vies_tmp2);
-           System.out.println("JOUEUR 2");
-           System.out.println(String.format("\n\n\nIl reste : %d vie(s)",(vies_tmp2)));
-           System.out.println(motUser2);
-           System.out.println("Vous avez déjà proposé les lettres suivantes: " + LettresFausses2);
-           
-           System.out.println("Ecrivez une lettre : ");
-           same = false;
-           re = true;          
-           
-           LettreUser = TextIO.getChar();
-           //If ASCII of letter is between 65 and 90 it's an UpperCase so we need to convert in a LowerCase
-           LettreUser = minuscule(LettreUser);
-   
-           for(byte i=0; i < MotSecret2.length(); i++) //loop to test all the string
-           {   
-               if (LettreUser == MotSecret2.charAt(i)) //if it's ok => fonction to replace the chain
-               {               
-                   motUser2 = replaceCharAt(motUser2, LettreUser, i);
-                   re = false;
-               //  changeChar(MotUser,i,LettreUser);
-               }
-           }
-           for(int l=0; l < LettresFausses2.length(); l++) // String with the wrong letters
-           {
-               if(LettreUser == LettresFausses2.charAt(l))
+               if(victoire(motUser2, MotSecret2, vies_tmp2)) {break;}                       
+               
+               if (re && !same) //if the letters was wrong and different of the wrong letters's string, minus 1 life
                {
-                   same = true;
+                   vies_tmp2--;
+                   LettresFausses2 = LettresFausses2 + LettreUser + " ";
+               }
+               
+               if(vies_tmp2 == 0)
+               {
+            	perdu = true;
+            	challenge.clear();
+               	pendre(vies_tmp2);
+                System.out.println("Il fallait trouver : " + MotSecret2 + "\n");
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n\t GAME OVER\n~~~~~~~~~~~~~~~~~~~~~~~~~~");
                }
            }
-           if(victoire(motUser2, MotSecret2, vies_tmp2)) {break;}                       
            
-           if (re && !same) //if the letters was wrong and different of the wrong letters's string, minus 1 life
-           {
-               vies_tmp2--;
-               LettresFausses2 = LettresFausses2 + LettreUser + " ";
-           }
-           
-           if(vies_tmp2 == 0)
-           {
-           	main.clear();
-           	pendre(vies_tmp2);
-            System.out.println("Il fallait trouver : " + MotSecret2 + "\n");
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n\t GAME OVER\n~~~~~~~~~~~~~~~~~~~~~~~~~~");
-           }
 	   }
+   }
+   /**
+    * 
+    * @param lgTab set la longueur du mot qui fallait trouver
+    * @param nbrVies est le nombre de vies qui restaient à la fin de la partie
+    * @return le score final de la partie actuelle
+    */
+   public static int calculScore(int lgTab, int nbrVies)
+   {
+	   if(lgTab < 5)
+	   {
+		   return (lgTab*nbrVies)*3;
+	   }
+	   else if(lgTab > 8)
+	   {
+		   return (lgTab*nbrVies)*2;
+	   }
+	   else
+	   {
+		   return lgTab*nbrVies;
+	   }	   
    }
    public static boolean victoire(String mU, String mS, short vies_tmp1)
    {
 	   if(mU.equals(mS))
 	   {
-		   main.clear();
+		   challenge.clear();
            pendre(vies_tmp1);
            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>BRAVO !!!<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
            System.out.println("Félicitation, vous avez trouvé le mot " + mU + " avec encore " + (vies_tmp1) + " vie(s) !!!");
@@ -319,7 +359,7 @@ public class pendu {
        switch(choix)
        {
            case 1 : 
-                   System.out.println("\n C'est parti !");
+                   System.out.println("\n C'est parti !");                   
                    jeu();                                                   
                break;
            case 2 :   
