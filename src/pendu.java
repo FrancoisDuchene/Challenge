@@ -59,7 +59,7 @@ public class pendu {
              System.out.println("Le joueur 1 peut entrer un mot\nNe pas mettre d'accent!!");
              MotSecret = TextIO.getWord();
              main.clear();
-             System.out.println("Le joueur 2 doit essayer de deviner le mot rentre par le joueur 1");
+             System.out.println("Le joueur 2 doit essayer de deviner le de joueur 1");
        }
        else
        { 
@@ -118,6 +118,7 @@ public class pendu {
            {
            	main.clear();
            	pendre(vies_tmp);
+            System.out.println("Dommage...");
             System.out.println("Il fallait trouver : " + MotSecret + "\n");
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n\t GAME OVER\n~~~~~~~~~~~~~~~~~~~~~~~~~~");
            }                       
@@ -163,7 +164,7 @@ public class pendu {
            System.out.println("JOUEUR 1");
            System.out.println(String.format("\n\n\nIl reste : %d vie(s)",(vies_tmp1)));
            System.out.println(motUser1);
-           System.out.println("Vous avez déjà proposé les lettres suivantes: " + LettresFausses1);
+           System.out.println("Vous avez déjà proposé les lettres suivantes : " + LettresFausses1);
            
            System.out.println("Ecrivez une lettre : ");
            same = false;
@@ -201,6 +202,7 @@ public class pendu {
            {
            	main.clear();
            	pendre(vies_tmp1);
+            System.out.println("Dommage...");
             System.out.println("Il fallait trouver : " + MotSecret1 + "\n");
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n\t GAME OVER\n~~~~~~~~~~~~~~~~~~~~~~~~~~");
            }
@@ -250,6 +252,7 @@ public class pendu {
            {
            	main.clear();
            	pendre(vies_tmp2);
+            System.out.println("Dommage...");
             System.out.println("Il fallait trouver : " + MotSecret2 + "\n");
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n\t GAME OVER\n~~~~~~~~~~~~~~~~~~~~~~~~~~");
            }
@@ -272,9 +275,14 @@ public class pendu {
 	   String MotUser = "";
 	   for (byte o = 0; o < MotSecret.length(); o++) // loop to have the same number of * than the letters in the "MotSecret"
        {
-         if(MotSecret.charAt(o) == '-')
-         {MotUser = MotUser + "-";}
-         else {MotUser = MotUser + "*";}
+         if(MotSecret.charAt(o) == '-') {
+            MotUser = MotUser + "-";}
+         if(MotSecret.charAt(o) == '_') {
+            MotUser = MotUser + " ";}
+         if(MotSecret.charAt(o) == '\'') {
+            MotUser = MotUser + "'";}
+         else {
+            MotUser = MotUser + "*";}
       }
 	   return MotUser;
    }
@@ -555,7 +563,7 @@ public class pendu {
            System.out.print("    ||      $ $   \n");
            System.out.print("    ||      $ $   \n");
            System.out.print("    ||      $ $   \n");
-           System.out.print("    ||     c$ $o  \n");
+           System.out.print("    ||     o$ $o  \n");
            System.out.print(" ##########       \n");
 		   break;
 	   }       
