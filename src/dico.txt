@@ -104,6 +104,7 @@ horreur
 penis
 verge
 gode-michet
+gode
 rideau
 cunnilingus
 codex
@@ -268,6 +269,7 @@ enfoncer
 sexe
 cloche
 noeud-papillon
+cravate
 porte
 buvette
 bar
@@ -645,7 +647,7 @@ violet
 eveque
 violine
 afghanistan
-afrique-du-sud
+afrique_du_sud
 albanie
 algerie
 allemagne
@@ -674,12 +676,12 @@ botswana
 bresil
 brunei
 bulgarie
-burkina-Faso
+burkina_faso
 burundi
 cambodge
 cameroun
 cap-vert
-republique-centrafricaine
+republique_centrafricaine
 centrafrique
 chili
 chine
@@ -687,23 +689,23 @@ chypre
 colombie
 comores
 congo
-republique-democratique-du-congo
+republique_democratique_du_congo
 coree
 costa-rica
-cote-d'ivoire
+cote_d'ivoire
 croatie
 cuba
 danemark
 djibouti
 dominique
 egypte
-emirats-arabes-unis
+emirats_arabes_unis
 equateur
 erythree
 espagne
 estonie
 etats-unis
-etats-unis
+amerique
 ethiopie
 fidji
 finlande
@@ -757,16 +759,16 @@ mali
 malte
 maroc
 marshall
-iles marshall
-archipel marshall
+iles_marshall
+archipel_marshall
 maurice
 mauritainie
 mexique
 micronesie
-etats federes de micronesie
+etats_federes_de_micronesie
 moldavie
 monaco
-principaute de monaco
+principaute_de_monaco
 mongolie
 montenegro
 mozambique
@@ -783,7 +785,7 @@ ouganda
 ouzbekistan
 pakistan
 palaos
-etat de palestine
+etat_de_palestine
 panama
 papouasie-nouvelle-guinee
 paraguay
@@ -797,55 +799,56 @@ katar
 roumanie
 royaume-uni
 grande-bretagne
-royaume-uni de grande-bretagne et d irlande du nord
+royaume-uni_de_grande-bretagne_et_d'irlande_du_nord
 russie
-federation de russie
+federation_de_russie
 rwanda
 saint-marin
-iles salomon
+iles_salomon
 salvador
 samoa
 senegal
 serbie
 seychelles
-sierra leone
+sierra_leone
 singapour
 slovaquie
 slovenie
 somalie
 soudan
-soudan du sud
-sri lanka
+soudan_du_sud
+sri_lanka
 suede
 suisse
 suriname
 swaziland
 syrie
-republique arabe syrienne
+republique_arabe_syrienne
 tadjikstan
 tanzanie
 tchad
-republique tcheque
+republique_tcheque
 tchequie
 thailande
 togo
 tongo
 trinite-et-tobago
-timor oriental
+timor_oriental
 tunisie
 turkmenistan
 turquie
 tuvalu
 ukraine
+malte
 uruguay
 vanuatu
 vatican
 saint-siege
-etat de la cite du vatican
-cite du vatican
+etat_de_la_cite_du_vatican
+cite_du_vatican
 venezuela
-republique bolivarienne du venezuela
-viet nam
+republique_bolivarienne_du_venezuela
+viet_nam
 vietnam
 yemen
 zambie
@@ -859,7 +862,7 @@ russe
 albanais
 allemand
 armenien
-cataln
+catalan
 coreen
 croate
 danois
@@ -965,7 +968,8 @@ coin
 figue
 fraise
 framboise
-fruit de la passion
+fruit_de_la_passion
+passion
 goyave
 passion
 grenade
@@ -1054,16 +1058,16 @@ chataigne
 chicoree
 chicon
 chou
-chou chinois
-chou de bruxelles
-chou frise
+chou_chinois
+chou_de_bruxelles
+chou_frise
 laitue
-chou rouge
+chou_rouge
 chou-fleur
 choucroute
 ciboulette
 citrouille
-coeur de palmier
+coeur_de_palmier
 palmier
 concombre
 courge
@@ -1074,7 +1078,7 @@ endive
 epinard
 fenouil
 haricot
-haricot vert
+haricot_vert
 manioc
 melon
 navet
@@ -1084,8 +1088,8 @@ ortie
 oseille
 panais
 patate
-pomme de terre
-patate douce
+pomme_de_terre
+patate_douce
 pissenlit
 poireau
 poivron
@@ -1097,11 +1101,11 @@ topinambour
 violette
 asperge
 lentille
-haricot blanc
-petit pois
+haricot_blanc
+petit_pois
 pois
 miso
-pois chiche
+pois_chiche
 soja
 tofu
 mollusque
@@ -1165,7 +1169,7 @@ esturgeon
 espadon
 fletan
 hareng
-lieu noir
+lieu_noir
 maquereau
 morue
 mulet
