@@ -124,6 +124,7 @@ public class pendu {
            {
            	challenge.clear();
            	pendre(vies_tmp);
+            System.out.println("Dommage...");
             System.out.println("Il fallait trouver : " + MotSecret + "\n");
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n\t GAME OVER\n~~~~~~~~~~~~~~~~~~~~~~~~~~");
             challenge.dormirSystem(2500);
@@ -217,8 +218,7 @@ public class pendu {
 	            System.out.println("Il fallait trouver : " + MotSecret1 + "\n");
 	            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n\t GAME OVER\n~~~~~~~~~~~~~~~~~~~~~~~~~~");
 	           } 
-		   }
-		   
+		   }		   
            if(perdu == false)
            {
         	 //PLAYER 2
@@ -260,6 +260,7 @@ public class pendu {
                {
                    vies_tmp2--;
                    LettresFausses2 = LettresFausses2 + LettreUser + " ";
+
                }
                
                if(vies_tmp2 == 0)
@@ -271,7 +272,6 @@ public class pendu {
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n\t GAME OVER\n~~~~~~~~~~~~~~~~~~~~~~~~~~");
                }
            }
-           
 	   }
    }
    /**
@@ -312,9 +312,14 @@ public class pendu {
 	   String MotUser = "";
 	   for (byte o = 0; o < MotSecret.length(); o++) // loop to have the same number of * than the letters in the "MotSecret"
        {
-         if(MotSecret.charAt(o) == '-')
-         {MotUser = MotUser + "-";}
-         else {MotUser = MotUser + "*";}
+         if(MotSecret.charAt(o) == '-') {
+            MotUser = MotUser + "-";}
+         if(MotSecret.charAt(o) == '_') {
+            MotUser = MotUser + " ";}
+         if(MotSecret.charAt(o) == '\'') {
+            MotUser = MotUser + "'";}
+         else {
+            MotUser = MotUser + "*";}
       }
 	   return MotUser;
    }
@@ -595,7 +600,7 @@ public class pendu {
            System.out.print("    ||      $ $   \n");
            System.out.print("    ||      $ $   \n");
            System.out.print("    ||      $ $   \n");
-           System.out.print("    ||     c$ $o  \n");
+           System.out.print("    ||     o$ $o  \n");
            System.out.print(" ##########       \n");
 		   break;
 	   }       
