@@ -2,26 +2,28 @@
 public class pendu {
 	
 	public static short vies = 7;
-    public static byte joueurs = 1;
-    public static byte connecte = 0;
+    public static byte joueurs = 1;   
     	
 	 /*
      * subroutine to play the game
      * @pre : number of lifes (n>0) and number of players (1 or 2)
      * @post: play the game
      */
-   public static int jeu()
+   public static void jeu()
    {   
 	   int score = 0;
 	   if(joueurs == 1)
 	   {
-		   UnJoueur((byte) 1);		   
+		   score = UnJoueur((byte) 1);
+		   if(profilGestion.existe() && vies == 7)
+		   {
+			   scoreTotal(score);
+		   }
 	   }
 	   else if(joueurs == 2)
 	   {
 		   choix2Jr();
 	   }
-	   return score;
    }
    public static void choix2Jr()
    {
@@ -124,7 +126,6 @@ public class pendu {
            {
            	challenge.clear();
            	pendre(vies_tmp);
-            System.out.println("Dommage...");
             System.out.println("Il fallait trouver : " + MotSecret + "\n");
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n\t GAME OVER\n~~~~~~~~~~~~~~~~~~~~~~~~~~");
             challenge.dormirSystem(2500);
@@ -218,7 +219,8 @@ public class pendu {
 	            System.out.println("Il fallait trouver : " + MotSecret1 + "\n");
 	            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n\t GAME OVER\n~~~~~~~~~~~~~~~~~~~~~~~~~~");
 	           } 
-		   }		   
+		   }
+		   
            if(perdu == false)
            {
         	 //PLAYER 2
@@ -260,7 +262,6 @@ public class pendu {
                {
                    vies_tmp2--;
                    LettresFausses2 = LettresFausses2 + LettreUser + " ";
-
                }
                
                if(vies_tmp2 == 0)
@@ -272,6 +273,7 @@ public class pendu {
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n\t GAME OVER\n~~~~~~~~~~~~~~~~~~~~~~~~~~");
                }
            }
+           
 	   }
    }
    /**
@@ -312,14 +314,9 @@ public class pendu {
 	   String MotUser = "";
 	   for (byte o = 0; o < MotSecret.length(); o++) // loop to have the same number of * than the letters in the "MotSecret"
        {
-         if(MotSecret.charAt(o) == '-') {
-            MotUser = MotUser + "-";}
-         if(MotSecret.charAt(o) == '_') {
-            MotUser = MotUser + " ";}
-         if(MotSecret.charAt(o) == '\'') {
-            MotUser = MotUser + "'";}
-         else {
-            MotUser = MotUser + "*";}
+         if(MotSecret.charAt(o) == '-')
+         {MotUser = MotUser + "-";}
+         else {MotUser = MotUser + "*";}
       }
 	   return MotUser;
    }
@@ -367,7 +364,7 @@ public class pendu {
                    System.out.println("\n C'est parti !");                   
                    jeu();                                                   
                break;
-           case 2 :   
+           case 2 :
                    menuOption();           
                break;           
            case 3 :               
@@ -413,6 +410,10 @@ public class pendu {
                }
        }while(choix != 4);
    }
+   public static void scoreTotal(int score)
+   {
+	   profilGestion.ajoutePtsPendu(score);
+   }
    /*
     * @pre -
     * @post change the value of the member variable vies
@@ -425,6 +426,10 @@ public class pendu {
        if(vies == 0)
        {
            vies = 1;
+       }
+       else if(vies > 99)
+       {
+    	   vies = 99;
        }
    }
    /*
@@ -600,7 +605,7 @@ public class pendu {
            System.out.print("    ||      $ $   \n");
            System.out.print("    ||      $ $   \n");
            System.out.print("    ||      $ $   \n");
-           System.out.print("    ||     o$ $o  \n");
+           System.out.print("    ||     c$ $o  \n");
            System.out.print(" ##########       \n");
 		   break;
 	   }       

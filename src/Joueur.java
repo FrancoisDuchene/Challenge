@@ -60,7 +60,7 @@ public class Joueur {
 	{
 		for(int i=0; i<scorePendu.length; i++)
 		{
-			if(scorePendu[i] != -1)
+			if(scorePendu[i] == -1)
 			{
 				scorePendu[i] = n;
 				i = (scorePendu.length-1);
@@ -71,7 +71,7 @@ public class Joueur {
 	{
 		for(int i=0; i<scorePlusMoins.length; i++)
 		{
-			if(scorePlusMoins[i] != -1)
+			if(scorePlusMoins[i] == -1)
 			{
 				scorePlusMoins[i] = n;
 				i = (scorePlusMoins.length-1);
@@ -123,14 +123,23 @@ public class Joueur {
 	}
 	public int scoreTotal()
 	{		
-		return scorePenduTotal()+scorePlusMoinsTotal();
+		int score = scorePenduTotal()+scorePlusMoinsTotal();
+		if(score < 0)
+		{
+			score = 0;
+		}
+		return score;
 	}
 	public int scorePenduTotal()
 	{
 		int a = 0;
 		for(int i = 0; i < scorePendu.length; i++)
 		{
-			a += scorePendu[i];
+			if(scorePendu[i] >= 0)
+			{
+				a += scorePendu[i];
+			}
+			
 		}
 		return a;
 	}
@@ -139,7 +148,10 @@ public class Joueur {
 		int b = 0;
 		for(int i = 0; i< scorePlusMoins.length; i++)
 		{
-			b += scorePlusMoins[i];
+			if(scorePlusMoins[i] >= 0)
+			{
+				b += scorePlusMoins[i];
+			}			
 		}
 		return b;
 	}

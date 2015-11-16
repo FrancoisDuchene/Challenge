@@ -6,7 +6,7 @@
  * @version 1.1
  */
 
-import java.awt.*;
+//import java.awt.*;
 
 public class Mastermind
 {

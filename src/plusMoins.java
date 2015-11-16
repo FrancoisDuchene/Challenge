@@ -26,31 +26,42 @@
 		 int nbrAleatoire = 0;
 		 int nbrUser = 0;
 		 int coup = 0;
+		 int score = 110;
 		 byte joueurs = 1, ee = 0;
 		 boolean victoire = false;
 
 		 System.out.println("Mode 1 ou 2 Joueurs ?");
 		 joueurs = TextIO.getByte();
 
-		 if(joueurs == 1) {
+		 if(joueurs == 1) 
+		 {
 			  nbrAleatoire = nbrRandom() ;
 			  System.out.println("Le nombre que vous recherchez est compris entre 0 et " + limMax + "\n");
 		 }
-		 else if (joueurs == 2) {
+		 else if (joueurs == 2) 
+		 {
 			 System.out.println("Joueur 1. Intoduisez une valeur pour le 2eme joueur :");
 			 nbrAleatoire = TextIO.getInt();
 		 }
-		 do {
+		 else
+		 {
+			 joueurs = 1;
+		 }
+		 do 
+		 {
 			 coup++;
+			 score = score-10;
+			 if(score < 0){score = 0;}
 			 System.out.println("Essayez ! (-1 pour sortir)");
 		     nbrUser = TextIO.getInt();
-		     if(nbrUser == -1) {
-		     break;
-			 }
-		     if(nbrUser < nbrAleatoire) {
+		     if(nbrUser == -1) 
+		     {break;}
+		     if(nbrUser < nbrAleatoire) 
+		     {
 		    	 System.out.println("Plus");
 		     }
-		     else if(nbrUser > nbrAleatoire) {
+		     else if(nbrUser > nbrAleatoire) 
+		     {
 		    	 System.out.println("Moins");
 		     }
 		     switch(nbrUser) 
@@ -58,18 +69,21 @@
 		     case -2:
 		    	 System.out.println("Bien essayé mais nan");
 		    	 System.out.println("\n          ;p");
+		    	 score += 2;
 		    	 break;
 			 case 0 :
 			  	 System.out.println("Vous etes nul !");
-			  	 main.dormirSystem(300);
+			  	 challenge.dormirSystem(300);
 				 System.out.println("Ou vous voulez tricher...");
 				 ee++;
+				 score++;
 				 break;
 			 case 1 :
 			 	 System.out.println("Vous etes serieux ?!?");
-			 	 main.dormirSystem(300);
+			 	 challenge.dormirSystem(300);
 				 System.out.println("Grosse feignasse !!!");
 				 ee++;
+				 score++;
 				 break;
 			 case 2 :
 			 	 System.out.println("On aime ce qui va de paire !!!");
@@ -78,10 +92,11 @@
 		     case 3 :
 		    	 System.out.println("TRIANGLE !!!");
 		    	 ee++;
+		    	 score++;
 		    	 break;
 			 case 4 :
 			 	 System.out.println("13 chinois !!!");
-			 	 main.dormirSystem(300);
+			 	 challenge.dormirSystem(300);
 				 System.out.println("Le 4 en chinois se prononce \"si\" et est\nphonetiquement tres proche du mot \"mort\"...");
 				 ee++;
 				 break;
@@ -92,21 +107,25 @@
 		     case 13 :
 		    	 System.out.println("Serions-nous superstitieux ?!");
 		    	 ee++;
+		    	 score++;
 		    	 break;
 		     case 42 :
 		    	 System.out.println("La réponse à la vie, à l'univers et à tout le reste\nn'est pas forcément la réponse à tout");
 		    	 if(nbrUser == nbrAleatoire) {
 		    	 System.out.println("\tIci oui ;p");
 				 }
+		    	 score +=2;
 		    	 break;
 		     case 69 :
 		    	 System.out.println("\tCochonne !");
-		    	 main.dormirSystem(300);
+		    	 challenge.dormirSystem(300);
 				 System.out.println("\tPervers !");
+				 score++;
 		    	 break;
 		     case 666 :
 		    	 System.out.println("Espece de Sataniste de merde !!!");
 		    	 ee++;
+		    	 score++;
 		    	 break;
 		     }
 		     if(ee == 3) {
@@ -128,6 +147,7 @@
 		    		 System.out.println("   ILLUMINATIS !!!  ");
 		    		 Thread.sleep(300);
 		    		 ee++;
+		    		 score += 7;
 		    	 }
 		    	 catch(Exception e) {
 		    		 e.printStackTrace();
@@ -141,7 +161,7 @@
 
 		 }
 		 while(victoire == false);
-
+		 ajouteScore(score);
 	 }
 	 public static void menuOption() {
 		 byte choix = 0;
@@ -167,6 +187,14 @@
 		 System.out.println("Quelle serait la limite ?");
 		 limMax = TextIO.getInt();
 		 System.out.println("La nouvelle limite est de " + limMax);
+	 }
+	 public static void ajouteScore(int score)
+	 {
+		 if(score < 0)
+		 {
+			 score = 0;
+		 }
+		 profilGestion.ajoutePtsPlusMoins(score);
 	 }
 	 public static int nbrRandom() {
 		 double n = Math.random();

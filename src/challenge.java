@@ -3,8 +3,7 @@
  * @version 1.2
  */
 public class challenge
-{        
-   // public static boolean connecter = false;
+{ 
     public static void main (String [] args)
     {
           /* 
@@ -24,7 +23,10 @@ public class challenge
            * 5) option1 to decide the number of lifes
            * 6) option2 to decide the number of players
            */
-
+    	
+    		ChallengeInterface CI = new ChallengeInterface();
+    		CI.launch();
+    		
         	menuPrincipal();             
         
     }     

@@ -169,7 +169,7 @@ public class Fichier {
 
 	/*
 	 * @pre -
-	 * @post lit un fichier et renvoie une string si cela s'est bien passé ou Error IOException si apparition de l'erreur
+	 * @post lit un fichier et renvoie une string si cela s'est bien passé ou Error IOExcpetion si cette erreur est apparue
 	 */
 	public String lire() {
 		try {
