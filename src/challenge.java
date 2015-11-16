@@ -24,8 +24,8 @@ public class challenge
            * 6) option2 to decide the number of players
            */
     	
-    		ChallengeInterface CI = new ChallengeInterface();
-    		CI.launch();
+    		//ChallengeInterface CI = new ChallengeInterface();
+    		//CI.launch();
     		
         	menuPrincipal();             
         
