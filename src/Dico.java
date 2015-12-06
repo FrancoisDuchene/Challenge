@@ -1,6 +1,3 @@
-import java.io.IOException;
-//import java.io.IOException;
-
 public class Dico {
 	public static String lectureMots() {
 		//Gestion des Flux I/O
@@ -10,11 +7,11 @@ public class Dico {
 		int nbrRandom = nbrRandom(fi);			
 		str = fi.lire(nbrRandom);				
 		try {
-				fi.fermer();
-			}
+			fi.fermer();
+		}
 		catch (Exception e) {
-				e.printStackTrace();
-			}
+			e.printStackTrace();
+		}
 		return str;
 	}
 	public static Fichier ouvrirDico() {
@@ -25,16 +22,11 @@ public class Dico {
 	}
 	public static void ecritureMot(String mot) {
 		Fichier fi = ouvrirDico();
-		if(fi.equalsMots(mot, fi))
+		if(fi.equalsMots(mot))
 		{			
 			fi.toEnd();
-			fi.introduireEspace();
-			try {
-				fi.ecrireString(mot);
-			}
-			catch (IOException e) {
-				e.printStackTrace();
-			}
+			fi.introduireEspace();			
+			fi.ecrireString(mot);			
 		}
 		else {
 			System.out.println("Desole ce mot existe déjà dans le dictionnaire");

@@ -2,26 +2,39 @@ import java.io.*;
 //import java.lang.Exception.*;
 
 public class Fichier {
-	private BufferedWriter fW;
 	private BufferedReader fR;
+	private PrintWriter pW;
 	private char mode = 'X';
-	private String nomFichier = "";	
+	private String nomFichier;	
 	/**
 	 * @category Constructor
 	 */
 	public Fichier() {
-			try {
-				fR = new BufferedReader(new FileReader(new File("src/dico.txt")));
-			}
-			catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			}
-			try {
-				fW = new BufferedWriter(new FileWriter(new File("src/dico.txt"),true));
-			}
-			catch (IOException e) {
-				e.printStackTrace();
-			}
+		try {
+			this.nomFichier = "src/dico.txt"; 
+			fR = new BufferedReader(new FileReader(new File(nomFichier)));			
+			pW = new PrintWriter(new FileWriter(new File(nomFichier), true));
+		}  catch (FileNotFoundException e) {
+			System.err.println(e);
+			System.exit(-1);
+		} catch (IOException e) {
+			System.err.println(e);
+			System.exit(-1);
+		}
+	}
+	public Fichier(String fileName)
+	{
+		try {
+			this.nomFichier = fileName;
+			fR = new BufferedReader(new FileReader(new File(fileName)));
+			pW = new PrintWriter(new FileWriter(new File(fileName), true));
+		}catch (FileNotFoundException e) {
+			System.err.println(e);
+			System.exit(-1);
+		}catch (IOException e){
+			System.err.println(e);
+			System.exit(-1);
+		}
 	}
 
 	//Other Routines
@@ -63,26 +76,28 @@ public class Fichier {
 	}
 
 	/**
-	 * Create a new Buffered Reader with the name of the file stocked in the object Fichier
+	 * Create a new BufferedReader with the name of the file stocked in the object Fichier
 	 */
 	public void setNewBufferedReader() {
 		try {
 			fR = new BufferedReader(new FileReader(new File(nomFichier)));
 		}
 		catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.err.println(e);
+			System.exit(-1);
 		}
 	}
-	
+
 	/**
-	 * Create a new Buffered Writer with the name of the file stocked in the object Fichier
+	 * Create a new PrintWriter with the name of the file stocked in the object Fichier
 	 */
-	public void setNewBufferedWriter() {
+	public void setNewPrintWriter() {
 		try {
-			fW = new BufferedWriter(new FileWriter(new File(nomFichier),true));
+			pW = new PrintWriter(new FileWriter(nomFichier));
 		}
 		catch (IOException e) {			
-			e.printStackTrace();
+			System.err.println(e);
+			System.exit(-1);
 		}
 	}
 
@@ -95,7 +110,8 @@ public class Fichier {
 			fR.mark(n);
 		}
 		catch(IOException e) {
-			e.printStackTrace();
+			System.err.println(e);
+			System.exit(-1);
 		}
 	}
 
@@ -105,98 +121,111 @@ public class Fichier {
 	 * @param s
 	 */
 	public void ouvrir(String nomDuFichier, String s) {
-			mode = (s.toUpperCase()).charAt(0);
-			nomFichier = nomDuFichier;
+		mode = (s.toUpperCase()).charAt(0);
+		nomFichier = nomDuFichier;
 		try {
 			if(mode == 'R' || mode == 'L') {
 				fR = new BufferedReader(new FileReader(new File(nomDuFichier)));
 			}
 			else if(mode == 'W' || mode == 'E') {
-				fW = new BufferedWriter(new FileWriter(new File(nomDuFichier),true));
+				pW = new PrintWriter(new FileWriter(new File(nomDuFichier),true));
 			}
 		}
 		catch(IOException e) {
-			e.printStackTrace();
-			System.out.println("\nIOException ERROR");
+			System.err.println(e);
+			System.exit(-1);
 		}
 	}
-	
-	/*
-	 * @pre -
-	 * @post ecrit dans le fichier le int reçu en paramètre
-	 */	
 
-	public void ecrireInt(int tmp) throws IOException
+	/**
+	 * Force the System to write with a flush() statement
+	 */
+	public void forcerEcriture()
+	{
+		pW.flush();
+	}
+
+	/**
+	 * @param tmp is the integer to write in the next line of the file
+	 */
+	public void ecrireInt(int tmp)
 	{		
 		String chaine = "";
 		chaine = String.valueOf(tmp);
 		assert(chaine != null) : "Cette chaine est nulle !";
-			fW.write(chaine, 0, chaine.length());
-			fW.newLine();
+		pW.println(chaine);		
 	}
-	public void ecrireDouble(double tmp) throws IOException
+
+	/**
+	 * @param tmp is the double to write in the next line of the file
+	 */
+	public void ecrireDouble(double tmp)
 	{
 		String chaine = "";
 		chaine = String.valueOf(tmp);
 		assert(chaine != null) : "Cette chaine est nulle !";
-			fW.write(chaine, 0, chaine.length());
-			fW.newLine();
-	}
-	/*
-	 * @pre tmp != NULL
-	 * @post ecrit dans le fichier le string reçu en paramètre
-	 */
-	public void ecrireString(String tmp) throws IOException {
-		assert(tmp != null) : "Il s'agit d'un String vide !";
-			fW.write(tmp);
-			fW.newLine();	
+		pW.println(chaine);
 	}
 
-	/*
-	 * @pre mode = W or E
-	 * @post add a new space at the current line
+	/**
+	 * @param tmp is the String to write in the next line of the file. tmp != null
+	 */
+	public void ecrireString(String tmp)
+	{
+		assert(tmp != null) : "Il s'agit d'un String vide !";
+		pW.println(tmp);
+	}
+
+	/**
+	 * Write a new empty line. Only in 'W' or 'E' mode !
 	 */
 	public void introduireEspace() {
-		if(mode == 'W' || mode == 'E') {
-			try {
-				fW.newLine();
-			}
-			catch (IOException e) {				
-				e.printStackTrace();
-			}
-		}
+		if(mode == 'W' || mode == 'E')			
+			pW.println("");	
 	}
 
-	/*
-	 * @pre -
-	 * @post lit un fichier et renvoie une string si cela s'est bien passé ou Error IOExcpetion si cette erreur est apparue
+	/**
+	 * @return the current String read from the file
 	 */
 	public String lire() {
 		try {
 			String chaine = fR.readLine();
 			return chaine;
 		}
-		catch(IOException e) {
-			System.out.println(" Erreur de lecture");
+		catch(IOException e) {		
+			System.err.println(e);
+			System.exit(-1);
 			return "Error IOException";
 		}
 	}
+
+	/**
+	 * @param n the number of line to skip
+	 * @return the current String read from the file
+	 */
 	public String lire(int n) {
 		try {
 			String chaine = "";
 			for(int i =0; i<n;i++) {
-			chaine = fR.readLine();
+				fR.readLine();				
 			}
 			return chaine;
 		}
 		catch(IOException e) {
+			System.err.println(e);
+			System.exit(-1);
 			return "Error IOException";
 		}
 	}
-	public boolean equalsMots(String mot1, Fichier fi) {
+	/**
+	 * Check in the file if the word in param is already in
+	 * @param mot1 the String to check
+	 * @return true if the word exist in the file and false if not
+	 */
+	public boolean equalsMots(String mot1) {
 		setNewBufferedReader();
 		String mot2 = "";
-		for(int i = 0; i < fi.longueurFichier();i++) {
+		for(int i = 0; i < this.longueurFichier();i++) {
 			mot2 = lire(i);
 			if(mot1.equals(mot2)) {
 				return false;
@@ -204,21 +233,18 @@ public class Fichier {
 		}
 		return true;
 	}
-	/*
-	 * @pre avoir ouvert un flux						
-	 * @post ferme le flux précédemment ouvert
+	
+	/**
+	 * Close the BufferedReader and the PrintWriter
 	 */
 	public void fermer() {
-		try {
-			if(mode == 'R' || mode == 'L') {
-				fR.close();
-			}
-			else if(mode == 'W' || mode == 'E') {
-				fW.close();
-			}
+		try{			
+			fR.close();			
+			pW.close();			
 		}
 		catch(IOException e) {
-			System.out.println("ERROR : IOEXCEPTION");
+			System.err.println(e);
+			System.exit(-1);
 		}
 	}
 
