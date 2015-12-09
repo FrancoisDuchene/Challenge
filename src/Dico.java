@@ -4,14 +4,9 @@ public class Dico {
 
 		String str = "";
 		Fichier fi = ouvrirDico();
-		int nbrRandom = nbrRandom(fi);			
-		str = fi.lire(nbrRandom);				
-		try {
-			fi.fermer();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		int nbrRandom = nbrRandom(fi.longueurFichier());
+		str = fi.lire(nbrRandom);
+		fi.fermer();
 		return str;
 	}
 	public static Fichier ouvrirDico() {
@@ -23,18 +18,23 @@ public class Dico {
 	public static void ecritureMot(String mot) {
 		Fichier fi = ouvrirDico();
 		if(fi.equalsMots(mot))
-		{			
+		{
 			fi.toEnd();
-			fi.introduireEspace();			
-			fi.ecrireString(mot);			
+			fi.introduireEspace();
+			fi.ecrireString(mot);
 		}
 		else {
 			System.out.println("Desole ce mot existe déjà dans le dictionnaire");
 		}
 	}
-	public static int nbrRandom(Fichier fi) {
+	/**
+	 *
+	 * @param longueur the length of the file currently used
+	 * @return a random number between 0 and the file length
+	 */
+	public static int nbrRandom(int longueur) {
 		double nbr = Math.random();
-		nbr = nbr*fi.longueurFichier();
+		nbr = nbr*longueur;
 		int nbrRandom = (int) nbr;
 		return Math.abs(nbrRandom);
 	}

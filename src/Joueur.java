@@ -3,7 +3,7 @@ public class Joueur {
 	//Attributs
 	private String name;
 	private int [] scorePendu, scorePlusMoins;
-		
+
 	//Constructeurs
 	public Joueur()
 	{
@@ -11,21 +11,23 @@ public class Joueur {
 		scorePendu = remplirTab(10);
 		scorePlusMoins = remplirTab(10);
 	}
+
 	public Joueur(String n)
 	{
 		name = n;
 		scorePendu = remplirTab(10);
 		scorePlusMoins = remplirTab(10);
 	}
+
 	public Joueur(String n, int sPd, int sPM )
 	{
 		name = n;
 		scorePendu = remplirTab(sPd);
 		scorePlusMoins = remplirTab(sPM);
 	}
-	
+
 	//Methodes
-	
+
 	/**
 	 * Met l'attribut scorePendu à la valeur du tableau envoyé en paramètre
 	 * @param sPd tableau de int à mettre à la place du scorePendu actuel
@@ -56,6 +58,7 @@ public class Joueur {
 	{
 		name = n;
 	}
+
 	public void ajouteScoreSPd(int n)
 	{
 		for(int i=0; i<scorePendu.length; i++)
@@ -66,7 +69,8 @@ public class Joueur {
 				i = (scorePendu.length-1);
 			}
 		}
-	}	
+	}
+
 	public void ajouteScoreSPM(int n)
 	{
 		for(int i=0; i<scorePlusMoins.length; i++)
@@ -78,6 +82,7 @@ public class Joueur {
 			}
 		}
 	}
+
 	public int[] remplirTab(int nbr)
 	{
 		int [] newTab = new int[nbr];
@@ -87,6 +92,7 @@ public class Joueur {
 		}
 		return newTab;
 	}
+
 	public void afficheScoreSPd()
 	{
 		for(int i=0; i<scorePendu.length ;i++)
@@ -94,6 +100,7 @@ public class Joueur {
 			System.out.println("[" + i + "] " + scorePendu[i]);
 		}
 	}
+
 	public void afficheScoreSPM()
 	{
 		for(int i=0; i<scorePlusMoins.length ;i++)
@@ -101,26 +108,32 @@ public class Joueur {
 			System.out.println("[" + i + "] " + scorePlusMoins[i]);
 		}
 	}
+
 	public void afficheNom()
 	{
 		System.out.print(name);
 	}
+
 	public String getName()
 	{
 		return name;
 	}
+
 	public int[] getScorePendu() 
 	{
 		return scorePendu;
 	}
+
 	public int[] getScorePlusMoins()
 	{
 		return scorePlusMoins;
 	}
+
 	public String toString()
 	{
 		return ("Nom : " + name + " - Score Pendu : " + scorePenduTotal() + " - Score PlusMoins : " + scorePlusMoinsTotal() + " - Score Total : " + scoreTotal() );
 	}
+
 	public int scoreTotal()
 	{		
 		int score = scorePenduTotal()+scorePlusMoinsTotal();
@@ -130,6 +143,7 @@ public class Joueur {
 		}
 		return score;
 	}
+
 	public int scorePenduTotal()
 	{
 		int a = 0;
@@ -139,10 +153,11 @@ public class Joueur {
 			{
 				a += scorePendu[i];
 			}
-			
+
 		}
 		return a;
 	}
+
 	public int scorePlusMoinsTotal()
 	{
 		int b = 0;
@@ -154,5 +169,44 @@ public class Joueur {
 			}			
 		}
 		return b;
+	}
+
+	public boolean equals(Object o)
+	{
+		if(o instanceof Joueur)
+		{
+			Joueur jr = (Joueur) o;
+			if(this.getName().equals(jr.getName()))
+			{	
+				if(this.scorePenduTotal() == jr.scorePenduTotal())
+				{
+					if(this.scorePlusMoinsTotal() == jr.scorePlusMoinsTotal())
+					{
+						return true;
+					}
+				}
+			}
+			return false;			
+		}
+		else
+		{return false;}
+	}
+
+	public void savePlayer()
+	{
+		Fichier fl = new Fichier();
+		fl.ouvrir(name + ".sav", "w");
+		fl.ecrireString(name);
+		fl.ecrireString("(A)");
+		for(int i=0; i<scorePendu.length;i++)
+		{
+			fl.ecrireInt(scorePendu[i]);
+		}
+		fl.ecrireString("(B)");
+		for(int i=0; i<scorePlusMoins.length;i++)
+		{
+			fl.ecrireInt(scorePlusMoins[i]);
+		}
+		fl.fermer();
 	}
 }

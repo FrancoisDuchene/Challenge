@@ -12,8 +12,8 @@ public class Fichier {
 	public Fichier() {
 		try {
 			this.nomFichier = "src/dico.txt"; 
-			fR = new BufferedReader(new FileReader(new File(nomFichier)));			
-			pW = new PrintWriter(new FileWriter(new File(nomFichier), true));
+			fR = new BufferedReader(new FileReader(nomFichier));			
+			pW = new PrintWriter(new FileWriter(nomFichier));
 		}  catch (FileNotFoundException e) {
 			System.err.println(e);
 			System.exit(-1);
@@ -22,21 +22,6 @@ public class Fichier {
 			System.exit(-1);
 		}
 	}
-	public Fichier(String fileName)
-	{
-		try {
-			this.nomFichier = fileName;
-			fR = new BufferedReader(new FileReader(new File(fileName)));
-			pW = new PrintWriter(new FileWriter(new File(fileName), true));
-		}catch (FileNotFoundException e) {
-			System.err.println(e);
-			System.exit(-1);
-		}catch (IOException e){
-			System.err.println(e);
-			System.exit(-1);
-		}
-	}
-
 	//Other Routines
 	/**
 	 * @param mode who need R or L for Reading and W or E for Writing
@@ -128,7 +113,7 @@ public class Fichier {
 				fR = new BufferedReader(new FileReader(new File(nomDuFichier)));
 			}
 			else if(mode == 'W' || mode == 'E') {
-				pW = new PrintWriter(new FileWriter(new File(nomDuFichier),true));
+				pW = new PrintWriter(new FileWriter(nomDuFichier));
 			}
 		}
 		catch(IOException e) {
@@ -233,7 +218,7 @@ public class Fichier {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Close the BufferedReader and the PrintWriter
 	 */
@@ -247,5 +232,4 @@ public class Fichier {
 			System.exit(-1);
 		}
 	}
-
 }
