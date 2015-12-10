@@ -28,7 +28,7 @@ public class pendu {
 				ajouteScore(score);
 			}
 		}
-		profilGestion.saveProfile();
+		profilGestion.saveProfil();
 	}
 	public static int choix2Jr()
 	{

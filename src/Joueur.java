@@ -1,10 +1,22 @@
 
 public class Joueur {
 	//Attributs
+	/**
+	 * the name of the player
+	 */
 	private String name;
-	private int [] scorePendu, scorePlusMoins;
-
+	/**
+	 * it's the score of the HangmannGame
+	 */
+	private int [] scorePendu;
+	/**
+	 * it's the score of the HighLowGame
+	 */
+	private int [] scorePlusMoins;
 	//Constructeurs
+	/**
+	 * @category Constructor
+	 */
 	public Joueur()
 	{
 		name = "Jean-Michel";
@@ -12,6 +24,10 @@ public class Joueur {
 		scorePlusMoins = remplirTab(10);
 	}
 
+	/**
+	 * @category Constructor 
+	 * @param n the name of the player
+	 */
 	public Joueur(String n)
 	{
 		name = n;
@@ -19,6 +35,12 @@ public class Joueur {
 		scorePlusMoins = remplirTab(10);
 	}
 
+	/**
+	 * @category Constructor
+	 * @param n the name of the player
+	 * @param sPd the score of the Hangmann
+	 * @param sPM the score of the HighLow
+	 */
 	public Joueur(String n, int sPd, int sPM )
 	{
 		name = n;
@@ -59,6 +81,10 @@ public class Joueur {
 		name = n;
 	}
 
+	/**
+	 * Add score to the total score arrays of the Hangmann
+	 * @param n the score to add
+	 */
 	public void ajouteScoreSPd(int n)
 	{
 		for(int i=0; i<scorePendu.length; i++)
@@ -71,6 +97,10 @@ public class Joueur {
 		}
 	}
 
+	/**
+	 * Add score to the total score arrays of the HighLow
+	 * @param n the score to add
+	 */
 	public void ajouteScoreSPM(int n)
 	{
 		for(int i=0; i<scorePlusMoins.length; i++)
@@ -197,16 +227,17 @@ public class Joueur {
 		Fichier fl = new Fichier();
 		fl.ouvrir(name + ".sav", "w");
 		fl.ecrireString(name);
-		fl.ecrireString("(A)");
+		fl.ecrireString(".A");
 		for(int i=0; i<scorePendu.length;i++)
 		{
 			fl.ecrireInt(scorePendu[i]);
 		}
-		fl.ecrireString("(B)");
+		fl.ecrireString(".B");
 		for(int i=0; i<scorePlusMoins.length;i++)
 		{
 			fl.ecrireInt(scorePlusMoins[i]);
 		}
+		fl.ecrireString(".end");
 		fl.fermer();
 	}
 }

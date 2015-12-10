@@ -1,4 +1,5 @@
 public class Dico {
+
 	public static String lectureMots() {
 		//Gestion des Flux I/O
 

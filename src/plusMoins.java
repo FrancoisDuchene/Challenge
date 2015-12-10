@@ -188,6 +188,10 @@
 		 limMax = TextIO.getInt();
 		 System.out.println("La nouvelle limite est de " + limMax);
 	 }
+	 /**
+	  * this function add you score to the profil of the player
+	  * @param a integer who represent the score to calculate a score
+	  */
 	 public static void ajouteScore(int score)
 	 {
 		 if(score < 0)
@@ -195,7 +199,11 @@
 			 score = 0;
 		 }
 		 profilGestion.ajoutePtsPlusMoins(score);
+		 profilGestion.saveProfil();
 	 }
+	 /**
+	  * @return a random number between 0 and the file length
+	  */
 	 public static int nbrRandom() {
 		 double n = Math.random();
 		 n = n*limMax;

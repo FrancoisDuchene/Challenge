@@ -35,31 +35,29 @@ public class challenge
 	{
 		if(profilGestion.existe())
 		{
-			return "connecte";
+			if(language == 1)
+			{
+				return "connecte";
+			}else{
+				return "connected";
+			}			
 		}
 		else
 		{
-			return "non connecte";
+			if(language == 1)
+			{
+				return "non connecte";
+			}else{
+				return "not connected";
+			}			
 		}
 	}    
 	public static void menuPrincipal()
 	{
 		byte choix = 0;
 		do
-		{       
-			System.out.println("#  $$$$  $$ $$   $$$   $$    $$    $$$$$  $   $   $$$$  $$$$$");
-			System.out.println("# $$     $$ $$  $$ $$  $$    $$    $$     $$  $  $$     $$");
-			System.out.println("# $      $$$$$  $$$$$  $$    $$    $$$$   $ $ $  $   $$ $$$");
-			System.out.println("# $$     $$ $$  $$ $$  $$    $$    $$     $  $$  $$   $ $$");
-			System.out.println("#  $$$$  $$ $$  $$ $$  $$$$$ $$$$$ $$$$$  $   $   $$$$  $$$$$");
-
-
-			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-			System.out.println("\t\tCHALLENGE - MINIGAMES");
-			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-			System.out.println((language == 1)?"\nMenu Principal :\n====================": "\nMain Menu :\n====================");
-			System.out.println((language == 1)?"\nStatut : " + connecte():"\nStatus : " + connecte() );
-			System.out.println((language == 1)?"\n1. Jouer\n2. Credits\n3. Profil\n4. Language\n5. Quitter":"\n1. Play\n. Credits\n3. Profile\n4. Language\n5. Exit");    
+		{    
+			printMenuMessage(1);
 
 			choix = TextIO.getByte();
 			switch(choix)
@@ -79,27 +77,32 @@ public class challenge
 				break;
 			case 5:
 				char c = 'n';
-				System.out.print((language == 1)?"Etes-vous sur de vouloir quitter ? (o/n)":"Are-you sure do you want to quit ? (y/n)");
+				if(language == 1){System.out.println("Etes-vous sur de vouloir quitter ? (o/n)");}
+				else{System.out.println("Are-you sure do you want to quit ? (y/n)");}				
 				do{
 					c = TextIO.getChar();
 					switch(c)
 					{
 					case 'o':
-						System.out.println("Au revoir alors !");
+						if(language == 1){System.out.println("Au revoir alors !");}
+						else{System.out.println("GoodBye Then !");}		
 						System.exit(0);
 						break;
 					case 'y':
-						System.out.println("Goodbye then !");
+						if(language == 1){System.out.println("Au revoir alors !");}
+						else{System.out.println("Goodbye then !");}						
 						System.exit(0);
 						break;
 					case 'n':
-						System.out.println((language == 1)?"J'etais sur que vous resteriez !":"I was sure you wanted to stay !");
+						if(language == 1){System.out.println("J'etais sur que vous resteriez !");}
+						else{System.out.println("I was sure you wanted to stay !");}
 						break;
 					}
 				}while(c != 'n' && c != 'o' && c != 'y');            
 				break;
 			default :
-				System.out.println("Veuillez indiquer 1, 2, 3, 4 ou 5 !");
+				if(language == 1){System.out.println("Veuillez indiquer 1, 2, 3, 4 ou 5 !");}
+				else{System.out.println("Please Indicate 1, 2, 3, 4 or 5 !");}				
 				break;
 			}
 
@@ -112,8 +115,7 @@ public class challenge
 		do
 		{
 			clear();
-			System.out.println("LISTE DE JEUX\n^^^^^^^^^^^^^^^^^^^^^^^^^^");
-			System.out.println("1. Pendu\n2. PlusMoins\n3. Mastermind\n4. Quitter");
+			printMenuMessage(2);
 			choix = TextIO.getByte();
 			switch(choix)
 			{
@@ -132,7 +134,8 @@ public class challenge
 				menuPrincipal();
 				break;
 			default :
-				System.out.println("Veuillez indiquer 1,2 ou 3 !");
+				if(language == 1){System.out.println("Veuillez indiquer 1, 2, 3 or 4 !");}
+				else{System.out.println("Please indicate 1, 2, 3 or 4 !");}				
 				break;
 			}
 		}while(choix != 3);
@@ -140,14 +143,17 @@ public class challenge
 	public static void credit()
 	{
 		clear();
-		System.out.println("Developpeurs Principaux :\n=====================");
+		if(language == 1){System.out.println("Developpeurs Principaux :\n=====================");}
+		else{System.out.println("Principal Developper's crew");}
 		System.out.println("Vinsifroid\nBivisi\nMelvinMajor\n\n\n");
 	}
 	public static void choseLanguage()
 	{
 		byte choix = 0;
 		clear();
-		System.out.println("Quel Language preferez-vous ?\n\t1. Francais\n2. English");
+		if(language == 1){System.out.println("Quel Language preferez-vous ?\n\t1. Francais\n2. English");}
+		else{System.out.println("What language would you like ?");}
+		
 		do{
 			choix = TextIO.getByte();
 			switch(choix)
@@ -163,6 +169,42 @@ public class challenge
 			}
 		}while(choix != 1 || choix != 2);    	
 	}
+	public static void printMenuMessage(int i)
+	{
+		if(i==1)
+		{
+			System.out.println("#  $$$$  $$ $$   $$$   $$    $$    $$$$$  $   $   $$$$  $$$$$");
+			System.out.println("# $$     $$ $$  $$ $$  $$    $$    $$     $$  $  $$     $$");
+			System.out.println("# $      $$$$$  $$$$$  $$    $$    $$$$   $ $ $  $   $$ $$$");
+			System.out.println("# $$     $$ $$  $$ $$  $$    $$    $$     $  $$  $$   $ $$");
+			System.out.println("#  $$$$  $$ $$  $$ $$  $$$$$ $$$$$ $$$$$  $   $   $$$$  $$$$$");
+
+
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+			System.out.println("\t\tCHALLENGE - MINIGAMES");
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+			if(language == 1){
+				System.out.println("\nMenu Principal :\n====================");
+				System.out.println("\nStatut : " + connecte());
+				System.out.println("\n1. Jouer\n2. Credits\n3. Profil\n4. Language\n5. Quitter");
+			}else if (language == 2){
+				System.out.println("\nMain Menu :\n====================");
+				System.out.println("\nStatus : " + connecte() );
+				System.out.println("\n1. Play\n. Credits\n3. Profile\n4. Language\n5. Exit");
+			}
+		}else if(i==2){
+			if(language == 1){
+				System.out.println("LISTE DE JEUX\n^^^^^^^^^^^^^^^^^^^^^^^^^^");
+				System.out.println("1. Pendu\n2. PlusMoins\n3. Mastermind\n4. Quitter");}
+			else{
+				System.out.println("LIST OF GAMES\n^^^^^^^^^^^^^^^^^^^^^^^^^^");
+				System.out.println("1. HangMann\n2. HighLow\n3. Mastermind\n4. Quit");
+			}
+		}
+	}
+	/**
+	 * @return the current Language
+	 */
 	public static int getLanguage()
 	{
 		return language;
@@ -174,10 +216,13 @@ public class challenge
 		for (int i = 0; i<25; i++)
 		{System.out.println("\n");}
 	}
+	/**
+	 * The system sleep in function of the milliseconds
+	 * @param n the number of milliseconds
+	 */
 	public static void dormirSystem(long n)
 	{
-		try
-		{
+		try	{
 			Thread.sleep(n);
 		}catch(InterruptedException e){
 			e.printStackTrace();
