@@ -13,7 +13,7 @@ public class Fichier {
 		try {
 			this.nomFichier = "src/dico.txt"; 
 			fR = new BufferedReader(new FileReader(nomFichier));			
-			pW = new PrintWriter(new FileWriter(nomFichier));
+			pW = new PrintWriter(new FileWriter(nomFichier, true));
 		}  catch (FileNotFoundException e) {
 			System.err.println(e);
 			System.exit(-1);
@@ -113,7 +113,7 @@ public class Fichier {
 				fR = new BufferedReader(new FileReader(new File(nomDuFichier)));
 			}
 			else if(mode == 'W' || mode == 'E') {
-				pW = new PrintWriter(new FileWriter(nomDuFichier));
+				pW = new PrintWriter(new FileWriter(nomDuFichier, true));
 			}
 		}
 		catch(IOException e) {
@@ -178,7 +178,7 @@ public class Fichier {
 			return chaine;
 		}
 		catch(IOException e) {		
-			System.err.println(e);
+			System.err.println(e.getMessage());
 			System.exit(-1);
 			return "Error IOException";
 		}
@@ -192,12 +192,12 @@ public class Fichier {
 		try {
 			String chaine = "";
 			for(int i =0; i<n;i++) {
-				fR.readLine();				
+				chaine = fR.readLine();
 			}
 			return chaine;
 		}
 		catch(IOException e) {
-			System.err.println(e);
+			System.err.println(e.getMessage());
 			System.exit(-1);
 			return "Error IOException";
 		}

@@ -139,26 +139,40 @@ public class Joueur {
 		}
 	}
 
+	/**
+	 * Print the name of the player
+	 */
 	public void afficheNom()
 	{
 		System.out.print(name);
 	}
 
+	/**
+	 * @return the name of the player
+	 */
 	public String getName()
 	{
 		return name;
 	}
-
+	/**
+	 * @return the int array's of Hangmann's score
+	 */
 	public int[] getScorePendu() 
 	{
 		return scorePendu;
 	}
 
+	/**
+	 * @return the int array's of HighLow score
+	 */
 	public int[] getScorePlusMoins()
 	{
 		return scorePlusMoins;
 	}
 
+	/**
+	 * @return a String describing the player with his name, his total HighLow score and his total Hangmann score
+	 */
 	public String toString()
 	{
 		return ("Nom : " + name + " - Score Pendu : " + scorePenduTotal() + " - Score PlusMoins : " + scorePlusMoinsTotal() + " - Score Total : " + scoreTotal() );
