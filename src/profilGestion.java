@@ -18,6 +18,7 @@ public class profilGestion {
 			else{System.out.println("What is your name ?");}			
 			name = TextIO.getWord();
 			playerOne.setName(name);
+			saveProfil();
 			existe = true;
 		}
 		else
@@ -56,6 +57,14 @@ public class profilGestion {
 			playerOne.ajouteScoreSPM(score);
 		}
 	}
+	
+	public static void ajoutePtsMasterMind(int score)
+	{
+		if(score >= 0)
+		{
+			playerOne.ajouteScoreSMM(score);
+		}
+	}
 	public static void afficheProfil()
 	{
 		if(language == 1)
@@ -67,6 +76,9 @@ public class profilGestion {
 			System.out.println("\nScore Plus ou Moins\n");
 			playerOne.afficheScoreSPM();
 			System.out.println("Score PlusMoins : " + playerOne.scorePlusMoinsTotal());
+			System.out.println("\nScore MasterMind\n");
+			playerOne.afficheScoreSMM();
+			System.out.println("Score MasterMind : " + playerOne.scoreMasterMindTotal());
 			System.out.println("Score Total : " + playerOne.scoreTotal());
 		}else{
 			System.out.println("\nName : " + playerOne.getName());
@@ -76,6 +88,9 @@ public class profilGestion {
 			System.out.println("\nHighLow score\n");
 			playerOne.afficheScoreSPM();
 			System.out.println("HighLow Total score : " + playerOne.scorePlusMoinsTotal());
+			System.out.println("\nMasterMind Score\n");
+			playerOne.afficheScoreSMM();
+			System.out.println("MasterMind Score : " + playerOne.scoreMasterMindTotal());
 			System.out.println("Total Score : " + playerOne.scoreTotal());
 		}
 	}
@@ -99,6 +114,7 @@ public class profilGestion {
 			fi.lire();
 			int [] scorePendu = new int[10];
 			int [] scorePlusMoins = new int[10];
+			int [] scoreMasterMind = new int[10];
 			for(int i=0;!(str.equals(".B"));i++)
 			{
 				str = fi.lire();
@@ -108,15 +124,24 @@ public class profilGestion {
 				}				
 			}
 			playerOne.setScorePendu(scorePendu);
-			for(int i=0;!(str.equals(".end"));i++)
+			for(int i=0;!(str.equals(".C"));i++)
 			{
 				str = fi.lire();
-				if(!str.equals(".end"))
+				if(!str.equals(".C"))
 				{
 					scorePlusMoins[i] = Integer.parseInt(str);
 				}				
 			}
 			playerOne.setScorePlusMoins(scorePlusMoins);
+			for(int i=0;!(str.equals(".end"));i++)
+			{
+				str = fi.lire();
+				if(!str.equals(".end"))
+				{
+					scoreMasterMind[i] = Integer.parseInt(str);
+				}				
+			}
+			playerOne.setScoreMasterMind(scoreMasterMind);
 			fi.fermer();
 		}
 	}

@@ -121,6 +121,28 @@ public class Fichier {
 			System.exit(-1);
 		}
 	}
+	/**
+	 * Open the file with the specified name and the specified mode (Reading or Writing)
+	 * @param nomDuFichier
+	 * @param s the mode
+	 * @param append if true, write at the end of the file and false to rewrite the file
+	 */
+	public void ouvrir(String nomDuFichier, String s, boolean append) {
+		mode = (s.toUpperCase()).charAt(0);
+		nomFichier = nomDuFichier;
+		try {
+			if(mode == 'R' || mode == 'L') {
+				fR = new BufferedReader(new FileReader(new File(nomDuFichier)));
+			}
+			else if(mode == 'W' || mode == 'E') {
+				pW = new PrintWriter(new FileWriter(nomDuFichier, append));
+			}
+		}
+		catch(IOException e) {
+			System.err.println(e);
+			System.exit(-1);
+		}
+	}
 
 	/**
 	 * Force the System to write with a flush() statement

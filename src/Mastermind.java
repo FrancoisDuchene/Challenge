@@ -56,7 +56,6 @@ public class Mastermind
 
         while(!gagne && viesTmp > 0)
         {
-
             try
             {
                 for(int g = 0; g < 4; g++)
@@ -103,6 +102,17 @@ public class Mastermind
                 else {viesTmp --;}
             }
         }
+    }
+    /**
+     * This function take the difficulty and the number of life who still here
+     * return the score and add to the playerProfile
+     * @return the score of the game
+     */
+    public static int calculScore()
+    {
+    	int score = difficulte*vies;
+    	profilGestion.ajoutePtsMasterMind(score);
+    	return score;
     }
 
     /**
@@ -159,7 +169,7 @@ public class Mastermind
      */
     public static void creerCouleur(char[] couleur)
     {
-        int longueur = (difficulte == 1)? 4: (difficulte == 2)? 7: 10;;
+        int longueur = (difficulte == 1)? 4: (difficulte == 2)? 7: 10;
         int a = 0;
         double b = 0.0;
         for (int i = 0; i< 4; i++)
@@ -178,12 +188,12 @@ public class Mastermind
         }
         else
         {
-            System.out.println("Dommage vous avez perdu, la combinaison etait:");
+            System.out.println("Dommage vous avez perdu, la combinaison etait : ");
             for (int s = 0; s < 4; s++)
             {
                 System.out.print(couleur[s]+ " ");
             }
-            System.out.println("\n");
+            System.out.println("\nVotre score pour cette partie est de : " + calculScore() + "\n");
         }
     }
 
@@ -196,9 +206,9 @@ public class Mastermind
     }
 
     /**
-     * @pre recoit un char LETTRE   
-     * @post retourne une majuscule si majuscule et si minuscule.
-     */
+	 * @param l Take a char
+	 * @return the LowerCase of the char if it's an UpperCase and the char itself if it's a LowerCase.
+	 */
     public static char majuscule(char l){
         if ((int)l <=122 && (int)l >= 97)
         {return (char)((int)l - 32);}

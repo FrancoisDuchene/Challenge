@@ -13,6 +13,8 @@ public class Joueur {
 	 * it's the score of the HighLowGame
 	 */
 	private int [] scorePlusMoins;
+	
+	private int [] scoreMaster;
 	//Constructeurs
 	/**
 	 * @category Constructor
@@ -22,6 +24,7 @@ public class Joueur {
 		name = "Jean-Michel";
 		scorePendu = remplirTab(10);
 		scorePlusMoins = remplirTab(10);
+		scoreMaster = remplirTab(10);
 	}
 
 	/**
@@ -33,6 +36,7 @@ public class Joueur {
 		name = n;
 		scorePendu = remplirTab(10);
 		scorePlusMoins = remplirTab(10);
+		scoreMaster = remplirTab(10);
 	}
 
 	/**
@@ -46,6 +50,14 @@ public class Joueur {
 		name = n;
 		scorePendu = remplirTab(sPd);
 		scorePlusMoins = remplirTab(sPM);
+		scoreMaster = remplirTab(10);
+	}
+	public Joueur(String name, int sPd, int sPM, int sMM)
+	{
+		this.name = name;
+		scorePendu = remplirTab(sPd);
+		scorePlusMoins = remplirTab(sPM);
+		scoreMaster = remplirTab(sMM);
 	}
 
 	//Methodes
@@ -70,6 +82,13 @@ public class Joueur {
 		for(int i=0; i<scorePlusMoins.length;i++)
 		{
 			scorePlusMoins[i] = sPM[i];
+		}
+	}
+	public void setScoreMasterMind(int [] sMM)
+	{
+		for(int i=0; i<scoreMaster.length;i++)
+		{
+			scoreMaster[i] = sMM[i];
 		}
 	}
 	/**
@@ -112,6 +131,17 @@ public class Joueur {
 			}
 		}
 	}
+	public void ajouteScoreSMM(int n)
+	{
+		for(int i=0; i<scoreMaster.length; i++)
+		{
+			if(scoreMaster[i] == -1)
+			{
+				scoreMaster[i] = n;
+				i = (scoreMaster.length-1);
+			}
+		}
+	}
 
 	public int[] remplirTab(int nbr)
 	{
@@ -136,6 +166,14 @@ public class Joueur {
 		for(int i=0; i<scorePlusMoins.length ;i++)
 		{
 			System.out.println("[" + i + "] " + scorePlusMoins[i]);
+		}
+	}
+	
+	public void afficheScoreSMM()
+	{
+		for(int i=0; i<scoreMaster.length ;i++)
+		{
+			System.out.println("[" + i + "] " + scoreMaster[i]);
 		}
 	}
 
@@ -170,6 +208,10 @@ public class Joueur {
 		return scorePlusMoins;
 	}
 
+	public int[] getScoreMasterMind()
+	{
+		return scoreMaster;
+	}
 	/**
 	 * @return a String describing the player with his name, his total HighLow score and his total Hangmann score
 	 */
@@ -180,7 +222,7 @@ public class Joueur {
 
 	public int scoreTotal()
 	{		
-		int score = scorePenduTotal()+scorePlusMoinsTotal();
+		int score = scorePenduTotal()+scorePlusMoinsTotal()+scoreMasterMindTotal();
 		if(score < 0)
 		{
 			score = 0;
@@ -214,7 +256,18 @@ public class Joueur {
 		}
 		return b;
 	}
-
+	public int scoreMasterMindTotal()
+	{
+		int c = 0;
+		for(int i = 0; i< scoreMaster.length; i++)
+		{
+			if(scoreMaster[i] >= 0)
+			{
+				c += scoreMaster[i];
+			}			
+		}
+		return c;
+	}
 	public boolean equals(Object o)
 	{
 		if(o instanceof Joueur)
@@ -226,7 +279,10 @@ public class Joueur {
 				{
 					if(this.scorePlusMoinsTotal() == jr.scorePlusMoinsTotal())
 					{
-						return true;
+						if(this.scoreMasterMindTotal() == jr.scoreMasterMindTotal())
+						{
+							return true;
+						}						
 					}
 				}
 			}
@@ -239,7 +295,7 @@ public class Joueur {
 	public void savePlayer()
 	{
 		Fichier fl = new Fichier();
-		fl.ouvrir(name + ".sav", "w");
+		fl.ouvrir(name + ".sav", "w", false);
 		fl.ecrireString(name);
 		fl.ecrireString(".A");
 		for(int i=0; i<scorePendu.length;i++)
@@ -250,6 +306,11 @@ public class Joueur {
 		for(int i=0; i<scorePlusMoins.length;i++)
 		{
 			fl.ecrireInt(scorePlusMoins[i]);
+		}
+		fl.ecrireString(".C");
+		for(int i=0; i<scoreMaster.length;i++)
+		{
+			fl.ecrireInt(scoreMaster[i]);
 		}
 		fl.ecrireString(".end");
 		fl.fermer();
