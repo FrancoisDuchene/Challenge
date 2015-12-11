@@ -135,21 +135,27 @@ public class Fichier {
 	 */
 	public void ecrireInt(int tmp)
 	{		
-		String chaine = "";
-		chaine = String.valueOf(tmp);
-		assert(chaine != null) : "Cette chaine est nulle !";
-		pW.println(chaine);		
+		if(mode == 'W' || mode == 'E')
+		{
+			String chaine = "";
+			chaine = String.valueOf(tmp);
+			assert(chaine != null) : "Cette chaine est nulle !";
+			pW.println(chaine);	
+		}
 	}
 
 	/**
 	 * @param tmp is the double to write in the next line of the file
 	 */
 	public void ecrireDouble(double tmp)
-	{
-		String chaine = "";
-		chaine = String.valueOf(tmp);
-		assert(chaine != null) : "Cette chaine est nulle !";
-		pW.println(chaine);
+	{		
+		if(mode == 'W' || mode == 'E')
+		{
+			String chaine = "";
+			chaine = String.valueOf(tmp);
+			assert(chaine != null) : "Cette chaine est nulle !";
+			pW.println(chaine);
+		}
 	}
 
 	/**
@@ -158,7 +164,10 @@ public class Fichier {
 	public void ecrireString(String tmp)
 	{
 		assert(tmp != null) : "Il s'agit d'un String vide !";
-		pW.println(tmp);
+		if(mode == 'W' || mode == 'E')
+		{
+			pW.println(tmp);
+		}		
 	}
 
 	/**
