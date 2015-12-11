@@ -157,7 +157,8 @@ public class Joueur {
 	{
 		for(int i=0; i<scorePendu.length ;i++)
 		{
-			System.out.println("[" + i + "] " + scorePendu[i]);
+			System.out.print("[" + i + "] ");
+			System.out.println((scorePendu[i] == -1)?" - ":scorePendu[i]);
 		}
 	}
 
@@ -165,7 +166,8 @@ public class Joueur {
 	{
 		for(int i=0; i<scorePlusMoins.length ;i++)
 		{
-			System.out.println("[" + i + "] " + scorePlusMoins[i]);
+			System.out.print("[" + i + "] ");
+			System.out.println((scorePlusMoins[i] == -1)?" - ":scorePlusMoins[i]);
 		}
 	}
 	
@@ -173,7 +175,8 @@ public class Joueur {
 	{
 		for(int i=0; i<scoreMaster.length ;i++)
 		{
-			System.out.println("[" + i + "] " + scoreMaster[i]);
+			System.out.print("[" + i + "] ");
+			System.out.println((scoreMaster[i] == -1)?" - ":scoreMaster[i]);
 		}
 	}
 
