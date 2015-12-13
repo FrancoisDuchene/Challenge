@@ -102,7 +102,7 @@ public class penduExt {
 			System.out.print("    ||      @@@   \n");
 			System.out.print("    ||       &    \n");
 			System.out.print("    ||     @@@@@  \n");
-			System.out.print("    ||    / @@@\\ \n");
+			System.out.print("    ||    / @@@ \\ \n");
 			System.out.print("    ||    | @@@ | \n");
 			System.out.print("    ||    | @@@ | \n");
 			System.out.print("    ||    * @@@ * \n");
@@ -122,7 +122,7 @@ public class penduExt {
 			System.out.print("    ||      @@@   \n");
 			System.out.print("    ||       &    \n");
 			System.out.print("    ||     @@@@@  \n");
-			System.out.print("    ||    / @@@\\ \n");
+			System.out.print("    ||    / @@@ \\ \n");
 			System.out.print("    ||    | @@@ | \n");
 			System.out.print("    ||    | @@@ | \n");
 			System.out.print("    ||    * @@@ * \n");
@@ -142,7 +142,7 @@ public class penduExt {
 			System.out.print("    ||      @@@   \n");
 			System.out.print("    ||       &    \n");
 			System.out.print("    ||     @@@@@  \n");
-			System.out.print("    ||    / @@@\\ \n");
+			System.out.print("    ||    / @@@ \\ \n");
 			System.out.print("    ||    | @@@ | \n");
 			System.out.print("    ||    | @@@ | \n");
 			System.out.print("    ||    * @@@ * \n");
@@ -154,6 +154,4 @@ public class penduExt {
 			break;
 		}       
 	}
-	
-
 }
