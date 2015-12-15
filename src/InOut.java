@@ -16,7 +16,7 @@ public class InOut
      */
     public static byte getByte()
     {
-        return (byte) readInteger(-128,127);
+        return (byte) readInteger(-128L,127L);
     }
 
     /**
@@ -25,7 +25,7 @@ public class InOut
      */
     public static short getShort()
     {
-        return (short)readInteger(-32768,32767);
+        return (short)readInteger(-32768L,32767L);
     }
 
     /**
@@ -36,12 +36,21 @@ public class InOut
     {
         return (int)readInteger(Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
+    
+    /**
+     * @pre --
+     * @post return the long that was in the console. Skip blanks.
+     */
+    public static int getLong()
+    {
+        return (int)readInteger(Long.MIN_VALUE, Long.MAX_VALUE);
+    }
 
     /**
      * @pre --
      * @post read int in console.
      */
-    private static int readInteger(int min, int max) throws NumberFormatException
+    private static long readInteger(long min, long max) throws NumberFormatException
     {
         BufferedReader bf = null;
         int x = Integer.MIN_VALUE;
