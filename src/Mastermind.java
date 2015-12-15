@@ -3,10 +3,8 @@
  * This is the game mastermind with letters.
  * 
  * @author Luis Tascon Gutierrez 
- * @version 1.1
+ * @version 1.2
  */
-
-//import java.awt.*;
 
 public class Mastermind
 {
@@ -22,13 +20,15 @@ public class Mastermind
     public static final char ARC_EN_CIEL = 'A';
     public static final char[] c = {BLEU,NOIR,VERT,CYAN,GRIS,ROUGE,JAUNE,MAUVE,ORANGE,ARC_EN_CIEL};
     public static final String[] e = {"BLEU","NOIR","VERT","CYAN","GRIS","ROUGE","JAUNE","MAUVE","ORANGE","ARC_EN_CIEL"};
+    //all the colors that can be used.
 
     public static int bienPlace = 0;
     public static int malPlace = 0;
-    public static int difficulte = 2;
+    public static int difficulte = 2;// by default it's two but there are 3 level of difficulty.
     public static boolean gagne  = false;
-    public static int nombreCouleur = 4;
     public static int vies = 12;
+    public static int score = 0;
+    public static String ligne = "";
 
     public static char[] couleur = new char[4];
     public static char[] entree = new char[4];
@@ -41,68 +41,69 @@ public class Mastermind
         String description = "";
         int viesTmp = vies;
 
-        creerCouleur(couleur);
+        creerCouleur(couleur);// create a tab with 4 colors random.
 
-        lignes[0] = "Couleurs possibles : ";
         for (int v = 1; v <vies+2; v++)
         {
             lignes[v] = "  ";
-        }
+        }// initialize each line to avoid to have a line equals to null.
 
+        lignes[0] = "Couleurs possibles : ";
         for(int g = 0; g < 1+3*difficulte; g++)
         {
             lignes[0] += c[g] + " ";
-        }
+        }// Create the line with all the possible colors in fonction of the difficulty.
 
         while(!gagne && viesTmp > 0)
         {
             try
             {
+                ligne = InOut.getLine();
                 for(int g = 0; g < 4; g++)
                 {
-                    entree[g] = TextIO.getChar();
-                    TextIO.skipBlanks();
+                    entree[g] = firstLetter();
                 }
                 avancer = true;
             }
             catch(Exception e)
             {
                 avancer = false;
-            }
+            }// create the tab with the colors entered by the user {entree}
 
             for(int g = 0; g < 4; g++)
             {
                 entree[g] = majuscule(entree[g]);
-            }
+            }// put in UpperCase 
 
-            if(avancer)
+            if(avancer)// if the colors entered are ok
             {
-
                 for(int g = 0; g < 4; g++)
                 {
                     lignes[lignes.length - viesTmp] += entree[g] + " ";
-                }
+                }// complete the current line
 
-                verification(couleur, entree);
-                challenge.clear();
+                verification(couleur, entree);// count the well and unwell colors
+                challenge.clear();// clear screen
 
                 description = "   bien placees:"+bienPlace + "   mal placees:" + malPlace;
-                lignes[lignes.length - viesTmp] += description + "   vies restantes:" + (viesTmp-1);
+                lignes[lignes.length - viesTmp] += description + "   vies restantes:" + (viesTmp-1);// complete the current line
 
                 for(int t = 0; t < vies+2; t ++)
                 {
                     if(lignes[t] != "  ")
                     {System.out.println(lignes[t]);}
-                }
+                }//print all the lines
 
                 if(bienPlace == 4)
                 {
                     gagne = true;
                 }
-                else {viesTmp --;}
+                else {viesTmp --;}// if win -->end of loop
             }
         }
+        score = calculScore();
     }
+
     /**
      * This function take the difficulty and the number of life who still here
      * return the score and add to the playerProfile
@@ -131,7 +132,7 @@ public class Mastermind
         {
             utiliseC[q] = false;
             utiliseE[q] = false;
-        }
+        }// to empty the arrays.
 
         for (int i = 0; i < entree.length; i ++)
         {
@@ -141,7 +142,7 @@ public class Mastermind
                     utiliseC[i] = true;
                     utiliseE[i] = true;
                 }
-        }
+        }//to count the well placed colors
 
         for (int i = 0; i < entree.length; i++)
         {
@@ -161,7 +162,7 @@ public class Mastermind
                     }
                 }
             }
-        }
+        }// to count the bad placed colors
     }
 
     /**
@@ -193,7 +194,7 @@ public class Mastermind
             {
                 System.out.print(couleur[s]+ " ");
             }
-            System.out.println("\nVotre score pour cette partie est de : " + calculScore() + "\n");
+            System.out.println("\nVotre score pour cette partie est de : " + score + "\n");
         }
     }
 
@@ -223,7 +224,7 @@ public class Mastermind
         {
             System.out.println("==========================\n\t MASTERMIND \n==========================");
             System.out.println("1. Jouer\n2. Option\n3. Regles\n4. Quitter");
-            choix = TextIO.getInt();
+            choix = InOut.getInt();
             switch(choix)
             {
                 case 1:
@@ -257,7 +258,7 @@ public class Mastermind
             System.out.println("~~~~~~~~~ Menu des options ~~~~~~~~~");
             System.out.println("1. Choisir la difficulte\n2. Choisir le nombre de vies\n3. Choisir le nombre de joueurs (Pas encore disponible)\n4. Quitter");
 
-            c = TextIO.getByte();
+            c = InOut.getByte();
             switch(c)
             {
                 case 1:
@@ -287,7 +288,7 @@ public class Mastermind
         do
         {
             try{
-                difficulte = TextIO.getInt();
+                difficulte = InOut.getInt();
                 re = false;
             }
             catch(Exception e)
@@ -307,7 +308,7 @@ public class Mastermind
         do
         {
             try{
-                vies = TextIO.getInt();
+                vies = InOut.getInt();
                 re = false;                
             }
             catch(Exception e)
@@ -334,5 +335,21 @@ public class Mastermind
             "\nLe joueur2 doit essayer de deviner la combinaison et chaque tour propose une combinaison."+
             "\nL'ordinateur ou le joueur1 va indiquer combien de couleurs (ou lettres) sont bien placees et combien sont mal placees.\n\n");
         menu();
+    }
+    
+    private static char firstLetter()
+    {
+        boolean fL = true;
+        char x = ' ';
+        for(int i = 0; i < ligne.length() && fL ; i++)
+        {
+            if(Character.isLetter(ligne.charAt(i)))
+            {
+                x = ligne.charAt(i);
+                ligne = ligne.substring(i+1);
+                fL = false;
+            }
+        }
+        return x;
     }
 }

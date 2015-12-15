@@ -8,7 +8,7 @@
 		 do {
 			 System.out.println("\tPlusMoins\n/////////////////////////////");
 			 System.out.println("1.Jouer\n2.Option\n3.Quitter");
-			 choix = TextIO.getByte();
+			 choix = InOut.getByte();
 
 			 switch(choix) {
 			 case 1 :
@@ -30,7 +30,7 @@
 		 int score = 110;
 		 byte ee = 0;
 		 boolean victoire = false;
-		 
+
 		 if(joueurs == 1) 
 		 {
 			  nbrAleatoire = nbrRandom() ;
@@ -39,7 +39,8 @@
 		 else if (joueurs == 2) 
 		 {
 			 System.out.println("Joueur 1. Intoduisez une valeur pour le 2eme joueur :");
-			 nbrAleatoire = TextIO.getInt();
+
+			 nbrAleatoire = InOut.getInt();
 			 challenge.clear();
 		 }
 		 else
@@ -52,7 +53,7 @@
 			 score = score-10;
 			 if(score < 0){score = 0;}
 			 System.out.println("Essayez ! (-1 pour sortir)");
-		     nbrUser = TextIO.getInt();
+		     nbrUser = InOut.getInt();
 		     if(nbrUser == -1) 
 		     {break;}
 		     if(nbrUser < nbrAleatoire) 
@@ -166,8 +167,9 @@
 		 byte choix = 0;
 		 do {
 			 System.out.println("************************\n\tOptions:\n************************");
+
 			 System.out.println("1. Limites\n2. Joueurs\n3. Quitter");
-			 choix = TextIO.getByte();
+			 choix = InOut.getByte();
 			 switch(choix) {
 			 case 1 :
 				 option1();
@@ -184,13 +186,13 @@
 
 	 public static void option1() {
 		 System.out.println("Quelle serait la limite ?");
-		 limMax = TextIO.getInt();
+		 limMax = InOut.getInt();
 		 System.out.println("La nouvelle limite est de " + limMax);
 	 }
 	 public static void option2()
 	 {
 		 System.out.println("Mode 1 ou 2 Joueurs ?");
-		 joueurs = TextIO.getByte();
+		 joueurs = InOut.getByte();
 	 }
 	 /**
 	  * this function add you score to the profil of the player

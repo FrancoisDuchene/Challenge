@@ -61,7 +61,7 @@ public class challenge
 		{    
 			printMenuMessage(1);
 
-			choix = TextIO.getByte();
+			choix = InOut.getByte();
 			switch(choix)
 			{
 			case 1 : 
@@ -82,7 +82,7 @@ public class challenge
 				if(language == 1){System.out.println("Etes-vous sur de vouloir quitter ? (o/n)");}
 				else{System.out.println("Are-you sure do you want to quit ? (y/n)");}				
 				do{
-					c = TextIO.getChar();
+					c = InOut.getChar();
 					switch(c)
 					{
 					case 'o':
@@ -118,7 +118,7 @@ public class challenge
 		{
 			clear();
 			printMenuMessage(2);
-			choix = TextIO.getByte();
+			choix = InOut.getByte();
 			switch(choix)
 			{
 			case 1 :
@@ -157,7 +157,7 @@ public class challenge
 		else{System.out.println("What language would you like ?");}
 		
 		do{
-			choix = TextIO.getByte();
+			choix = InOut.getByte();
 			switch(choix)
 			{
 			case 1:
