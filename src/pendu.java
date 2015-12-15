@@ -38,7 +38,7 @@ public class pendu {
 			System.out.println("\nDans le mode deux joueurs, soit\n1. l'un des joueurs choisit le mot à chercher pour l'autre");
 			System.out.println("2. ou alors les deux joueurs jouent simultanément\n\nQue préferez-vous ?");
 			System.out.println("(3 pour sortir)");
-			choix = TextIO.getByte();
+			choix = InOut.getByte();
 			switch(choix)
 			{
 			case 1:			   
@@ -66,7 +66,7 @@ public class pendu {
 		if (joueurs == 2)
 		{//condition to define the word
 			System.out.println("Le joueur 1 peut entrer un mot\nNe pas mettre d'accent!!");
-			MotSecret = TextIO.getWord();
+			MotSecret = InOut.getWord();
 			challenge.clear();
 			System.out.println("Le joueur 2 doit essayer de deviner le mot rentre par le joueur 1");
 		}
@@ -94,7 +94,7 @@ public class pendu {
 			same = false;
 			re = true;          
 
-			LettreUser = TextIO.getChar();
+			LettreUser = InOut.getChar();
 			//If ASCII of letter is between 65 and 90 it's an UpperCase so we need to convert in a LowerCase
 			LettreUser = minuscule(LettreUser);
 
@@ -155,13 +155,13 @@ public class pendu {
 		System.out.println("Joueur 1");
 		challenge.dormirSystem(2500);
 		System.out.println("Veuillez indiquer le mot à chercher pour le joueur 2");
-		MotSecret1 = TextIO.getlnWord();
+		MotSecret1 = InOut.Mot(InOut.getLine());
 		challenge.clear();
 
 		System.out.println("Joueur 2");
 		challenge.dormirSystem(2500);
 		System.out.println("Veuillez indiquer le mot à chercher pour le joueur 1");
-		MotSecret2 = TextIO.getlnWord();
+		MotSecret2 = InOut.getWord();
 		challenge.clear();
 
 		MotSecret1.toLowerCase();
@@ -188,7 +188,7 @@ public class pendu {
 				same = false;
 				re = true;          
 
-				LettreUser = TextIO.getChar();
+				LettreUser = InOut.getChar();
 				//If ASCII of letter is between 65 and 90 it's an UpperCase so we need to convert in a LowerCase
 				LettreUser = minuscule(LettreUser);
 
@@ -245,7 +245,7 @@ public class pendu {
 				same = false;
 				re = true;          
 
-				LettreUser = TextIO.getChar();
+				LettreUser = InOut.getChar();
 				//If ASCII of letter is between 65 and 90 it's an UpperCase so we need to convert in a LowerCase
 				LettreUser = minuscule(LettreUser);
 
@@ -351,7 +351,7 @@ public class pendu {
 			System.out.println("==========================\n\t LE PENDU \n==========================");
 			System.out.println("1.Jouer \n2.Options \n3.Quitter");
 
-			choix = TextIO.getByte();
+			choix = InOut.getByte();
 			switch(choix)
 			{
 			case 1 : 
@@ -382,7 +382,7 @@ public class pendu {
 			System.out.println("************************\n\tOptions:\n************************");
 			System.out.println("Voulez-vous Changer :\n1. le nombre de vies ?\n2. le nombre de joueurs ?\n3. [Still in Dev]ajouter un mot au dico");
 			System.out.println("\n4. Retourner en arrière");
-			choix = TextIO.getByte();
+			choix = InOut.getByte();
 
 			switch(choix)
 			{
@@ -439,7 +439,7 @@ public class pendu {
 	{   
 		System.out.println("Vous avez actuellement " + vies + " vies");
 		System.out.println("Combien voulez vous de vies ?");
-		vies = TextIO.getlnShort();     
+		vies = InOut.getShort();     
 		if(vies == 0)
 		{
 			vies = 1;
@@ -456,7 +456,7 @@ public class pendu {
 	{   
 		System.out.println("Vous êtes actuellement en mode " + joueurs + " joueur(s)");
 		System.out.println("1. 1 Player\n2. 2 Players");
-		joueurs = TextIO.getByte();
+		joueurs = InOut.getByte();
 	}
 	/**
 	 * add a word to the dictionary
@@ -464,7 +464,7 @@ public class pendu {
 	public static void option3()
 	{    	
 		System.out.println("Veuillez indiquer ci-dessous quel mot vous voudriez ajouter au dictionnaire");
-		String mot = TextIO.getWord();    	
+		String mot = InOut.getWord();    	
 		Dico.ecritureMot(mot);
 	}        
 	/**

@@ -16,7 +16,7 @@ public class profilGestion {
 			language = challenge.getLanguage();
 			if(language == 1){System.out.println("Quel est votre nom ?");}
 			else{System.out.println("What is your name ?");}			
-			name = TextIO.getWord();
+			name = InOut.Mot(InOut.getLine());
 			playerOne.setName(name);
 			saveProfil();
 			existe = true;
