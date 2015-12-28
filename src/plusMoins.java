@@ -1,7 +1,6 @@
 
  public class plusMoins {	
 	 public static int limMax = 100;
-	 public static byte joueurs = 1;
 
 	 public static void menu() {
 		 byte choix = 0;
@@ -28,8 +27,11 @@
 		 int nbrUser = 0;
 		 int coup = 0;
 		 int score = 110;
-		 byte ee = 0;
+		 byte joueurs = 1, ee = 0;
 		 boolean victoire = false;
+
+		 System.out.println("Mode 1 ou 2 Joueurs ?");
+		 joueurs = InOut.getByte();
 
 		 if(joueurs == 1) 
 		 {
@@ -39,9 +41,7 @@
 		 else if (joueurs == 2) 
 		 {
 			 System.out.println("Joueur 1. Intoduisez une valeur pour le 2eme joueur :");
-
 			 nbrAleatoire = InOut.getInt();
-			 challenge.clear();
 		 }
 		 else
 		 {
@@ -167,32 +167,26 @@
 		 byte choix = 0;
 		 do {
 			 System.out.println("************************\n\tOptions:\n************************");
-
-			 System.out.println("1. Limites\n2. Joueurs\n3. Quitter");
+			 System.out.println("1. Limites\n2. Quitter");
 			 choix = InOut.getByte();
 			 switch(choix) {
 			 case 1 :
-				 option1();
+				 option();
 				 break;
 			 case 2 :
 				 break;
 			 default:
-				 System.out.println("Veuillez indiquer 1, 2 ou 3 !");
+				 System.out.println("Veuillez indiquer 1 ou 2");
 				 break;
 			 }
 		 }
-		 while(choix != 3);		 
+		 while(choix != 2);		 
 	 }
 
-	 public static void option1() {
+	 public static void option() {
 		 System.out.println("Quelle serait la limite ?");
 		 limMax = InOut.getInt();
 		 System.out.println("La nouvelle limite est de " + limMax);
-	 }
-	 public static void option2()
-	 {
-		 System.out.println("Mode 1 ou 2 Joueurs ?");
-		 joueurs = InOut.getByte();
 	 }
 	 /**
 	  * this function add you score to the profil of the player

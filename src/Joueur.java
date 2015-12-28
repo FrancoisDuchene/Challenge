@@ -15,7 +15,6 @@ public class Joueur {
 	private int [] scorePlusMoins;
 	
 	private int [] scoreMaster;
-	private static int language = 1;
 	//Constructeurs
 	/**
 	 * @category Constructor
@@ -26,7 +25,6 @@ public class Joueur {
 		scorePendu = remplirTab(10);
 		scorePlusMoins = remplirTab(10);
 		scoreMaster = remplirTab(10);
-		language = challenge.getLanguage();
 	}
 
 	/**
@@ -39,7 +37,6 @@ public class Joueur {
 		scorePendu = remplirTab(10);
 		scorePlusMoins = remplirTab(10);
 		scoreMaster = remplirTab(10);
-		language = challenge.getLanguage();
 	}
 
 	/**
@@ -54,7 +51,6 @@ public class Joueur {
 		scorePendu = remplirTab(sPd);
 		scorePlusMoins = remplirTab(sPM);
 		scoreMaster = remplirTab(10);
-		language = challenge.getLanguage();
 	}
 	public Joueur(String name, int sPd, int sPM, int sMM)
 	{
@@ -62,7 +58,6 @@ public class Joueur {
 		scorePendu = remplirTab(sPd);
 		scorePlusMoins = remplirTab(sPM);
 		scoreMaster = remplirTab(sMM);
-		language = challenge.getLanguage();
 	}
 
 	//Methodes
@@ -225,14 +220,7 @@ public class Joueur {
 	 */
 	public String toString()
 	{
-		switch(language)
-		{
-		case 1:
-			return ("Nom : " + name + " - Score Pendu : " + scorePenduTotal() + " - Score PlusMoins : " + scorePlusMoinsTotal() + " - Score Total : " + scoreTotal() );
-		case 2:
-			return ("Name : " + name + " - Hangmann Score : " + scorePenduTotal() + " - HighLow Score : " + scorePlusMoinsTotal() + " - Total Score : " + scoreTotal() );
-		}
-		return "";
+		return ("Nom : " + name + " - Score Pendu : " + scorePenduTotal() + " - Score PlusMoins : " + scorePlusMoinsTotal() + " - Score Total : " + scoreTotal() );
 	}
 
 	public int scoreTotal()

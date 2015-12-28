@@ -364,7 +364,7 @@ public class pendu {
 			case 3 :               
 				break;          
 			default :
-				System.out.println("Veuillez indiquer 1,2,3 ou 4 !");
+				System.out.println("Veuillez indiquer 1,2 ou 3 !");
 				break;
 			}
 

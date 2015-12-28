@@ -28,9 +28,7 @@ public class challenge
 		//ChallengeInterface CI = new ChallengeInterface();
 		//CI.launch();
 
-		//Thread playWave=new AePlayWave("src/LaChevaucheeDesValkyries.wav");
-		//playWave.start();
-		menuPrincipal();
+		menuPrincipal();             
 
 	}     
 	public static String connecte()

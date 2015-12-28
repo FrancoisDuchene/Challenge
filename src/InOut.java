@@ -36,7 +36,7 @@ public class InOut
     {
         return (int)readInteger(Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
-    
+
     /**
      * @pre --
      * @post return the long that was in the console. Skip blanks.
@@ -60,7 +60,7 @@ public class InOut
             boolean fin = true;
             while(fin)
             {
-                char s = (char)bf.read();
+                char s = (char)bf.read(); 
                 if(s == ' ' || !Character.isDigit(s))
                 {
                     fin = false;
@@ -77,17 +77,7 @@ public class InOut
         {System.err.println("NumberFormatException readInteger() InOut :" + e2.getMessage());}
         catch(Exception e3)
         {System.err.println("Exception readInteger() InOut :" + e3.getMessage());}
-        finally
-        {
-            if(bf != null)
-            {
-                try{
-                    bf.close();
-                }
-                catch(IOException e)
-                {}
-            }
-        }
+        
         if(x > max || x < min)
         {
             throw new NumberFormatException("Nombre trop grand ou trop petit max = "+ max + "   min = "+ min + "    nombre = " + x);
@@ -111,17 +101,7 @@ public class InOut
         {System.err.println("IOException getChar() InOut :" + e1.getMessage());}
         catch(Exception e2)
         {System.err.println("Exception getChar() InOut :" + e2.getMessage());}
-        finally
-        {
-            if(bf != null)
-            {
-                try{
-                    bf.close();
-                }
-                catch(IOException e)
-                {}
-            }
-        }
+        
         if(x == ' ')
         {
             x = getChar();
@@ -158,17 +138,7 @@ public class InOut
         {System.err.println("IOException getWord() InOut :" + e1.getMessage());}
         catch(Exception e2)
         {System.err.println("Exception getWord() InOut :" + e2.getMessage());}
-        finally
-        {
-            if(bf != null)
-            {
-                try{
-                    bf.close();
-                }
-                catch(IOException e)
-                {}
-            }
-        }
+        
         if(x.equals(" "))
         {
             x = getWord();
@@ -188,17 +158,7 @@ public class InOut
         {System.err.println("IOException getWord() InOut :" + e1.getMessage());}
         catch(Exception e2)
         {System.err.println("Exception getWord() InOut :" + e2.getMessage());}
-        finally
-        {
-            if(bf != null)
-            {
-                try{
-                    bf.close();
-                }
-                catch(IOException e)
-                {}
-            }
-        }
+        
         return x;
     }
 
