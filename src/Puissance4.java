@@ -72,7 +72,7 @@ public class Puissance4
         do
         {
             System.out.println("Quelle taille voulez vous lui donner?");
-            longueur
+            longueur = InOut.getInt();
         }
         while(longueur <1 || longueur > 40);
     }
@@ -91,7 +91,7 @@ public class Puissance4
 
         while(!fin())
         {
-            main.clear();
+            challenge.clear();
             afficheTab();
             int num = (j)?1:2;
             System.out.println("Entrer le numero de la colonne : C'est au joueur "+ num);

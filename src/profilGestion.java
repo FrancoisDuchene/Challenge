@@ -108,7 +108,7 @@ public class profilGestion {
 		{			
 			String str = "";
 			Fichier fi = new Fichier();
-			fi.ouvrir(name + ".sav", "L");
+			fi.ouvrir(name + ".sav", "L",true);
 			str = fi.lire();
 			playerOne.setName(str);
 			fi.lire();
