@@ -94,9 +94,10 @@ public class Puissance4
             challenge.clear();
             afficheTab();
             int num = (j)?1:2;
+            System.out.println("Entrer 0 pour sortir.");
             System.out.println("Entrer le numero de la colonne : C'est au joueur "+ num);
             entree = InOut.getInt();
-            if(entree == -1)
+            if(entree == 0)
             {
             	return;
             }

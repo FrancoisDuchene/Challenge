@@ -53,12 +53,17 @@ public class Mastermind
         {
             lignes[0] += c[g] + " ";
         }// Create the line with all the possible colors in fonction of the difficulty.
-
+        lignes[0] += "\t\t0 pour sortir";
+        
         while(!gagne && viesTmp > 0)
         {
             try
             {
                 ligne = InOut.getLine();
+                if( ligne.equals("0"))
+                {
+                    return;
+                }
                 for(int g = 0; g < 4; g++)
                 {
                     entree[g] = firstLetter();
@@ -111,9 +116,9 @@ public class Mastermind
      */
     public static int calculScore()
     {
-    	int score = difficulte*vies;
-    	profilGestion.ajoutePtsMasterMind(score);
-    	return score;
+        int score = difficulte*vies;
+        profilGestion.ajoutePtsMasterMind(score);
+        return score;
     }
 
     /**
@@ -203,13 +208,13 @@ public class Mastermind
         System.out.println("Vous jouez au mastemind, tapez :");
         for(int i = 0; i < 1+3*difficulte; i++)
         {System.out.println(c[i]+ " pour la couleur : " + e[i]);}
-        System.out.println("ATTENTION!! \nSuivez l'exemple si dessous :\n \"N C B V\"\n");
+        System.out.println("\nSuivez l'exemple si dessous :\n \"N C B V\"\n");
     }
 
     /**
-	 * @param l Take a char
-	 * @return the LowerCase of the char if it's an UpperCase and the char itself if it's a LowerCase.
-	 */
+     * @param l Take a char
+     * @return the LowerCase of the char if it's an UpperCase and the char itself if it's a LowerCase.
+     */
     public static char majuscule(char l){
         if ((int)l <=122 && (int)l >= 97)
         {return (char)((int)l - 32);}

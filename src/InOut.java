@@ -61,7 +61,7 @@ public class InOut
             while(fin)
             {
                 char s = (char)bf.read(); 
-                if(s == ' ' || !Character.isDigit(s))
+                if(s == ' '  || !Character.isDigit(s) && s != '-')
                 {
                     fin = false;
                 }
