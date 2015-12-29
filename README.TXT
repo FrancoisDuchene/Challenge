@@ -42,4 +42,4 @@ Here is the list of all current available games:
 1.) Pendu (= Hangman).
 2.) Plus ou moins (= Highlow).
 3.) MasterMind
-4.) Tetris (soon)
+4.) Puissance 4
