@@ -1,9 +1,9 @@
 
 /**
- * Write a description of class Puissance4 here.
+ * Puissance4 is the class who contain the game puissance 4
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Bivisi & Vinsifroid
+ * @version 1.0
  */
 public class Puissance4
 {
@@ -96,6 +96,10 @@ public class Puissance4
             int num = (j)?1:2;
             System.out.println("Entrer le numero de la colonne : C'est au joueur "+ num);
             entree = InOut.getInt();
+            if(entree == -1)
+            {
+            	return;
+            }
             if (entree >= 1 && entree <=  ch.length)
             {
                 if(!ajouterTab(((j)?1:2), entree-1))
