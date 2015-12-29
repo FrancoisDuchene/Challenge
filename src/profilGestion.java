@@ -69,8 +69,6 @@ public class profilGestion {
 	{
 		if(language == 1)
 		{
-			//Texte en francais
-			
 			System.out.println("\nNom : " + playerOne.getName());
 			System.out.println("Scores Pendu");
 			playerOne.afficheScoreSPd();
@@ -83,9 +81,6 @@ public class profilGestion {
 			System.out.println("Score MasterMind : " + playerOne.scoreMasterMindTotal());
 			System.out.println("Score Total : " + playerOne.scoreTotal());
 		}else{
-			
-			//Text in English
-			
 			System.out.println("\nName : " + playerOne.getName());
 			System.out.println("Hangmann Score");
 			playerOne.afficheScoreSPd();
@@ -113,7 +108,7 @@ public class profilGestion {
 		{			
 			String str = "";
 			Fichier fi = new Fichier();
-			fi.ouvrir(name + ".sav", "L", true);
+			fi.ouvrir(name + ".sav", "L",true);
 			str = fi.lire();
 			playerOne.setName(str);
 			fi.lire();
@@ -170,4 +165,5 @@ public class profilGestion {
 		}
 		return bon;
 	}
+
 }
