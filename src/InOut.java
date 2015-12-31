@@ -53,31 +53,33 @@ public class InOut
     private static long readInteger(long min, long max) throws NumberFormatException
     {
         BufferedReader bf = null;
-        int x = Integer.MIN_VALUE;
-        try{
-            bf = new BufferedReader(new InputStreamReader (System.in));
-            StringBuffer sb = new StringBuffer();
-            boolean fin = true;
-            while(fin)
-            {
-                char s = (char)bf.read(); 
-                if(s == ' '  || !Character.isDigit(s) && s != '-')
+        long x = Integer.MIN_VALUE;
+        while(x == Integer.MIN_VALUE)
+        {
+            try{
+                bf = new BufferedReader(new InputStreamReader (System.in));
+                StringBuffer sb = new StringBuffer();
+                boolean fin = true;
+                while(fin)
                 {
-                    fin = false;
+                    char s = (char)bf.read(); 
+                    if(s == ' '  || !Character.isDigit(s) && s != '-')
+                    {
+                        fin = false;
+                    }
+                    else{
+                        sb.append(s);
+                    }
                 }
-                else{
-                    sb.append(s);
-                }
+                x = Long.parseLong(sb.toString());
             }
-            x = Integer.parseInt(sb.toString());
+            catch(IOException e1)
+            {System.err.println("IOException readInteger() InOut :" + e1.getMessage());}
+            catch(NumberFormatException e2)
+            {System.err.println("NumberFormatException readInteger() InOut :" + e2.getMessage());}
+            catch(Exception e3)
+            {System.err.println("Exception readInteger() InOut :" + e3.getMessage());}
         }
-        catch(IOException e1)
-        {System.err.println("IOException readInteger() InOut :" + e1.getMessage());}
-        catch(NumberFormatException e2)
-        {System.err.println("NumberFormatException readInteger() InOut :" + e2.getMessage());}
-        catch(Exception e3)
-        {System.err.println("Exception readInteger() InOut :" + e3.getMessage());}
-        
         if(x > max || x < min)
         {
             throw new NumberFormatException("Nombre trop grand ou trop petit max = "+ max + "   min = "+ min + "    nombre = " + x);
@@ -101,7 +103,7 @@ public class InOut
         {System.err.println("IOException getChar() InOut :" + e1.getMessage());}
         catch(Exception e2)
         {System.err.println("Exception getChar() InOut :" + e2.getMessage());}
-        
+
         if(x == ' ')
         {
             x = getChar();
@@ -138,7 +140,7 @@ public class InOut
         {System.err.println("IOException getWord() InOut :" + e1.getMessage());}
         catch(Exception e2)
         {System.err.println("Exception getWord() InOut :" + e2.getMessage());}
-        
+
         if(x.equals(" "))
         {
             x = getWord();
@@ -158,7 +160,7 @@ public class InOut
         {System.err.println("IOException getWord() InOut :" + e1.getMessage());}
         catch(Exception e2)
         {System.err.println("Exception getWord() InOut :" + e2.getMessage());}
-        
+
         return x;
     }
 
