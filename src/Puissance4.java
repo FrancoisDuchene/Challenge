@@ -10,9 +10,6 @@ public class Puissance4
     private static int longueur = 8;
     private static char[][] ch;
     private static TabAligne3 tab = null;
-    private static int x = -1;
-    private static int y = -1;
-    private static int type =0;
     private static int nombreJoueurs = 1;
     public static char j1 = (char)9774;
     public static char j2 = (char)9775;
@@ -81,7 +78,7 @@ public class Puissance4
             System.out.println("Quelle taille voulez vous lui donner?");
             longueur = InOut.getInt();
         }
-        while(longueur <1 || longueur > 40);
+        while(longueur <1 || longueur > 20);
     }
 
     public static void option2()
@@ -133,7 +130,7 @@ public class Puissance4
         else
         {
             int entree = 0;
-
+            boolean first = true;
             while(!fin())
             {
                 challenge.clear();
@@ -163,8 +160,15 @@ public class Puissance4
                 TabAligne3.afficheTab(longueur, ch);
                 try{Thread.sleep(1500);}
                 catch(Exception e){}
-
-                choixOrdi(ch , entree);
+                
+                if(first)
+                {
+                    if(!ajouterTab(1, entree-2))
+                    {ajouterTab(1, entree);}
+                }
+                else
+                {choixOrdi(ch , entree);}
+                first = false;
                 //choix de l'ordi
 
                 if(allignement4())
