@@ -18,7 +18,7 @@ for fun, don't take it too seriously.
 PROJECT TITLE: Challenge - Classics games
 PURPOSE OF PROJECT: Create little games for fun :D
 VERSION or DATE: 1.2
-LANGUAGE : FRENCH - ENGLISH (always in translating)
+LANGUAGE : FRENCH - ENGLISH (still in translating)
 
 THE GREAT INQUISITOR: vinsifroid
 THE FINDER OF CLUES: Bivisi
