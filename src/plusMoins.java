@@ -175,6 +175,7 @@
 				 option1();
 				 break;
 			 case 2 :
+				 option2();
 				 break;
 			 default:
 				 System.out.println("Veuillez indiquer 1, 2 ou 3 !");
@@ -193,6 +194,11 @@
 	 {
 		 System.out.println("Mode 1 ou 2 Joueurs ?");
 		 joueurs = InOut.getByte();
+		 if(joueurs != 1 || joueurs != 2)
+		 {
+			 joueurs = 1;
+		 }
+		 System.out.println("Vous etes actuellement en mode " + joueurs + " joueurs");
 	 }
 	 /**
 	  * this function add you score to the profil of the player

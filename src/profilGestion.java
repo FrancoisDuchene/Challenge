@@ -5,19 +5,29 @@ import java.io.IOException;
 
 public class profilGestion {
 
+	public static boolean premierOuverture = true;
 	public static boolean existe = false;
 	public static Joueur playerOne = new Joueur();
 	public static String name = "";
 	public static int language = 1;
 	public static void gestion()
 	{		
-		if(existe == false)
-		{				
-			language = challenge.getLanguage();
+		language = challenge.getLanguage();
+		if(premierOuverture)
+		{
 			if(language == 1){System.out.println("Quel est votre nom ?");}
-			else{System.out.println("What is your name ?");}			
+			else{System.out.println("What is your name ?");}		
 			name = InOut.Mot(InOut.getLine());
 			playerOne.setName(name);
+			if(fichierExiste())
+			{
+				existe = true;
+			}
+			premierOuverture = false;
+		}
+
+		if(existe == false)
+		{
 			saveProfil();
 			existe = true;
 		}
@@ -57,7 +67,7 @@ public class profilGestion {
 			playerOne.ajouteScoreSPM(score);
 		}
 	}
-	
+
 	public static void ajoutePtsMasterMind(int score)
 	{
 		if(score >= 0)
@@ -156,12 +166,10 @@ public class profilGestion {
 			bon = false;
 		}finally{
 			try{
-				bF.close();
+				if(bon == true)
+					bF.close();
 			}catch(IOException e)
-			{
-				System.err.println(e.getMessage());
-				System.exit(-1);
-			}
+			{}
 		}
 		return bon;
 	}
