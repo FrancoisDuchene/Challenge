@@ -163,8 +163,8 @@ public class Puissance4
                 
                 if(first)
                 {
-                    if(!ajouterTab(1, entree-2))
-                    {ajouterTab(1, entree);}
+                    if(!ajouterTab(2, entree-2))
+                    {ajouterTab(2, entree);}
                 }
                 else
                 {choixOrdi(ch , entree);}
