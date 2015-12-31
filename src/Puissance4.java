@@ -174,7 +174,7 @@ public class Puissance4
 		{
 			int entree = 0;
 			boolean first = true;
-			while(!fin())
+			while(!fin() && !allignement4())
 			{
 				challenge.clear();
 				TabAligne3.afficheTab(longueur, ch);
@@ -313,8 +313,6 @@ public class Puissance4
 	 */
 	public static boolean fin()
 	{
-		if(allignement4())
-		{return true;}
 		for(int i = 0; i < ch.length; i++)
 		{
 			if(verifTab(i))

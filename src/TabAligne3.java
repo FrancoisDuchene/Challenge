@@ -67,7 +67,7 @@ public class TabAligne3
                         {bool[tab[i].y-1] = true;}
                     }
                 }
-                else if(Puissance4.caseIsEmpty(tab[i].x, tab[i].y+3))
+                if(Puissance4.caseIsEmpty(tab[i].x, tab[i].y+3))
                 {
                     if(!Puissance4.caseIsEmpty(tab[i].x+1, tab[i].y+3))
                     {
@@ -95,7 +95,7 @@ public class TabAligne3
                         {bool[tab[i].y-1] = true;}
                     }
                 }
-                else if(Puissance4.caseIsEmpty(tab[i].x+3, tab[i].y+3))
+                if(Puissance4.caseIsEmpty(tab[i].x+3, tab[i].y+3))
                 {
                     if(!Puissance4.caseIsEmpty(tab[i].x+4, tab[i].y+3))
                     {
@@ -123,7 +123,7 @@ public class TabAligne3
                         {bool[tab[i].y-1] = true;}
                     }
                 }
-                else if(Puissance4.caseIsEmpty(tab[i].x-3, tab[i].y+3))
+                if(Puissance4.caseIsEmpty(tab[i].x-3, tab[i].y+3))
                 {
                     if(!Puissance4.caseIsEmpty(tab[i].x-2, tab[i].y+3))
                     {
