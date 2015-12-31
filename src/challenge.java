@@ -1,10 +1,10 @@
 /**
  * @author Vinsifroid && Bivisi
- * @version 1.2
+ * @version 1.0 gamma
  */
 public class challenge
 { 
-    private static int language = 1;
+    private static byte language = 1;
     public static void main (String [] args)
     {
         /* 
@@ -57,7 +57,7 @@ public class challenge
         byte choix = 0;
         do
         {    
-            printMenuMessage(1);
+            printMenuMessage((byte)1);
 
             choix = InOut.getByte();
             switch(choix)
@@ -115,7 +115,7 @@ public class challenge
         do
         {
             clear();
-            printMenuMessage(2);
+            printMenuMessage((byte)2);
             choix = InOut.getByte();
             switch(choix)
             {
@@ -174,7 +174,7 @@ public class challenge
             }
         }while(choix != 1 || choix != 2);       
     }
-    public static void printMenuMessage(int i)
+    public static void printMenuMessage(byte i)
     {
         if(i==1)
         {
@@ -210,7 +210,7 @@ public class challenge
     /**
      * @return the current Language
      */
-    public static int getLanguage()
+    public static byte getLanguage()
     {
         return language;
     }
