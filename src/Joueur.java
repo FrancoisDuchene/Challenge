@@ -310,7 +310,7 @@ public class Joueur {
 	public void savePlayer()
 	{
 		Fichier fl = new Fichier();
-		fl.ouvrir(name + ".sav", "w", false);
+		fl.ouvrir("saves/" + name + ".sav", "w", false);
 		fl.ecrireString(name);
 		fl.ecrireString(".A");
 		for(int i=0; i<scorePendu.length;i++)
