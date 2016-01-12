@@ -24,20 +24,25 @@ public class TabAligne3
     }
 
     private Aligne3[] tab;
+    private int difficulte;
 
-    public TabAligne3(int dimension)
+    public TabAligne3(int dimension, int difficulte)
     {
         tab = new Aligne3[dimension];
+        this.difficulte = difficulte;
     }
 
     public int choisirColonne(char[][] ch, int entree)// ne prends pas encore en compte quel joueur...
     {
         boolean[] bool = new boolean[ch.length];
-
         for(int x = 0; x < bool.length; x ++)
         {bool[x] = false;}
 
-        /**colonne**/
+        boolean[] non = new boolean[ch.length];
+        for(int x = 0; x < bool.length; x ++)
+        {non[x] = true;}
+
+        /**colonne  2 **/
         for(int i = 0; i < tab.length && tab[i] != null; i++)
         {
             if(tab[i].type == 2)
@@ -52,7 +57,7 @@ public class TabAligne3
             }
         }
 
-        /**ligne**/
+        /**ligne  1 **/
         for(int i = 0; i < tab.length && tab[i] != null; i++)
         {
             if(tab[i].type == 1)
@@ -66,6 +71,8 @@ public class TabAligne3
                         else
                         {bool[tab[i].y-1] = true;}
                     }
+                    else if(!Puissance4.caseIsEmpty(tab[i].x+2, tab[i].y-1) && tab[i].joueur == true)
+                    {non[tab[i].y-1] = false;}
                 }
                 if(Puissance4.caseIsEmpty(tab[i].x, tab[i].y+3))
                 {
@@ -76,11 +83,41 @@ public class TabAligne3
                         else
                         {bool[tab[i].y+3] = true;}
                     }
+                    else if(!Puissance4.caseIsEmpty(tab[i].x+2, tab[i].y+3) && tab[i].joueur == true)
+                    {non[tab[i].y+3] = false;}
+                }
+            }else if(tab[i].type == 11)
+            {
+                if(Puissance4.caseIsEmpty(tab[i].x, tab[i].y+1))
+                {
+                    if(!Puissance4.caseIsEmpty(tab[i].x+1, tab[i].y+1))
+                    {
+                        if(tab[i].joueur == false)
+                        {return tab[i].y+1;}
+                        else
+                        {bool[tab[i].y+1] = true;}
+                    }
+                    else if(!Puissance4.caseIsEmpty(tab[i].x+2, tab[i].y+1) && tab[i].joueur == true)
+                    {non[tab[i].y+1] = false;}
+                }
+            }else if(tab[i].type == 12)
+            {
+                if(Puissance4.caseIsEmpty(tab[i].x, tab[i].y+2))
+                {
+                    if(!Puissance4.caseIsEmpty(tab[i].x+1, tab[i].y+2))
+                    {
+                        if(tab[i].joueur == false)
+                        {return tab[i].y+2;}
+                        else
+                        {bool[tab[i].y+2] = true;}
+                    }
+                    else if(!Puissance4.caseIsEmpty(tab[i].x+2, tab[i].y+2) && tab[i].joueur == true)
+                    {non[tab[i].y+2] = false;}
                 }
             }
         }
 
-        /**diagonale descendante**/
+        /**diagonale descendante  3 **/
         for(int i = 0; i < tab.length && tab[i] != null; i++)
         {
             if(tab[i].type == 3)
@@ -94,6 +131,8 @@ public class TabAligne3
                         else
                         {bool[tab[i].y-1] = true;}
                     }
+                    else if(!Puissance4.caseIsEmpty(tab[i].x+1, tab[i].y-1) && tab[i].joueur == true)
+                    {non[tab[i].y-1] = false;}
                 }
                 if(Puissance4.caseIsEmpty(tab[i].x+3, tab[i].y+3))
                 {
@@ -104,11 +143,41 @@ public class TabAligne3
                         else
                         {bool[tab[i].y+3] = true;}
                     }
+                    else if(!Puissance4.caseIsEmpty(tab[i].x+5, tab[i].y+3) && tab[i].joueur == true)
+                    {non[tab[i].y+3] = false;}
+                }
+            }else if(tab[i].type == 31)
+            {
+                if(Puissance4.caseIsEmpty(tab[i].x+1, tab[i].y+1))
+                {
+                    if(!Puissance4.caseIsEmpty(tab[i].x+2, tab[i].y+1))
+                    {
+                        if(tab[i].joueur == false)
+                        {return tab[i].y+1;}
+                        else
+                        {bool[tab[i].y+1] = true;}
+                    }
+                    else if(!Puissance4.caseIsEmpty(tab[i].x+3, tab[i].y+1) && tab[i].joueur == true)
+                    {non[tab[i].y+1] = false;}
+                }
+            }else if(tab[i].type == 32)
+            {
+                if(Puissance4.caseIsEmpty(tab[i].x+2, tab[i].y+2))
+                {
+                    if(!Puissance4.caseIsEmpty(tab[i].x+3, tab[i].y+2))
+                    {
+                        if(tab[i].joueur == false)
+                        {return tab[i].y+2;}
+                        else
+                        {bool[tab[i].y+2] = true;}
+                    }
+                    else if(!Puissance4.caseIsEmpty(tab[i].x+4, tab[i].y+2) && tab[i].joueur == true)
+                    {non[tab[i].y+2] = false;}
                 }
             }
         }
 
-        /**diagonale montante**/
+        /**diagonale montante  4 **/
         for(int i = 0; i < tab.length && tab[i] != null; i++)
         {
             if(tab[i].type == 4)
@@ -122,6 +191,8 @@ public class TabAligne3
                         else
                         {bool[tab[i].y-1] = true;}
                     }
+                    else if(!Puissance4.caseIsEmpty(tab[i].x+3, tab[i].y-1) && tab[i].joueur == true)
+                    {non[tab[i].y-1] = false;}
                 }
                 if(Puissance4.caseIsEmpty(tab[i].x-3, tab[i].y+3))
                 {
@@ -132,15 +203,65 @@ public class TabAligne3
                         else
                         {bool[tab[i].y+3] = true;}
                     }
+                    else if(!Puissance4.caseIsEmpty(tab[i].x-1, tab[i].y+3) && tab[i].joueur == true)
+                    {non[tab[i].y+3] = false;}
+                }
+            }else if (tab[i].type == 41)
+            {
+                if(Puissance4.caseIsEmpty(tab[i].x-1, tab[i].y+1))
+                {
+                    if(!Puissance4.caseIsEmpty(tab[i].x, tab[i].y+1))
+                    {
+                        if(tab[i].joueur == false)
+                        {return tab[i].y+1;}
+                        else
+                        {bool[tab[i].y+1] = true;}
+                    }
+                    else if(!Puissance4.caseIsEmpty(tab[i].x+1, tab[i].y+1) && tab[i].joueur == true)
+                    {non[tab[i].y+1] = false;}
+                }
+            }else if (tab[i].type == 42)
+            {
+                if(Puissance4.caseIsEmpty(tab[i].x-2, tab[i].y+2))
+                {
+                    if(!Puissance4.caseIsEmpty(tab[i].x-1, tab[i].y+2))
+                    {
+                        if(tab[i].joueur == false)
+                        {return tab[i].y+2;}
+                        else
+                        {bool[tab[i].y+2] = true;}
+                    }
+                    else if(!Puissance4.caseIsEmpty(tab[i].x, tab[i].y+2) && tab[i].joueur == true)
+                    {non[tab[i].y+2] = false;}
                 }
             }
         }
-        
+
         for(int x = 0; x < bool.length; x++)
         {
             if(bool[x] == true)
             {return x;}
         }
+
+        if(difficulte >= 2)
+        {
+            int count = 0, v = 0;
+            boolean ok = false;
+            do{
+                v = (int)(Math.random()*3)-1;
+                count++;
+                if(count >8)
+                {v = (int)(Math.random()*ch.length)-1;}
+                if(entree+v >0 && entree+v <= ch.length)
+                {
+                    if(non[entree+v-1])
+                    {return entree+v-1;}
+                }
+                if (count > 60)
+                {ok = true;}
+            }while(!ok);
+        }
+
         return -1;
     }
 
@@ -155,7 +276,7 @@ public class TabAligne3
             }
         }
     }
-    
+
     public void enleverA(int pos)
     {
         if(isEmpty())
@@ -166,10 +287,10 @@ public class TabAligne3
             if(tab[i] != null)
             {last = i;}
         }
-        
+
         tab[pos] = tab[last];
         tab[last] = null;
-   }
+    }
 
     private void enleverA(Aligne3 a)
     {
@@ -185,7 +306,7 @@ public class TabAligne3
         tab[pos] = tab[last];
         tab[last] = null;
     }
-    
+
     public boolean isEmpty()
     {
         for(int i = 0;i < tab.length; i++)
@@ -214,7 +335,6 @@ public class TabAligne3
                 {
                     ajouterA(i, j, (ch[i][j] == Puissance4.j1)?true: false, 1);// i j  = coordonnee extremite gauche
                 }//en ligne
-                
                 if(ch[j][i] != (char)12288 && ch[j][i] == ch[j+1][i] && ch[j][i] == ch[j+2][i])
                 {
                     ajouterA(j, i, (ch[j][i] == Puissance4.j1)?true: false, 2);// i j = coordonnee extremite superieure
@@ -239,6 +359,51 @@ public class TabAligne3
                 {
                     ajouterA(i  , j, (ch[i][j] == Puissance4.j1)?true: false, 4);// i j = coordonnee extremite bas gauche
                 }//en diagonale montante
+            }
+        }
+        if (difficulte >= 3)
+        {
+            for(int i = 0; i < ch.length; i++)
+            {
+                for(int j = 0; j < ch[i].length-3; j++)
+                {  
+                    if(ch[i][j] != (char)12288 && ch[i][j] == ch[i][j+2] && ch[i][j] == ch[i][j+3])
+                    {
+                        ajouterA(i, j, (ch[i][j] == Puissance4.j1)?true: false, 11);// i j  = coordonnee extremite gauche
+                    }//en ligne
+                    if(ch[i][j] != (char)12288 && ch[i][j] == ch[i][j+1] && ch[i][j] == ch[i][j+3])
+                    {
+                        ajouterA(i, j, (ch[i][j] == Puissance4.j1)?true: false, 12);// i j  = coordonnee extremite gauche
+                    }//en ligne
+                }
+            }
+            for(int i = 0; i < ch.length -3; i++)
+            {
+                for(int j = 0; j < ch[i].length-3 ; j++)
+                {
+                    if(ch[i][j] != (char)12288 && ch[i][j] == ch[i+2][j+2] && ch[i][j] == ch[i+3][j+3])
+                    {
+                        ajouterA(i  , j, (ch[i][j] == Puissance4.j1)?true: false, 31);// i j = coordonnee extremite haut gauche
+                    }//en diagonale descendante
+                    if(ch[i][j] != (char)12288 && ch[i][j] == ch[i+1][j+1] && ch[i][j] == ch[i+3][j+3])
+                    {
+                        ajouterA(i  , j, (ch[i][j] == Puissance4.j1)?true: false, 32);// i j = coordonnee extremite haut gauche
+                    }//en diagonale descendante
+                }
+            }
+            for(int i = 3; i < ch.length; i++)
+            {
+                for(int j = 0; j < ch[i].length-3 ; j++)
+                {
+                    if(ch[i][j] != (char)12288 && ch[i][j] == ch[i-2][j+2] && ch[i][j] == ch[i-3][j+3])
+                    {
+                        ajouterA(i  , j, (ch[i][j] == Puissance4.j1)?true: false, 41);// i j = coordonnee extremite bas gauche
+                    }//en diagonale montante
+                    if(ch[i][j] != (char)12288 && ch[i][j] == ch[i-1][j+1] && ch[i][j] == ch[i-3][j+3])
+                    {
+                        ajouterA(i  , j, (ch[i][j] == Puissance4.j1)?true: false, 42);// i j = coordonnee extremite bas gauche
+                    }//en diagonale montante
+                }
             }
         }
     }
