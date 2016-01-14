@@ -1,6 +1,9 @@
 
 /**
  * Project Challenge 2015
+ * 
+ * @author Bivisi && Vinsifroid
+ * @version 1.5  14/01/2016
  */
 public class TabAligne3
 {
@@ -250,14 +253,14 @@ public class TabAligne3
             do{
                 v = (int)(Math.random()*3)-1;
                 count++;
-                if(count >8)
+                if(count >7)
                 {v = (int)(Math.random()*ch.length)-1;}
                 if(entree+v >0 && entree+v <= ch.length)
                 {
                     if(non[entree+v-1])
                     {return entree+v-1;}
                 }
-                if (count > 60)
+                if (count > 50*ch.length)
                 {ok = true;}
             }while(!ok);
         }
@@ -408,7 +411,6 @@ public class TabAligne3
         }
     }
 
-
     public static void afficheTab(int longueur, char[][] ch)
     {
         final int longGrid = longueur*2;
@@ -420,6 +422,8 @@ public class TabAligne3
             if(i%2 == 0)
             {
                 System.out.print(x);
+                if(i%3 == 0 && i < 20 || i%4 == 0)//cette ligne ci
+                {System.out.print(" ");}//et cette ligne sont à enlever si comme vinsifroid les chiffres ne sont pas bien alignés...
             }
             else
             {

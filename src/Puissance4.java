@@ -3,16 +3,17 @@
  * Puissance4 is the class who contain the game puissance 4
  *
  * @author Bivisi & Vinsifroid
- * @version 1.0 gamma
+ * @version 1.5
  */
 public class Puissance4
 {
-    private static int longueur = 8;
+    private static int longueur = 7;
     private static char[][] ch;
     private static TabAligne3 tab = null;
     private static int nombreJoueurs = 1;
     private static int difficulte = 3;
-    public static char j1 = (char)9711;//9763;
+    private static char[] c = {(char)9711,(char)9744,(char)9745,(char)9746,(char)9773,(char)9774,(char)9775,(char)8984,(char)9728,(char)9729,(char)9730,(char)9731,(char)9732,(char)9734,(char)9738,(char)9739,(char)9743,(char)9760,(char)9762,(char)9763,(char)9765,(char)9769,(char)9770,(char)9771,(char)9772 };
+    public static char j1 = c[0];
     public static char j2 = (char)9689;
     public static byte language = 1;
 
@@ -61,12 +62,12 @@ public class Puissance4
             if(language == 1)
             {
                 System.out.println("************************\n\tOptions:\n************************");
-                System.out.println("Voulez-vous Changer :\n1. La taille du tableau ?\n2. le nombre de joueurs ?\n3. la difficulte ?");
-                System.out.println("4. Retourner en arrière");
+                System.out.println("Voulez-vous Changer :\n1. La taille du tableau ?\n2. le nombre de joueurs ?\n3. la difficulte ?\n4. le jeton ?");
+                System.out.println("\n5. Retourner en arrière");
             }else{
                 System.out.println("************************\n\tSettings:\n***********************");
-                System.out.println("Want you change :\n1. the array length ?\n2. the number of players ?\n3. the difficulty ?");
-                System.out.println("4. Go back");
+                System.out.println("Want you change :\n1. the array length ?\n2. the number of players ?\n3. the difficulty ?\n4. the token ?");
+                System.out.println("\n5. Go back");
             }
 
             choix = InOut.getByte();
@@ -83,13 +84,16 @@ public class Puissance4
                 option3();
                 break;
                 case 4:
+                option4();
+                break;
+                case 5:
                 break;
                 default:
-                if(language==1){System.out.println("Veuillez indiquer 1, 2, 3 ou 4 !");}
-                else{System.out.println("Please enter 1, 2, 3 or 4 !");}
+                if(language==1){System.out.println("Veuillez indiquer 1, 2, 3, 4 ou 5 !");}
+                else{System.out.println("Please enter 1, 2, 3, 4 or 5 !");}
                 break;
             }
-        }while(choix != 4);
+        }while(choix != 5);
     }
 
     public static void option1()
@@ -133,10 +137,33 @@ public class Puissance4
         while(difficulte <0 || difficulte > 3);
     }
 
+    public static void option4()
+    {
+        if(language==1){System.out.println("Vous avez actuellement le jeton "+ j1);}
+        else{System.out.println("You have actually the token "+ j1);}
+        try{Thread.sleep(2000);}catch(Exception e){}
+
+        int i = 0;
+        do{
+            afficherChoix();
+            i = InOut.getInt();
+        }while(i> c.length+1 || i <=0);
+        j1 = c[i-1];
+    }
+
+    public static void afficherChoix()
+    {
+        for(int i = 0; i < c.length; i++)
+        {
+            System.out.println( (i+1) +" : "+ c[i]);
+        }
+    }
+
     public static void jouer()
     {
         initialisationTab();
         TabAligne3.afficheTab(longueur, ch);
+        int x =7;
         if(nombreJoueurs == 2)
         {
             int entree = 0;
@@ -211,13 +238,13 @@ public class Puissance4
                     if(language==1){System.out.println("Cette colonne n'existe pas !");}
                     else{System.out.println("This column don't exist !");}
                 }
-                else
+                else 
                 {
                     if(entree == 0)
                     {
                         return;
                     }
-                    if (entree >= 1 && entree <=  ch.length)
+                    else if (entree >= 1 && entree <=  ch.length)
                     {
                         if(!ajouterTab(1, entree-1))
                         {
@@ -233,7 +260,8 @@ public class Puissance4
                         else{System.out.println("You win !");}
                         return;
                     }
-
+                    if(fin())
+                    {break;}
                     challenge.clear();
                     TabAligne3.afficheTab(longueur, ch);
                     try{Thread.sleep(1500);}
@@ -258,7 +286,6 @@ public class Puissance4
                         return;
                     }
                 }
-
             }
         }
         if(fin())
@@ -279,14 +306,12 @@ public class Puissance4
             t.viderTab();
             t.remplirTab(ch);
 
-            for(int i = 0; !t.isEmpty() && i < 10; i++)
+            for(int i = 0; !t.isEmpty() && i < 15; i++)
             {
                 int x = t.choisirColonne(ch, entree);
                 if(x != -1)
                 {
-                    if(!ajouterTab(2, x))
-                    {t.enleverA(x);}
-                    else
+                    if(ajouterTab(2, x))
                     {return;}
                 }
             }
