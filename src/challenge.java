@@ -151,6 +151,12 @@ public class challenge
         if(language == 1){System.out.println("Developpeurs Principaux :\n=====================");}
         else{System.out.println("Principal Developper's crew");}
         System.out.println("Vinsifroid\nBivisi\nMelvinMajor\n\n\n");
+        dormirSystem(3000); 
+        String rep;
+        do{
+        	System.out.println("Pressez enter");
+        	rep = InOut.getWord();
+        }while(rep != null);
     }
     public static void choseLanguage()
     {
@@ -172,7 +178,7 @@ public class challenge
                 System.out.println("The Default language is now English");
                 break;
             }
-        }while(choix != 1 || choix != 2);       
+        }while(choix != 1 && choix != 2);       
     }
     public static void printMenuMessage(byte i)
     {
