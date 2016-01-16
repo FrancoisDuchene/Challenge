@@ -151,12 +151,7 @@ public class challenge
         if(language == 1){System.out.println("Developpeurs Principaux :\n=====================");}
         else{System.out.println("Principal Developper's crew");}
         System.out.println("Vinsifroid\nBivisi\nMelvinMajor\n\n\n");
-        dormirSystem(3000); 
-        String rep;
-        do{
-        	System.out.println("Pressez enter");
-        	rep = InOut.getWord();
-        }while(rep != null);
+        dormirSystem(4000); 
     }
     public static void choseLanguage()
     {
