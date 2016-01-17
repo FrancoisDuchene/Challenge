@@ -3,20 +3,20 @@
  * @version 1.0 gamma
  */
 public class challenge
-{ 
+{
     private static byte language = 1;
     public static void main (String [] args)
     {
-        /* 
+        /*
          * ==========================
          *        LE PENDU
          * ==========================
-         * 
+         *
          * game to play "le pendu". Here is the main class were all the
          * program is executed
-         * 
+         *
          *There are actually 6 functions:
-         * 
+         *
          * 1) main
          * 2) jeu where the game is played
          * 3) replaceCharAt subroutines of the game
@@ -28,9 +28,9 @@ public class challenge
         //ChallengeInterface CI = new ChallengeInterface();
         //CI.launch();
 
-        menuPrincipal();             
+        menuPrincipal();
 
-    }     
+    }
     public static String connecte()
     {
         if(profilGestion.existe())
@@ -40,7 +40,7 @@ public class challenge
                 return "connecte";
             }else{
                 return "connected";
-            }           
+            }
         }
         else
         {
@@ -49,24 +49,24 @@ public class challenge
                 return "non connecte";
             }else{
                 return "not connected";
-            }           
+            }
         }
-    }    
+    }
     public static void menuPrincipal()
     {
         byte choix = 0;
         do
-        {    
+        {
             printMenuMessage((byte)1);
 
             choix = InOut.getByte();
             switch(choix)
             {
-            case 1 : 
+            case 1 :
                 clear();
-                menuJeu();                                                 
+                menuJeu();
                 break;
-            case 2 :                    
+            case 2 :
                 credit();
                 break;
             case 3:
@@ -78,19 +78,19 @@ public class challenge
             case 5:
                 char c = 'n';
                 if(language == 1){System.out.println("Etes-vous sur de vouloir quitter ? (o/n)");}
-                else{System.out.println("Are-you sure do you want to quit ? (y/n)");}               
+                else{System.out.println("Are-you sure do you want to quit ? (y/n)");}
                 do{
                     c = InOut.getChar();
                     switch(c)
                     {
                     case 'o':
                         if(language == 1){System.out.println("Au revoir alors !");}
-                        else{System.out.println("GoodBye Then !");}     
+                        else{System.out.println("GoodBye Then !");}
                         System.exit(0);
                         break;
                     case 'y':
                         if(language == 1){System.out.println("Au revoir alors !");}
-                        else{System.out.println("Goodbye then !");}                     
+                        else{System.out.println("Goodbye then !");}
                         System.exit(0);
                         break;
                     case 'n':
@@ -98,11 +98,11 @@ public class challenge
                         else{System.out.println("I was sure you wanted to stay !");}
                         break;
                     }
-                }while(c != 'n' && c != 'o' && c != 'y');            
+                }while(c != 'n' && c != 'o' && c != 'y');
                 break;
             default :
                 if(language == 1){System.out.println("Veuillez indiquer 1, 2, 3, 4 ou 5 !");}
-                else{System.out.println("Please Indicate 1, 2, 3, 4 or 5 !");}              
+                else{System.out.println("Please Indicate 1, 2, 3, 4 or 5 !");}
                 break;
             }
 
@@ -131,7 +131,7 @@ public class challenge
                 clear();
                 Mastermind.menu();
                 break;
-            case 4 : 
+            case 4 :
                 clear();
                 Puissance4.menu();
                 break;
@@ -140,7 +140,7 @@ public class challenge
                 break;
             default :
                 if(language == 1){System.out.println("Veuillez indiquer 1, 2, 3, 4 ou 5 !");}
-                else{System.out.println("Please indicate 1, 2, 3, 4 or 5 !");}              
+                else{System.out.println("Please indicate 1, 2, 3, 4 or 5 !");}
                 break;
             }
         }while(choix != 5);
@@ -151,7 +151,7 @@ public class challenge
         if(language == 1){System.out.println("Developpeurs Principaux :\n=====================");}
         else{System.out.println("Principal Developper's crew");}
         System.out.println("Vinsifroid\nBivisi\nMelvinMajor\n\n\n");
-        dormirSystem(4000); 
+        dormirSystem(4000);
     }
     public static void choseLanguage()
     {
@@ -159,7 +159,7 @@ public class challenge
         clear();
         if(language == 1){System.out.println("Quel Language preferez-vous ?\n1. Francais\n2. English");}
         else{System.out.println("What language would you like ?");}
-        
+
         do{
             choix = InOut.getByte();
             switch(choix)
@@ -173,7 +173,7 @@ public class challenge
                 System.out.println("The Default language is now English");
                 break;
             }
-        }while(choix != 1 && choix != 2);       
+        }while(choix != 1 && choix != 2);
     }
     public static void printMenuMessage(byte i)
     {

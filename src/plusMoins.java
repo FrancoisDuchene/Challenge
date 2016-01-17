@@ -157,6 +157,7 @@
 		     if(nbrUser == nbrAleatoire) {
 		    	 victoire = true;
 		    	 System.out.println("\tBRAVO !!!\n\nVous avez reussi en " + coup + " coups");
+		    	 System.out.println("Votre score est de " + score);
 		     }
 
 		 }
@@ -185,17 +186,22 @@
 		 }
 		 while(choix != 3);		 
 	 }
-
+	 /**
+	  * This is the option to chose the limit of the number 
+	  */	
 	 public static void option1() {
 		 System.out.println("Quelle serait la limite ?");
 		 limMax = InOut.getInt();
 		 System.out.println("La nouvelle limite est de " + limMax);
 	 }
+	 /**
+	  * Option for choose the number of players
+	  */
 	 public static void option2()
 	 {
 		 System.out.println("Mode 1 ou 2 Joueurs ?");
 		 joueurs = InOut.getByte();
-		 if(joueurs != 1 || joueurs != 2)
+		 if(joueurs != 1 && joueurs != 2)
 		 {
 			 joueurs = 1;
 		 }
