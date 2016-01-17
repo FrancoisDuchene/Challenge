@@ -264,8 +264,8 @@ public class Puissance4
                     {break;}
                     challenge.clear();
                     TabAligne3.afficheTab(longueur, ch);
-                    try{Thread.sleep(1500);}
-                    catch(Exception e){}
+                    
+                    challenge.dormirSystem(2000);
 
                     if(first)
                     {

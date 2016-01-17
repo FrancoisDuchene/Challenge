@@ -161,7 +161,8 @@
 
 		 }
 		 while(victoire == false);
-		 ajouteScore(score);
+		 if(profilGestion.existe())
+		 {ajouteScore(score);}
 	 }
 	 public static void menuOption() {
 		 byte choix = 0;
