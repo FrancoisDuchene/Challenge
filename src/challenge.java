@@ -157,7 +157,7 @@ public class challenge
     {
         byte choix = 0;
         clear();
-        if(language == 1){System.out.println("Quel Language preferez-vous ?\n\t1. Francais\n2. English");}
+        if(language == 1){System.out.println("Quel Language preferez-vous ?\n1. Francais\n2. English");}
         else{System.out.println("What language would you like ?");}
         
         do{
@@ -196,7 +196,7 @@ public class challenge
             }else if (language == 2){
                 System.out.println("\nMain Menu :\n====================");
                 System.out.println("\nStatus : " + connecte() );
-                System.out.println("\n1. Play\n. Credits\n3. Profile\n4. Language\n5. Exit");
+                System.out.println("\n1. Play\n2. Credits\n3. Profile\n4. Language\n5. Exit");
             }
         }else if(i==2){
             if(language == 1){
