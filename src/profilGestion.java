@@ -7,35 +7,53 @@ public class profilGestion {
 
 	public static boolean premierOuverture = true;
 	public static boolean existe = false;
+	public static boolean confExiste = false;
 	public static Joueur playerOne = new Joueur();
 	public static String name = "";
+	public static Config playerConf = null;
 	public static int language = 1;
 	public static void gestion()
 	{		
 		language = challenge.getLanguage();
+		//pour la premiere ouverture de cette fonction dans ce programme
 		if(premierOuverture)
 		{
 			if(language == 1){System.out.println("Quel est votre nom ?");}
 			else{System.out.println("What is your name ?");}		
 			name = InOut.Mot(InOut.getLine());
 			playerOne.setName(name);
-			if(fichierExiste())
+			if(fichierExiste(".sav"))
 			{
 				existe = true;
+				if(fichierExiste(".cf"))
+				{
+					confExiste = true;
+				}
 			}
+			playerConf = new Config(name);
 			premierOuverture = false;
 		}
-
+		//Si c'est la premiere fois qu'on cree le fichier de profil
 		if(existe == false)
 		{
-			saveProfil();
+			saveProfil();			
 			existe = true;
 		}
+		//Si le fichier de profil existe deja
 		else
 		{
 			chargeProfil();
+			gestionConfig(false);
 			afficheProfil();
 		}		
+		if(confExiste)
+		{
+			gestionConfig(false);
+		}
+		else
+		{
+			gestionConfig(true);
+		}
 	}
 	/**
 	 * 
@@ -44,6 +62,14 @@ public class profilGestion {
 	public static boolean existe()
 	{
 		return existe;	
+	}
+	/**
+	 * 
+	 * @return true if a profile is not created on this session and false if a player is already logged
+	 */
+	public static boolean getPremierOuverture()
+	{
+		return premierOuverture;
 	}
 	/**
 	 * the function add the score of the HangmanGame
@@ -75,6 +101,9 @@ public class profilGestion {
 			playerOne.ajouteScoreSMM(score);
 		}
 	}
+	/**
+	 * Print the profile at screen
+	 */
 	public static void afficheProfil()
 	{
 		if(language == 1)
@@ -112,9 +141,12 @@ public class profilGestion {
 		playerOne.savePlayer();
 	}
 
+	/**
+	 * Charge the player Profile
+	 */
 	public static void chargeProfil()
 	{
-		if(fichierExiste())
+		if(fichierExiste(".sav"))
 		{			
 			String str = "";
 			Fichier fi = new Fichier();
@@ -155,12 +187,17 @@ public class profilGestion {
 			fi.fermer();
 		}
 	}
-	public static boolean fichierExiste()
+	public static boolean fichierExiste(String extension)
 	{
 		BufferedReader bF = null;
 		boolean bon = false;
 		try{
-			bF = new BufferedReader(new FileReader(name + ".sav"));
+			String filename = name + extension;
+			if(extension.contains(".sav"))
+			{
+				filename = "saves/" + filename;
+			}
+			bF = new BufferedReader(new FileReader(filename));
 			bon = true;
 		}catch(FileNotFoundException e){
 			bon = false;
@@ -172,6 +209,22 @@ public class profilGestion {
 			{}
 		}
 		return bon;
+	}
+	/**
+	 * 
+	 * @param mode true pour sauvegarder et false pour charger
+	 */
+	public static void gestionConfig(boolean mode)
+	{
+		if(mode)
+		{
+			playerConf.paramInto();
+			playerConf.saveConfig();
+		}else
+		{
+			playerConf.chargeConfig();
+			playerConf.paramExo();
+		}
 	}
 
 }

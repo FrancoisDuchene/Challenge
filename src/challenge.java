@@ -174,6 +174,10 @@ public class challenge
                 break;
             }
         }while(choix != 1 && choix != 2);
+        if(!profilGestion.getPremierOuverture())
+        {
+        	profilGestion.gestionConfig(true);
+        }
     }
     public static void printMenuMessage(byte i)
     {
@@ -184,7 +188,6 @@ public class challenge
             System.out.println("#  $      $$$$$  $$$$$  $$    $$    $$$$   $ $ $  $   $$ $$$    #");
             System.out.println("#  $$     $$ $$  $$ $$  $$    $$    $$     $  $$  $$   $ $$     #");
             System.out.println("#   $$$$  $$ $$  $$ $$  $$$$$ $$$$$ $$$$$  $   $   $$$$  $$$$$  #");
-
 
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             System.out.println("\t\tCHALLENGE - MINIGAMES");
@@ -204,7 +207,7 @@ public class challenge
                 System.out.println("1. Pendu\n2. PlusMoins\n3. Mastermind\n4. Puissance 4\n5. Quitter");}
             else{
                 System.out.println("LIST OF GAMES\n^^^^^^^^^^^^^^^^^^^^^^^^^^");
-                System.out.println("1. HangMann\n2. HighLow\n3. Mastermind\n4. Connect 4\n5.Quit");
+                System.out.println("1. HangMann\n2. HighLow\n3. Mastermind\n4. Connect 4\n5. Quit");
             }
         }
     }
@@ -214,6 +217,10 @@ public class challenge
     public static byte getLanguage()
     {
         return language;
+    }
+    public static void setLanguage(byte lang)
+    {
+    	language = lang;
     }
     /**
      * a function who "clear" the screen
