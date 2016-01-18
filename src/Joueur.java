@@ -136,6 +136,10 @@ public class Joueur {
 			}
 		}
 	}
+	/**
+	 * Add score to the total score arrays of the MasterMind
+	 * @param n the score to add
+	 */
 	public void ajouteScoreSMM(int n)
 	{
 		for(int i=0; i<scoreMaster.length; i++)
@@ -147,8 +151,12 @@ public class Joueur {
 			}
 		}
 	}
-
-	public int[] remplirTab(int nbr)
+	/**
+	 * 
+	 * @param nbr the length of the arrays
+	 * @return a arrays with all the values initialized by -1
+	 */
+	private int[] remplirTab(int nbr)
 	{
 		int [] newTab = new int[nbr];
 		for(int i=0; i<nbr; i++)
@@ -157,7 +165,9 @@ public class Joueur {
 		}
 		return newTab;
 	}
-
+	/**
+	 * Print at screen all the values of the score array of the Hangmann
+	 */
 	public void afficheScoreSPd()
 	{
 		for(int i=0; i<scorePendu.length ;i++)
@@ -166,7 +176,9 @@ public class Joueur {
 			System.out.println((scorePendu[i] == -1)?" - ":scorePendu[i]);
 		}
 	}
-
+	/**
+	 * Print at screen all the values of the score array of the HighLow
+	 */
 	public void afficheScoreSPM()
 	{
 		for(int i=0; i<scorePlusMoins.length ;i++)
@@ -175,7 +187,9 @@ public class Joueur {
 			System.out.println((scorePlusMoins[i] == -1)?" - ":scorePlusMoins[i]);
 		}
 	}
-	
+	/**
+	 * Print at screen all the values of the score array of the MasterMind
+	 */
 	public void afficheScoreSMM()
 	{
 		for(int i=0; i<scoreMaster.length ;i++)
@@ -254,7 +268,6 @@ public class Joueur {
 			{
 				a += scorePendu[i];
 			}
-
 		}
 		return a;
 	}
@@ -306,7 +319,12 @@ public class Joueur {
 		else
 		{return false;}
 	}
-
+	/**
+	 * This method save the current player into a file named by "saves/" + name + ".sav"
+	 * the extension .sav is actually a self-made extension. The saving is formatted according
+	 * to a self-made method and currently save : 1. name 2. all the values of the Hangmann
+	 * 3. of the HighLow 4. the MasterMind
+	 */
 	public void savePlayer()
 	{
 		Fichier fl = new Fichier();

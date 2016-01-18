@@ -12,12 +12,69 @@ public class profilGestion {
 	public static String name = "";
 	public static Config playerConf = null;
 	public static int language = 1;
+
+	public static void menuGestion()
+	{
+		afficheMenu();
+		byte choix = 0;
+		do
+		{
+			choix = InOut.getByte();
+			switch(choix)
+			{
+			case 1:
+				afficheProfil();
+				break;
+			case 2:
+				playerOne.afficheScoreSPd();
+				break;
+			case 3:
+				playerOne.afficheScoreSPM();
+				break;
+			case 4:
+				playerOne.afficheScoreSMM();
+				break;
+			case 5:
+				break;
+			default:
+				if(language == 1){System.out.println("Veuillez indiquer 1, 2, 3, 4, 5 ou 6 !");}
+                else{System.out.println("Please indicate 1, 2, 3, 4, 5 or 6");}
+				break;
+			}
+		}while(choix != 6);
+	}
+	public static void afficheMenu()
+	{
+		if(language == 1)
+		{
+			System.out.println("#### PROFIL -" + name + " ####");
+			System.out.println(playerOne.toString() + "\n");
+			System.out.println("1. Tableau des scores general");
+			System.out.println("2. Score Pendu");
+			System.out.println("3. Score PlusMoins");
+			System.out.println("4. Score MasterMind");
+			System.out.println("5. Configuration");
+			System.out.println("6. Changer d'utilisateur");
+			System.out.println("\n7. Quitter");
+		}else if(language == 2)
+		{
+			System.out.println("#### PROFILE -" + name + " ####");
+			System.out.println(playerOne.toString() + "\n");
+			System.out.println("1. General HighScore");
+			System.out.println("2. Hangman Score");
+			System.out.println("3. HighLow Score");
+			System.out.println("4. MasterMind Score");
+			System.out.println("6. Change user");
+			System.out.println("\n7. Quit");
+		}
+	}
+
 	public static void gestion()
 	{		
-		language = challenge.getLanguage();
 		//pour la premiere ouverture de cette fonction dans ce programme
 		if(premierOuverture)
 		{
+			language = challenge.getLanguage();
 			if(language == 1){System.out.println("Quel est votre nom ?");}
 			else{System.out.println("What is your name ?");}		
 			name = InOut.Mot(InOut.getLine());
@@ -150,7 +207,7 @@ public class profilGestion {
 		{			
 			String str = "";
 			Fichier fi = new Fichier();
-			fi.ouvrir(name + ".sav", "L",true);
+			fi.ouvrir("saves/" + name + ".sav", "L",true);
 			str = fi.lire();
 			playerOne.setName(str);
 			fi.lire();
@@ -189,22 +246,22 @@ public class profilGestion {
 	}
 	public static boolean fichierExiste(String extension)
 	{
-		BufferedReader bF = null;
+		BufferedReader vador = null;
 		boolean bon = false;
 		try{
 			String filename = name + extension;
-			if(extension.contains(".sav"))
+			if(extension.contains(".sav"))	// pour savoir si c'est dans le dossier saves
 			{
 				filename = "saves/" + filename;
 			}
-			bF = new BufferedReader(new FileReader(filename));
+			vador = new BufferedReader(new FileReader(filename));
 			bon = true;
 		}catch(FileNotFoundException e){
 			bon = false;
 		}finally{
 			try{
 				if(bon == true)
-					bF.close();
+					vador.close();
 			}catch(IOException e)
 			{}
 		}
