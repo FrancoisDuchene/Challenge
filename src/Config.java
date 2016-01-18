@@ -1,65 +1,77 @@
 import java.io.*;
+import java.util.Properties;
 
 public class Config
 {
 	private String name;
 	private byte language;
+	private Properties force;
 	public Config(String name)
 	{
 		this.name = name;
-		this.language = challenge.getLanguage();		
+		this.language = challenge.getLanguage();	
+		this.force = new Properties();
 	}
-	public boolean saveConfig()
+	/**
+	 * Save the Configuration in a properties file
+	 */
+	public void saveConfig()
 	{
-		PrintWriter yoda = null;
-		try{
-			yoda = new PrintWriter(new FileWriter(name + ".cf"));
-			yoda.println(language);
-		}catch(FileNotFoundException e1)
-		{
+		final String filename = "saves/" + name + ".properties";
+		FileOutputStream luke = null;
+		
+		force.setProperty("Language", Byte.toString(language));
+		//force.list(System.out); si on veut afficher les le documents
+		
+		try {
+			File fichier = new File(filename);
+			luke = new FileOutputStream(fichier);
+			force.store(luke, " Proprietes");			
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
 			System.err.println(e1.getMessage());
-		}catch(IOException e2)
-		{
+		}catch (IOException e2) {
+			e2.printStackTrace();
 			System.err.println(e2.getMessage());
-		}catch(Exception e3)
-		{
+		}catch (Exception e3) {
+			e3.printStackTrace();
 			System.err.println(e3.getMessage());
-			return false;
 		}finally{
 			try{
-				yoda.close();
-				return true;
-			}catch(Exception e2){
-				System.err.println(e2.getMessage());
+				luke.close();
+			}catch(Exception e4){
+				e4.printStackTrace();
+				System.err.println(e4.getMessage());
 			}
 		}
-		return false;
 	}
 	public void chargeConfig()
 	{
-		BufferedReader Luke = null;
-		try{
-			Luke = new BufferedReader(new FileReader(name + ".cf"));
-			String force = "";
-			force = Luke.readLine();
-			language = Byte.parseByte(force);
-		}catch(FileNotFoundException e1)
-		{
+		final String filename = "saves/" + name + ".properties";
+		FileInputStream leia = null;
+		
+		try {
+			File fichier = new File(filename);
+			leia = new FileInputStream(fichier);
+			force.load(leia);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
 			System.err.println(e1.getMessage());
-		}catch(IOException e2)
-		{
+		}catch (IOException e2) {
+			e2.printStackTrace();
 			System.err.println(e2.getMessage());
-		}catch(Exception e3)
-		{
+		}catch (Exception e3) {
+			e3.printStackTrace();
 			System.err.println(e3.getMessage());
 		}finally{
 			try{
-				Luke.close();
-			}catch(Exception e2){
-				System.err.println(e2.getMessage());
-				System.exit(-1);
+				leia.close();
+			}catch(Exception e4){
+				e4.printStackTrace();
+				System.err.println(e4.getMessage());
 			}
 		}
+		language = Byte.parseByte(force.getProperty("Language"));
 	}
 	public void paramInto()
 	{
@@ -68,5 +80,11 @@ public class Config
 	public void paramExo()
 	{
 		challenge.setLanguage(language);
+	}
+	public Properties getProp() {
+		return force;
+	}
+	public void setProp(Properties prop) {
+		this.force = prop;
 	}
 }

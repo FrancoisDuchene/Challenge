@@ -14,11 +14,11 @@ public class profilGestion {
 	public static int language = 1;
 
 	public static void menuGestion()
-	{
-		afficheMenu();
+	{		
 		byte choix = 0;
 		do
 		{
+			afficheMenu();
 			choix = InOut.getByte();
 			switch(choix)
 			{
@@ -35,13 +35,20 @@ public class profilGestion {
 				playerOne.afficheScoreSMM();
 				break;
 			case 5:
+				playerConf.getProp().list(System.out);
+				gestionConfig(true);
+				break;
+			case 6:
+				premierOuverture = true;
+				existe = false;
+				confExiste = false;
 				break;
 			default:
-				if(language == 1){System.out.println("Veuillez indiquer 1, 2, 3, 4, 5 ou 6 !");}
-                else{System.out.println("Please indicate 1, 2, 3, 4, 5 or 6");}
+				if(language == 1){System.out.println("Veuillez indiquer 1, 2, 3, 4, 5, 6 ou 7 !");}
+				else{System.out.println("Please indicate 1, 2, 3, 4, 5,6 ou 7 !");}
 				break;
 			}
-		}while(choix != 6);
+		}while(choix != 7);
 	}
 	public static void afficheMenu()
 	{
@@ -67,6 +74,7 @@ public class profilGestion {
 			System.out.println("6. Change user");
 			System.out.println("\n7. Quit");
 		}
+		System.out.println();
 	}
 
 	public static void gestion()
@@ -88,6 +96,10 @@ public class profilGestion {
 				}
 			}
 			playerConf = new Config(name);
+			if(confExiste)
+			{
+				gestionConfig(false);
+			}
 			premierOuverture = false;
 		}
 		//Si c'est la premiere fois qu'on cree le fichier de profil
@@ -102,15 +114,8 @@ public class profilGestion {
 			chargeProfil();
 			gestionConfig(false);
 			afficheProfil();
-		}		
-		if(confExiste)
-		{
-			gestionConfig(false);
 		}
-		else
-		{
-			gestionConfig(true);
-		}
+		menuGestion();
 	}
 	/**
 	 * 
@@ -244,16 +249,17 @@ public class profilGestion {
 			fi.fermer();
 		}
 	}
+	/**
+	 * 
+	 * @param extension
+	 * @return true if the file exist and false if the file don't exist
+	 */
 	public static boolean fichierExiste(String extension)
 	{
 		BufferedReader vador = null;
 		boolean bon = false;
 		try{
-			String filename = name + extension;
-			if(extension.contains(".sav"))	// pour savoir si c'est dans le dossier saves
-			{
-				filename = "saves/" + filename;
-			}
+			String filename = "saves/" + name + extension;
 			vador = new BufferedReader(new FileReader(filename));
 			bon = true;
 		}catch(FileNotFoundException e){
