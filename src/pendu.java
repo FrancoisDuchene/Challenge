@@ -17,6 +17,7 @@ public class pendu {
             if(profilGestion.existe()) // on verifie que le profil existe deja
             {
                 ajouteScore(score);
+                profilGestion.saveProfil();
             }
         }
         else if(joueurs == 2)
@@ -25,9 +26,9 @@ public class pendu {
             if(profilGestion.existe()) // on verifie que le profil existe deja
             {
                 ajouteScore(score);
+                profilGestion.saveProfil();
             }
         }
-        profilGestion.saveProfil();
     }
     public static int choix2Jr()
     {

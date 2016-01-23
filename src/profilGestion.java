@@ -43,6 +43,8 @@ public class profilGestion {
 				existe = false;
 				confExiste = false;
 				break;
+			case 7:
+				break;
 			default:
 				if(language == 1){System.out.println("Veuillez indiquer 1, 2, 3, 4, 5, 6 ou 7 !");}
 				else{System.out.println("Please indicate 1, 2, 3, 4, 5,6 ou 7 !");}
@@ -54,7 +56,7 @@ public class profilGestion {
 	{
 		if(language == 1)
 		{
-			System.out.println("#### PROFIL -" + name + " ####");
+			System.out.println("\n#### PROFIL -" + name + " ####");
 			System.out.println(playerOne.toString() + "\n");
 			System.out.println("1. Tableau des scores general");
 			System.out.println("2. Score Pendu");
