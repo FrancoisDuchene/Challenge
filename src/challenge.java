@@ -1,6 +1,6 @@
 /**
  * @author Vinsifroid && Bivisi
- * @version 1.0 gamma
+ * @version 1.1
  */
 public class challenge
 {
@@ -177,7 +177,8 @@ public class challenge
 		if(!profilGestion.getPremierOuverture())
 		{
 			if(language==1){System.out.println("Voulez-vous enregistrer ce parametre comme defaut ? (1.oui 2.non)");}
-			else{System.out.println("Want you save this parameter as default ? (1.yes 2.no)");}
+			else{System.out.println("Want you save this parameter as default ? (1.yes/2.no)");}
+			
 			byte bleu = 0;
 			do{
 				bleu = InOut.getByte();
@@ -186,13 +187,15 @@ public class challenge
 				case 1:
 					profilGestion.gestionConfig(true);
 					break;
+				case 2:
+					break;
 				default:
 					if(language==1){System.out.println("S'il vous plait indiquez 1 ou 2");}
 					else{System.out.println("S'il vous plait indiquez 1 ou 2");}
 					break;
 				}
-			}while(bleu < 2 && bleu > 1);			
-		}
+			}while(bleu < 2 && bleu > 1);
+		}		
 	}
 	public static void printMenuMessage(byte i)
 	{

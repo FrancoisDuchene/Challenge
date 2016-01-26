@@ -3,13 +3,30 @@ import java.util.Properties;
 
 public class Config
 {
+	//variables generales
 	private String name;
 	private byte language;
+	//variables PlusMoins
+	private byte joueurs_PlusMoins;
+	private int limMax_PlusMoins;
+	//variables Pendu
+	private short vies_pendu;
+	private byte joueurs_pendu;
+	//variables MasterMind
+	private int vies_MasterMind;
+	private int difficulty_MasterMind;
 	private Properties force;
+	
 	public Config(String name)
 	{
 		this.name = name;
-		this.language = challenge.getLanguage();	
+		this.language = challenge.getLanguage();
+		this.joueurs_PlusMoins = plusMoins.getJoueur();
+		this.limMax_PlusMoins = plusMoins.getLimMax();
+		this.vies_pendu = pendu.getVies();
+		this.joueurs_pendu = pendu.getJoueurs();
+		this.vies_MasterMind = Mastermind.getVies();
+		this.difficulty_MasterMind = Mastermind.getDifficulte();
 		this.force = new Properties();
 	}
 	/**
@@ -20,8 +37,15 @@ public class Config
 		final String filename = "saves/" + name + ".properties";
 		FileOutputStream luke = null;
 		
+		//On ajoute les éléments à l'object représentant toutes les propriétés.
 		force.setProperty("Language", Byte.toString(language));
-		//force.list(System.out); si on veut afficher les le documents
+		force.setProperty("joueurs_PlusMoins", Byte.toString(joueurs_PlusMoins));
+		force.setProperty("limMax_PlusMoins", Integer.toString(limMax_PlusMoins));
+		force.setProperty("vies_pendu", Short.toString(vies_pendu));
+		force.setProperty("joueurs_pendu", Byte.toString(joueurs_pendu));
+		force.setProperty("vies_MasterMind", Integer.toString(vies_MasterMind));
+		force.setProperty("difficulty_MasterMind", Integer.toString(difficulty_MasterMind));
+		//force.list(System.out); si on veut les le documents
 		
 		try {
 			File fichier = new File(filename);
@@ -72,14 +96,29 @@ public class Config
 			}
 		}
 		language = Byte.parseByte(force.getProperty("Language"));
+		joueurs_PlusMoins = Byte.parseByte(force.getProperty("joueurs_PlusMoins"));
+		limMax_PlusMoins = Integer.parseInt(force.getProperty("limMax_PlusMoins"));
+		vies_pendu = Short.parseShort(force.getProperty("vies_pendu"));
+		joueurs_pendu = Byte.parseByte(force.getProperty("joueurs_pendu"));		
+		vies_MasterMind = Integer.parseInt(force.getProperty("vies_MasterMind"));
+		difficulty_MasterMind = Integer.parseInt(force.getProperty("difficulty_MasterMind"));
 	}
 	public void paramInto()
 	{
 		this.language = challenge.getLanguage();
+		this.joueurs_PlusMoins = plusMoins.getJoueur();
+		this.limMax_PlusMoins = plusMoins.getLimMax();
+		this.vies_pendu = pendu.getVies();
+		this.joueurs_pendu = pendu.getJoueurs();
+		this.vies_MasterMind = Mastermind.getVies();
+		this.difficulty_MasterMind = Mastermind.getDifficulte();
 	}
 	public void paramExo()
 	{
 		challenge.setLanguage(language);
+		pendu.setParam(vies_pendu, joueurs_pendu);
+		plusMoins.setParam(limMax_PlusMoins, joueurs_PlusMoins);
+		Mastermind.setParam(difficulty_MasterMind, vies_MasterMind);
 	}
 	public Properties getProp() {
 		return force;

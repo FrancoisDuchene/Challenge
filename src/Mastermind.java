@@ -3,7 +3,7 @@
  * This is the game mastermind with letters.
  * 
  * @author Luis Tascon Gutierrez 
- * @version 1.2
+ * @version 1.3
  */
 
 public class Mastermind
@@ -59,7 +59,7 @@ public class Mastermind
 		}// Create the line with all the possible colors in fonction of the difficulty.
 		if(language==1){lignes[0] += "\t\t0 pour sortir";}
 		else{lignes[0] += "\t\t0 to exit";}
-		
+
 
 		while(!gagne && viesTmp > 0)
 		{
@@ -235,7 +235,7 @@ public class Mastermind
 			{System.out.println(c[i]+ " for the color : " + e[i]);}
 			System.out.println("\nFollow the example bellow :\n \"N C B V\"\n");
 		}
-		
+
 	}
 
 	/**
@@ -280,7 +280,6 @@ public class Mastermind
 				regles();
 				break;
 			case 4:
-				challenge.menuJeu();
 				break;
 			default :
 				if(language==1){System.out.println("Veuillez introduire 1,2,3 ou 4!");					
@@ -292,7 +291,7 @@ public class Mastermind
 
 	public static void menuOption()
 	{
-		byte c = 0;
+		byte choix = 0;
 		do
 		{
 			if(language==1){
@@ -302,8 +301,8 @@ public class Mastermind
 				System.out.println("~~~~~~~~~ Settings panel ~~~~~~~~~");
 				System.out.println("1. Choose Difficult\n2. Choose number of lifes\n3. Choose the number of players (not yet available)\n4. Quit");
 			}
-			c = InOut.getByte();
-			switch(c)
+			choix = InOut.getByte();
+			switch(choix)
 			{
 			case 1:
 				option1();
@@ -318,10 +317,10 @@ public class Mastermind
 				menu();
 				break;
 			default:
-				if(language==1){System.out.println("Veuillez introduire 1,2 or 3!");					
-				}else{System.out.println("Please Introduce 1,2 or 3!");}
+				if(language==1){System.out.println("Veuillez introduire 1, 2, 3 ou 4!");}
+				else{System.out.println("Please Introduce 1, 2, 3 or 4!");}
 			}
-		}while(c!= 3 && c!= 2 && c!= 1);
+		}while(choix!= 4);
 	}
 
 	public static void option1()
@@ -335,7 +334,7 @@ public class Mastermind
 			System.out.printf("You are currently in difficulty %2d .\n", difficulte);
 			System.out.println("Which level of difficulty you want to have?\n1. easy\n2. normale\n3. hard");
 		}
-		
+
 		do
 		{
 			try{
@@ -347,7 +346,10 @@ public class Mastermind
 				re = true;
 			}
 		}while(re);
-		menuOption();
+		if(!profilGestion.getPremierOuverture())
+		{
+			profilGestion.gestionConfig(true);
+		}
 	}
 
 	public static void option2()
@@ -377,7 +379,10 @@ public class Mastermind
 		{
 			vies = 99;
 		}
-		menuOption();
+		if(!profilGestion.getPremierOuverture())
+		{
+			profilGestion.gestionConfig(true);
+		}
 	}
 
 	public static void regles()
@@ -403,8 +408,6 @@ public class Mastermind
 					"\nPlayer 2 must try to find the combinaison and each round propose a combinaison."+
 					"\nThe computer or player 1 will show how much colors (or letter in this case) are good placed and how much are wrong placed.\n\n");
 		}
-
-		menu();
 	}
 
 	private static char firstLetter()
@@ -421,5 +424,18 @@ public class Mastermind
 			}
 		}
 		return x;
+	}
+	public static int getDifficulte()
+	{
+		return difficulte;
+	}
+	public static int getVies()
+	{
+		return vies;
+	}
+	public static void setParam(int diff, int vies_MM)
+	{
+		difficulte = diff;
+		vies = vies_MM;
 	}
 }

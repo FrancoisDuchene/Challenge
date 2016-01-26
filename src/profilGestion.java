@@ -34,9 +34,8 @@ public class profilGestion {
 			case 4:
 				playerOne.afficheScoreSMM();
 				break;
-			case 5:
-				playerConf.getProp().list(System.out);
-				gestionConfig(true);
+			case 5:				
+				optionConfigurationMenu();
 				break;
 			case 6:
 				premierOuverture = true;
@@ -47,7 +46,7 @@ public class profilGestion {
 				break;
 			default:
 				if(language == 1){System.out.println("Veuillez indiquer 1, 2, 3, 4, 5, 6 ou 7 !");}
-				else{System.out.println("Please indicate 1, 2, 3, 4, 5,6 ou 7 !");}
+				else{System.out.println("Please indicate 1, 2, 3, 4, 5, 6 ou 7 !");}
 				break;
 			}
 		}while(choix != 7);
@@ -79,12 +78,37 @@ public class profilGestion {
 		System.out.println();
 	}
 
+	public static void optionConfigurationMenu()
+	{
+		byte choix = 0;
+		System.out.println("###CONFIGURATION MENU###");
+		System.out.println("\n1. Listing des propriétés 2. Charger la configuration 3. Sortir");
+		do{
+			choix = InOut.getByte();
+			switch(choix)
+			{
+			case 1:
+				playerConf.getProp().list(System.out);
+				break;
+			case 2:
+				gestionConfig(true);
+				break;
+			case 3:
+				break;
+			default:
+				if(language==1){System.out.println("Veuillez indiquer 1, 2 ou 3 !");}
+				else{System.out.println("Please enter 1, 2 or 3 !");}
+				break;
+
+			}
+		}while(choix != 3);
+	}
 	public static void gestion()
 	{		
 		//pour la premiere ouverture de cette fonction dans ce programme
+		language = challenge.getLanguage();
 		if(premierOuverture)
-		{
-			language = challenge.getLanguage();
+		{			
 			if(language == 1){System.out.println("Quel est votre nom ?");}
 			else{System.out.println("What is your name ?");}		
 			name = InOut.Mot(InOut.getLine());

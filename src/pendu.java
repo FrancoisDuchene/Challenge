@@ -451,14 +451,18 @@ public class pendu {
         System.out.println("Vous avez actuellement " + vies + " vies");
         System.out.println("Combien voulez vous de vies ?");
         vies = InOut.getShort();     
-        if(vies == 0)
+        if(vies <= 0)
         {
             vies = 1;
         }
-        else if(vies > 99)
+        else if(vies > 26)
         {
-            vies = 99;
+            vies = 26;
         }
+        if(!profilGestion.getPremierOuverture())
+		{
+			profilGestion.gestionConfig(true);
+		}
     }
     /**
      *  change the value of the member variable joueurs
@@ -468,6 +472,10 @@ public class pendu {
         System.out.println("Vous êtes actuellement en mode " + joueurs + " joueur(s)");
         System.out.println("1. 1 Player\n2. 2 Players");
         joueurs = InOut.getByte();
+        if(!profilGestion.getPremierOuverture())
+		{
+			profilGestion.gestionConfig(true);
+		}
     }
     /**
      * add a word to the dictionary
@@ -487,5 +495,18 @@ public class pendu {
         {return (char)((int)l + 32);}
         else 
             return l;
+    }
+    public static short getVies()
+    {
+    	return vies;
+    }
+    public static byte getJoueurs()
+    {
+    	return joueurs;
+    }
+    public static void setParam(short vies_p, byte J)
+    {
+    	vies = vies_p;
+    	joueurs = J;
     }
 }

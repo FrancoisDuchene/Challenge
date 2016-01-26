@@ -230,7 +230,10 @@ public class plusMoins {
 			limMax = InOut.getInt();
 			System.out.println("The new limit is " + limMax);
 		}
-		
+		if(!profilGestion.getPremierOuverture())
+		{
+			profilGestion.gestionConfig(true);
+		}
 	}
 	/**
 	 * Option for choose the number of players
@@ -253,7 +256,11 @@ public class plusMoins {
 				joueurs = 1;
 			}
 			System.out.println("You are currently in mode " + joueurs + " player");
-		}		
+		}
+		if(!profilGestion.getPremierOuverture())
+		{
+			profilGestion.gestionConfig(true);
+		}
 	}
 	/**
 	 * this function add you score to the profil of the player
@@ -275,5 +282,18 @@ public class plusMoins {
 		double n = Math.random();
 		n = n*limMax;
 		return Math.abs((int) n);
+	}
+	public static int getLimMax()
+	{
+		return limMax;
+	}
+	public static byte getJoueur()
+	{
+		return joueurs;
+	}
+	public static void setParam(int limMax_P, byte J)
+	{
+		limMax = limMax_P;
+		joueurs = J;
 	}
 }
