@@ -178,7 +178,7 @@ public class challenge
 		{
 			if(language==1){System.out.println("Voulez-vous enregistrer ce parametre comme defaut ? (1.oui 2.non)");}
 			else{System.out.println("Want you save this parameter as default ? (1.yes/2.no)");}
-			
+
 			byte bleu = 0;
 			do{
 				bleu = InOut.getByte();
@@ -195,7 +195,7 @@ public class challenge
 					break;
 				}
 			}while(bleu < 2 && bleu > 1);
-		}		
+		}
 	}
 	public static void printMenuMessage(byte i)
 	{
