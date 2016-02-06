@@ -7,27 +7,10 @@ public class challenge
 	private static byte language = 1;
 	public static void main (String [] args)
 	{
-		/*
-		 * ==========================
-		 *        LE PENDU
-		 * ==========================
-		 *
-		 * game to play "le pendu". Here is the main class were all the
-		 * program is executed
-		 *
-		 *There are actually 6 functions:
-		 *
-		 * 1) main
-		 * 2) jeu where the game is played
-		 * 3) replaceCharAt subroutines of the game
-		 * 4) menu
-		 * 5) option1 to decide the number of lifes
-		 * 6) option2 to decide the number of players
-		 */
-
 		//ChallengeInterface CI = new ChallengeInterface();
 		//CI.launch();
-
+		SoundPlayer leia = new SoundPlayer("res/sound/LaChevaucheeDesValkyries.wav");
+		leia.start();
 		menuPrincipal();
 
 	}
@@ -76,6 +59,7 @@ public class challenge
 				choseLanguage();
 				break;
 			case 5:
+				/*
 				char c = 'n';
 				if(language == 1){System.out.println("Etes-vous sur de vouloir quitter ? (o/n)");}
 				else{System.out.println("Are-you sure do you want to quit ? (y/n)");}
@@ -99,6 +83,8 @@ public class challenge
 						break;
 					}
 				}while(c != 'n' && c != 'o' && c != 'y');
+				*/
+				System.exit(0);
 				break;
 			default :
 				if(language == 1){System.out.println("Veuillez indiquer 1, 2, 3, 4 ou 5 !");}

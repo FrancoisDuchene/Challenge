@@ -41,6 +41,7 @@ public class profilGestion {
 				premierOuverture = true;
 				existe = false;
 				confExiste = false;
+				challenge.menuPrincipal();
 				break;
 			case 7:
 				break;
