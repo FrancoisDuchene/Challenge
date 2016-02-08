@@ -13,33 +13,42 @@ public class Panel extends JPanel
     private int posX = 200;
     private int posY = 200;
     private int w = 0;
-    
-    private int high = 0;
-    private int large = 0;
+
     private String name = "";
-    
+
     public Panel()
     {
         super();
     }
-    public Panel(String name, int high, int large)
+
+    public Panel(String name)
     {
+        super();
         this.name = name;
-        this.high = high;
-        this.large = large;
     }
-    
+
     public void paintComponent(Graphics g)
     {
-        if(w == 150)
-        {e = (int)(Math.random()*5000); d= (int)(Math.random()*e/5.0); w = 0;}
-        g.setColor(Color.white);
-        g.fillRect(0,0,this.getWidth(),this.getHeight());
-        Dessins x = new Dessins(d, posX,posY, 200, e);
-        x.draw(g);
-        Font font = new Font("Arial", Font.BOLD, 32);
-        g.setFont(font);g.setColor(Color.red);
-        g.drawString("Bienvenue dans Challenge", this.getWidth()/2-200,80);
+        if(this.name.equals(""))
+        {
+            if(w == 150)
+            {e = (int)(Math.random()*5000); d= (int)(Math.random()*e/5.0); w = 0;}
+            g.setColor(Color.white);
+            g.fillRect(0,0,this.getWidth(),this.getHeight());
+            Dessins x = new Dessins(d, posX,posY, 200, e);
+            x.draw(g);
+            Font font = new Font("Arial", Font.BOLD, 32);
+            g.setFont(font);g.setColor(Color.red);
+            g.drawString("Bienvenue dans Challenge", this.getWidth()/2-200,80);
+        }
+        else if (this.name.equals("menu"))
+        {
+            g.setColor(Color.white);
+            g.fillRect(0,0,this.getWidth(),this.getHeight());
+            Font font = new Font("Helvetica", Font.BOLD, (int)(this.getHeight()/1.5));
+            g.setFont(font);g.setColor(Color.red);
+            g.drawString("Menu", this.getWidth()/2-this.name.length()*50,(int)(this.getHeight() /1.5));
+        }
     }
 
     public int getPosX()
