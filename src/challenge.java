@@ -5,14 +5,15 @@
 public class challenge
 {
 	private static byte language = 1;
+	public static MThread musique = new MThread("Musique");
+	public static MThread page = new MThread("Page");
+	public static boolean continuons = true;
 	public static void main (String [] args)
 	{
-		//ChallengeInterface CI = new ChallengeInterface();
-		//CI.launch();
-		SoundPlayer leia = new SoundPlayer("res/sound/LaChevaucheeDesValkyries.wav");
-		leia.start();
+	    musique.start();
+	    page.start();
+	    
 		menuPrincipal();
-
 	}
 	public static String connecte()
 	{
