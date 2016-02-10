@@ -60,31 +60,6 @@ public class challenge
 				choseLanguage();
 				break;
 			case 5:
-				/*
-				char c = 'n';
-				if(language == 1){System.out.println("Etes-vous sur de vouloir quitter ? (o/n)");}
-				else{System.out.println("Are-you sure do you want to quit ? (y/n)");}
-				do{
-					c = InOut.getChar();
-					switch(c)
-					{
-					case 'o':
-						if(language == 1){System.out.println("Au revoir alors !");}
-						else{System.out.println("GoodBye Then !");}
-						System.exit(0);
-						break;
-					case 'y':
-						if(language == 1){System.out.println("Au revoir alors !");}
-						else{System.out.println("Goodbye then !");}
-						System.exit(0);
-						break;
-					case 'n':
-						if(language == 1){System.out.println("J'etais sur que vous resteriez !");}
-						else{System.out.println("I was sure you wanted to stay !");}
-						break;
-					}
-				}while(c != 'n' && c != 'o' && c != 'y');
-				*/
 				System.exit(0);
 				break;
 			default :
