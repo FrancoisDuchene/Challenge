@@ -27,9 +27,9 @@ public class TabAligne3
     }
 
     private Aligne3[] tab;
-    private int difficulte;
+    private byte difficulte;
 
-    public TabAligne3(int dimension, int difficulte)
+    public TabAligne3(int dimension, byte difficulte)
     {
         tab = new Aligne3[dimension];
         this.difficulte = difficulte;
@@ -302,7 +302,7 @@ public class TabAligne3
         tab[pos] = tab[last];
         tab[last] = null;
     }
-
+/*
     private void enleverA(Aligne3 a)
     {
         int last = -1;
@@ -317,7 +317,7 @@ public class TabAligne3
         tab[pos] = tab[last];
         tab[last] = null;
     }
-
+*/
     public boolean isEmpty()
     {
         for(int i = 0;i < tab.length; i++)
@@ -422,8 +422,8 @@ public class TabAligne3
             if(i%2 == 0)
             {
                 System.out.print(x);
-                if(i%3 == 0 && i < 20 || i%4 == 0)//cette ligne ci
-                {System.out.print(" ");}//et cette ligne sont à enlever si comme vinsifroid les chiffres ne sont pas bien alignés...
+                //if(i%3 == 0 && i < 20 || i%4 == 0)//cette ligne ci
+                //{System.out.print(" ");}//et cette ligne sont à enlever si comme vinsifroid les chiffres ne sont pas bien alignés...
             }
             else
             {

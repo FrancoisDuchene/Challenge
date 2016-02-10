@@ -15,6 +15,10 @@ public class Config
 	//variables MasterMind
 	private int vies_MasterMind;
 	private int difficulty_MasterMind;
+	//variables Puissance4
+	private byte joueurs_Puissance;
+	private byte difficulty_Puissance;
+	
 	private Properties force;
 	
 	public Config(String name)
@@ -27,6 +31,8 @@ public class Config
 		this.joueurs_pendu = pendu.getJoueurs();
 		this.vies_MasterMind = Mastermind.getVies();
 		this.difficulty_MasterMind = Mastermind.getDifficulte();
+		this.joueurs_Puissance = Puissance4.getNbrJoueurs();
+		this.difficulty_Puissance = Puissance4.getDifficulte();
 		this.force = new Properties();
 	}
 	/**
@@ -45,6 +51,8 @@ public class Config
 		force.setProperty("joueurs_pendu", Byte.toString(joueurs_pendu));
 		force.setProperty("vies_MasterMind", Integer.toString(vies_MasterMind));
 		force.setProperty("difficulty_MasterMind", Integer.toString(difficulty_MasterMind));
+		force.setProperty("joueurs_Puissance", Byte.toString(joueurs_Puissance));
+		force.setProperty("difficulty_Puissance", Byte.toString(difficulty_Puissance));
 		//force.list(System.out); si on veut les le documents
 		
 		try {
@@ -102,6 +110,8 @@ public class Config
 		joueurs_pendu = Byte.parseByte(force.getProperty("joueurs_pendu"));		
 		vies_MasterMind = Integer.parseInt(force.getProperty("vies_MasterMind"));
 		difficulty_MasterMind = Integer.parseInt(force.getProperty("difficulty_MasterMind"));
+		joueurs_Puissance = Byte.parseByte(force.getProperty("joueurs_Puissance"));
+		difficulty_Puissance = Byte.parseByte(force.getProperty("difficulty_Puissance"));
 	}
 	public void paramInto()
 	{
@@ -112,6 +122,8 @@ public class Config
 		this.joueurs_pendu = pendu.getJoueurs();
 		this.vies_MasterMind = Mastermind.getVies();
 		this.difficulty_MasterMind = Mastermind.getDifficulte();
+		this.joueurs_Puissance = Puissance4.getNbrJoueurs();
+		this.difficulty_Puissance = Puissance4.getDifficulte();
 	}
 	public void paramExo()
 	{
@@ -119,6 +131,7 @@ public class Config
 		pendu.setParam(vies_pendu, joueurs_pendu);
 		plusMoins.setParam(limMax_PlusMoins, joueurs_PlusMoins);
 		Mastermind.setParam(difficulty_MasterMind, vies_MasterMind);
+		Puissance4.setParam(joueurs_Puissance, difficulty_Puissance);
 	}
 	public Properties getProp() {
 		return force;

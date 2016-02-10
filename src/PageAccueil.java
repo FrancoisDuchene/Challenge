@@ -14,7 +14,8 @@ import javax.swing.JMenuItem;
 
 public class PageAccueil extends JFrame
 {
-    JPanel pageMenu = new JPanel();
+	private static final long serialVersionUID = -8435323211801706775L;
+	JPanel pageMenu = new JPanel();
     Panel page = new Panel();
     
     private JMenuBar menuBar = new JMenuBar();

@@ -34,23 +34,26 @@ public class profilGestion {
 			case 4:
 				playerOne.afficheScoreSMM();
 				break;
-			case 5:				
+			case 5:
+				playerOne.afficheScoreSPU();
+				break;
+			case 6:				
 				optionConfigurationMenu();
 				break;
-			case 6:
+			case 7:
 				premierOuverture = true;
 				existe = false;
 				confExiste = false;
 				challenge.menuPrincipal();
 				break;
-			case 7:
+			case 8:
 				break;
 			default:
 				if(language == 1){System.out.println("Veuillez indiquer 1, 2, 3, 4, 5, 6 ou 7 !");}
 				else{System.out.println("Please indicate 1, 2, 3, 4, 5, 6 ou 7 !");}
 				break;
 			}
-		}while(choix != 7);
+		}while(choix != 8);
 	}
 	public static void afficheMenu()
 	{
@@ -62,9 +65,10 @@ public class profilGestion {
 			System.out.println("2. Score Pendu");
 			System.out.println("3. Score PlusMoins");
 			System.out.println("4. Score MasterMind");
-			System.out.println("5. Configuration");
-			System.out.println("6. Changer d'utilisateur");
-			System.out.println("\n7. Quitter");
+			System.out.println("5. Score Puissance4");
+			System.out.println("6. Configuration");
+			System.out.println("7. Changer d'utilisateur");
+			System.out.println("\n8. Quitter");
 		}else if(language == 2)
 		{
 			System.out.println("#### PROFILE -" + name + " ####");
@@ -73,8 +77,10 @@ public class profilGestion {
 			System.out.println("2. Hangman Score");
 			System.out.println("3. HighLow Score");
 			System.out.println("4. MasterMind Score");
-			System.out.println("6. Change user");
-			System.out.println("\n7. Quit");
+			System.out.println("5. Puissance4 Score");
+			System.out.println("6. Configuration");
+			System.out.println("7. Change user");
+			System.out.println("\n8. Quit");
 		}
 		System.out.println();
 	}
@@ -126,6 +132,10 @@ public class profilGestion {
 			if(confExiste)
 			{
 				gestionConfig(false);
+			}
+			else
+			{
+				gestionConfig(true);
 			}
 			premierOuverture = false;
 		}
@@ -190,6 +200,13 @@ public class profilGestion {
 			playerOne.ajouteScoreSMM(score);
 		}
 	}
+	public static void ajouteScoreSPU(int score)
+	{
+		if(score >= 0)
+		{
+			playerOne.ajouteScoreSPU(score);
+		}
+	}
 	/**
 	 * Print the profile at screen
 	 */
@@ -207,6 +224,9 @@ public class profilGestion {
 			System.out.println("\nScore MasterMind\n");
 			playerOne.afficheScoreSMM();
 			System.out.println("Score MasterMind : " + playerOne.scoreMasterMindTotal());
+			System.out.println("\nScore Puissance4\n");
+			playerOne.afficheScoreSPU();
+			System.out.println("Score Puissance4 : " + playerOne.scorePuissanceTotal());
 			System.out.println("Score Total : " + playerOne.scoreTotal());
 		}else{
 			System.out.println("\nName : " + playerOne.getName());
@@ -219,6 +239,9 @@ public class profilGestion {
 			System.out.println("\nMasterMind Score\n");
 			playerOne.afficheScoreSMM();
 			System.out.println("MasterMind Score : " + playerOne.scoreMasterMindTotal());
+			System.out.println("\nPuissance4 Score\n");
+			playerOne.afficheScoreSPU();
+			System.out.println("Puissance4 Score : " + playerOne.scorePuissanceTotal());
 			System.out.println("Total Score : " + playerOne.scoreTotal());
 		}
 	}
@@ -246,6 +269,7 @@ public class profilGestion {
 			int [] scorePendu = new int[10];
 			int [] scorePlusMoins = new int[10];
 			int [] scoreMasterMind = new int[10];
+			int [] scorePuissance =new int[10];
 			for(int i=0;!(str.equals(".B"));i++)
 			{
 				str = fi.lire();
@@ -264,15 +288,24 @@ public class profilGestion {
 				}				
 			}
 			playerOne.setScorePlusMoins(scorePlusMoins);
-			for(int i=0;!(str.equals(".end"));i++)
+			for(int i=0;!(str.equals(".D"));i++)
 			{
 				str = fi.lire();
-				if(!str.equals(".end"))
+				if(!str.equals(".D"))
 				{
 					scoreMasterMind[i] = Integer.parseInt(str);
 				}				
 			}
 			playerOne.setScoreMasterMind(scoreMasterMind);
+			for(int i=0;!(str.equals(".end"));i++)
+			{
+				str = fi.lire();
+				if(!str.equals(".end"))
+				{
+					scorePuissance[i] = Integer.parseInt(str);
+				}				
+			}
+			playerOne.setScorePuissance4(scorePuissance);
 			fi.fermer();
 		}
 	}
