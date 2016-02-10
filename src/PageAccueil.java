@@ -2,8 +2,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.GridLayout;
+import java.awt.Dimension;
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JCheckBox;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,6 +22,8 @@ public class PageAccueil extends JFrame
 	private static final long serialVersionUID = -8435323211801706775L;
 	JPanel pageMenu = new JPanel();
     Panel page = new Panel();
+    
+    private JButton bouton = new JButton("Entrer");
     
     private JMenuBar menuBar = new JMenuBar();
     private JMenu navigation = new JMenu("Navigation");
@@ -68,10 +75,27 @@ public class PageAccueil extends JFrame
             {}});
         prop1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event)
-            {}});
+            {
+                String x = "Développeurs principaux : \n    Bivisi\n    Vinsifroid\nContributeurs :\n    The Muse\n    Po";
+                JOptionPane j = new JOptionPane(); j.showMessageDialog(null,x, "Crédits",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("res/img/programmeur.jpe"));
+            }});
         prop2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event)
-            {}});
+            {
+                String[] jeux = {"Pendu","Plus ou moins","Mastermind","Puissance 4"};
+                JOptionPane j1 = new JOptionPane(), j2 = new JOptionPane();
+                String n = (String) j1.showInputDialog(null,"Sur quel jeu voulez-voulez vous des infos?","Jeux",JOptionPane.QUESTION_MESSAGE, null,jeux,jeux[3]);
+                String x = "";
+                if(n.equals("Pendu"))
+                {x = "Premier jeu developpe dans challenge.\nLe principe de base est qu'il faut retrouver un mot en proposant des lettres.\nSi on a propose trop de mauvaise lettre, on perd.";}
+                else if(n.equals("Plus ou moins"))
+                {x = "Second jeu developpe dans challenge.\nLe but est de trouver un chiffre au hasard entre deux bornes.\nDes EastersEggs y sont cachés ;)";}
+                else if(n.equals("Mastermind"))
+                {x = "Troisieme jeu developpe dans challenge.\nIl faut retrouver la combinaison de couleur prise au hasard par l'ordinateur.";}
+                else if(n.equals("Puissance 4"))
+                {x = "Dernier jeu en date developpe dans challenge.\nIl faut reussir a aligner 4 jetons de sa couleur dans la grille sans que l'autre joueur n'en aligne avant vous";}
+                j2.showMessageDialog(null,x, n,JOptionPane.INFORMATION_MESSAGE);
+            }});
         prof1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event)
             {}});
@@ -91,13 +115,43 @@ public class PageAccueil extends JFrame
         this.menuBar.add(profil);
         this.menuBar.add(sound);
         
-        JPanel men1 = new JPanel();
-        men1.setBackground(Color.white);
-
-        JButton bouton = new JButton("Entrer");
         bouton.addActionListener(new ActionBouton());
         page.add(bouton);
+        
+        Panel men1 = new Panel("menu");
+        JPanel men2 = new JPanel();                     men2.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/4));
+        JButton bMenu1 = new JButton("Pendu");          bMenu1.setPreferredSize(new Dimension(this.getWidth()/6,this.getHeight()/10));
+        JButton bMenu2 = new JButton("Plus ou Moins");  bMenu2.setPreferredSize(new Dimension(this.getWidth()/6,this.getHeight()/10));
+        JButton bMenu3 = new JButton("Mastermind");     bMenu3.setPreferredSize(new Dimension(this.getWidth()/6,this.getHeight()/10));
+        JButton bMenu4 = new JButton("Puissance 4");    bMenu4.setPreferredSize(new Dimension(this.getWidth()/6,this.getHeight()/10));
+        JButton bMenu5 = new JButton("Exit");           bMenu5.setPreferredSize(new Dimension(this.getWidth()/6,this.getHeight()/10));
+        
+        bMenu1.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event)
+            {challenge.clear();pendu.menu();}});
+        bMenu2.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event)
+            {challenge.clear();plusMoins.menu();}});
+        bMenu3.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event)
+            {challenge.clear();Mastermind.menu();}});
+        bMenu4.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event)
+            {challenge.clear();Puissance4.menu();}});
+        bMenu5.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event)
+            {System.exit(0);}});
+        
+        GridLayout gl = new GridLayout(1,5);
+        gl.setHgap(20);
+        men2.setLayout(gl);
+        men2.add(bMenu1);men2.add(bMenu2);men2.add(bMenu3);
+        men2.add(bMenu4);men2.add(bMenu5);
+        men2.setBackground(Color.white);
 
+        pageMenu.setLayout(new BoxLayout(pageMenu, BoxLayout.PAGE_AXIS));
+        pageMenu.add(men1);pageMenu.add(men2);
+        
         this.getContentPane().add(page, BorderLayout.CENTER);
         this.setVisible(true);
         animation();
@@ -140,7 +194,8 @@ public class PageAccueil extends JFrame
     public void menu()
     {
         this.setJMenuBar(menuBar);
-        
+        bouton.setVisible(false);
+        this.setContentPane(pageMenu);
         this.setVisible(true);
     }
     
