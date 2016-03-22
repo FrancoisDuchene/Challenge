@@ -15,6 +15,7 @@ public class Joueur {
 	private int [] scorePlusMoins;
 	
 	private int [] scoreMaster;
+	private int [] scorePuissance;
 	private static int language = 1;
 	//Constructeurs
 	/**
@@ -26,6 +27,7 @@ public class Joueur {
 		scorePendu = remplirTab(10);
 		scorePlusMoins = remplirTab(10);
 		scoreMaster = remplirTab(10);
+		scorePuissance = remplirTab(10);
 		language = challenge.getLanguage();
 	}
 
@@ -39,6 +41,7 @@ public class Joueur {
 		scorePendu = remplirTab(10);
 		scorePlusMoins = remplirTab(10);
 		scoreMaster = remplirTab(10);
+		scorePuissance = remplirTab(10);
 		language = challenge.getLanguage();
 	}
 
@@ -54,6 +57,7 @@ public class Joueur {
 		scorePendu = remplirTab(sPd);
 		scorePlusMoins = remplirTab(sPM);
 		scoreMaster = remplirTab(10);
+		scorePuissance = remplirTab(10);
 		language = challenge.getLanguage();
 	}
 	public Joueur(String name, int sPd, int sPM, int sMM)
@@ -62,6 +66,16 @@ public class Joueur {
 		scorePendu = remplirTab(sPd);
 		scorePlusMoins = remplirTab(sPM);
 		scoreMaster = remplirTab(sMM);
+		scorePuissance = remplirTab(10);
+		language = challenge.getLanguage();
+	}
+	public Joueur(String name, int sPd, int sPM, int sMM, int sPu)
+	{
+		this.name = name;
+		scorePendu = remplirTab(sPd);
+		scorePlusMoins = remplirTab(sPM);
+		scoreMaster = remplirTab(sMM);
+		scorePuissance = remplirTab(sPu);
 		language = challenge.getLanguage();
 	}
 
@@ -94,6 +108,13 @@ public class Joueur {
 		for(int i=0; i<scoreMaster.length;i++)
 		{
 			scoreMaster[i] = sMM[i];
+		}
+	}
+	public void setScorePuissance4(int [] sPu)
+	{
+		for(int i=0; i<scorePuissance.length;i++)
+		{
+			scorePuissance[i] = sPu[i];
 		}
 	}
 	/**
@@ -151,6 +172,17 @@ public class Joueur {
 			}
 		}
 	}
+	public void ajouteScoreSPU(int n)
+	{
+		for(int i=0; i<scorePuissance.length; i++)
+		{
+			if(scorePuissance[i] == -1)
+			{
+				scorePuissance[i] = n;
+				i = (scorePuissance.length-1);
+			}
+		}	
+	}
 	/**
 	 * 
 	 * @param nbr the length of the arrays
@@ -198,7 +230,14 @@ public class Joueur {
 			System.out.println((scoreMaster[i] == -1)?" - ":scoreMaster[i]);
 		}
 	}
-
+	public void afficheScoreSPU()
+	{
+		for(int i=0; i<scorePuissance.length ;i++)
+		{
+			System.out.print("[" + i + "] ");
+			System.out.println((scorePuissance[i] == -1)?" - ":scorePuissance[i]);
+		}
+	}
 	/**
 	 * Print the name of the player
 	 */
@@ -234,6 +273,10 @@ public class Joueur {
 	{
 		return scoreMaster;
 	}
+	public int[] getScorePuissance4()
+	{
+		return scorePuissance;
+	}
 	/**
 	 * @return a String describing the player with his name, his total HighLow score and his total Hangmann score
 	 */
@@ -242,16 +285,16 @@ public class Joueur {
 		switch(language)
 		{
 		case 1:
-			return ("Nom : " + name + " - Score Pendu : " + scorePenduTotal() + " - Score PlusMoins : " + scorePlusMoinsTotal() + " - Score Total : " + scoreTotal() );
+			return ("Nom : " + name + " - Score Pendu : " + scorePenduTotal() + " - Score PlusMoins : " + scorePlusMoinsTotal() + " - Score MasterMind : " + scoreMasterMindTotal() + "  Score Puissance4 : " + scorePuissanceTotal() + " - Score Total : " + scoreTotal() );
 		case 2:
-			return ("Name : " + name + " - Hangmann Score : " + scorePenduTotal() + " - HighLow Score : " + scorePlusMoinsTotal() + " - Total Score : " + scoreTotal() );
+			return ("Name : " + name + " - Hangmann Score : " + scorePenduTotal() + " - HighLow Score : " + scorePlusMoinsTotal() + " - MasterMind Score : " + scoreMasterMindTotal() + "  Score Puissance4 : " + scorePuissanceTotal() + " - Total Score : " + scoreTotal() );
 		}
 		return "";
 	}
 
 	public int scoreTotal()
 	{		
-		int score = scorePenduTotal()+scorePlusMoinsTotal()+scoreMasterMindTotal();
+		int score = scorePenduTotal()+scorePlusMoinsTotal()+scoreMasterMindTotal()+scorePuissanceTotal();
 		if(score < 0)
 		{
 			score = 0;
@@ -295,6 +338,18 @@ public class Joueur {
 			}			
 		}
 		return c;
+	}
+	public int scorePuissanceTotal()
+	{
+		int d = 0;
+		for(int i = 0; i< scorePuissance.length; i++)
+		{
+			if(scorePuissance[i] >= 0)
+			{
+				d += scorePuissance[i];
+			}			
+		}
+		return d;
 	}
 	public boolean equals(Object o)
 	{
@@ -344,6 +399,11 @@ public class Joueur {
 		for(int i=0; i<scoreMaster.length;i++)
 		{
 			fl.ecrireInt(scoreMaster[i]);
+		}
+		fl.ecrireString(".D");
+		for(int i=0; i<scorePuissance.length;i++)
+		{
+			fl.ecrireInt(scorePuissance[i]);
 		}
 		fl.ecrireString(".end");
 		fl.fermer();
