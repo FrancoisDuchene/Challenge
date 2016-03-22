@@ -273,6 +273,11 @@ public class plusMoins {
 			score = 0;
 		}
 		profilGestion.ajoutePtsPlusMoins(score);
+		try {
+			HighScoreGestion.ajouterValeur((byte)2, profilGestion.getName(), score);
+		} catch (INVALID_MODE e) {
+			System.err.println(e.getMessage());
+		}
 		profilGestion.saveProfil();
 	}
 	/**

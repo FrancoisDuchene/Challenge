@@ -120,10 +120,10 @@ public class profilGestion {
 			else{System.out.println("What is your name ?");}		
 			name = InOut.Mot(InOut.getLine());
 			playerOne.setName(name);
-			if(fichierExiste(".sav"))
+			if(fichierExiste(".sav", name))
 			{
 				existe = true;
-				if(fichierExiste(".cf"))
+				if(fichierExiste(".cf", name))
 				{
 					confExiste = true;
 				}
@@ -258,7 +258,7 @@ public class profilGestion {
 	 */
 	public static void chargeProfil()
 	{
-		if(fichierExiste(".sav"))
+		if(fichierExiste(".sav", name))
 		{			
 			String str = "";
 			Fichier fi = new Fichier();
@@ -311,15 +311,15 @@ public class profilGestion {
 	}
 	/**
 	 * 
-	 * @param extension
+	 * @param extension with a "."
 	 * @return true if the file exist and false if the file don't exist
 	 */
-	public static boolean fichierExiste(String extension)
+	public static boolean fichierExiste(String extension, String nom)
 	{
 		BufferedReader vador = null;
 		boolean bon = false;
 		try{
-			String filename = "saves/" + name + extension;
+			String filename = "saves/" + nom + extension;
 			vador = new BufferedReader(new FileReader(filename));
 			bon = true;
 		}catch(FileNotFoundException e){
@@ -349,5 +349,67 @@ public class profilGestion {
 			playerConf.paramExo();
 		}
 	}
-
+	/**
+	 * Cette fonction gère le fichier des listes de noms
+	 */
+	public void gestionListeNomsUsers()
+	{
+		Fichier ListeNoms = new Fichier();
+		final String NomListeNom = "ListeNoms";
+		// Si le fichier existe, on l'ouvre et on charge dans un tableau tous les noms contenus dans le fichier
+		
+		if(fichierExiste(".ch",NomListeNom))
+		{
+			ListeNoms.ouvrir(NomListeNom + ".ch", "R");	
+			String tmp = "";
+			tmp = ListeNoms.lire();
+			int nbr = Integer.parseInt(tmp);
+			String [] tabNoms = new String[nbr];
+			tmp = "";
+			for(int i=0; tmp != null;i++)
+			{
+				tmp = ListeNoms.lire();
+				tabNoms[i] = tmp;
+			}
+			if(!(nomDeja(tabNoms, name)))
+			{
+				ListeNoms.ouvrir(NomListeNom + ".ch", "W", false);
+				nbr++;
+				ListeNoms.ecrireInt(nbr);
+				ListeNoms.ecrireString(name);
+				for(int i=0; i<tabNoms.length;i++)
+				{
+					ListeNoms.ecrireString(tabNoms[i]);
+				}			
+			}
+			ListeNoms.fermer();
+		}else{
+			ListeNoms.ouvrir(NomListeNom + ".ch", "W", true);
+			ListeNoms.ecrireInt(1);
+			ListeNoms.ecrireString(name);
+			ListeNoms.fermer();
+		}
+	}
+	
+	/**
+	 * 
+	 * @param listeNoms un tableau de String
+	 * @param nom un mot à chercher dans le tableau de String
+	 * @return true si le mot est contenu dans le tableau et false si non
+	 */
+	private boolean nomDeja(String [] listeNoms, String nom)
+	{
+		for(int i=0; i<listeNoms.length; i++)
+		{
+			if(listeNoms[i].equals(nom))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	public static String getName()
+	{
+		return playerOne.getName();
+	}
 }

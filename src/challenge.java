@@ -12,6 +12,7 @@ public class challenge
 	{
 	    musique.start();
 	    page.start();
+	    HighScoreGestion.gestion();
 	    
 		menuPrincipal();
 	}

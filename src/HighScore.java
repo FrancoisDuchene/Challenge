@@ -99,15 +99,15 @@ public class HighScore {
 		blaster.setProperty("val10", Integer.toString(val10));	
 
 		blaster.setProperty("val1Player", val1Player);
-		blaster.setProperty("val2Playe", val2Player);
-		blaster.setProperty("val3Playe", val3Player);
-		blaster.setProperty("val4Playe", val4Player);
-		blaster.setProperty("val5Playe", val5Player);
-		blaster.setProperty("val6Playe", val6Player);
-		blaster.setProperty("val7Playe", val7Player);
-		blaster.setProperty("val8Playe", val8Player);
-		blaster.setProperty("val9Playe", val9Player);
-		blaster.setProperty("val10Playe", val10Player);
+		blaster.setProperty("val2Player", val2Player);
+		blaster.setProperty("val3Player", val3Player);
+		blaster.setProperty("val4Player", val4Player);
+		blaster.setProperty("val5Player", val5Player);
+		blaster.setProperty("val6Player", val6Player);
+		blaster.setProperty("val7Player", val7Player);
+		blaster.setProperty("val8Player", val8Player);
+		blaster.setProperty("val9Player", val9Player);
+		blaster.setProperty("val10Player", val10Player);
 	}
 	/**
 	 * Cette fonction sauvegarde le tableau de inclu en memoire
@@ -165,7 +165,27 @@ public class HighScore {
 				System.err.println(e4.getMessage());
 			}
 		}
-		updateProperties();
+		val1 = Integer.parseInt(blaster.getProperty("val1"));
+		val2 = Integer.parseInt(blaster.getProperty("val2"));
+		val3 = Integer.parseInt(blaster.getProperty("val3"));
+		val4 = Integer.parseInt(blaster.getProperty("val4"));
+		val5 = Integer.parseInt(blaster.getProperty("val5"));
+		val6 = Integer.parseInt(blaster.getProperty("val6"));
+		val7 = Integer.parseInt(blaster.getProperty("val7"));
+		val8 = Integer.parseInt(blaster.getProperty("val8"));
+		val9 = Integer.parseInt(blaster.getProperty("val9"));
+		val10 = Integer.parseInt(blaster.getProperty("val10"));
+		
+		val1Player = blaster.getProperty("val1Player");
+		val2Player = blaster.getProperty("val2Player");
+		val3Player = blaster.getProperty("val3Player");
+		val4Player = blaster.getProperty("val4Player");
+		val5Player = blaster.getProperty("val5Player");
+		val6Player = blaster.getProperty("val6Player");
+		val7Player = blaster.getProperty("val7Player");
+		val8Player = blaster.getProperty("val8Player");
+		val9Player = blaster.getProperty("val9Player");
+		val10Player = blaster.getProperty("val10Player");
 	}
 	public void afficheHighScore() throws INVALID_MODE
 	{
@@ -346,6 +366,8 @@ public class HighScore {
 			val2Player = val1Player;
 			val1Player = nom;
 		}
+		updateProperties();
+		save();
 		return true;
 	}
 	public Properties getProperties()

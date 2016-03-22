@@ -17,6 +17,11 @@ public class pendu {
             if(profilGestion.existe()) // on verifie que le profil existe deja
             {
                 ajouteScore(score);
+                try {
+					HighScoreGestion.ajouterValeur((byte)1, profilGestion.getName(), score);
+				} catch (INVALID_MODE e) {
+					System.err.println(e.getMessage());
+				}
                 profilGestion.saveProfil();
             }
         }
@@ -26,6 +31,11 @@ public class pendu {
             if(profilGestion.existe()) // on verifie que le profil existe deja
             {
                 ajouteScore(score);
+                try {
+					HighScoreGestion.ajouterValeur((byte)1, profilGestion.getName(), score);
+				} catch (INVALID_MODE e) {
+					System.err.println(e.getMessage());
+				}
                 profilGestion.saveProfil();
             }
         }

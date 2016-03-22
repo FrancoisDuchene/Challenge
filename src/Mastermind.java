@@ -131,6 +131,11 @@ public class Mastermind
 		if(profilGestion.existe())
 		{
 			profilGestion.ajoutePtsMasterMind(score);
+			try {
+				HighScoreGestion.ajouterValeur((byte)3, profilGestion.getName(), score);
+			} catch (INVALID_MODE e) {
+				System.err.println(e.getMessage());
+			}
 			profilGestion.saveProfil();
 		}		
 		return score;

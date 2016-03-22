@@ -215,6 +215,11 @@ public class Puissance4
 							if(!profilGestion.getPremierOuverture())
 							{
 								System.out.println(score + " points ajoutes au profil");
+								try {
+									HighScoreGestion.ajouterValeur((byte)4, profilGestion.getName(), score);
+								} catch (INVALID_MODE e) {
+									System.err.println(e.getMessage());
+								}
 								profilGestion.ajouteScoreSPU(score);
 							}
 						}
@@ -226,6 +231,11 @@ public class Puissance4
 							{
 								System.out.println(score + " points added to the profil");
 								profilGestion.ajouteScoreSPU(score);
+								try {
+									HighScoreGestion.ajouterValeur((byte)4, profilGestion.getName(), score);
+								} catch (INVALID_MODE e) {
+									System.err.println(e.getMessage());
+								}
 								profilGestion.saveProfil();
 							}
 						}
@@ -286,6 +296,11 @@ public class Puissance4
 							{
 								System.out.println(score + " points ajoutes au profil");
 								profilGestion.ajouteScoreSPU(score);
+								try {
+									HighScoreGestion.ajouterValeur((byte)4, profilGestion.getName(), score);
+								} catch (INVALID_MODE e) {
+									System.err.println(e.getMessage());
+								}
 								profilGestion.saveProfil();
 							}
 						}
@@ -297,6 +312,11 @@ public class Puissance4
 							{
 								System.out.println(score + " points added to the profil");
 								profilGestion.ajouteScoreSPU(score);
+								try {
+									HighScoreGestion.ajouterValeur((byte)4, profilGestion.getName(), score);
+								} catch (INVALID_MODE e) {
+									System.err.println(e.getMessage());
+								}
 								profilGestion.saveProfil();
 							}
 						}
@@ -328,6 +348,11 @@ public class Puissance4
 
 						if(!profilGestion.getPremierOuverture())
 						{profilGestion.ajouteScoreSPU(0);
+						try {
+							HighScoreGestion.ajouterValeur((byte)4, profilGestion.getName(), 0);
+						} catch (INVALID_MODE e) {
+							System.err.println(e.getMessage());
+						}
 						profilGestion.saveProfil();}
 						return;
 					}
