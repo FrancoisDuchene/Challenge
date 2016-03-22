@@ -6,9 +6,21 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class HighScore {
-	
+
+	/**
+	 * Le mode du Highscore, c'est a dire cela definit sur quel jeu le highscore travaille
+	 * 4 possibilites :
+	 * 	- 1 pendu
+	 *  - 2 plusmoins
+	 *  - 3 mastermind
+	 *  - 4 puissance4
+	 */
 	private byte mode;
-	
+
+	//Toutes les valeurs du Highscore trié dans l'ordre décroissant
+	// val1 est la plus grande valeur
+	// val10 la plus petite
+
 	private int val1;
 	private int val2;
 	private int val3;
@@ -19,7 +31,20 @@ public class HighScore {
 	private int val8;
 	private int val9;
 	private int val10;
-	
+
+	//Tous les noms des joueurs ayant fait les valeurs
+
+	private String val1Player;
+	private String val2Player;
+	private String val3Player;
+	private String val4Player;
+	private String val5Player;
+	private String val6Player;
+	private String val7Player;
+	private String val8Player;
+	private String val9Player;
+	private String val10Player;
+
 	private String specific_Name;
 	private String fileName;
 	private String [][] tableauScore;
@@ -28,6 +53,8 @@ public class HighScore {
 	public HighScore(byte mode) throws INVALID_MODE
 	{
 		val1=0;val2=0;val3=0;val4=0;val5=0;val6=0;val7=0;val8=0;val9=0;val10=0;
+		val1Player="";val2Player="";val3Player="";val4Player="";val5Player="";
+		val6Player="";val7Player="";val8Player="";val9Player="";val10Player="";
 		blaster = new Properties();
 		this.mode = mode;
 		this.fileName = null;
@@ -57,7 +84,7 @@ public class HighScore {
 		tableauScore = null;
 		charge();
 	}
-	
+
 	private void updateProperties()
 	{
 		blaster.setProperty("val1", Integer.toString(val1));
@@ -69,7 +96,18 @@ public class HighScore {
 		blaster.setProperty("val7", Integer.toString(val7));
 		blaster.setProperty("val8", Integer.toString(val8));
 		blaster.setProperty("val9", Integer.toString(val9));
-		blaster.setProperty("val10", Integer.toString(val10));		
+		blaster.setProperty("val10", Integer.toString(val10));	
+
+		blaster.setProperty("val1Player", val1Player);
+		blaster.setProperty("val2Playe", val2Player);
+		blaster.setProperty("val3Playe", val3Player);
+		blaster.setProperty("val4Playe", val4Player);
+		blaster.setProperty("val5Playe", val5Player);
+		blaster.setProperty("val6Playe", val6Player);
+		blaster.setProperty("val7Playe", val7Player);
+		blaster.setProperty("val8Playe", val8Player);
+		blaster.setProperty("val9Playe", val9Player);
+		blaster.setProperty("val10Playe", val10Player);
 	}
 	/**
 	 * Cette fonction sauvegarde le tableau de inclu en memoire
@@ -105,7 +143,7 @@ public class HighScore {
 	public void charge()
 	{
 		FileInputStream C3PO = null;
-		
+
 		try {
 			File fichier = new File(fileName);
 			C3PO = new FileInputStream(fichier);
@@ -128,6 +166,191 @@ public class HighScore {
 			}
 		}
 		updateProperties();
+	}
+	public void afficheHighScore() throws INVALID_MODE
+	{
+		System.out.println("HighScore " + specific_Name);
+
+		System.out.println(val1Player + " : " + val1);
+		System.out.println(val2Player + " : " + val2);
+		System.out.println(val3Player + " : " + val3);
+		System.out.println(val4Player + " : " + val4);
+		System.out.println(val5Player + " : " + val5);
+		System.out.println(val6Player + " : " + val6);
+		System.out.println(val7Player + " : " + val7);
+		System.out.println(val8Player + " : " + val8);
+		System.out.println(val9Player + " : " + val9);
+		System.out.println(val10Player + " : " + val10);
+	}
+
+	public boolean addValeur(String nom, int val)
+	{
+		if(val<val1)
+		{
+			if(val<val2)
+			{
+				if(val<val3)
+				{
+					if(val<val4)
+					{
+						if(val<val5)
+						{
+							if(val<val6)
+							{
+								if(val<val7)
+								{
+									if(val<val8)
+									{
+										if(val<val9)
+										{
+											if(val<val10)
+											{
+												return false;
+											}else{
+												val10=val;
+
+												val10Player = nom;
+											}
+										}else{
+											val10=val9;
+											val9=val;
+
+											val10Player = val9Player;
+											val9Player = nom;
+										}
+									}else{
+										val10=val9;
+										val9=val8;
+										val8=val;
+
+										val10Player = val9Player;
+										val9Player = val8Player;
+										val8Player = nom;
+									}
+								}else{
+									val10=val9;
+									val9=val8;
+									val8=val7;
+									val7=val;
+
+									val10Player = val9Player;
+									val9Player = val8Player;
+									val8Player = val7Player;
+									val7Player = nom;
+								}
+							}else{
+								val10=val9;
+								val9=val8;
+								val8=val7;
+								val7=val6;
+								val6=val;
+
+								val10Player = val9Player;
+								val9Player = val8Player;
+								val8Player = val7Player;
+								val7Player = val6Player;
+								val6Player = nom;
+							}
+						}else{
+							val10=val9;
+							val9=val8;
+							val8=val7;
+							val7=val6;
+							val6=val5;
+							val5=val;
+
+							val10Player = val9Player;
+							val9Player = val8Player;
+							val8Player = val7Player;
+							val7Player = val6Player;
+							val6Player = val5Player;
+							val5Player = nom;
+						}
+					}else{
+						val10=val9;
+						val9=val8;
+						val8=val7;
+						val7=val6;
+						val6=val5;
+						val5=val4;
+						val4=val;
+
+						val10Player = val9Player;
+						val9Player = val8Player;
+						val8Player = val7Player;
+						val7Player = val6Player;
+						val6Player = val5Player;
+						val5Player = val4Player;
+						val4Player = nom;
+					}
+				}else{
+					val10=val9;
+					val9=val8;
+					val8=val7;
+					val7=val6;
+					val6=val5;
+					val5=val4;
+					val4=val3;
+					val3=val;
+
+					val10Player = val9Player;
+					val9Player = val8Player;
+					val8Player = val7Player;
+					val7Player = val6Player;
+					val6Player = val5Player;
+					val5Player = val4Player;
+					val4Player = val3Player;
+					val3Player = nom;
+				}
+			}else{
+				val10=val9;
+				val9=val8;
+				val8=val7;
+				val7=val6;
+				val6=val5;
+				val5=val4;
+				val4=val3;
+				val3=val2;
+				val2=val;
+
+				val10Player = val9Player;
+				val9Player = val8Player;
+				val8Player = val7Player;
+				val7Player = val6Player;
+				val6Player = val5Player;
+				val5Player = val4Player;
+				val4Player = val3Player;
+				val3Player = val2Player;
+				val2Player = nom;
+			}
+		}else{
+			val10=val9;
+			val9=val8;
+			val8=val7;
+			val7=val6;
+			val6=val5;
+			val5=val4;
+			val4=val3;
+			val3=val2;
+			val2=val1;
+			val1=val;
+
+			val10Player = val9Player;
+			val9Player = val8Player;
+			val8Player = val7Player;
+			val7Player = val6Player;
+			val6Player = val5Player;
+			val5Player = val4Player;
+			val4Player = val3Player;
+			val3Player = val2Player;
+			val2Player = val1Player;
+			val1Player = nom;
+		}
+		return true;
+	}
+	public Properties getProperties()
+	{
+		return blaster;
 	}
 
 	public void setFileName(String FileName)
