@@ -16,6 +16,7 @@ public class HighScore {
 	 *  - 4 puissance4
 	 */
 	private byte mode;
+	private byte language;
 
 	//Toutes les valeurs du Highscore trié dans l'ordre décroissant
 	// val1 est la plus grande valeur
@@ -53,38 +54,61 @@ public class HighScore {
 	public HighScore(byte mode) throws INVALID_MODE
 	{
 		val1=0;val2=0;val3=0;val4=0;val5=0;val6=0;val7=0;val8=0;val9=0;val10=0;
-		val1Player="";val2Player="";val3Player="";val4Player="";val5Player="";
-		val6Player="";val7Player="";val8Player="";val9Player="";val10Player="";
+		val1Player=" ";val2Player=" ";val3Player=" ";val4Player=" ";val5Player=" ";
+		val6Player=" ";val7Player=" ";val8Player=" ";val9Player=" ";val10Player=" ";
 		blaster = new Properties();
 		this.mode = mode;
 		this.fileName = null;
+		updateSpecific_Name();
 		switch(mode)
 		{
 		case 1:
-			this.specific_Name = "pendu";
-			this.fileName = "saves/HighScore/" + specific_Name + ".hg";
+			this.fileName = "saves/HighScore/" + "pendu" + ".hg";
 			break;
 		case 2:
-			this.specific_Name = "plusMoins";
-			this.fileName = "saves/HighScore/" + specific_Name + ".hg";
+			this.fileName = "saves/HighScore/" + "plusMoins" + ".hg";
 			break;
 		case 3:
-			this.specific_Name = "mastermind";
-			this.fileName = "saves/HighScore/" + specific_Name + ".hg";
+			this.fileName = "saves/HighScore/" + "mastermind" + ".hg";
 			break;
 		case 4:
-			this.specific_Name = "puissance4";
-			this.fileName = "saves/HighScore/" + specific_Name + ".hg";
+			this.fileName = "saves/HighScore/" + "puissance4" + ".hg";
 			break;
 		default:
-			this.specific_Name = "error";
 			this.fileName = null;
 			throw new INVALID_MODE("Mauvais_mode_donne");
 		}
 		tableauScore = null;
-		charge();
+	}
+	private void updateSpecific_Name()
+	{
+		language = challenge.getLanguage();
+		switch(mode)
+		{
+		case 1:
+			if(language==1){ this.specific_Name = "Pendu"; 
+			}else{ this.specific_Name = "Hangman"; }
+			break;
+		case 2:
+			if(language==1){ this.specific_Name = "PlusMoins"; }
+			else{ this.specific_Name = "HighLow"; }
+			break;
+		case 3:
+			if(language==1){ this.specific_Name = "Mastermind"; }
+			else{ this.specific_Name = "Mastermind"; }
+			break;
+		case 4:
+			if(language==1){ this.specific_Name = "Puissance4"; }
+			else{ this.specific_Name = "Connect4"; }
+			break;
+		default:
+			this.specific_Name = "error";
+		}
 	}
 
+	/**
+	 * Cette fonction mes à jour les propriétés avec les valeurs inclue en mémoire du programme
+	 */
 	private void updateProperties()
 	{
 		blaster.setProperty("val1", Integer.toString(val1));
@@ -138,7 +162,8 @@ public class HighScore {
 		}
 	}
 	/**
-	 * Cette fonction charge le tableau contenu dans le fichier saves/HighScore/<FichierSpecifique>
+	 * Cette fonction charge la propriété contenu dans le fichier saves/HighScore/<FichierSpecifique> et ensuite
+	 * met a jour toues les variables du HighScore
 	 */
 	public void charge()
 	{
@@ -187,8 +212,9 @@ public class HighScore {
 		val9Player = blaster.getProperty("val9Player");
 		val10Player = blaster.getProperty("val10Player");
 	}
-	public void afficheHighScore() throws INVALID_MODE
+	public void afficheHighScore()
 	{
+		updateSpecific_Name();
 		System.out.println("HighScore " + specific_Name);
 
 		System.out.println(val1Player + " : " + val1);

@@ -1,6 +1,9 @@
 
 public class HighScoreGestion {
 
+
+	private static byte language =1;
+
 	private static HighScore HGpendu;
 	private static HighScore HGplusMoins;
 	private static HighScore HGmastermind;
@@ -12,6 +15,7 @@ public class HighScoreGestion {
 	{
 		if(premiereOuverture)
 		{
+			language = challenge.getLanguage();
 			try{
 				HGpendu = new HighScore((byte)1);
 				HGplusMoins = new HighScore((byte)2);
@@ -19,7 +23,7 @@ public class HighScoreGestion {
 				HGpuissance4 = new HighScore((byte)4);
 			}catch(INVALID_MODE e)
 			{System.err.println(e.getMessage());}
-			
+
 			// Ici on regarde si les fichiers de highscore existent deja sur le disque dur,
 			// si oui, on les charge, c'est sense etre les plus recents
 			// si non, on les cree
@@ -29,19 +33,19 @@ public class HighScoreGestion {
 			}else{
 				HGpendu.charge();
 			}
-				
+
 			if(!(profilGestion.fichierExiste(".hg", "HighScore/plusMoins"))){
 				HGplusMoins.save();
 			}else{
 				HGplusMoins.charge();
 			}
-				
+
 			if(!(profilGestion.fichierExiste(".hg", "HighScore/mastermind"))){
 				HGmastermind.save();
 			}else{
 				HGmastermind.charge();
 			}
-				
+
 			if(!(profilGestion.fichierExiste(".hg", "HighScore/puissance4"))){
 				HGpuissance4.save();
 			}else{
@@ -49,6 +53,53 @@ public class HighScoreGestion {
 			}				
 			premiereOuverture = false;
 		}
+	}
+	public static void menuHighScore()
+	{
+		language = challenge.getLanguage();
+		byte choix = 0;		
+
+		do
+		{
+			if(language==1)
+			{
+				System.out.println("\nQuel Highscore souhaiteriez vous consulter ?\n"
+						+ "1. Pendu\n"
+						+ "2. PlusMoins\n"
+						+ "3. Mastermind\n"
+						+ "4. Puissance4\n"
+						+ "\n0. Retour\n");
+			}else{
+				System.out.println("\nWhich HighScore do you want to see ?\n"
+						+ "1. Hangman\n"
+						+ "2. HighLow\n"
+						+ "3. Mastermind\n"
+						+ "4. Connect4"
+						+ "\n0. Return\n");
+			}
+			choix = InOut.getByte();
+			switch(choix)
+			{
+			case 1:
+				HGpendu.afficheHighScore();
+				break;
+			case 2:
+				HGplusMoins.afficheHighScore();
+				break;
+			case 3:
+				HGmastermind.afficheHighScore();
+				break;
+			case 4:
+				HGpuissance4.afficheHighScore();
+				break;
+			case 5:
+				break;
+			default:
+				if(language==1){ System.out.println("Entrez une valeur entre 0 et 4 !");}
+				else{System.out.println("Enter a value between 0 and 4 !");}
+				break;
+			}
+		}while(choix!=0);		
 	}
 	public static boolean ajouterValeur(byte mode, String nom, int valeur) throws INVALID_MODE
 	{
@@ -70,8 +121,8 @@ public class HighScoreGestion {
 			if(HGpuissance4.addValeur(nom, valeur))
 			{return true;}
 			else{return false;}
-			default:
-				throw new INVALID_MODE("Erreur mode rentre incorrect");
+		default:
+			throw new INVALID_MODE("Erreur mode rentre incorrect");
 		}
 	}
 }

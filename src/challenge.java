@@ -61,15 +61,18 @@ public class challenge
 				choseLanguage();
 				break;
 			case 5:
+				HighScoreGestion.menuHighScore();
+				break;
+			case 6:
 				System.exit(0);
 				break;
 			default :
-				if(language == 1){System.out.println("Veuillez indiquer 1, 2, 3, 4 ou 5 !");}
-				else{System.out.println("Please Indicate 1, 2, 3, 4 or 5 !");}
+				if(language == 1){System.out.println("Veuillez indiquer 1, 2, 3, 4, 5 ou 6 !");}
+				else{System.out.println("Please Indicate 1, 2, 3, 4, 5 or 6!");}
 				break;
 			}
 
-		}while(choix != 5);
+		}while(choix != 6);
 	}
 
 	public static void menuJeu()
@@ -160,7 +163,11 @@ public class challenge
 			}while(bleu < 2 && bleu > 1);
 		}
 	}
-	public static void printMenuMessage(byte i)
+	/**
+	 * This function just print the Menu at the screen
+	 * @param i determine which menu print. 1 mean the main menu and 2 mans games menu
+	 */
+	private static void printMenuMessage(byte i)
 	{
 		if(i==1)
 		{
@@ -176,11 +183,11 @@ public class challenge
 			if(language == 1){
 				System.out.println("\nMenu Principal :\n====================");
 				System.out.println("\nStatut : " + connecte());
-				System.out.println("\n1. Jouer\n2. Credits\n3. Profil\n4. Language\n5. Quitter");
+				System.out.println("\n1. Jouer\n2. Credits\n3. Profil\n4. Language\n5. HighScore\n6. Quitter");
 			}else if (language == 2){
 				System.out.println("\nMain Menu :\n====================");
 				System.out.println("\nStatus : " + connecte() );
-				System.out.println("\n1. Play\n2. Credits\n3. Profile\n4. Language\n5. Exit");
+				System.out.println("\n1. Play\n2. Credits\n3. Profile\n4. Language\n5. HighScore\n6. Exit");
 			}
 		}else if(i==2){
 			if(language == 1){
