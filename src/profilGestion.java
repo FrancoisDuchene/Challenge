@@ -116,9 +116,17 @@ public class profilGestion {
 		language = challenge.getLanguage();
 		if(premierOuverture)
 		{			
-			if(language == 1){System.out.println("Quel est votre nom ?");}
-			else{System.out.println("What is your name ?");}		
-			name = InOut.Mot(InOut.getLine());
+			do
+			{
+				if(language == 1){System.out.println("Quel est votre nom ?");}
+				else{System.out.println("What is your name ?");}		
+				name = InOut.Mot(InOut.getLine());
+				if(name.contains(" "))
+				{
+					if(language == 1){System.out.println("Veuillez a ne pas introduire d'espace");}
+					else{System.out.println("P");}
+				}
+			}while(name.contains(" "));
 			playerOne.setName(name);
 			if(fichierExiste(".sav", name))
 			{
@@ -357,7 +365,7 @@ public class profilGestion {
 		Fichier ListeNoms = new Fichier();
 		final String NomListeNom = "ListeNoms";
 		// Si le fichier existe, on l'ouvre et on charge dans un tableau tous les noms contenus dans le fichier
-		
+
 		if(fichierExiste(".ch",NomListeNom))
 		{
 			ListeNoms.ouvrir(NomListeNom + ".ch", "R");	
@@ -390,7 +398,7 @@ public class profilGestion {
 			ListeNoms.fermer();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param listeNoms un tableau de String

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="private" author="true" classpath="." destdir="" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" source="1.7" sourcefiles="../src/challenge.java,../src/HighScoreGestion.java,../src/Dico.java,../src/Fichier.java,../src/InOut.java,../src/PageAccueil.java,../src/Mastermind.java,../src/MThread.java,../src/pendu.java,../src/INVALID_MODE.java,../src/Panel.java,../src/TabAligne3.java,../src/HighScore.java,../src/SoundPlayer.java,../src/profilGestion.java,../src/Joueur.java,../src/penduExt.java,../src/Config.java,../src/plusMoins.java,../src/Puissance4.java" sourcepath="../src" splitindex="true" use="true" version="true"/>
+    </target>
+</project>
