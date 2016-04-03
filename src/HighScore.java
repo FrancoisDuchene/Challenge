@@ -54,8 +54,8 @@ public class HighScore {
 	public HighScore(byte mode) throws INVALID_MODE
 	{
 		val1=0;val2=0;val3=0;val4=0;val5=0;val6=0;val7=0;val8=0;val9=0;val10=0;
-		val1Player=" ";val2Player=" ";val3Player=" ";val4Player=" ";val5Player=" ";
-		val6Player=" ";val7Player=" ";val8Player=" ";val9Player=" ";val10Player=" ";
+		val1Player="Bob";val2Player="Bob";val3Player="Bob";val4Player="Bob";val5Player="Bob";
+		val6Player="Bob";val7Player="Bob";val8Player="Bob";val9Player="Bob";val10Player="Bob";
 		blaster = new Properties();
 		this.mode = mode;
 		this.fileName = null;
@@ -138,6 +138,7 @@ public class HighScore {
 	 */
 	public void save()
 	{
+		updateProperties();
 		FileOutputStream Solo = null;
 		try {
 			File fichier = new File(fileName);
@@ -392,7 +393,6 @@ public class HighScore {
 			val2Player = val1Player;
 			val1Player = nom;
 		}
-		updateProperties();
 		save();
 		return true;
 	}

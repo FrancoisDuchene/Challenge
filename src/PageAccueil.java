@@ -77,14 +77,15 @@ public class PageAccueil extends JFrame
             public void actionPerformed(ActionEvent event)
             {
                 String x = "Développeurs principaux : \n    Bivisi\n    Vinsifroid\nContributeurs :\n    The Muse\n    Po";
-                JOptionPane j = new JOptionPane(); j.showMessageDialog(null,x, "Crédits",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("res/img/programmeur.jpe"));
+                new JOptionPane(); 
+                JOptionPane.showMessageDialog(null,x, "Crédits",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("res/img/programmeur.jpe"));
             }});
         prop2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event)
             {
                 String[] jeux = {"Pendu","Plus ou moins","Mastermind","Puissance 4"};
                 JOptionPane j1 = new JOptionPane(), j2 = new JOptionPane();
-                String n = (String) j1.showInputDialog(null,"Sur quel jeu voulez-voulez vous des infos?","Jeux",JOptionPane.QUESTION_MESSAGE, null,jeux,jeux[3]);
+                String n = (String) JOptionPane.showInputDialog(null,"Sur quel jeu voulez-voulez vous des infos?","Jeux",JOptionPane.QUESTION_MESSAGE, null,jeux,jeux[3]);
                 String x = "";
                 if(n.equals("Pendu"))
                 {x = "Premier jeu developpe dans challenge.\nLe principe de base est qu'il faut retrouver un mot en proposant des lettres.\nSi on a propose trop de mauvaise lettre, on perd.";}

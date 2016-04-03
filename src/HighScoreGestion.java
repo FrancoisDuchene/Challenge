@@ -80,6 +80,8 @@ public class HighScoreGestion {
 			choix = InOut.getByte();
 			switch(choix)
 			{
+			case 0:
+				break;
 			case 1:
 				HGpendu.afficheHighScore();
 				break;
@@ -91,8 +93,6 @@ public class HighScoreGestion {
 				break;
 			case 4:
 				HGpuissance4.afficheHighScore();
-				break;
-			case 5:
 				break;
 			default:
 				if(language==1){ System.out.println("Entrez une valeur entre 0 et 4 !");}

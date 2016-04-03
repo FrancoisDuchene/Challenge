@@ -263,7 +263,7 @@ public class Mastermind
 			if(language==1)
 			{
 				System.out.println("==========================\n\t MASTERMIND \n==========================");
-				System.out.println("1. Jouer\n2. Options\n3. Regles\n4. Return");        		
+				System.out.println("1. Jouer\n2. Options\n3. Regles\n4. Retour");        		
 			}else{
 				System.out.println("==========================\n\t MASTERMIND \n==========================");
 				System.out.println("1. Play\n2. Settings\n3. Rules\n4. Return");
