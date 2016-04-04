@@ -12,7 +12,8 @@ public class challenge
 	public static boolean continuons = true;
 	public static void main (String [] args)
 	{
-		HighScoreGestion.gestion();
+		profilGestion.confDefautLoad();
+		HighScoreGestion.gestion();		
 		boolean mode_Affichage = messageAcceuil();
 		musique.start();
 		if(mode_Affichage)

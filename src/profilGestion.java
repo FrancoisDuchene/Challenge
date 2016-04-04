@@ -13,6 +13,16 @@ public class profilGestion {
 	public static Config playerConf = null;
 	public static int language = 1;
 
+	public static void confDefautLoad()
+	{
+		playerConf = new Config("default");
+		if(fichierExiste(".properties", "default"))
+		{
+			playerConf.chargeConfig();
+			playerConf.paramExo();			
+		}		
+	}
+
 	public static void menuGestion()
 	{		
 		byte choix = 0;
@@ -106,7 +116,6 @@ public class profilGestion {
 				if(language==1){System.out.println("Veuillez indiquer 1, 2 ou 3 !");}
 				else{System.out.println("Please enter 1, 2 or 3 !");}
 				break;
-
 			}
 		}while(choix != 3);
 	}
@@ -124,9 +133,13 @@ public class profilGestion {
 				if(name.contains(" "))
 				{
 					if(language == 1){System.out.println("Veuillez a ne pas introduire d'espace");}
-					else{System.out.println("P");}
+					else{System.out.println("Please don't put space in your name");}
+				}else if(name.equals("default"))
+				{
+					if(language == 1){System.out.println("Veuillez choisir un autre nom d'utilisateur que 'default' !");}
+					else{System.out.println("Please choose another username than 'default' !");}
 				}
-			}while(name.contains(" "));
+			}while(name.contains(" ") || name.equals("default"));
 			playerOne.setName(name);
 			if(fichierExiste(".sav", name))
 			{
@@ -162,22 +175,7 @@ public class profilGestion {
 		}
 		menuGestion();
 	}
-	/**
-	 * 
-	 * @return true if the player profile already exist and false if not
-	 */
-	public static boolean existe()
-	{
-		return existe;	
-	}
-	/**
-	 * 
-	 * @return true if a profile is not created on this session and false if a player is already logged
-	 */
-	public static boolean getPremierOuverture()
-	{
-		return premierOuverture;
-	}
+
 	/**
 	 * the function add the score of the HangmanGame
 	 * @param score is the score to add at the profile
@@ -357,67 +355,25 @@ public class profilGestion {
 			playerConf.paramExo();
 		}
 	}
-	/**
-	 * Cette fonction gère le fichier des listes de noms
-	 */
-	public void gestionListeNomsUsers()
-	{
-		Fichier ListeNoms = new Fichier();
-		final String NomListeNom = "ListeNoms";
-		// Si le fichier existe, on l'ouvre et on charge dans un tableau tous les noms contenus dans le fichier
 
-		if(fichierExiste(".ch",NomListeNom))
-		{
-			ListeNoms.ouvrir(NomListeNom + ".ch", "R");	
-			String tmp = "";
-			tmp = ListeNoms.lire();
-			int nbr = Integer.parseInt(tmp);
-			String [] tabNoms = new String[nbr];
-			tmp = "";
-			for(int i=0; tmp != null;i++)
-			{
-				tmp = ListeNoms.lire();
-				tabNoms[i] = tmp;
-			}
-			if(!(nomDeja(tabNoms, name)))
-			{
-				ListeNoms.ouvrir(NomListeNom + ".ch", "W", false);
-				nbr++;
-				ListeNoms.ecrireInt(nbr);
-				ListeNoms.ecrireString(name);
-				for(int i=0; i<tabNoms.length;i++)
-				{
-					ListeNoms.ecrireString(tabNoms[i]);
-				}			
-			}
-			ListeNoms.fermer();
-		}else{
-			ListeNoms.ouvrir(NomListeNom + ".ch", "W", true);
-			ListeNoms.ecrireInt(1);
-			ListeNoms.ecrireString(name);
-			ListeNoms.fermer();
-		}
-	}
-
-	/**
-	 * 
-	 * @param listeNoms un tableau de String
-	 * @param nom un mot à chercher dans le tableau de String
-	 * @return true si le mot est contenu dans le tableau et false si non
-	 */
-	private boolean nomDeja(String [] listeNoms, String nom)
-	{
-		for(int i=0; i<listeNoms.length; i++)
-		{
-			if(listeNoms[i].equals(nom))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
 	public static String getName()
 	{
 		return playerOne.getName();
+	}
+	/**
+	 * 
+	 * @return true if the player profile already exist and false if not
+	 */
+	public static boolean existe()
+	{
+		return existe;	
+	}
+	/**
+	 * 
+	 * @return true if a profile is not created on this session and false if a player is already logged
+	 */
+	public static boolean getPremierOuverture()
+	{
+		return premierOuverture;
 	}
 }

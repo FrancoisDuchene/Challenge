@@ -113,6 +113,9 @@ public class Config
 		joueurs_Puissance = Byte.parseByte(force.getProperty("joueurs_Puissance"));
 		difficulty_Puissance = Byte.parseByte(force.getProperty("difficulty_Puissance"));
 	}
+	/**
+	 * charge les différents paramètres du programme dans la config actuelle
+	 */
 	public void paramInto()
 	{
 		this.language = challenge.getLanguage();
@@ -125,6 +128,9 @@ public class Config
 		this.joueurs_Puissance = Puissance4.getNbrJoueurs();
 		this.difficulty_Puissance = Puissance4.getDifficulte();
 	}
+	/**
+	 * charge les paramètres de la config actuelle dans le programme
+	 */
 	public void paramExo()
 	{
 		challenge.setLanguage(language);
