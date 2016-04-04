@@ -1,3 +1,5 @@
+import javax.swing.JOptionPane;
+
 /**
  * @author Vinsifroid && Bivisi
  * @version 1.1
@@ -10,11 +12,38 @@ public class challenge
 	public static boolean continuons = true;
 	public static void main (String [] args)
 	{
-	    musique.start();
-	    page.start();
-	    HighScoreGestion.gestion();
-	    
-		menuPrincipal();
+		HighScoreGestion.gestion();
+		boolean mode_Affichage = messageAcceuil();
+		musique.start();
+		if(mode_Affichage)
+		{
+			page.start();
+		}else{
+			menuPrincipal();
+		}
+	}
+
+	/**
+	 * Cette fonction demande a l'utilisateur si il veut utiliser le programme en interface graphique
+	 * ou en console
+	 * @return true si c'est la GUI et false si c'est la console
+	 */
+	public static boolean messageAcceuil()
+	{
+		String[] options = new String[]{"GUI","Console"};
+		String message = "";
+		if(language==1){message = "Voulez-vous utiliser le programme en interface graphique ou en console ?";}
+		else{message = "Do you want to use this program with a graphical interface or with in console ?";}
+
+		String choix = (String)JOptionPane.showInputDialog(null,message,
+						"IMPORTANT",JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		if(choix.equals(options[0]))
+		{
+			return true;
+		}else{
+			return false;
+		}
+
 	}
 	public static String connecte()
 	{
@@ -71,7 +100,6 @@ public class challenge
 				else{System.out.println("Please Indicate 1, 2, 3, 4, 5 or 6!");}
 				break;
 			}
-
 		}while(choix != 6);
 	}
 
@@ -124,7 +152,7 @@ public class challenge
 		byte choix = 0;
 		clear();
 		if(language == 1){System.out.println("Quel Language preferez-vous ?\n1. Francais\n2. English");}
-		else{System.out.println("What language would you like ?");}
+		else{System.out.println("What language would you like ?\n1. Francais\n2. English");}
 
 		do{
 			choix = InOut.getByte();
