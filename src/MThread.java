@@ -17,7 +17,7 @@ public class MThread extends Thread
         }
         else
         {
-            new PageAccueil();
+            new PageAccueil();           
         }
     }    
 }

@@ -3,6 +3,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import javax.swing.Icon;
+import javax.swing.JOptionPane;
+
 public class profilGestion {
 
 	public static boolean premierOuverture = true;
@@ -19,7 +22,7 @@ public class profilGestion {
 		if(fichierExiste(".properties", "default"))
 		{
 			playerConf.chargeConfig();
-			playerConf.paramExo();			
+			playerConf.paramExo();				
 		}		
 	}
 
@@ -119,37 +122,36 @@ public class profilGestion {
 			}
 		}while(choix != 3);
 	}
-	public static void gestion()
+	/**
+	 * Cette fonction gère les interraction principale avec le profil de l'utilisateur. Elle intervient tout particulièrement au début du
+	 * programme, lorsqu'il il s'agit d'effectuer plusieurs étapes de maintenance
+	 * @param mode = 1 lorsque l'interface est en mode graphique et 2 quand c'est en mode console
+	 */
+	public static void gestion(byte mode)
 	{		
 		//pour la premiere ouverture de cette fonction dans ce programme
 		language = challenge.getLanguage();
 		if(premierOuverture)
 		{			
-			do
+			String nom = "";
+			if(mode == 1)
 			{
-				if(language == 1){System.out.println("Quel est votre nom ?");}
-				else{System.out.println("What is your name ?");}		
-				name = InOut.Mot(InOut.getLine());
-				if(name.contains(" "))
-				{
-					if(language == 1){System.out.println("Veuillez a ne pas introduire d'espace");}
-					else{System.out.println("Please don't put space in your name");}
-				}else if(name.equals("default"))
-				{
-					if(language == 1){System.out.println("Veuillez choisir un autre nom d'utilisateur que 'default' !");}
-					else{System.out.println("Please choose another username than 'default' !");}
-				}
-			}while(name.contains(" ") || name.equals("default"));
-			playerOne.setName(name);
-			if(fichierExiste(".sav", name))
+				nom = demandeNomGUI();
+			}else{
+				nom = demandeNomConsole();
+			}
+			
+			name = nom;
+			playerOne.setName(nom);
+			if(fichierExiste(".sav", nom))
 			{
 				existe = true;
-				if(fichierExiste(".cf", name))
+				if(fichierExiste(".cf", nom))
 				{
 					confExiste = true;
 				}
 			}
-			playerConf = new Config(name);
+			playerConf = new Config(nom);
 			if(confExiste)
 			{
 				gestionConfig(false);
@@ -174,6 +176,48 @@ public class profilGestion {
 			afficheProfil();
 		}
 		menuGestion();
+	}
+	private static String demandeNomConsole()
+	{
+		String nom = "";
+		do
+		{
+			if(language == 1){System.out.println("Quel est votre nom ?");}
+			else{System.out.println("What is your name ?");}		
+			nom = InOut.Mot(InOut.getLine());
+			if(nom.contains(" "))
+			{
+				if(language == 1){System.out.println("Veuillez a ne pas introduire d'espace");}
+				else{System.out.println("Please don't put space in your name");}
+			}else if(nom.equals("default"))
+			{
+				if(language == 1){System.out.println("Veuillez choisir un autre nom d'utilisateur que 'default' !");}
+				else{System.out.println("Please choose another username than 'default' !");}
+			}
+		}while(nom.contains(" ") || nom.equals("default"));
+		return nom;
+	}
+	private static String demandeNomGUI()
+	{
+		String nom = "";
+		do
+		{
+			nom = (String) JOptionPane.showInputDialog(null, "Quel est votre nom ?", "Gestion de profil", JOptionPane.QUESTION_MESSAGE);
+			if(nom.contains(" "))
+			{
+				if(language==1){final String messageE1 = "Désolé mais votre nom ne peut contenir d'espace !", titleE1 = "Erreur";
+				JOptionPane.showMessageDialog(null, messageE1, titleE1, JOptionPane.WARNING_MESSAGE, null);}
+				else{final String messageE1 = "Sorry but your name cannot contain space !", titleE1 = "Error";
+				JOptionPane.showMessageDialog(null, messageE1, titleE1, JOptionPane.WARNING_MESSAGE, null);}        		
+			}else if(nom.equals("default"))
+			{
+				if(language==1){final String messageE2 = "Désolé mais votre nom ne peut peut pas être 'default'", titleE2 = "Erreur";
+				JOptionPane.showMessageDialog(null, messageE2, titleE2, JOptionPane.WARNING_MESSAGE, null);}
+				else{final String messageE2 = "Sorry but your name cannot be 'default'", titleE2 = "Error";
+				JOptionPane.showMessageDialog(null, messageE2, titleE2, JOptionPane.WARNING_MESSAGE, null);}        		
+			}
+		}while(nom.contains(" ") || nom.equals("default"));
+		return nom;
 	}
 
 	/**

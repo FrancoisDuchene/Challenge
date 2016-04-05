@@ -2,13 +2,13 @@ import javax.swing.JOptionPane;
 
 /**
  * @author Vinsifroid && Bivisi
- * @version 1.1
+ * @version 1.0 delta
  */
 public class challenge
 {
 	private static byte language = 1;
 	public static MThread musique = new MThread("Musique");
-	public static MThread page = new MThread("Page");
+	public static MThread page = new MThread("PageP");
 	public static boolean continuons = true;
 	public static void main (String [] args)
 	{
@@ -85,7 +85,7 @@ public class challenge
 				credit();
 				break;
 			case 3:
-				profilGestion.gestion();
+				profilGestion.gestion((byte)2);
 				break;
 			case 4:
 				choseLanguage();

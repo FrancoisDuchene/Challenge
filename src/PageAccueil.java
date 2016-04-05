@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JCheckBox;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+//import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -31,6 +31,8 @@ public class PageAccueil extends JFrame
     private JMenu aPropos = new JMenu("A propos");
     private JMenu profil = new JMenu("Profil");
     
+    //Les onglets de navigations
+    
     private JMenuItem nav1  = new JMenuItem("Menu Principal");
     private JMenuItem nav2  = new JMenuItem("Quitter");
     private JMenuItem lang1 = new JMenuItem("Français");
@@ -41,10 +43,12 @@ public class PageAccueil extends JFrame
     private JMenuItem prof2 = new JMenuItem("Creer un nouveau profil");
     private JCheckBox sound = new JCheckBox("Sound");
     
+    private byte langue;
     boolean fin = false;
 
     public PageAccueil()
     {
+    	langue = challenge.getLanguage();
         this.setTitle("Challenge");
         this.setSize(1200,750);
         this.setLocationRelativeTo(null);
@@ -69,40 +73,51 @@ public class PageAccueil extends JFrame
             {System.exit(0);}});
         lang1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event)
-            {}});
+            {
+            	challenge.setLanguage((byte)1);
+            	langue = 1;
+            }});
         lang2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event)
-            {}});
+            {
+            	challenge.setLanguage((byte)2);
+            	langue = 2;
+            }});
         prop1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event)
             {
-                String x = "Développeurs principaux : \n    Bivisi\n    Vinsifroid\nContributeurs :\n    The Muse\n    Po";
-                new JOptionPane(); 
-                JOptionPane.showMessageDialog(null,x, "Crédits",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("res/img/programmeur.jpe"));
+            	String message = "";
+            	if(langue==1){message = "Développeurs principaux : \n    Bivisi\n    Vinsifroid\nContributeurs :\n    The Muse\n    Po";}
+            	else{message = "Main developers : \n    Bivisi\n    Vinsifroid\nContributeurs :\n    The Muse\n    Po";}
+                
+                JOptionPane.showMessageDialog(null,message, "Crédits",JOptionPane.INFORMATION_MESSAGE,new ImageIcon("res/img/programmeur.jpe"));
             }});
         prop2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event)
             {
                 String[] jeux = {"Pendu","Plus ou moins","Mastermind","Puissance 4"};
-                JOptionPane j1 = new JOptionPane(), j2 = new JOptionPane();
-                String n = (String) JOptionPane.showInputDialog(null,"Sur quel jeu voulez-voulez vous des infos?","Jeux",JOptionPane.QUESTION_MESSAGE, null,jeux,jeux[3]);
-                String x = "";
-                if(n.equals("Pendu"))
-                {x = "Premier jeu developpe dans challenge.\nLe principe de base est qu'il faut retrouver un mot en proposant des lettres.\nSi on a propose trop de mauvaise lettre, on perd.";}
-                else if(n.equals("Plus ou moins"))
-                {x = "Second jeu developpe dans challenge.\nLe but est de trouver un chiffre au hasard entre deux bornes.\nDes EastersEggs y sont cachés ;)";}
-                else if(n.equals("Mastermind"))
-                {x = "Troisieme jeu developpe dans challenge.\nIl faut retrouver la combinaison de couleur prise au hasard par l'ordinateur.";}
-                else if(n.equals("Puissance 4"))
-                {x = "Dernier jeu en date developpe dans challenge.\nIl faut reussir a aligner 4 jetons de sa couleur dans la grille sans que l'autre joueur n'en aligne avant vous";}
-                j2.showMessageDialog(null,x, n,JOptionPane.INFORMATION_MESSAGE);
+                String choix = (String) JOptionPane.showInputDialog(null,"Sur quel jeu voulez-voulez vous des infos?","Jeux",JOptionPane.QUESTION_MESSAGE, null,jeux,jeux[3]);
+                String corps = "";
+                if(choix.equals("Pendu"))
+                {corps = "Premier jeu developpe dans challenge.\nLe principe de base est qu'il faut retrouver un mot en proposant des lettres.\nSi on a propose trop de mauvaise lettre, on perd.";}
+                else if(choix.equals("Plus ou moins"))
+                {corps = "Second jeu developpe dans challenge.\nLe but est de trouver un chiffre au hasard entre deux bornes.\nDes EastersEggs y sont cachés ;)";}
+                else if(choix.equals("Mastermind"))
+                {corps = "Troisieme jeu developpe dans challenge.\nIl faut retrouver la combinaison de couleur prise au hasard par l'ordinateur.";}
+                else if(choix.equals("Puissance 4"))
+                {corps = "Dernier jeu en date developpe dans challenge.\nIl faut reussir a aligner 4 jetons de sa couleur dans la grille sans que l'autre joueur n'en aligne avant vous";}
+                JOptionPane.showMessageDialog(null,corps, choix,JOptionPane.INFORMATION_MESSAGE);
             }});
         prof1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event)
-            {}});
+            {
+            	profilGestion.gestion((byte)1);
+            }});
         prof2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event)
-            {}});
+            {
+            	profilGestion.gestion((byte)1);
+            }});
         sound.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event)
             {if(((JCheckBox)event.getSource()).isSelected())
@@ -119,6 +134,8 @@ public class PageAccueil extends JFrame
         bouton.addActionListener(new ActionBouton());
         page.add(bouton);
         
+        //Panneau principal
+        
         Panel men1 = new Panel("menu");
         JPanel men2 = new JPanel();                     men2.setPreferredSize(new Dimension(this.getWidth(),this.getHeight()/4));
         JButton bMenu1 = new JButton("Pendu");          bMenu1.setPreferredSize(new Dimension(this.getWidth()/6,this.getHeight()/10));
@@ -126,19 +143,23 @@ public class PageAccueil extends JFrame
         JButton bMenu3 = new JButton("Mastermind");     bMenu3.setPreferredSize(new Dimension(this.getWidth()/6,this.getHeight()/10));
         JButton bMenu4 = new JButton("Puissance 4");    bMenu4.setPreferredSize(new Dimension(this.getWidth()/6,this.getHeight()/10));
         JButton bMenu5 = new JButton("Exit");           bMenu5.setPreferredSize(new Dimension(this.getWidth()/6,this.getHeight()/10));
-        
+
         bMenu1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event)
             {challenge.clear();pendu.menu();}});
+        
         bMenu2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event)
             {challenge.clear();plusMoins.menu();}});
+        
         bMenu3.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event)
             {challenge.clear();Mastermind.menu();}});
+        
         bMenu4.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event)
             {challenge.clear();Puissance4.menu();}});
+        
         bMenu5.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event)
             {System.exit(0);}});
@@ -187,8 +208,7 @@ public class PageAccueil extends JFrame
 
             try{Thread.sleep(vitesse);}
             catch(InterruptedException e){}
-        }
-        
+        }        
         menu();
     }
     
