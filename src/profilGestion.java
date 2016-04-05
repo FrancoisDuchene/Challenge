@@ -72,7 +72,7 @@ public class profilGestion {
 	{
 		if(language == 1)
 		{
-			System.out.println("\n#### PROFIL -" + name + " ####");
+			System.out.println("\n#### PROFIL - " + name + " ####");
 			System.out.println(playerOne.toString() + "\n");
 			System.out.println("1. Tableau des scores general");
 			System.out.println("2. Score Pendu");
@@ -84,7 +84,7 @@ public class profilGestion {
 			System.out.println("\n8. Quitter");
 		}else if(language == 2)
 		{
-			System.out.println("#### PROFILE -" + name + " ####");
+			System.out.println("#### PROFILE - " + name + " ####");
 			System.out.println(playerOne.toString() + "\n");
 			System.out.println("1. General HighScore");
 			System.out.println("2. Hangman Score");
@@ -419,5 +419,17 @@ public class profilGestion {
 	public static boolean getPremierOuverture()
 	{
 		return premierOuverture;
+	}
+	public static void setPremierOuverture(boolean arg)
+	{
+		premierOuverture = arg;
+	}
+	public static void setExiste(boolean arg)
+	{
+		existe = arg;
+	}
+	public static void setConfExiste(boolean arg)
+	{
+		confExiste = arg;
 	}
 }
