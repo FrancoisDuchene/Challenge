@@ -1,5 +1,5 @@
 import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,6 +8,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * 
+ * @author vinsifroid
+ * @version 1.0
+ */
 public class Profil_Windows extends JFrame {
 
 	private static final long serialVersionUID = 5288800453009819186L;
@@ -27,14 +32,14 @@ public class Profil_Windows extends JFrame {
 		setSize(1200,750);
 		setLocationRelativeTo(null);
 		setResizable(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setContentPane(buildContentPane());
 		setVisible(true);
 	}
 	private JPanel buildContentPane()
 	{
 		JPanel panel = new JPanel();
-		panel.setLayout(new FlowLayout());
+		panel.setLayout(new GridLayout(8,1));
 		panel.setBackground(Color.magenta);
 		
 		String nom = profilGestion.getName();
@@ -51,27 +56,44 @@ public class Profil_Windows extends JFrame {
 		bouton1.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) 
-			{}});
+			{
+				//A changer par la suite
+				profilGestion.afficheProfil();
+			}});
 		bouton2.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) 
-			{}});
+			{
+				//A changer par la suite
+				profilGestion.playerOne.afficheScoreSPd();
+			}});
 		bouton3.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) 
-			{}});
+			{
+				//A changer par la suite
+				profilGestion.playerOne.afficheScoreSPM();
+			}});
 		bouton4.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) 
-			{}});
+			{
+				//A changer par la suite
+				profilGestion.playerOne.afficheScoreSMM();
+			}});
 		bouton5.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) 
-			{}});
+			{
+				//A changer par la suite
+				profilGestion.playerOne.afficheScoreSPU();
+			}});
 		bouton6.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) 
-			{}});
+			{
+				profilGestion.optionConfigurationMenu();
+			}});
 		bouton7.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) 

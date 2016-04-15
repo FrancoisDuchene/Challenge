@@ -3,7 +3,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import javax.swing.Icon;
 import javax.swing.JOptionPane;
 
 public class profilGestion {
@@ -175,7 +174,15 @@ public class profilGestion {
 			gestionConfig(false);
 			afficheProfil();
 		}
-		menuGestion();
+		
+		//Le menu affiché en fonction du mode initial
+		
+		if(mode == 1)
+		{
+			new Profil_Windows();
+		}else{
+			menuGestion();
+		}		
 	}
 	private static String demandeNomConsole()
 	{
