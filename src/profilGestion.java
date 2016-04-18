@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class profilGestion {
@@ -14,6 +15,11 @@ public class profilGestion {
 	public static String name = "";
 	public static Config playerConf = null;
 	public static int language = 1;
+	/**
+	 * if mode == 0, it's the console mode that is activated
+	 * if mode == 1, it's the GUI mode that is activated
+	 */
+	public static byte mode=0;
 
 	public static void confDefautLoad()
 	{
@@ -124,22 +130,23 @@ public class profilGestion {
 	/**
 	 * Cette fonction gère les interraction principale avec le profil de l'utilisateur. Elle intervient tout particulièrement au début du
 	 * programme, lorsqu'il il s'agit d'effectuer plusieurs étapes de maintenance
-	 * @param mode = 1 lorsque l'interface est en mode graphique et 2 quand c'est en mode console
+	 * @param md = 1 lorsque l'interface est en mode graphique et 2 quand c'est en mode console
 	 */
-	public static void gestion(byte mode)
+	public static void gestion(byte md)
 	{		
+		mode = md;
 		//pour la premiere ouverture de cette fonction dans ce programme
 		language = challenge.getLanguage();
 		if(premierOuverture)
 		{			
 			String nom = "";
-			if(mode == 1)
+			if(md == 1)
 			{
 				nom = demandeNomGUI();
 			}else{
 				nom = demandeNomConsole();
 			}
-			
+
 			name = nom;
 			playerOne.setName(nom);
 			if(fichierExiste(".sav", nom))
@@ -172,12 +179,11 @@ public class profilGestion {
 		{
 			chargeProfil();
 			gestionConfig(false);
-			afficheProfil();
 		}
-		
+
 		//Le menu affiché en fonction du mode initial
-		
-		if(mode == 1)
+
+		if(md == 1)
 		{
 			new Profil_Windows();
 		}else{
@@ -269,38 +275,75 @@ public class profilGestion {
 	 */
 	public static void afficheProfil()
 	{
-		if(language == 1)
+		if(mode == 0)
 		{
-			System.out.println("\nNom : " + playerOne.getName());
-			System.out.println("Scores Pendu");
-			playerOne.afficheScoreSPd();
-			System.out.println("Score Pendu Total : " + playerOne.scorePenduTotal());
-			System.out.println("\nScore Plus ou Moins\n");
-			playerOne.afficheScoreSPM();
-			System.out.println("Score PlusMoins : " + playerOne.scorePlusMoinsTotal());
-			System.out.println("\nScore MasterMind\n");
-			playerOne.afficheScoreSMM();
-			System.out.println("Score MasterMind : " + playerOne.scoreMasterMindTotal());
-			System.out.println("\nScore Puissance4\n");
-			playerOne.afficheScoreSPU();
-			System.out.println("Score Puissance4 : " + playerOne.scorePuissanceTotal());
-			System.out.println("Score Total : " + playerOne.scoreTotal());
-		}else{
-			System.out.println("\nName : " + playerOne.getName());
-			System.out.println("Hangmann Score");
-			playerOne.afficheScoreSPd();
-			System.out.println("Hangmann Total score : " + playerOne.scorePenduTotal());
-			System.out.println("\nHighLow score\n");
-			playerOne.afficheScoreSPM();
-			System.out.println("HighLow Total score : " + playerOne.scorePlusMoinsTotal());
-			System.out.println("\nMasterMind Score\n");
-			playerOne.afficheScoreSMM();
-			System.out.println("MasterMind Score : " + playerOne.scoreMasterMindTotal());
-			System.out.println("\nPuissance4 Score\n");
-			playerOne.afficheScoreSPU();
-			System.out.println("Puissance4 Score : " + playerOne.scorePuissanceTotal());
-			System.out.println("Total Score : " + playerOne.scoreTotal());
+			if(language == 1)
+			{
+				System.out.println("\nNom : " + playerOne.getName());
+				System.out.println("Scores Pendu");
+				playerOne.afficheScoreSPd();
+				System.out.println("Score Pendu Total : " + playerOne.scorePenduTotal());
+				System.out.println("\nScore Plus ou Moins\n");
+				playerOne.afficheScoreSPM();
+				System.out.println("Score PlusMoins Total : " + playerOne.scorePlusMoinsTotal());
+				System.out.println("\nScore MasterMind\n");
+				playerOne.afficheScoreSMM();
+				System.out.println("Score MasterMind Total : " + playerOne.scoreMasterMindTotal());
+				System.out.println("\nScore Puissance4\n");
+				playerOne.afficheScoreSPU();
+				System.out.println("Score Puissance4 Total : " + playerOne.scorePuissanceTotal());
+				System.out.println("Score Total : " + playerOne.scoreTotal());
+			}else{
+				System.out.println("\nName : " + playerOne.getName());
+				System.out.println("Hangmann Score");
+				playerOne.afficheScoreSPd();
+				System.out.println("Hangmann Total score : " + playerOne.scorePenduTotal());
+				System.out.println("\nHighLow score\n");
+				playerOne.afficheScoreSPM();
+				System.out.println("HighLow Total score : " + playerOne.scorePlusMoinsTotal());
+				System.out.println("\nMasterMind Score\n");
+				playerOne.afficheScoreSMM();
+				System.out.println("MasterMind Score : " + playerOne.scoreMasterMindTotal());
+				System.out.println("\nPuissance4 Score\n");
+				playerOne.afficheScoreSPU();
+				System.out.println("Puissance4 Score : " + playerOne.scorePuissanceTotal());
+				System.out.println("Total Score : " + playerOne.scoreTotal());
+			}
+		}else if(mode == 1)
+		{		
+			int[] tab1 = playerOne.getScorePendu();
+			int[] tab2 = playerOne.getScorePlusMoins();
+			int[] tab3 = playerOne.getScoreMasterMind();
+			int[] tab4 = playerOne.getScorePuissance4();
+			
+			SimpleFenetre SF = new SimpleFenetre("Profil -"+ name,18,2);
+			
+			SF.addJlabel(new JLabel("Nom : " + name));	SF.addJlabel(new JLabel(""));	
+			
+			SF.addJlabel(new JLabel("Score Pendu")); SF.addJlabel(new JLabel(""));				
+			SF.addJlabel(new JLabel(Integer.toString(tab1[1])));	SF.addJlabel(new JLabel(Integer.toString(tab1[2])));
+			SF.addJlabel(new JLabel(Integer.toString(tab1[3])));	SF.addJlabel(new JLabel(Integer.toString(tab1[4])));		
+			SF.addJlabel(new JLabel("Score Pendu total : "));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scorePenduTotal())));
+			
+			SF.addJlabel(new JLabel("Score Plus ou Moins"));	SF.addJlabel(new JLabel(""));		
+			SF.addJlabel(new JLabel(Integer.toString(tab2[1])));	SF.addJlabel(new JLabel(Integer.toString(tab2[2])));
+			SF.addJlabel(new JLabel(Integer.toString(tab2[3])));	SF.addJlabel(new JLabel(Integer.toString(tab2[4])));		
+			SF.addJlabel(new JLabel("Score PlusMoins total : "));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scorePlusMoinsTotal())));
+			
+			SF.addJlabel(new JLabel("Score Mastermind"));	SF.addJlabel(new JLabel(""));
+			SF.addJlabel(new JLabel(Integer.toString(tab3[1])));	SF.addJlabel(new JLabel(Integer.toString(tab3[2])));
+			SF.addJlabel(new JLabel(Integer.toString(tab3[3])));	SF.addJlabel(new JLabel(Integer.toString(tab3[4])));
+			SF.addJlabel(new JLabel("Score Mastermind total : "));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scoreMasterMindTotal())));
+			
+			SF.addJlabel(new JLabel("Puissance 4"));	SF.addJlabel(new JLabel(""));
+			SF.addJlabel(new JLabel(Integer.toString(tab4[1])));	SF.addJlabel(new JLabel(Integer.toString(tab4[2])));
+			SF.addJlabel(new JLabel(Integer.toString(tab4[3])));	SF.addJlabel(new JLabel(Integer.toString(tab4[4])));
+			SF.addJlabel(new JLabel("Score Puissance 4 total : ")); SF.addJlabel(new JLabel(Integer.toString(playerOne.scorePuissanceTotal())));
+			
+			SF.addJlabel(new JLabel("Total Score : "));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scoreTotal())));
+			SF.repaintSimpleF();
 		}
+
 	}
 	/**
 	 * Save the player Profile with the score and the name

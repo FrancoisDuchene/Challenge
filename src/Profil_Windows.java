@@ -65,33 +65,34 @@ public class Profil_Windows extends JFrame {
 			public void actionPerformed(ActionEvent event) 
 			{
 				//A changer par la suite
-				profilGestion.playerOne.afficheScoreSPd();
+				optionBouton2();
 			}});
 		bouton3.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) 
 			{
 				//A changer par la suite
-				profilGestion.playerOne.afficheScoreSPM();
+				optionBouton3();
 			}});
 		bouton4.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) 
 			{
 				//A changer par la suite
-				profilGestion.playerOne.afficheScoreSMM();
+				optionBouton4();
 			}});
 		bouton5.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) 
 			{
 				//A changer par la suite
-				profilGestion.playerOne.afficheScoreSPU();
+				optionBouton5();
 			}});
 		bouton6.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) 
 			{
+				optionBouton6();
 				profilGestion.optionConfigurationMenu();
 			}});
 		bouton7.addActionListener(new ActionListener(){
@@ -109,5 +110,54 @@ public class Profil_Windows extends JFrame {
 		panel.add(bouton6);panel.add(bouton7);
 
 		return panel;
+	}
+	
+	private void optionBouton2()
+	{
+		int[] tab = profilGestion.playerOne.getScorePendu();
+		
+		SimpleFenetre SF = new SimpleFenetre("Score Pendu",8,2);
+		
+		SF.addJlabel(new JLabel("Score Pendu")); SF.addJlabel(new JLabel(""));				
+		SF.addJlabel(new JLabel(Integer.toString(tab[1])));	SF.addJlabel(new JLabel(Integer.toString(tab[2])));
+		SF.addJlabel(new JLabel(Integer.toString(tab[3])));	SF.addJlabel(new JLabel(Integer.toString(tab[4])));		
+		SF.addJlabel(new JLabel("Score Pendu total : "));	SF.addJlabel(new JLabel(Integer.toString(profilGestion.playerOne.scorePenduTotal())));		
+	}
+	private void optionBouton3()
+	{
+		int[] tab2 = profilGestion.playerOne.getScorePlusMoins();
+		
+		SimpleFenetre SF = new SimpleFenetre("Score Pendu",8,2);
+		
+		SF.addJlabel(new JLabel("Score Plus ou Moins"));	SF.addJlabel(new JLabel(""));		
+		SF.addJlabel(new JLabel(Integer.toString(tab2[1])));	SF.addJlabel(new JLabel(Integer.toString(tab2[2])));
+		SF.addJlabel(new JLabel(Integer.toString(tab2[3])));	SF.addJlabel(new JLabel(Integer.toString(tab2[4])));		
+		SF.addJlabel(new JLabel("Score PlusMoins total : "));	SF.addJlabel(new JLabel(Integer.toString(profilGestion.playerOne.scorePlusMoinsTotal())));
+	}
+	private void optionBouton4()
+	{
+		int[] tab3 = profilGestion.playerOne.getScoreMasterMind();
+		
+		SimpleFenetre SF = new SimpleFenetre("Score Pendu",8,2);
+		
+		SF.addJlabel(new JLabel("Score Mastermind"));	SF.addJlabel(new JLabel(""));
+		SF.addJlabel(new JLabel(Integer.toString(tab3[1])));	SF.addJlabel(new JLabel(Integer.toString(tab3[2])));
+		SF.addJlabel(new JLabel(Integer.toString(tab3[3])));	SF.addJlabel(new JLabel(Integer.toString(tab3[4])));
+		SF.addJlabel(new JLabel("Score Mastermind total : "));	SF.addJlabel(new JLabel(Integer.toString(profilGestion.playerOne.scoreMasterMindTotal())));
+	}
+	private void optionBouton5()
+	{
+		int[] tab4 = profilGestion.playerOne.getScorePuissance4();
+		
+		SimpleFenetre SF = new SimpleFenetre("Score Pendu",8,2);
+		
+		SF.addJlabel(new JLabel("Puissance 4"));	SF.addJlabel(new JLabel(""));
+		SF.addJlabel(new JLabel(Integer.toString(tab4[1])));	SF.addJlabel(new JLabel(Integer.toString(tab4[2])));
+		SF.addJlabel(new JLabel(Integer.toString(tab4[3])));	SF.addJlabel(new JLabel(Integer.toString(tab4[4])));
+		SF.addJlabel(new JLabel("Score Puissance 4 total : ")); SF.addJlabel(new JLabel(Integer.toString(profilGestion.playerOne.scorePuissanceTotal())));
+	}
+	private void optionBouton6()
+	{
+		
 	}
 }
