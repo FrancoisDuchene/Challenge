@@ -1,3 +1,6 @@
+package source;
+import exceptions.INVALID_MODE;
+
 public class pendu {
 
     public static short vies = 7;

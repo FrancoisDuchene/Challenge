@@ -1,3 +1,4 @@
+package sound;
 import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.AudioFormat;
@@ -7,6 +8,8 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
+
+import source.challenge;
 
 public class SoundPlayer extends Thread
 {
@@ -79,4 +82,3 @@ public class SoundPlayer extends Thread
         }
     }
 }
-

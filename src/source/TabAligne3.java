@@ -1,3 +1,4 @@
+package source;
 
 /**
  * Project Challenge 2015
@@ -501,7 +502,6 @@ public class TabAligne3
                             r++;
                         }
                     }
-
                     System.out.print(x);
                 }
             }

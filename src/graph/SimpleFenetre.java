@@ -1,3 +1,4 @@
+package graph;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;

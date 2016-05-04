@@ -1,4 +1,7 @@
+package source;
 import javax.swing.JOptionPane;
+
+import graph.MThread;
 
 /**
  * @author Vinsifroid && Bivisi

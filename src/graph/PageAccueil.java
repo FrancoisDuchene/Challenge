@@ -1,20 +1,29 @@
+package graph;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.GridLayout;
-import java.awt.Dimension;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import javax.swing.JCheckBox;
+
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
-//import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+//import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import source.Mastermind;
+import source.Puissance4;
+import source.challenge;
+import source.pendu;
+import source.plusMoins;
+import source.profilGestion;
 
 
 public class PageAccueil extends JFrame

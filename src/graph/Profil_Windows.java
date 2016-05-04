@@ -1,5 +1,7 @@
+package graph;
 import java.awt.Color;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,6 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import source.profilGestion;
 
 /**
  * 
@@ -37,55 +41,108 @@ public class Profil_Windows extends JFrame {
 		setVisible(true);
 	}
 	private JPanel buildContentPane()
-	{
+	{		
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(8,1));
+		panel.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
 		panel.setBackground(Color.magenta);
 		
 		String nom = profilGestion.getName();
 		
+		c.fill = GridBagConstraints.VERTICAL;
+		
 		JLabel label1 = new JLabel("PROFIL - " + nom);
+		c.weightx = 0.5;
+		c.weighty = 1;
+		c.fill = GridBagConstraints.VERTICAL;
+		c.gridx = 2;
+		c.gridy = 0;
+		panel.add(label1,  c);
+		
 		JButton bouton1 = new JButton("Tableau des scores general");
+		c.fill = GridBagConstraints.VERTICAL;
+		c.weightx = 0.5;	
+		c.weighty = 0.5;
+		c.gridx = 2;
+		c.gridy = 1;
+		panel.add(bouton1,  c);
+		
 		JButton bouton2= new JButton("Score Pendu");
+		c.fill = GridBagConstraints.VERTICAL;
+		c.weightx = 0.5;	
+		c.weighty = 0.5;
+		c.gridx = 2;
+		c.gridy = 2;
+		panel.add(bouton2,  c);
+		
 		JButton bouton3= new JButton("Score PlusMoins");
+		c.fill = GridBagConstraints.VERTICAL;
+		c.weightx = 0.5;	
+		c.weighty = 0.5;
+		c.gridx = 2;
+		c.gridy = 3;
+		panel.add(bouton3,  c);
+		
 		JButton bouton4= new JButton("Score MasterMind");
+		c.fill = GridBagConstraints.VERTICAL;
+		c.weightx = 0.5;
+		c.weighty = 0.5;
+		c.gridx = 2;
+		c.gridy = 4;
+		panel.add(bouton4,  c);
+		
 		JButton bouton5= new JButton("Score Puissance4");
+		c.fill = GridBagConstraints.VERTICAL;
+		c.weightx = 0.5;
+		c.weighty = 0.5;
+		c.gridx = 2;
+		c.gridy = 5;
+		panel.add(bouton5,  c);
+		
 		JButton bouton6= new JButton("Configuration");
+		c.fill = GridBagConstraints.VERTICAL;
+		c.weightx = 0.5;
+		c.weighty = 0.5;
+		c.gridx = 2;
+		c.gridy = 6;
+		panel.add(bouton6,  c);
+		
 		JButton bouton7= new JButton("Changer d'utilisateur");
+		c.fill = GridBagConstraints.VERTICAL;
+		c.weightx = 0.5;
+		c.weighty = 0.8;
+		c.gridx = 2;
+		c.gridy = 7;
+		panel.add(bouton7,  c);
 
 		bouton1.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) 
 			{
-				//A changer par la suite
 				profilGestion.afficheProfil();
 			}});
 		bouton2.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) 
 			{
-				//A changer par la suite
 				optionBouton2();
 			}});
 		bouton3.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) 
 			{
-				//A changer par la suite
 				optionBouton3();
 			}});
 		bouton4.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) 
 			{
-				//A changer par la suite
 				optionBouton4();
 			}});
 		bouton5.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) 
 			{
-				//A changer par la suite
 				optionBouton5();
 			}});
 		bouton6.addActionListener(new ActionListener(){
@@ -104,10 +161,6 @@ public class Profil_Windows extends JFrame {
 				profilGestion.setConfExiste(false);
 				profilGestion.gestion((byte)1);
 			}});
-
-		panel.add(label1);panel.add(bouton1);panel.add(bouton2);
-		panel.add(bouton3);panel.add(bouton4);panel.add(bouton5);
-		panel.add(bouton6);panel.add(bouton7);
 
 		return panel;
 	}

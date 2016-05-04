@@ -1,3 +1,5 @@
+package source;
+import exceptions.INVALID_MODE;
 
 /**
  * Puissance4 is the class who contain the game puissance 4

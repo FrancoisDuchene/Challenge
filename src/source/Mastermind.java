@@ -1,3 +1,5 @@
+package source;
+import exceptions.INVALID_MODE;
 
 /**
  * This is the game mastermind with letters.

@@ -1,3 +1,5 @@
+package source;
+import exceptions.INVALID_MODE;
 
 public class HighScoreGestion {
 

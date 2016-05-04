@@ -1,3 +1,4 @@
+package source;
 import java.io.*;
 import java.util.Properties;
 
@@ -18,9 +19,9 @@ public class Config
 	//variables Puissance4
 	private byte joueurs_Puissance;
 	private byte difficulty_Puissance;
-	
+
 	private Properties force;
-	
+
 	public Config(String name)
 	{
 		this.name = name;
@@ -42,7 +43,7 @@ public class Config
 	{
 		final String filename = "saves/" + name + ".properties";
 		FileOutputStream luke = null;
-		
+
 		//On ajoute les éléments à l'object représentant toutes les propriétés.
 		force.setProperty("Language", Byte.toString(language));
 		force.setProperty("joueurs_PlusMoins", Byte.toString(joueurs_PlusMoins));
@@ -54,7 +55,7 @@ public class Config
 		force.setProperty("joueurs_Puissance", Byte.toString(joueurs_Puissance));
 		force.setProperty("difficulty_Puissance", Byte.toString(difficulty_Puissance));
 		//force.list(System.out); si on veut les le documents
-		
+
 		try {
 			File fichier = new File(filename);
 			luke = new FileOutputStream(fichier);
@@ -81,7 +82,7 @@ public class Config
 	{
 		final String filename = "saves/" + name + ".properties";
 		FileInputStream leia = null;
-		
+
 		try {
 			File fichier = new File(filename);
 			leia = new FileInputStream(fichier);

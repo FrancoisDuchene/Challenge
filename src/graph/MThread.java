@@ -1,3 +1,6 @@
+package graph;
+import sound.SoundPlayer;
+
 public class MThread extends Thread
 {
     private String name;
@@ -17,7 +20,7 @@ public class MThread extends Thread
         }
         else
         {
-            new PageAccueil();           
+            new PageAccueil();
         }
     }    
 }

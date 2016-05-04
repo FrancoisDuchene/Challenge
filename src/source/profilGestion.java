@@ -1,3 +1,4 @@
+package source;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -5,6 +6,9 @@ import java.io.IOException;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
+import graph.Profil_Windows;
+import graph.SimpleFenetre;
 
 public class profilGestion {
 

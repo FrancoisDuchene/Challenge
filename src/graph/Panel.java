@@ -1,3 +1,4 @@
+package graph;
 import java.awt.Graphics;
 import java.awt.Font;
 import java.awt.Color;
@@ -153,7 +154,5 @@ public class Panel extends JPanel
                 s[k].draw(g);
             }
         }
-
     }
-
 }
