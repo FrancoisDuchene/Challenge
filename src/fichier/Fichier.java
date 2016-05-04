@@ -1,4 +1,4 @@
-package source;
+package fichier;
 import java.io.*;
 //import java.lang.Exception.*;
 
@@ -12,7 +12,9 @@ public class Fichier {
 	 */
 	public Fichier() {
 		try {
-			this.nomFichier = "src/dico.txt"; 
+			//TODO A changer. A chaque nouveau fichier ill ouvre d'office ce fichier => optimisation bof-bof
+			this.nomFichier = "res/data/dico.txt"; 
+			this.mode = 'X';
 			fR = new BufferedReader(new FileReader(nomFichier));			
 			pW = new PrintWriter(new FileWriter(nomFichier, true));
 		}  catch (FileNotFoundException e) {
@@ -264,4 +266,27 @@ public class Fichier {
 			System.exit(-1);
 		}
 	}
+	
+	//Statics methodes
+	
+	/**
+	 * 
+	 * @param path le chemin du dossier dans lequel chercher
+	 * @param fileName le fichier a trouver
+	 * @return true si le fichier existe et false si il n'existe pas dans le dossier specifie
+	 */
+	public static boolean fichierExiste(String path, String fileName)
+	{
+		File folder = new File(path);
+		File[] files = folder.listFiles();
+		for(int i=0; i < files.length; i++)
+		{
+			if(files[i].isFile() && files[i].getName().equals(fileName))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }

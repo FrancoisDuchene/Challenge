@@ -1,12 +1,10 @@
 package source;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import fichier.Fichier;
+import fichier.InOut;
 import graph.Profil_Windows;
 import graph.SimpleFenetre;
 
@@ -28,7 +26,7 @@ public class profilGestion {
 	public static void confDefautLoad()
 	{
 		playerConf = new Config("default");
-		if(fichierExiste(".properties", "default"))
+		if(Fichier.fichierExiste("saves/", "default.properties"))
 		{
 			playerConf.chargeConfig();
 			playerConf.paramExo();				
@@ -153,10 +151,10 @@ public class profilGestion {
 
 			name = nom;
 			playerOne.setName(nom);
-			if(fichierExiste(".sav", nom))
+			if(Fichier.fichierExiste("saves/",nom + ".sav" ))
 			{
 				existe = true;
-				if(fichierExiste(".cf", nom))
+				if(Fichier.fichierExiste("saves/", nom + ".cf"))
 				{
 					confExiste = true;
 				}
@@ -362,7 +360,7 @@ public class profilGestion {
 	 */
 	public static void chargeProfil()
 	{
-		if(fichierExiste(".sav", name))
+		if(Fichier.fichierExiste("saves/", name + ".sav"))
 		{			
 			String str = "";
 			Fichier fi = new Fichier();
@@ -413,30 +411,7 @@ public class profilGestion {
 			fi.fermer();
 		}
 	}
-	/**
-	 * 
-	 * @param extension with a "."
-	 * @return true if the file exist and false if the file don't exist
-	 */
-	public static boolean fichierExiste(String extension, String nom)
-	{
-		BufferedReader vador = null;
-		boolean bon = false;
-		try{
-			String filename = "saves/" + nom + extension;
-			vador = new BufferedReader(new FileReader(filename));
-			bon = true;
-		}catch(FileNotFoundException e){
-			bon = false;
-		}finally{
-			try{
-				if(bon == true)
-					vador.close();
-			}catch(IOException e)
-			{}
-		}
-		return bon;
-	}
+	
 	/**
 	 * 
 	 * @param mode true pour sauvegarder et false pour charger

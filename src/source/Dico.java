@@ -1,4 +1,7 @@
 package source;
+
+import fichier.Fichier;
+
 public class Dico {
 	/**
 	 * This function read the dictionary and return a random word
@@ -22,7 +25,7 @@ public class Dico {
 	public static Fichier ouvrirDico() {
 		String nomFichier = "res/data/dico.txt";
 		Fichier fi = new Fichier();
-		fi.ouvrir(nomFichier, "Lecture");
+		fi.ouvrir(nomFichier, "Lecture",true);
 		return fi;
 	}
 	/**

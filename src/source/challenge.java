@@ -1,6 +1,7 @@
 package source;
 import javax.swing.JOptionPane;
 
+import fichier.InOut;
 import graph.MThread;
 
 /**
@@ -40,7 +41,7 @@ public class challenge
 		else{message = "Do you want to use this program with a graphical interface or with in console ?";}
 
 		String choix = (String)JOptionPane.showInputDialog(null,message,
-						"IMPORTANT",JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+				"IMPORTANT",JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 		if(choix.equals(options[0]))
 		{
 			return true;
@@ -97,14 +98,25 @@ public class challenge
 				HighScoreGestion.menuHighScore();
 				break;
 			case 6:
+				if(continuons)
+				{
+					continuons = false;
+				}else{
+					continuons = true;
+					musique = null;
+					musique = new MThread("Musique");
+					musique.start();
+				}
+				break;
+			case 7:
 				System.exit(0);
 				break;
 			default :
-				if(language == 1){System.out.println("Veuillez indiquer 1, 2, 3, 4, 5 ou 6 !");}
-				else{System.out.println("Please Indicate 1, 2, 3, 4, 5 or 6!");}
+				if(language == 1){System.out.println("Veuillez indiquer 1, 2, 3, 4, 5, 6 ou 7 !");}
+				else{System.out.println("Please Indicate 1, 2, 3, 4, 5, 6 or 7 !");}
 				break;
 			}
-		}while(choix != 6);
+		}while(choix != 7);
 	}
 
 	public static void menuJeu()
@@ -215,11 +227,11 @@ public class challenge
 			if(language == 1){
 				System.out.println("\nMenu Principal :\n====================");
 				System.out.println("\nStatut : " + connecte());
-				System.out.println("\n1. Jouer\n2. Credits\n3. Profil\n4. Language\n5. HighScore\n6. Quitter");
+				System.out.println("\n1. Jouer\n2. Credits\n3. Profil\n4. Language\n5. HighScore\n6. Musique On/Off \n7. Quitter");
 			}else if (language == 2){
 				System.out.println("\nMain Menu :\n====================");
 				System.out.println("\nStatus : " + connecte() );
-				System.out.println("\n1. Play\n2. Credits\n3. Profile\n4. Language\n5. HighScore\n6. Exit");
+				System.out.println("\n1. Play\n2. Credits\n3. Profile\n4. Language\n5. HighScore\n6. Music On/Off \n7. Exit");
 			}
 		}else if(i==2){
 			if(language == 1){

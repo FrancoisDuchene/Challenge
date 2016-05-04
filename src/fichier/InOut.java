@@ -1,4 +1,4 @@
-package source;
+package fichier;
 import java.io.*;
 /**
  * To read the characters,...
