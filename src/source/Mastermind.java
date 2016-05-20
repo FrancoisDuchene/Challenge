@@ -1,5 +1,6 @@
 package source;
 import exceptions.INVALID_MODE;
+import fichier.InOut;
 
 /**
  * This is the game mastermind with letters.

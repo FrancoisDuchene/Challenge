@@ -1,5 +1,7 @@
 package source;
 
+import fichier.Fichier;
+
 public class Joueur {
 	//Attributs
 	/**

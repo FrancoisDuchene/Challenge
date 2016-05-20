@@ -83,7 +83,7 @@ public class SoundPlayer extends Thread
 	
 	public File rdmMusique()
 	{
-		final String filenameL = "saves/mus.ls";
+		final String filenameL = "res/data/mus.ls";
 		Fichier fi = new Fichier();
 		fi.ouvrir(filenameL, "L");
 		int nbrRdm = nbrRandom(fi.longueurFichier());

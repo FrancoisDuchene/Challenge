@@ -1,5 +1,6 @@
 package source;
 import exceptions.INVALID_MODE;
+import fichier.InOut;
 
 /**
  * Puissance4 is the class who contain the game puissance 4

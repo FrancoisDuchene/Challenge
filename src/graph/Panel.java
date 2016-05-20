@@ -2,11 +2,12 @@ package graph;
 import java.awt.Graphics;
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+//import java.awt.GradientPaint;
+//import java.awt.Graphics;
+//import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class Panel extends JPanel
 {
     private static int d= (int)(Math.random()*1000);
@@ -108,8 +109,8 @@ public class Panel extends JPanel
 
         private int nombre = 0;
         private Coordonnee[] t;
-        private int x = 0;
-        private int y = 0;// coordonnee du centre
+        //private int x = 0;
+        //private int y = 0;// coordonnee du centre
         private int lon = 0;
         private int f= 0;
 
@@ -118,8 +119,8 @@ public class Panel extends JPanel
             nombre = 5;
             Coordonnee tab[] = new Coordonnee[nombre];
             t = tab;
-            x = 100;
-            y = 100;
+            //x = 100;
+            //y = 100;
             lon = 50;
             f = 2;
         }
@@ -127,8 +128,8 @@ public class Panel extends JPanel
         public Dessins(int n, int x, int y, int longueur, int modulo)
         {
             this.nombre = n;
-            this.x = x;
-            this.y = y;
+            //this.x = x;
+            //this.y = y;
             this.lon = longueur;
             Coordonnee tab[] = new Coordonnee[nombre];
             for(int i  = 0; i < n; i++)
