@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+
+  <project name="Challenge" basedir="." default="jar">
+    <property name="saves.dir" value="saves"/>
+    <property name="build.dir" value="class"/>
+
+    <target name="info">
+      <echo>HChallenge installing ANT</echo>
+    </target>
+  	
+  	<target name="build" description="Compile source tree java fileset">
+  		<mkdir dir="${build.dir}/src"/>
+  		<mkdir dir="${build.dir}/res"/>
+  		<mkdir dir="${build.dir}/saves"/>
+  		<!-- Pour que le compilateur soit verbeux, il faut rajouter dans la balise
+  		javac : verbose="true" -->
+  		<javac srcdir="src" destdir="${build.dir}/src" source="1.7" target="1.7" debug="true"
+  		        deprecation="false" optimize="false" includeAntRuntime="false">
+  		        <include name="**/*.java"/>
+  		</javac>
+  		<copy todir="${build.dir}/res">
+			<fileset dir="res"/>
+  		</copy>
+  		<copy todir="${build.dir}/saves">
+  			<fileset dir="saves"/>
+  		</copy>
+  	</target>
+  	
+  	<target name="jar" depends="build" description="Create a Jar file">
+  		<jar destfile="Challenge.jar" basedir="${build.dir}" keepcompression="true"
+  			update="true">
+  			<manifest>
+  		    	<attribute name="Main-Class" value="hu-hu"/>
+  		    </manifest>
+  		</jar>
+  	</target>
+  	
+  	<target name="clean" description="Clean output directories" depends="jar">
+  		<delete>
+  	    	<fileset dir="${build.dir}">
+  	    		<include name="**/*.class"/>
+  	    	</fileset>
+  	    </delete>
+    </target>
+
+  </project>
