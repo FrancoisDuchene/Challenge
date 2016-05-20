@@ -10,12 +10,11 @@
     </target>
   	
   	<target name="build" description="Compile source tree java fileset">
-  		<mkdir dir="${build.dir}/src"/>
   		<mkdir dir="${build.dir}/res"/>
   		<mkdir dir="${build.dir}/saves"/>
   		<!-- Pour que le compilateur soit verbeux, il faut rajouter dans la balise
   		javac : verbose="true" -->
-  		<javac srcdir="src" destdir="${build.dir}/src" source="1.7" target="1.7" debug="true"
+  		<javac srcdir="src" destdir="${build.dir}" source="1.7" target="1.7" debug="true"
   		        deprecation="false" optimize="false" includeAntRuntime="false">
   		        <include name="**/*.java"/>
   		</javac>
@@ -28,10 +27,10 @@
   	</target>
   	
   	<target name="jar" depends="build" description="Create a Jar file">
-  		<jar destfile="Challenge.jar" basedir="${build.dir}" keepcompression="true"
-  			update="true">
+  		<jar destfile="Challenge.jar" basedir="${build.dir}" keepcompression="true">
   			<manifest>
-  		    	<attribute name="Main-Class" value="hu-hu"/>
+  		    	<attribute name="Main-Class" value="source.challenge"/>
+  				<attribute name="Class-Path" value="."/>
   		    </manifest>
   		</jar>
   	</target>
