@@ -18,6 +18,18 @@ of this classic game !
 Fourth is a connect 4 game with 1 and 2 players mode too, like the others.
 However the project is still in development and we will add some other games.
 
+We are currently in developpement of a graphical user interface (GUI) to make
+things right. The console version is still active thought and the user have actually
+the possibility, at the start of the program, to chose between GUI and console.
+
+As other features, we have a profile user system that can saves the score and
+preference into two files in the saves repertories.
+
+We have also a soundplayer that can play musics of ".wav" format.
+It is possible for the user to add his own musics in wav format into the
+"sound" folder, in the "res" repertorie. To make it good, it is also
+necessary to add the filename of the music into the file "mus.ls".
+
 You can help if you want but remember that we work on this project only
 for fun, don't take it too seriously.
 
@@ -29,8 +41,8 @@ PROJECT TITLE: Challenge - Classics games
 PURPOSE OF PROJECT: Create little games for fun :D
 VERSION or DATE: 1.0 gamma
 LANGUAGE : FRENCH - ENGLISH (still in translating)
-LAUNCH CONDITION : The game DON'T have a gui (graphical user interface).
-                   You need to open it in a terminal
+LAUNCH CONDITION : The game DON'T have a gui for a all the feature (graphical user interface).
+                   For now, you must open it in a terminal
 
 THE GREAT INQUISITOR: vinsifroid
 THE FINDER OF CLUES: Bivisi
