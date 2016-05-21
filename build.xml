@@ -1,12 +1,11 @@
 <?xml version="1.0"?>
 
-
   <project name="Challenge" basedir="." default="jar">
     <property name="saves.dir" value="saves"/>
     <property name="build.dir" value="class"/>
 
     <target name="info">
-      <echo>HChallenge installing ANT</echo>
+      <echo>Challenge installing ANT</echo>
     </target>
   	
   	<target name="build" description="Compile source tree java fileset">
