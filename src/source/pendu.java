@@ -2,6 +2,7 @@ package source;
 import exceptions.INVALID_MODE;
 import fichier.InOut;
 
+
 /**
  * 
  * @author vinsifroid and Bivisi
@@ -84,7 +85,7 @@ public class pendu {
 	 */
 	public static void option1()    //subroutines in the options to choose the number of life(42)
 	{   
-		System.out.println("Vous avez actuellement " + vies + " vies");
+		System.out.println(("Vous avez actuellement " + vies + " vies"));
 		System.out.println("Combien voulez vous de vies ?");
 		vies = InOut.getShort();     
 		if(vies <= 0)

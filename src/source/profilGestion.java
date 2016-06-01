@@ -22,15 +22,123 @@ public class profilGestion {
 	 * if mode == 1, it's the GUI mode that is activated
 	 */
 	public static byte mode=0;
-
-	public static void confDefautLoad()
-	{
-		playerConf = new Config("default");
-		if(Fichier.fichierExiste("saves/", "default.properties"))
+	
+	/**
+	 * Cette fonction gère les interraction principale avec le profil de l'utilisateur. Elle intervient tout particulièrement au début du
+	 * programme, lorsqu'il il s'agit d'effectuer plusieurs étapes de maintenance
+	 * @param md = 1 lorsque l'interface est en mode graphique, 2 quand c'est en mode console et 3 quand en mode graphique mais option "se connecter"
+	 */
+	public static void gestion(byte md)
+	{		
+		mode = md;
+		if(md==3)
+			mode = (byte)1;
+		
+		//pour la premiere ouverture de cette fonction dans ce programme
+		language = challenge.getLanguage();
+		if(premierOuverture)
+		{			
+			String nom = "";
+			if(md == 1 || md == 3)
+			{
+				nom = demandeNomGUI();
+			}else{
+				nom = demandeNomConsole();
+			}
+			
+			//Pour différencier les boutons 'se connecter' et 'creer un nouveau compte'
+			if(md==3 && !Fichier.fichierExiste("saves/", nom + ".sav"))
+			{
+				JOptionPane.showMessageDialog(null, "Cet utilisateur n'existe pas !", "Avertissement", JOptionPane.WARNING_MESSAGE, null);
+				return;
+			}
+			name = nom;
+			playerOne.setName(nom);
+			
+			if(Fichier.fichierExiste("saves/",nom + ".sav" ))
+			{
+				existe = true;
+				if(Fichier.fichierExiste("saves/", nom + ".cf"))
+				{
+					confExiste = true;
+				}
+			}
+			playerConf = new Config(nom);
+			if(confExiste)
+			{
+				gestionConfig(false);
+			}
+			else
+			{
+				gestionConfig(true);
+			}
+			premierOuverture = false;
+		}
+		//Si c'est la premiere fois qu'on cree le fichier de profil
+		if(existe == false)
 		{
-			playerConf.chargeConfig();
-			playerConf.paramExo();				
+			saveProfil();			
+			existe = true;
+		}
+		//Si le fichier de profil existe deja
+		else
+		{
+			chargeProfil();
+			gestionConfig(false);
+		}
+
+		//Le menu affiché en fonction du mode initial
+
+		if(md == 1 || md == 3)
+		{
+			new Profil_Windows();
+		}else{
+			menuGestion();
 		}		
+	}
+	
+	private static String demandeNomConsole()
+	{
+		String nom = "";
+		do
+		{
+			if(language == 1){System.out.println("Quel est votre nom ?");}
+			else{System.out.println("What is your name ?");}		
+			nom = InOut.Mot(InOut.getLine());
+			if(nom.contains(" "))
+			{
+				if(language == 1){System.out.println("Veuillez a ne pas introduire d'espace");}
+				else{System.out.println("Please don't put space in your name");}
+			}else if(nom.equals("default"))
+			{
+				if(language == 1){System.out.println("Veuillez choisir un autre nom d'utilisateur que 'default' !");}
+				else{System.out.println("Please choose another username than 'default' !");}
+			}
+		}while(nom.contains(" ") || nom.equals("default"));
+		return nom;
+	}
+	
+	private static String demandeNomGUI()
+	{
+		String nom = "";
+		do
+		{
+			nom = (String) JOptionPane.showInputDialog(null, "Quel est votre nom ?", "Gestion de profil", JOptionPane.QUESTION_MESSAGE);
+			if(nom.contains(" "))
+			{
+				if(language==1){final String messageE1 = "Désolé mais votre nom ne peut contenir d'espace !", titleE1 = "Erreur";
+				JOptionPane.showMessageDialog(null, messageE1, titleE1, JOptionPane.WARNING_MESSAGE, null);}
+				else{final String messageE1 = "Sorry but your name cannot contain space !", titleE1 = "Error";
+				JOptionPane.showMessageDialog(null, messageE1, titleE1, JOptionPane.WARNING_MESSAGE, null);}        		
+			}else if(nom.equals("default"))
+			{
+				if(language==1){final String messageE2 = "Désolé mais votre nom ne peut peut pas être 'default'", titleE2 = "Erreur";
+				JOptionPane.showMessageDialog(null, messageE2, titleE2, JOptionPane.WARNING_MESSAGE, null);}
+				else{final String messageE2 = "Sorry but your name cannot be 'default'", titleE2 = "Error";
+				JOptionPane.showMessageDialog(null, messageE2, titleE2, JOptionPane.WARNING_MESSAGE, null);}        		
+			}
+		}while(nom.contains(" ") || nom.equals("default"));
+		return nom;
 	}
 
 	public static void menuGestion()
@@ -75,6 +183,7 @@ public class profilGestion {
 			}
 		}while(choix != 8);
 	}
+	
 	public static void afficheMenu()
 	{
 		if(language == 1)
@@ -103,137 +212,7 @@ public class profilGestion {
 			System.out.println("\n8. Quit");
 		}
 		System.out.println();
-	}
-
-	public static void optionConfigurationMenu()
-	{
-		byte choix = 0;
-		System.out.println("###CONFIGURATION MENU###");
-		System.out.println("\n1. Listing des propriétés 2. Charger la configuration 3. Sortir");
-		do{
-			choix = InOut.getByte();
-			switch(choix)
-			{
-			case 1:
-				playerConf.getProp().list(System.out);
-				break;
-			case 2:
-				gestionConfig(true);
-				break;
-			case 3:
-				break;
-			default:
-				if(language==1){System.out.println("Veuillez indiquer 1, 2 ou 3 !");}
-				else{System.out.println("Please enter 1, 2 or 3 !");}
-				break;
-			}
-		}while(choix != 3);
-	}
-	/**
-	 * Cette fonction gère les interraction principale avec le profil de l'utilisateur. Elle intervient tout particulièrement au début du
-	 * programme, lorsqu'il il s'agit d'effectuer plusieurs étapes de maintenance
-	 * @param md = 1 lorsque l'interface est en mode graphique et 2 quand c'est en mode console
-	 */
-	public static void gestion(byte md)
-	{		
-		mode = md;
-		//pour la premiere ouverture de cette fonction dans ce programme
-		language = challenge.getLanguage();
-		if(premierOuverture)
-		{			
-			String nom = "";
-			if(md == 1)
-			{
-				nom = demandeNomGUI();
-			}else{
-				nom = demandeNomConsole();
-			}
-
-			name = nom;
-			playerOne.setName(nom);
-			if(Fichier.fichierExiste("saves/",nom + ".sav" ))
-			{
-				existe = true;
-				if(Fichier.fichierExiste("saves/", nom + ".cf"))
-				{
-					confExiste = true;
-				}
-			}
-			playerConf = new Config(nom);
-			if(confExiste)
-			{
-				gestionConfig(false);
-			}
-			else
-			{
-				gestionConfig(true);
-			}
-			premierOuverture = false;
-		}
-		//Si c'est la premiere fois qu'on cree le fichier de profil
-		if(existe == false)
-		{
-			saveProfil();			
-			existe = true;
-		}
-		//Si le fichier de profil existe deja
-		else
-		{
-			chargeProfil();
-			gestionConfig(false);
-		}
-
-		//Le menu affiché en fonction du mode initial
-
-		if(md == 1)
-		{
-			new Profil_Windows();
-		}else{
-			menuGestion();
-		}		
-	}
-	private static String demandeNomConsole()
-	{
-		String nom = "";
-		do
-		{
-			if(language == 1){System.out.println("Quel est votre nom ?");}
-			else{System.out.println("What is your name ?");}		
-			nom = InOut.Mot(InOut.getLine());
-			if(nom.contains(" "))
-			{
-				if(language == 1){System.out.println("Veuillez a ne pas introduire d'espace");}
-				else{System.out.println("Please don't put space in your name");}
-			}else if(nom.equals("default"))
-			{
-				if(language == 1){System.out.println("Veuillez choisir un autre nom d'utilisateur que 'default' !");}
-				else{System.out.println("Please choose another username than 'default' !");}
-			}
-		}while(nom.contains(" ") || nom.equals("default"));
-		return nom;
-	}
-	private static String demandeNomGUI()
-	{
-		String nom = "";
-		do
-		{
-			nom = (String) JOptionPane.showInputDialog(null, "Quel est votre nom ?", "Gestion de profil", JOptionPane.QUESTION_MESSAGE);
-			if(nom.contains(" "))
-			{
-				if(language==1){final String messageE1 = "Désolé mais votre nom ne peut contenir d'espace !", titleE1 = "Erreur";
-				JOptionPane.showMessageDialog(null, messageE1, titleE1, JOptionPane.WARNING_MESSAGE, null);}
-				else{final String messageE1 = "Sorry but your name cannot contain space !", titleE1 = "Error";
-				JOptionPane.showMessageDialog(null, messageE1, titleE1, JOptionPane.WARNING_MESSAGE, null);}        		
-			}else if(nom.equals("default"))
-			{
-				if(language==1){final String messageE2 = "Désolé mais votre nom ne peut peut pas être 'default'", titleE2 = "Erreur";
-				JOptionPane.showMessageDialog(null, messageE2, titleE2, JOptionPane.WARNING_MESSAGE, null);}
-				else{final String messageE2 = "Sorry but your name cannot be 'default'", titleE2 = "Error";
-				JOptionPane.showMessageDialog(null, messageE2, titleE2, JOptionPane.WARNING_MESSAGE, null);}        		
-			}
-		}while(nom.contains(" ") || nom.equals("default"));
-		return nom;
-	}
+	}	
 
 	/**
 	 * the function add the score of the HangmanGame
@@ -410,6 +389,41 @@ public class profilGestion {
 			playerOne.setScorePuissance4(scorePuissance);
 			fi.fermer();
 		}
+	}
+	
+	public static void confDefautLoad()
+	{
+		playerConf = new Config("default");
+		if(Fichier.fichierExiste("saves/", "default.properties"))
+		{
+			playerConf.chargeConfig();
+			playerConf.paramExo();				
+		}		
+	}
+	
+	public static void optionConfigurationMenu()
+	{
+		byte choix = 0;
+		System.out.println("###CONFIGURATION MENU###");
+		System.out.println("\n1. Listing des propriétés 2. Charger la configuration 3. Sortir");
+		do{
+			choix = InOut.getByte();
+			switch(choix)
+			{
+			case 1:
+				playerConf.getProp().list(System.out);
+				break;
+			case 2:
+				gestionConfig(true);
+				break;
+			case 3:
+				break;
+			default:
+				if(language==1){System.out.println("Veuillez indiquer 1, 2 ou 3 !");}
+				else{System.out.println("Please enter 1, 2 or 3 !");}
+				break;
+			}
+		}while(choix != 3);
 	}
 	
 	/**

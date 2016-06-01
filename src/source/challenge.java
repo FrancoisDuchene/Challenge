@@ -1,4 +1,7 @@
 package source;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import javax.swing.JOptionPane;
 
 import fichier.InOut;
@@ -48,7 +51,6 @@ public class challenge
 		}else{
 			return false;
 		}
-
 	}
 	public static String connecte()
 	{

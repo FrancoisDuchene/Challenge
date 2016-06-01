@@ -1,5 +1,7 @@
 package source;
 import exceptions.INVALID_MODE;
+import fichier.Fichier;
+import fichier.InOut;
 
 public class HighScoreGestion {
 
@@ -30,25 +32,25 @@ public class HighScoreGestion {
 			// si oui, on les charge, c'est sense etre les plus recents
 			// si non, on les cree
 
-			if(!(profilGestion.fichierExiste(".hg", "HighScore/pendu"))){
+			if(!(Fichier.fichierExiste("saves/", "HighScore/pendu.hg"))){
 				HGpendu.save();
 			}else{
 				HGpendu.charge();
 			}
 
-			if(!(profilGestion.fichierExiste(".hg", "HighScore/plusMoins"))){
+			if(!(Fichier.fichierExiste("saves/", "HighScore/plusMoins.hg"))){
 				HGplusMoins.save();
 			}else{
 				HGplusMoins.charge();
 			}
 
-			if(!(profilGestion.fichierExiste(".hg", "HighScore/mastermind"))){
+			if(!(Fichier.fichierExiste("saves/", "HighScore/mastermind.hg"))){
 				HGmastermind.save();
 			}else{
 				HGmastermind.charge();
 			}
 
-			if(!(profilGestion.fichierExiste(".hg", "HighScore/puissance4"))){
+			if(!(Fichier.fichierExiste("saves/", "HighScore/puissance4.hg"))){
 				HGpuissance4.save();
 			}else{
 				HGpuissance4.charge();

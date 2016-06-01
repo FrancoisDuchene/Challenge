@@ -42,6 +42,10 @@ public class SimpleFenetre extends JFrame {
 	{
 			chewie.add(lab);					
 	}
+	public void addEmptyLabel()
+	{
+		chewie.add(new JLabel(""));
+	}
 	public void repaintSimpleF()
 	{
 		chewie.repaint();

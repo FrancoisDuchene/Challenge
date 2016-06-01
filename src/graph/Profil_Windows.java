@@ -4,10 +4,12 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import source.profilGestion;
@@ -211,6 +213,34 @@ public class Profil_Windows extends JFrame {
 	}
 	private void optionBouton6()
 	{
+		//TODO ici une fenetre contenant le text brut s'affiche et une autre boite de dialogue
+		// prend les requetes de l'utilisateur. Ce n'est pas efficace et ergonomique
+		// Il faudrait soit faire une fenetre de Configuration soit faire un Card Layout avec la fentre de profil
+		// Pour ainsi afficher la configuration etc
 		
+		String[] options = new String[]{"Listing des propriétés", "Charger la configuration"};
+		
+		String choix = (String)JOptionPane.showInputDialog(null, "Choisissez votre option", "Menu de Configuration", 
+															JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+		
+		if(choix.equals(options[0]))
+		{
+			Properties pop = profilGestion.playerConf.getProp();
+			
+			SimpleFenetre SF = new SimpleFenetre("Proprietes - " + profilGestion.name, 9, 4);
+			
+			SF.addEmptyLabel();SF.addJlabel(new JLabel("Language : "));SF.addJlabel(new JLabel(pop.getProperty("Language"))); SF.addEmptyLabel();
+			SF.addEmptyLabel();SF.addJlabel(new JLabel("joueurs_PlusMoins : "));SF.addJlabel(new JLabel(pop.getProperty("joueurs_PlusMoins"))); SF.addEmptyLabel();
+			SF.addEmptyLabel();SF.addJlabel(new JLabel("limMax_PlusMoins : "));SF.addJlabel(new JLabel(pop.getProperty("limMax_PlusMoins"))); SF.addEmptyLabel();
+			SF.addEmptyLabel();SF.addJlabel(new JLabel("vies_pendu : "));SF.addJlabel(new JLabel(pop.getProperty("vies_pendu"))); SF.addEmptyLabel();
+			SF.addEmptyLabel();SF.addJlabel(new JLabel("joueurs_pendu : "));SF.addJlabel(new JLabel(pop.getProperty("joueurs_pendu"))); SF.addEmptyLabel();
+			SF.addEmptyLabel();SF.addJlabel(new JLabel("vies_MasterMind : "));SF.addJlabel(new JLabel(pop.getProperty("vies_MasterMind"))); SF.addEmptyLabel();
+			SF.addEmptyLabel();SF.addJlabel(new JLabel("difficulty_MasterMind : "));SF.addJlabel(new JLabel(pop.getProperty("difficulty_MasterMind"))); SF.addEmptyLabel();
+			SF.addEmptyLabel();SF.addJlabel(new JLabel("joueurs_Puissance : "));SF.addJlabel(new JLabel(pop.getProperty("joueurs_Puissance"))); SF.addEmptyLabel();
+			SF.addEmptyLabel();SF.addJlabel(new JLabel("difficulty_Puissance : "));SF.addJlabel(new JLabel(pop.getProperty("difficulty_Puissance"))); SF.addEmptyLabel();
+			
+		}else{
+			profilGestion.gestionConfig(true);
+		}
 	}
 }

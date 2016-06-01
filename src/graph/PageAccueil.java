@@ -138,7 +138,7 @@ public class PageAccueil extends JFrame
 		prof1.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event)
 			{
-				profilGestion.gestion((byte)1);
+				profilGestion.gestion((byte)3);
 			}});
 		prof2.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event)
