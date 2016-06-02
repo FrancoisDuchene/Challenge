@@ -11,6 +11,7 @@
   	<target name="build" description="Compile source tree java fileset">
   		<mkdir dir="${build.dir}/res"/>
   		<mkdir dir="${build.dir}/saves"/>
+  		<mkdir dir="${build.dir}/lang"/>
   		<!-- Pour que le compilateur soit verbeux, il faut rajouter dans la balise
   		javac : verbose="true" -->
   		<javac srcdir="src" destdir="${build.dir}" source="1.7" target="1.7" debug="true"
@@ -22,6 +23,9 @@
   		</copy>
   		<copy todir="${build.dir}/saves">
   			<fileset dir="saves"/>
+  		</copy>
+  		<copy todir="${build.dir}/lang">
+  			<fileset dir="src/lang"/>
   		</copy>
   	</target>
   	
