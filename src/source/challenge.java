@@ -164,12 +164,12 @@ public class challenge
 			{
 			case 1:
 				language = 1;
-				LSD = ResourceBundle.getBundle("challenge", new Locale("fr", "BE"));
+				LSD = ResourceBundle.getBundle("lang.challenge", new Locale("fr", "BE"));
 				System.out.println(LSD.getString("chLa_msg2"));
 				break;
 			case 2:
 				language = 2;
-				LSD = ResourceBundle.getBundle("challenge", new Locale("en"));
+				LSD = ResourceBundle.getBundle("lang.challenge", new Locale("en"));
 				System.out.println(LSD.getString("chLa_msg2"));
 				break;
 			}
@@ -230,6 +230,10 @@ public class challenge
 	public static void setLanguage(byte lang)
 	{
 		language = lang;
+	}
+	public static ResourceBundle getResbundle()
+	{
+		return LSD;
 	}
 	/**
 	 * a function who "clear" the screen

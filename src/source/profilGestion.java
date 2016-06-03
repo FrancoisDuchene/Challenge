@@ -1,5 +1,7 @@
 package source;
 
+import java.util.ResourceBundle;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -10,6 +12,7 @@ import graph.SimpleFenetre;
 
 public class profilGestion {
 
+	private static ResourceBundle LSD = challenge.getResbundle();
 	public static boolean premierOuverture = true;
 	public static boolean existe = false;
 	public static boolean confExiste = false;
@@ -22,7 +25,7 @@ public class profilGestion {
 	 * if mode == 1, it's the GUI mode that is activated
 	 */
 	public static byte mode=0;
-	
+
 	/**
 	 * Cette fonction gère les interraction principale avec le profil de l'utilisateur. Elle intervient tout particulièrement au début du
 	 * programme, lorsqu'il il s'agit d'effectuer plusieurs étapes de maintenance
@@ -33,7 +36,7 @@ public class profilGestion {
 		mode = md;
 		if(md==3)
 			mode = (byte)1;
-		
+
 		//pour la premiere ouverture de cette fonction dans ce programme
 		language = challenge.getLanguage();
 		if(premierOuverture)
@@ -45,16 +48,17 @@ public class profilGestion {
 			}else{
 				nom = demandeNomConsole();
 			}
-			
+
 			//Pour différencier les boutons 'se connecter' et 'creer un nouveau compte'
 			if(md==3 && !Fichier.fichierExiste("saves/", nom + ".sav"))
 			{
-				JOptionPane.showMessageDialog(null, "Cet utilisateur n'existe pas !", "Avertissement", JOptionPane.WARNING_MESSAGE, null);
+				final String message = LSD.getString("gesti_msg");
+				JOptionPane.showMessageDialog(null, message, "Avertissement", JOptionPane.WARNING_MESSAGE, null);
 				return;
 			}
 			name = nom;
 			playerOne.setName(nom);
-			
+
 			if(Fichier.fichierExiste("saves/",nom + ".sav" ))
 			{
 				existe = true;
@@ -96,28 +100,25 @@ public class profilGestion {
 			menuGestion();
 		}		
 	}
-	
+
 	private static String demandeNomConsole()
 	{
 		String nom = "";
 		do
 		{
-			if(language == 1){System.out.println("Quel est votre nom ?");}
-			else{System.out.println("What is your name ?");}		
+			System.out.println(LSD.getString("dNoCo_msg1"));		
 			nom = InOut.Mot(InOut.getLine());
 			if(nom.contains(" "))
 			{
-				if(language == 1){System.out.println("Veuillez a ne pas introduire d'espace");}
-				else{System.out.println("Please don't put space in your name");}
+				System.out.println(LSD.getString("dNoCo_msg2"));
 			}else if(nom.equals("default"))
 			{
-				if(language == 1){System.out.println("Veuillez choisir un autre nom d'utilisateur que 'default' !");}
-				else{System.out.println("Please choose another username than 'default' !");}
+				System.out.println(LSD.getString("dNoCo_msg3"));
 			}
 		}while(nom.contains(" ") || nom.equals("default"));
 		return nom;
 	}
-	
+
 	private static String demandeNomGUI()
 	{
 		String nom = "";
@@ -126,16 +127,12 @@ public class profilGestion {
 			nom = (String) JOptionPane.showInputDialog(null, "Quel est votre nom ?", "Gestion de profil", JOptionPane.QUESTION_MESSAGE);
 			if(nom.contains(" "))
 			{
-				if(language==1){final String messageE1 = "Désolé mais votre nom ne peut contenir d'espace !", titleE1 = "Erreur";
-				JOptionPane.showMessageDialog(null, messageE1, titleE1, JOptionPane.WARNING_MESSAGE, null);}
-				else{final String messageE1 = "Sorry but your name cannot contain space !", titleE1 = "Error";
-				JOptionPane.showMessageDialog(null, messageE1, titleE1, JOptionPane.WARNING_MESSAGE, null);}        		
+				final String messageE1 = LSD.getString("deNoGui_msg1"), titleE1 = LSD.getString("deNoGUI_msg2");
+				JOptionPane.showMessageDialog(null, messageE1, titleE1, JOptionPane.WARNING_MESSAGE, null);        		
 			}else if(nom.equals("default"))
 			{
-				if(language==1){final String messageE2 = "Désolé mais votre nom ne peut peut pas être 'default'", titleE2 = "Erreur";
-				JOptionPane.showMessageDialog(null, messageE2, titleE2, JOptionPane.WARNING_MESSAGE, null);}
-				else{final String messageE2 = "Sorry but your name cannot be 'default'", titleE2 = "Error";
-				JOptionPane.showMessageDialog(null, messageE2, titleE2, JOptionPane.WARNING_MESSAGE, null);}        		
+				final String messageE2 = LSD.getString("deNoGUI_msg3"), titleE2 = LSD.getString("deNoGUI_msg2");
+				JOptionPane.showMessageDialog(null, messageE2, titleE2, JOptionPane.WARNING_MESSAGE, null);       		
 			}
 		}while(nom.contains(" ") || nom.equals("default"));
 		return nom;
@@ -177,40 +174,24 @@ public class profilGestion {
 			case 8:
 				break;
 			default:
-				if(language == 1){System.out.println("Veuillez indiquer 1, 2, 3, 4, 5, 6 ou 7 !");}
-				else{System.out.println("Please indicate 1, 2, 3, 4, 5, 6 ou 7 !");}
+				System.out.println(LSD.getString("meGest_msg"));
 				break;
 			}
 		}while(choix != 8);
 	}
-	
+
 	public static void afficheMenu()
 	{
-		if(language == 1)
-		{
-			System.out.println("\n#### PROFIL - " + name + " ####");
-			System.out.println(playerOne.toString() + "\n");
-			System.out.println("1. Tableau des scores general");
-			System.out.println("2. Score Pendu");
-			System.out.println("3. Score PlusMoins");
-			System.out.println("4. Score MasterMind");
-			System.out.println("5. Score Puissance4");
-			System.out.println("6. Configuration");
-			System.out.println("7. Changer d'utilisateur");
-			System.out.println("\n8. Quitter");
-		}else if(language == 2)
-		{
-			System.out.println("#### PROFILE - " + name + " ####");
-			System.out.println(playerOne.toString() + "\n");
-			System.out.println("1. General HighScore");
-			System.out.println("2. Hangman Score");
-			System.out.println("3. HighLow Score");
-			System.out.println("4. MasterMind Score");
-			System.out.println("5. Puissance4 Score");
-			System.out.println("6. Configuration");
-			System.out.println("7. Change user");
-			System.out.println("\n8. Quit");
-		}
+		System.out.println(LSD.getString("prGe_affMe_msg1") + name + " ####");
+		System.out.println(playerOne.toString() + LSD.getString("prGe_affMe_msg2"));
+		System.out.println(LSD.getString("prGe_affMe_msg3"));
+		System.out.println(LSD.getString("prGe_affMe_msg4"));
+		System.out.println(LSD.getString("prGe_affMe_msg5"));
+		System.out.println(LSD.getString("prGe_affMe_msg6"));
+		System.out.println(LSD.getString("prGe_affMe_msg7"));
+		System.out.println(LSD.getString("prGe_affMe_msg8"));
+		System.out.println(LSD.getString("prGe_affMe_msg9"));
+		System.out.println(LSD.getString("prGe_affMe_msg10"));
 		System.out.println();
 	}	
 
@@ -258,73 +239,54 @@ public class profilGestion {
 	{
 		if(mode == 0)
 		{
-			if(language == 1)
-			{
-				System.out.println("\nNom : " + playerOne.getName());
-				System.out.println("Scores Pendu");
-				playerOne.afficheScoreSPd();
-				System.out.println("Score Pendu Total : " + playerOne.scorePenduTotal());
-				System.out.println("\nScore Plus ou Moins\n");
-				playerOne.afficheScoreSPM();
-				System.out.println("Score PlusMoins Total : " + playerOne.scorePlusMoinsTotal());
-				System.out.println("\nScore MasterMind\n");
-				playerOne.afficheScoreSMM();
-				System.out.println("Score MasterMind Total : " + playerOne.scoreMasterMindTotal());
-				System.out.println("\nScore Puissance4\n");
-				playerOne.afficheScoreSPU();
-				System.out.println("Score Puissance4 Total : " + playerOne.scorePuissanceTotal());
-				System.out.println("Score Total : " + playerOne.scoreTotal());
-			}else{
-				System.out.println("\nName : " + playerOne.getName());
-				System.out.println("Hangmann Score");
-				playerOne.afficheScoreSPd();
-				System.out.println("Hangmann Total score : " + playerOne.scorePenduTotal());
-				System.out.println("\nHighLow score\n");
-				playerOne.afficheScoreSPM();
-				System.out.println("HighLow Total score : " + playerOne.scorePlusMoinsTotal());
-				System.out.println("\nMasterMind Score\n");
-				playerOne.afficheScoreSMM();
-				System.out.println("MasterMind Score : " + playerOne.scoreMasterMindTotal());
-				System.out.println("\nPuissance4 Score\n");
-				playerOne.afficheScoreSPU();
-				System.out.println("Puissance4 Score : " + playerOne.scorePuissanceTotal());
-				System.out.println("Total Score : " + playerOne.scoreTotal());
-			}
+			System.out.println(LSD.getString("prGe_affMe_msg2") + LSD.getString("prGe_affPr_msg1") + playerOne.getName());
+			System.out.println(LSD.getString("prGe_affPr_msg2"));
+			playerOne.afficheScoreSPd();
+			System.out.println(LSD.getString("prGe_affPr_msg3") + playerOne.scorePenduTotal());
+			System.out.println(LSD.getString("prGe_affMe_msg2") + LSD.getString("prGe_affPr_msg4") + LSD.getString("prGe_affMe_msg2"));
+			playerOne.afficheScoreSPM();
+			System.out.println(LSD.getString("prGe_affPr_msg5") + playerOne.scorePlusMoinsTotal());
+			System.out.println(LSD.getString("prGe_affMe_msg2") + LSD.getString("prGe_affPr_msg6") + LSD.getString("prGe_affMe_msg2"));
+			playerOne.afficheScoreSMM();
+			System.out.println(LSD.getString("prGe_affPr_msg7") + playerOne.scoreMasterMindTotal());
+			System.out.println(LSD.getString("prGe_affMe_msg2") + LSD.getString("prGe_affPr_msg8") + LSD.getString("prGe_affMe_msg2"));
+			playerOne.afficheScoreSPU();
+			System.out.println(LSD.getString("prGe_affPr_msg9") + playerOne.scorePuissanceTotal());
+			System.out.println(LSD.getString("prGe_affPr_msg10") + playerOne.scoreTotal());
 		}else if(mode == 1)
 		{		
 			int[] tab1 = playerOne.getScorePendu();
 			int[] tab2 = playerOne.getScorePlusMoins();
 			int[] tab3 = playerOne.getScoreMasterMind();
 			int[] tab4 = playerOne.getScorePuissance4();
-			
+
 			SimpleFenetre SF = new SimpleFenetre("Profil -"+ name,18,2);
-			
-			SF.addJlabel(new JLabel("Nom : " + name));	SF.addJlabel(new JLabel(""));	
-			
-			SF.addJlabel(new JLabel("Score Pendu")); SF.addJlabel(new JLabel(""));				
+
+			SF.addJlabel(new JLabel(LSD.getString("prGe_affPr_msg1") + name));	SF.addJlabel(new JLabel(""));	
+
+			SF.addJlabel(new JLabel(LSD.getString("prGe_affPr_msg2"))); SF.addJlabel(new JLabel(""));				
 			SF.addJlabel(new JLabel(Integer.toString(tab1[1])));	SF.addJlabel(new JLabel(Integer.toString(tab1[2])));
 			SF.addJlabel(new JLabel(Integer.toString(tab1[3])));	SF.addJlabel(new JLabel(Integer.toString(tab1[4])));		
-			SF.addJlabel(new JLabel("Score Pendu total : "));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scorePenduTotal())));
-			
-			SF.addJlabel(new JLabel("Score Plus ou Moins"));	SF.addJlabel(new JLabel(""));		
+			SF.addJlabel(new JLabel(LSD.getString("prGe_affPr_msg3")));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scorePenduTotal())));
+
+			SF.addJlabel(new JLabel(LSD.getString("prGe_affMe_msg4")));	SF.addJlabel(new JLabel(""));		
 			SF.addJlabel(new JLabel(Integer.toString(tab2[1])));	SF.addJlabel(new JLabel(Integer.toString(tab2[2])));
 			SF.addJlabel(new JLabel(Integer.toString(tab2[3])));	SF.addJlabel(new JLabel(Integer.toString(tab2[4])));		
-			SF.addJlabel(new JLabel("Score PlusMoins total : "));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scorePlusMoinsTotal())));
-			
-			SF.addJlabel(new JLabel("Score Mastermind"));	SF.addJlabel(new JLabel(""));
+			SF.addJlabel(new JLabel(LSD.getString("prGe_affMe_msg5")));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scorePlusMoinsTotal())));
+
+			SF.addJlabel(new JLabel(LSD.getString("prGe_affMe_msg6")));	SF.addJlabel(new JLabel(""));
 			SF.addJlabel(new JLabel(Integer.toString(tab3[1])));	SF.addJlabel(new JLabel(Integer.toString(tab3[2])));
 			SF.addJlabel(new JLabel(Integer.toString(tab3[3])));	SF.addJlabel(new JLabel(Integer.toString(tab3[4])));
-			SF.addJlabel(new JLabel("Score Mastermind total : "));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scoreMasterMindTotal())));
-			
-			SF.addJlabel(new JLabel("Puissance 4"));	SF.addJlabel(new JLabel(""));
+			SF.addJlabel(new JLabel(LSD.getString("prGe_affMe_msg7")));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scoreMasterMindTotal())));
+
+			SF.addJlabel(new JLabel(LSD.getString("prGe_affMe_msg8")));	SF.addJlabel(new JLabel(""));
 			SF.addJlabel(new JLabel(Integer.toString(tab4[1])));	SF.addJlabel(new JLabel(Integer.toString(tab4[2])));
 			SF.addJlabel(new JLabel(Integer.toString(tab4[3])));	SF.addJlabel(new JLabel(Integer.toString(tab4[4])));
-			SF.addJlabel(new JLabel("Score Puissance 4 total : ")); SF.addJlabel(new JLabel(Integer.toString(playerOne.scorePuissanceTotal())));
-			
-			SF.addJlabel(new JLabel("Total Score : "));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scoreTotal())));
+			SF.addJlabel(new JLabel(LSD.getString("prGe_affMe_msg9"))); SF.addJlabel(new JLabel(Integer.toString(playerOne.scorePuissanceTotal())));
+
+			SF.addJlabel(new JLabel(LSD.getString("prGe_affMe_msg10")));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scoreTotal())));
 			SF.repaintSimpleF();
 		}
-
 	}
 	/**
 	 * Save the player Profile with the score and the name
@@ -390,7 +352,7 @@ public class profilGestion {
 			fi.fermer();
 		}
 	}
-	
+
 	public static void confDefautLoad()
 	{
 		playerConf = new Config("default");
@@ -400,12 +362,12 @@ public class profilGestion {
 			playerConf.paramExo();				
 		}		
 	}
-	
+
 	public static void optionConfigurationMenu()
 	{
 		byte choix = 0;
 		System.out.println("###CONFIGURATION MENU###");
-		System.out.println("\n1. Listing des propriétés 2. Charger la configuration 3. Sortir");
+		System.out.println(LSD.getString("optConfMe_msg1"));
 		do{
 			choix = InOut.getByte();
 			switch(choix)
@@ -419,13 +381,12 @@ public class profilGestion {
 			case 3:
 				break;
 			default:
-				if(language==1){System.out.println("Veuillez indiquer 1, 2 ou 3 !");}
-				else{System.out.println("Please enter 1, 2 or 3 !");}
+				System.out.println(LSD.getString("optConfMe_msg2"));
 				break;
 			}
 		}while(choix != 3);
 	}
-	
+
 	/**
 	 * 
 	 * @param mode true pour sauvegarder et false pour charger
