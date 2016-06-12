@@ -162,58 +162,127 @@ public class jeuDames {
 			break;
 		}
 	}
-	private pion prAdversaire(pion pi, boolean surUnAdversaire, boolean arrete)
+	/**
+	 * 
+	 * @param pi le pion avec les coodornnes de l'adversaire que l'on veut prendre
+	 * @param surUnAdversaire mettre a true
+	 * @param sMT mettre a false
+	 * @param arrete mettre a true
+	 * @return
+	 */
+	private pion prAdversaire(pion pi, boolean surUnAdversaire, boolean sMT,boolean arrete)
 	{
+		boolean surMemeTrace = sMT;
+		boolean onArrete = arrete;
 		// Cas de base
-		if(arrete==false)
+		if(onArrete==false)
 		{
 			return pi;
 		}
-		//On verifie a gauche et a droite si il y a un autre adversaire
-		byte a = canMove(pi,true);
-		byte b = canMove(pi,false);
 		
 		//On cree un nouveau pion pour repositionner le curseur sur le plateau
 		pion tmp = new pion(pi.getCoordX(),pi.getCoordY(),pi.isWhite());
-		//On regarde a droite
-		switch(a)
-		{
-		case 0:
-			return pi;
-		case 1:
-			return pi;
-		case 2:
-			if(surUnAdversaire)
+		
+		if(!surMemeTrace){
+			//On regarde a gauche
+			byte a = canMove(pi,true);
+			
+			switch(a)
 			{
-				return pi;
-			}else{
-				if(pi.isWhite())
+			case 0:
+				//Place suivante est sur le bord
+				surMemeTrace = true;
+			case 1:
+				//Place suivante est un pion du meme camp
+				surMemeTrace = true;
+			case 2:
+				//Place suivante est un pion adverse, tout depend si on vient d'un pion adverse ou d'une case libre
+				//si case libre, alors on peut envisager de prendre ce pion-là
+				//si pion adverse, on ne peut pas le prendre selon les regles internationnales
+				if(surUnAdversaire)
 				{
-					tmp.setCoord(new Coordonnees((byte)(pi.getCoordX()+1),(byte)(pi.getCoordY()+1)));
+					surMemeTrace = true;
 				}else{
-					tmp.setCoord(new Coordonnees((byte)(pi.getCoordX()+1),(byte)(pi.getCoordY()-1)));
+					if(pi.isWhite())
+					{
+						tmp.setCoord(new Coordonnees((byte)(pi.getCoordX()-1),(byte)(pi.getCoordY()+1)));
+					}else{
+						tmp.setCoord(new Coordonnees((byte)(pi.getCoordX()-1),(byte)(pi.getCoordY()-1)));
+					}
+					surUnAdversaire=true;
 				}
+				break;
+			case 3:
+				//Place suivante est un case libre, tout depend si on vient d'un pion adverse ou d'une case libre
+				//si case libre, alors on ne peut plus avancer et on prend le pion précédent
+				//si pion adverse, on peut envisager d'avancer d'encore 1
+				if(surUnAdversaire)
+				{
+					if(pi.isWhite())
+					{
+						tmp.setCoord(new Coordonnees((byte)(pi.getCoordX()-1),(byte)(pi.getCoordY()+1)));
+					}else{
+						tmp.setCoord(new Coordonnees((byte)(pi.getCoordX()-1),(byte)(pi.getCoordY()-1)));
+					}
+					surUnAdversaire=false;
+				}else{
+					surMemeTrace = true;
+				}
+				break;
 			}
-			break;
-		case 3:
-			if(surUnAdversaire)
+		}else{
+			//On regarde a droite
+			byte b = canMove(pi,false);
+			
+			switch(b)
 			{
-				if(pi.isWhite())
+			case 0:
+				//Place suivante est sur le bord
+				onArrete = false;
+			case 1:
+				//Place suivante est un pion du meme camp
+				onArrete = false;
+			case 2:
+				//Place suivante est un pion adverse, tout depend si on vient d'un pion adverse ou d'une case libre
+				//si case libre, alors on peut envisager de prendre ce pion-là
+				//si pion adverse, on ne peut pas le prendre selon les regles internationnales
+				if(surUnAdversaire)
 				{
-					tmp.setCoord(new Coordonnees((byte)(pi.getCoordX()+1),(byte)(pi.getCoordY()+1)));
+					onArrete = false;
 				}else{
-					tmp.setCoord(new Coordonnees((byte)(pi.getCoordX()+1),(byte)(pi.getCoordY()-1)));
+					if(pi.isWhite())
+					{
+						tmp.setCoord(new Coordonnees((byte)(pi.getCoordX()+1),(byte)(pi.getCoordY()+1)));
+					}else{
+						tmp.setCoord(new Coordonnees((byte)(pi.getCoordX()+1),(byte)(pi.getCoordY()-1)));
+					}
+					surUnAdversaire=true;
 				}
-			}else{
-				return pi;
+				break;
+			case 3:
+				//Place suivante est un case libre, tout depend si on vient d'un pion adverse ou d'une case libre
+				//si case libre, alors on ne peut plus avancer et on prend le pion précédent
+				//si pion adverse, on peut envisager d'avancer d'encore 1
+				if(surUnAdversaire)
+				{
+					if(pi.isWhite())
+					{
+						tmp.setCoord(new Coordonnees((byte)(pi.getCoordX()+1),(byte)(pi.getCoordY()+1)));
+					}else{
+						tmp.setCoord(new Coordonnees((byte)(pi.getCoordX()+1),(byte)(pi.getCoordY()-1)));
+					}
+					surUnAdversaire=false;
+				}else{
+					onArrete = false;
+				}
+				break;
 			}
-			break;
 		}
 		//TODO changer les affectations pour la recursion
 		//quand on ne sait plus du tout avancer, on met arrete a false pour arreter la recursion
 		//dire si le pion est sur un adversaire ou pas avec la variable correspondante
-		
-		return prAdversaire(tmp,false,true);
+
+		return prAdversaire(tmp,surUnAdversaire,surMemeTrace,onArrete);
 	}
 	/**
 	 * Cette methode regarde si le pion peut bouger
@@ -222,7 +291,7 @@ public class jeuDames {
 	 * true à gauche et false à droite (avec le plateau ou les blancs sont toujours les plus proches
 	 * @return 0 si il s'agit du bord, 1 si il y a un pion du même camp, 2 si y a un pion adverse et 3 si il peut avancer
 	 */
-	public byte canMove(pion pi, boolean sens)
+	private byte canMove(pion pi, boolean sens)
 	{
 		Coordonnees meh = pi.getCoord();
 		boolean blip = false;
@@ -321,7 +390,7 @@ public class jeuDames {
 		}
 		return -1;
 	}
-	
+
 	// Classes Annexes
 
 	/**
