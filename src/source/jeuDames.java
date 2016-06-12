@@ -1,5 +1,21 @@
 package source;
 
+/*
+ * Liste des choses a faire pour que le jeu fonctionne
+ * TODO dessiner en ASCII un plateau avec une representation des pions
+ * code unicode pour symboles : U+26C0 (pion blanc), U+26C1 (dame blanche),
+ * U+26C2 (pion noir), U+26C3 (dame noire)
+ * TODO une liste d'actions possible pour les pions et quels pions sont susceptibles
+ * d'etre bouge
+ * TODO faire des actions speciales si le pion est une dame
+ * TODO une intelligence artificielle pour pouvoir jouer contre l'ordinateur
+ */
+
+/**
+ * 
+ * @author vinsifroid
+ * @version indev
+ */
 public class jeuDames {
 
 	private static boolean[][] plateau = new boolean[10][10];
@@ -61,7 +77,6 @@ public class jeuDames {
 		}
 	}
 	/**
-	 * 
 	 * @param pi
 	 * @param sens true si gauche et false si droit
 	 */
@@ -78,28 +93,127 @@ public class jeuDames {
 			break;
 		case 2:
 			System.err.println("Erreur - Pion deja present sur la case et appartenant a l'adversaire");
-			//TODO faire une option pour prendre le(s) pion(s) de l'adversaire
-			break;
-		case 3:
-			Coordonnees coco = pi.getCoord();
+
+			//TODO faire une option pour prendre les pions de l'adversaire
+			//TODO trouver une meilleure facon de faire pour prendre le pion d'un adversaire
+			//Pour pouvoir verifier qu'on puisse prendre le pion adverse, on doit d'abord regarder
+			//en fonction des 4 possibilitees qu'il ne se trouve rien de l'autre cote pour pouvoir bouger
+
+			// On verifie si c'est possible de bouger
+			pion tmp = new pion((byte)0,(byte)0,true);
+			Coordonnees coord = pi.getCoord();
 			if(sens){
 				if(pi.isWhite()){
-					pi.setCoord(new Coordonnees((byte)(coco.getCoordX()-1),(byte)(coco.getCoordY()+1)));
+					tmp.setCoord(new Coordonnees((byte)(coord.getCoordX()-1),(byte)(coord.getCoordY()+1)));
 				}else{
-					pi.setCoord(new Coordonnees((byte)(coco.getCoordX()-1),(byte)(coco.getCoordY()-1)));
+					tmp.setCoord(new Coordonnees((byte)(coord.getCoordX()-1),(byte)(coord.getCoordY()-1)));
 				}				
 			}else{
 				if(pi.isWhite()){
-					pi.setCoord(new Coordonnees((byte)(coco.getCoordX()+1),(byte)(coco.getCoordY()+1)));
+					tmp.setCoord(new Coordonnees((byte)(coord.getCoordX()+1),(byte)(coord.getCoordY()+1)));
 				}else{
-					pi.setCoord(new Coordonnees((byte)(coco.getCoordX()+1),(byte)(coco.getCoordY()-1)));
+					tmp.setCoord(new Coordonnees((byte)(coord.getCoordX()+1),(byte)(coord.getCoordY()-1)));
 				}
 			}
-			//TODO enregistrer la nouvelle position du pion
-			//Il faudrait faire une nouvelle methode de recherche dans la liste de pions qui renvoie l'indice du pion recherche
-			//Et mettre a jour le plateau
+			byte et = canMove(tmp,sens);
+
+			if(et==3)	//On le bouge
+			{
+				pion nouvea = pi;
+				if(sens){
+					if(pi.isWhite()){
+						nouvea.setCoord(new Coordonnees((byte)(coord.getCoordX()-2),(byte)(coord.getCoordY()+2)));
+					}else{
+						nouvea.setCoord(new Coordonnees((byte)(coord.getCoordX()-2),(byte)(coord.getCoordY()-2)));
+					}				
+				}else{
+					if(pi.isWhite()){
+						nouvea.setCoord(new Coordonnees((byte)(coord.getCoordX()+2),(byte)(coord.getCoordY()+2)));
+					}else{
+						nouvea.setCoord(new Coordonnees((byte)(coord.getCoordX()+2),(byte)(coord.getCoordY()-2)));
+					}
+				}
+			}
+			else
+			{
+				System.err.println("Erreur Impossible de prendre le pion Adverse");
+			}
+			break;
+		case 3:
+			Coordonnees coco = pi.getCoord();
+			pion nouveau = pi;
+			//On cree un nouveau pion et on change ses coordonnees
+			if(sens){
+				if(pi.isWhite()){
+					nouveau.setCoord(new Coordonnees((byte)(coco.getCoordX()-1),(byte)(coco.getCoordY()+1)));
+				}else{
+					nouveau.setCoord(new Coordonnees((byte)(coco.getCoordX()-1),(byte)(coco.getCoordY()-1)));
+				}				
+			}else{
+				if(pi.isWhite()){
+					nouveau.setCoord(new Coordonnees((byte)(coco.getCoordX()+1),(byte)(coco.getCoordY()+1)));
+				}else{
+					nouveau.setCoord(new Coordonnees((byte)(coco.getCoordX()+1),(byte)(coco.getCoordY()-1)));
+				}
+			}
+			byte indice = searchPionI(coco);
+			lstPions[indice] = nouveau;
+			plateau[nouveau.getCoordX()][nouveau.getCoordY()] = true;
 			break;
 		}
+	}
+	private pion prAdversaire(pion pi, boolean surUnAdversaire, boolean arrete)
+	{
+		// Cas de base
+		if(arrete==false)
+		{
+			return pi;
+		}
+		//On verifie a gauche et a droite si il y a un autre adversaire
+		byte a = canMove(pi,true);
+		byte b = canMove(pi,false);
+		
+		//On cree un nouveau pion pour repositionner le curseur sur le plateau
+		pion tmp = new pion(pi.getCoordX(),pi.getCoordY(),pi.isWhite());
+		//On regarde a droite
+		switch(a)
+		{
+		case 0:
+			return pi;
+		case 1:
+			return pi;
+		case 2:
+			if(surUnAdversaire)
+			{
+				return pi;
+			}else{
+				if(pi.isWhite())
+				{
+					tmp.setCoord(new Coordonnees((byte)(pi.getCoordX()+1),(byte)(pi.getCoordY()+1)));
+				}else{
+					tmp.setCoord(new Coordonnees((byte)(pi.getCoordX()+1),(byte)(pi.getCoordY()-1)));
+				}
+			}
+			break;
+		case 3:
+			if(surUnAdversaire)
+			{
+				if(pi.isWhite())
+				{
+					tmp.setCoord(new Coordonnees((byte)(pi.getCoordX()+1),(byte)(pi.getCoordY()+1)));
+				}else{
+					tmp.setCoord(new Coordonnees((byte)(pi.getCoordX()+1),(byte)(pi.getCoordY()-1)));
+				}
+			}else{
+				return pi;
+			}
+			break;
+		}
+		//TODO changer les affectations pour la recursion
+		//quand on ne sait plus du tout avancer, on met arrete a false pour arreter la recursion
+		//dire si le pion est sur un adversaire ou pas avec la variable correspondante
+		
+		return prAdversaire(tmp,false,true);
 	}
 	/**
 	 * Cette methode regarde si le pion peut bouger
@@ -112,7 +226,7 @@ public class jeuDames {
 	{
 		Coordonnees meh = pi.getCoord();
 		boolean blip = false;
-		
+
 		if(pi.isWhite())
 		{
 			if(sens)
@@ -181,17 +295,40 @@ public class jeuDames {
 	}
 	private pion searchPion(Coordonnees co)
 	{
+		pion tmp;
 		for(int i=0;i<lstPions.length;i++)
 		{
-			pion tmp = lstPions[i];
+			tmp = lstPions[i];
 			if(tmp.getCoordX()== co.getCoordX() && tmp.getCoordY() == co.getCoordY())
-			{
-				return tmp;
-			}
+				return tmp;			
 		}
 		return null;
 	}
+	/**
+	 * 
+	 * @param co des coordonnees
+	 * @return l'indice du tableau ou se trouve le pion
+	 */
+	@SuppressWarnings("unused")
+	private byte searchPionI(Coordonnees co)
+	{
+		pion tmp;
+		for(int i=0;i<lstPions.length;i++)
+		{
+			tmp = lstPions[i];
+			if(tmp.getCoordX() == co.getCoordX() && tmp.getCoordY() == co.getCoordY());
+			{return (byte)i;}
+		}
+		return -1;
+	}
+	
+	// Classes Annexes
 
+	/**
+	 * 
+	 * @author vinsifroid
+	 * @version 1.0
+	 */
 	public class pion{
 		private Coordonnees Coo;
 		private boolean couleur;
@@ -253,10 +390,15 @@ public class jeuDames {
 		}
 
 	}
+	/**
+	 * 
+	 * @author vinsifroid
+	 * @version 1.0
+	 */
 	public class Coordonnees{
 		private byte X;
 		private byte Y;
-		
+
 		public Coordonnees(byte X, byte Y)
 		{
 			this.X = X;
