@@ -1,6 +1,6 @@
 package fichier;
 import java.io.*;
-//import java.lang.Exception.*;
+//import java.lang.Exception.*; m
 
 public class Fichier {
 	private BufferedReader fR;
