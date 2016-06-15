@@ -36,26 +36,31 @@ for fun, don't take it too seriously.
 
 ## TECHNICAL DETAILS
 
-
 PROJECT TITLE: Challenge - Classics games
+
 PURPOSE OF PROJECT: Create little games for fun :D
+
 VERSION or DATE: 1.0 gamma
+
 LANGUAGE : FRENCH - ENGLISH (still in translating)
+
 LAUNCH CONDITION : The game DON'T have a gui for a all the feature (graphical user interface).
                    For now, you must open it in a terminal
+                   
+#### List of contributors
 
-THE GREAT INQUISITOR: vinsifroid
-THE FINDER OF CLUES: Bivisi
-THE MASTER OF THE DICTIONNARY: melvinmajor
-OCCASIONNAL CONTRIBUTOR : Lazyboy007
-*** THE MUSE *** : OrvalInspiration
+* THE GREAT INQUISITOR: vinsifroid
+* THE FINDER OF CLUES: Bivisi
+* THE MASTER OF THE DICTIONNARY: melvinmajor
+* OCCASIONNAL CONTRIBUTOR : Lazyboy007
+* THE MUSE * : OrvalInspiration
 
 ## HOW TO START THIS PROJECT
 
-USER INSTRUCTIONS:
+#### USER INSTRUCTIONS
 1. Download all files of the project.
-  Begin by downloading all the files of the project. 
-  You have 2 options :
+   Begin by downloading all the files of the project. 
+   You have 2 options :
     - Download the most recent source code. 
       It contains the most advanced features of the games but 
       there is a risk of bugs
@@ -63,14 +68,14 @@ USER INSTRUCTIONS:
       They are considered as "stable version" 
       and they contains (most likely) not any bugs
 2. Unzip the Archive in the folder of your choice
-  tip : in versions after the release 1.0 gamma, you need to create yourself
+   tip : in the versions **After** the release 1.0 gamma, you need to create yourself
         a folder named "saves" in the current folder. 
         We gonna try to fix this in the future.
 3. Compile the source on your computer.
-  To do that, use the command : javac "filename"
-   * Windows Users : open a cmd windows (execute -> cmd) and go to
+   To do that, use the command : javac "filename"
+     * Windows Users : open a cmd windows (execute -> cmd) and go to
                     the installation folder with "cd "pathname" " command.
-   * Linux Users : open the terminal with ctrl+t and tape the command
+     * Linux Users : open the terminal with ctrl+t and tape the command
                   `$javac <...>`
                   with the <...> that is the file to compile
                   
