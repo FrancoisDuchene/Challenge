@@ -13,7 +13,7 @@ public class Fichier {
 	public Fichier() {
 		try {
 			//TODO A changer. A chaque nouveau fichier ill ouvre d'office ce fichier => optimisation bof-bof
-			this.nomFichier = "res/data/dico.txt"; 
+			this.nomFichier = "res/data/dico_fr.txt"; 
 			this.mode = 'X';
 			fR = new BufferedReader(new FileReader(nomFichier));			
 			pW = new PrintWriter(new FileWriter(nomFichier, true));
