@@ -1,6 +1,6 @@
--------------------------------------------------------------------------
-                  CHALLENGE - CLASSIC MINIGAMES
--------------------------------------------------------------------------
+
+# CHALLENGE - CLASSIC MINIGAMES
+
 
 The "Challenge" project is a little project who is made by some students
 of the UCL (Universite Catholique de Louvain) in Belgium. We began this 
@@ -33,9 +33,9 @@ necessary to add the filename of the music into the file "mus.ls".
 You can help if you want but remember that we work on this project only
 for fun, don't take it too seriously.
 
--------------------------------------------------------------------------
-                        TECHNICAL DETAILS
--------------------------------------------------------------------------
+
+## TECHNICAL DETAILS
+
 
 PROJECT TITLE: Challenge - Classics games
 PURPOSE OF PROJECT: Create little games for fun :D
@@ -50,12 +50,10 @@ THE MASTER OF THE DICTIONNARY: melvinmajor
 OCCASIONNAL CONTRIBUTOR : Lazyboy007
 *** THE MUSE *** : OrvalInspiration
 
--------------------------------------------------------------------------
-                      HOW TO START THIS PROJECT
--------------------------------------------------------------------------
+## HOW TO START THIS PROJECT
 
 USER INSTRUCTIONS:
-1.) Download all files of the project.
+1. Download all files of the project.
   Begin by downloading all the files of the project. 
   You have 2 options :
     - Download the most recent source code. 
@@ -64,47 +62,45 @@ USER INSTRUCTIONS:
     - Download the source code from one of the few releases of the program. 
       They are considered as "stable version" 
       and they contains (most likely) not any bugs
-2.) Unzip the Archive in the folder of your choice
+2. Unzip the Archive in the folder of your choice
   tip : in versions after the release 1.0 gamma, you need to create yourself
         a folder named "saves" in the current folder. 
         We gonna try to fix this in the future.
-3.) Compile the source on your computer.
+3. Compile the source on your computer.
   To do that, use the command : javac "filename"
-    Windows Users : open a cmd windows (execute -> cmd) and go to
+   * Windows Users : open a cmd windows (execute -> cmd) and go to
                     the installation folder with "cd "pathname" " command.
-    Linux Users : open the terminal with ctrl+t and tape the command
-                  $javac <...>
+   * Linux Users : open the terminal with ctrl+t and tape the command
+                  `$javac <...>`
                   with the <...> that is the file to compile
                   
-    Compilate all the .java files, NOT the others !
+    **Compilate all the .java files, NOT the others !**
   
--------------------------------------------------------------------------
-                      HOW TO 'INSTALL' THE PROGRAM
--------------------------------------------------------------------------
+## HOW TO 'INSTALL' THE PROGRAM
 
 It is not possible to 'install' the program. If you chose the version v1.0 gamma,
 there still no possibilities to install properly the program.
 If you use now the last versions of the source and if you have jdk7/ANT installed,
 you can yourself use the command :
-  >  ant
+```shell
+  $ ant
+```
 in you favourite command prompt/shell (depends of your Operating System)
 It will automatically compile your sources et create a executable jar that
 you can use with
-  >  java -jar Challenge.jar
+```shell
+  $ java -jar Challenge.jar
+```
 
--------------------------------------------------------------------------
-                 	      LIST OF AVAILABLE GAMES
--------------------------------------------------------------------------
+## LIST OF AVAILABLE GAMES
 
 Here is the list of all current available games:
-1.) Pendu (= Hangman).
-2.) Plus ou moins (= Highlow).
-3.) MasterMind
-4.) Puissance 4 (Connect 4)
+* Pendu (= Hangman).
+* Plus ou moins (= Highlow).
+* MasterMind
+* Puissance 4 (Connect 4)
 
--------------------------------------------------------------------------
-                          LIST OF FEATURES
--------------------------------------------------------------------------
+## LIST OF FEATURES
 
 There is a few important features that are currently implemented in the project
 
