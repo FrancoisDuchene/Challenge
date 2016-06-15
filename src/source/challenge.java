@@ -221,7 +221,7 @@ public class challenge
 		}
 	}
 	/**
-	 * @return the current Language
+	 * @return the current Language. 1 if french and 2 if english
 	 */
 	public static byte getLanguage()
 	{

@@ -1,4 +1,6 @@
 package source;
+import java.util.ResourceBundle;
+
 import exceptions.INVALID_MODE;
 import fichier.InOut;
 
@@ -10,8 +12,9 @@ import fichier.InOut;
  */
 public class pendu {
 
-	public static short vies = 7;
-	public static byte joueurs = 1;   
+	private static ResourceBundle LSD = challenge.getResbundle();
+	private static short vies = 7;
+	private static byte joueurs = 1;
 
 	// Les Fonctions suivantes sont utilisees pour la naviguation et non pas
 	// pour le fonctionnement du jeu en lui-même
@@ -24,14 +27,14 @@ public class pendu {
 
 		do
 		{
-			System.out.println("==========================\n\t LE PENDU \n==========================");
-			System.out.println("1.Jouer \n2.Options \n3.Quitter");
+			System.out.println(LSD.getString("pen_menu_msg1"));
+			System.out.println(LSD.getString("pen_menu_msg2"));
 
 			choix = InOut.getByte();
 			switch(choix)
 			{
 			case 1 : 
-				System.out.println("\n C'est parti !");                   
+				System.out.println(LSD.getString("pen_menu_msg3"));    
 				jeu();                                                   
 				break;
 			case 2 :
@@ -40,7 +43,7 @@ public class pendu {
 			case 3 :               
 				break;          
 			default :
-				System.out.println("Veuillez indiquer 1,2 ou 3 !");
+				System.out.println(LSD.getString("optConfMe_msg2"));
 				break;
 			}
 
@@ -56,9 +59,10 @@ public class pendu {
 		byte choix = 0;     
 		do
 		{
-			System.out.println("************************\n\tOptions:\n************************");
-			System.out.println("Voulez-vous Changer :\n1. le nombre de vies ?\n2. le nombre de joueurs ?\n3. [Still in Dev]ajouter un mot au dico");
-			System.out.println("\n4. Retourner en arrière");
+			System.out.println(LSD.getString("pen_menuO_msg1"));
+			System.out.println(LSD.getString("pen_menuO_msg2")
+					+ LSD.getString("pen_menuO_msg3"));
+			System.out.println(LSD.getString("pen_menuO_msg4"));
 			choix = InOut.getByte();
 
 			switch(choix)
@@ -73,21 +77,24 @@ public class pendu {
 				option3();
 				break;
 			case 4:
+				option4();
+				break;
+			case 5:
 				break;
 			default:
-				System.out.println("Veuillez indiquer 1,2,3 ou 4 !");
+				System.out.println(LSD.getString("pen_menuO_msg5"));
 				break;
 			}
-		}while(choix != 4);
+		}while(choix != 5);
 	}
 	/**
 	 *  change the value of the member variable vies
 	 */
-	public static void option1()    //subroutines in the options to choose the number of life(42)
+	private static void option1()    //subroutines in the options to choose the number of life(42)
 	{   
-		System.out.println(("Vous avez actuellement " + vies + " vies"));
-		System.out.println("Combien voulez vous de vies ?");
-		vies = InOut.getShort();     
+		System.out.println((LSD.getString("pen_opt1_msg1") + vies + LSD.getString("pen_opt1_msg2")));
+		System.out.println(LSD.getString("pen_opt1_msg3"));
+		vies = InOut.getShort();
 		if(vies <= 0)
 		{
 			vies = 1;
@@ -104,11 +111,16 @@ public class pendu {
 	/**
 	 *  change the value of the member variable joueurs
 	 */
-	public static void option2()
+	private static void option2()
 	{   
-		System.out.println("Vous êtes actuellement en mode " + joueurs + " joueur(s)");
-		System.out.println("1. 1 Player\n2. 2 Players");
+		System.out.println(LSD.getString("pen_opt2_msg1") + joueurs + LSD.getString("pen_opt2_msg2"));
+		System.out.println(LSD.getString("pen_opt2_msg3"));
 		joueurs = InOut.getByte();
+		if(joueurs>2)
+		{joueurs=2;}
+		if(joueurs<1)
+		{joueurs=1;}
+		
 		if(!profilGestion.getPremierOuverture())
 		{
 			profilGestion.gestionConfig(true);
@@ -117,11 +129,22 @@ public class pendu {
 	/**
 	 * add a word to the dictionary
 	 */
-	public static void option3()
+	private static void option3()
 	{       
-		System.out.println("Veuillez indiquer ci-dessous quel mot vous voudriez ajouter au dictionnaire");
+		System.out.println(LSD.getString("pen_opt3_msg1"));
 		String mot = InOut.getWord();       
 		Dico.ecritureMot(mot);
+	}
+	private static void option4()
+	{
+		System.out.println(LSD.getString("pen_opt4_msg1")
+				+ LSD.getString("pen_opt4_msg2")
+				+ LSD.getString("pen_opt4_msg3"));
+		byte choix=0;
+		do{
+			choix=InOut.getByte();
+		}while(choix!=1 || choix!=2);
+		Dico.setChoixDico(choix);
 	}
 	/**
 	 * subroutine to play the game
@@ -169,9 +192,9 @@ public class pendu {
 		byte choix = 0;
 		do
 		{
-			System.out.println("\nDans le mode deux joueurs, soit\n1. l'un des joueurs choisit le mot à chercher pour l'autre");
-			System.out.println("2. ou alors les deux joueurs jouent simultanément\n\nQue préferez-vous ?");
-			System.out.println("(3 pour sortir)");
+			System.out.println(LSD.getString("pen_choix2JR_msg1"));
+			System.out.println(LSD.getString("pen_choix2JR_msg2"));
+			System.out.println(LSD.getString("pen_choix2JR_msg3"));
 			choix = InOut.getByte();
 			switch(choix)
 			{
@@ -199,7 +222,7 @@ public class pendu {
 		final String MotSecret = intro((byte)1);
 
 		MotUser = remplaceEtoiles(MotSecret);
-		System.out.println("Trouvez le mot secret !");  
+		System.out.println(LSD.getString("pen_UnJoueur_msg1"));  
 
 		while( vies_tmp != 0)
 		{           
@@ -374,24 +397,24 @@ public class pendu {
 		{
 			if(joueurs == 2)
 			{
-				System.out.println("Le joueur 1 peut entrer un mot\nNe pas mettre d'accent!!");
+				System.out.println(LSD.getString("pen_intro_msg1"));
 				MotSecret = InOut.getWord();
 				challenge.clear();
-				System.out.println("Le joueur 2 doit essayer de deviner le mot rentre par le joueur 1");
+				System.out.println(LSD.getString("pen_intro_msg2"));
 			}
 			else{
 				MotSecret = Dico.lectureMots();
 			}
 		}else if(a==2){
-			System.out.println("Joueur 1");
+			System.out.println(LSD.getString("pen_intro_msg3"));
 			challenge.dormirSystem(2500);
-			System.out.println("Veuillez indiquer le mot à chercher pour le joueur 2");
+			System.out.println(LSD.getString("pen_intro_msg4"));
 			MotSecret = InOut.Mot(InOut.getLine());
 			challenge.clear();
 		}else{
-			System.out.println("Joueur 2");
+			System.out.println(LSD.getString("pen_intro_msg5"));
 			challenge.dormirSystem(2500);
-			System.out.println("Veuillez indiquer le mot à chercher pour le joueur 1");
+			System.out.println(LSD.getString("pen_intro_msg6"));
 			MotSecret = InOut.getWord();
 			challenge.clear();
 		}
@@ -430,15 +453,15 @@ public class pendu {
 		penduExt.pendre(vies_tmp);
 		if(a==2)
 		{
-			System.out.println("JOUEUR 1");
+			System.out.println(LSD.getString("pen_inter_msg1"));
 		}else if(a==3)
 		{
-			System.out.println("JOUEUR 2");
+			System.out.println(LSD.getString("pen_inter_msg2"));
 		}
-		System.out.println(String.format("\n\n\nIl reste : %d vie(s)",(vies_tmp)));
+		System.out.println(String.format("\n\n\n" + LSD.getString("pen_inter_msg3") + "%d" + LSD.getString("pen_inter_msg4"),(vies_tmp)));
 		System.out.println(MotUser);
-		System.out.println("Vous avez déjà proposé les lettres suivantes: " + LettresFausses);
-		System.out.println("Ecrivez une lettre : \t\t 0 pour sortir:");
+		System.out.println(LSD.getString("pen_inter_msg5") + LettresFausses);
+		System.out.println(LSD.getString("pen_inter_msg6"));
 
 		final char LettreUser = InOut.getChar();
 
@@ -459,8 +482,8 @@ public class pendu {
 		{
 			challenge.clear();
 			penduExt.pendre(vies_tmp);
-			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>BRAVO !!!<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-			System.out.println("Félicitation, vous avez trouvé le mot " + mU + " avec encore " + (vies_tmp) + " vie(s) !!!");
+			System.out.println(LSD.getString("pen_vict_msg1"));
+			System.out.println(LSD.getString("pen_vict_msg2") + mU + LSD.getString("pen_vict_msg3") + (vies_tmp) + LSD.getString("pen_vict_msg4"));
 			return true;
 		}
 		return false;
@@ -472,13 +495,13 @@ public class pendu {
 		penduExt.pendre(vies_tmp);
 		if(a==2)
 		{
-			System.out.println("Joueur 1 - PERDU");
+			System.out.println(LSD.getString("pen_gaOv_msg1"));
 		}else if(a==3)
 		{
-			System.out.println("Joueur 2 - PERDU");
+			System.out.println(LSD.getString("pen_gaOv_msg2"));
 		}
-		System.out.println("Il fallait trouver : " + MotSecret + "\n");
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~\n\t GAME OVER\n~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println(LSD.getString("pen_gaOv_msg3") + MotSecret + "\n");
+		System.out.println(LSD.getString("pen_gaOv_msg4"));
 		if(a==1)
 			challenge.dormirSystem(2500);
 

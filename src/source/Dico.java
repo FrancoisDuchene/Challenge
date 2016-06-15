@@ -3,6 +3,7 @@ package source;
 import fichier.Fichier;
 
 public class Dico {
+	private static byte choixDico=challenge.getLanguage();	
 	/**
 	 * This function read the dictionary and return a random word
 	 * @return a random word
@@ -19,11 +20,21 @@ public class Dico {
 		return str;
 	}
 	/**
-	 * This function open the dico with the path per default "src/dico.txt"
+	 * This function open the dico with the path per default "res/data/dico_fr.txt"
 	 * @return a file describing the dico 
 	 */
 	public static Fichier ouvrirDico() {
-		String nomFichier = "res/data/dico.txt";
+		String nomFichier = "res/data/dico_fr.txt";
+		switch(choixDico)
+		{
+		case 1:
+			nomFichier = "res/data/dico_fr.txt";
+			break;
+		case 2:
+			nomFichier = "res/data/dico_en.txt";
+			break;
+		}
+		
 		Fichier fi = new Fichier();
 		fi.ouvrir(nomFichier, "Lecture",true);
 		return fi;
@@ -49,10 +60,14 @@ public class Dico {
 	 * @param longueur the length of the file currently used
 	 * @return a random number between 0 and the file length
 	 */
-	public static int nbrRandom(int longueur) {
+	private static int nbrRandom(int longueur) {
 		double nbr = Math.random();
 		nbr = nbr*longueur;
 		int nbrRandom = (int) nbr;
 		return Math.abs(nbrRandom);
+	}
+	public static void setChoixDico(byte choixD)
+	{
+		choixDico=choixD;
 	}
 }

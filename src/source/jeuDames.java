@@ -12,7 +12,6 @@ package source;
  */
 
 /**
- * 
  * @author vinsifroid
  * @version indev
  */
@@ -179,14 +178,14 @@ public class jeuDames {
 		{
 			return pi;
 		}
-		
+
 		//On cree un nouveau pion pour repositionner le curseur sur le plateau
 		pion tmp = new pion(pi.getCoordX(),pi.getCoordY(),pi.isWhite());
-		
+
 		if(!surMemeTrace){
 			//On regarde a gauche
 			byte a = canMove(pi,true);
-			
+
 			switch(a)
 			{
 			case 0:
@@ -197,8 +196,8 @@ public class jeuDames {
 				surMemeTrace = true;
 			case 2:
 				//Place suivante est un pion adverse, tout depend si on vient d'un pion adverse ou d'une case libre
-				//si case libre, alors on peut envisager de prendre ce pion-là
 				//si pion adverse, on ne peut pas le prendre selon les regles internationnales
+				//si case libre, alors on peut envisager de prendre ce pion-là				
 				if(surUnAdversaire)
 				{
 					surMemeTrace = true;
@@ -225,6 +224,21 @@ public class jeuDames {
 						tmp.setCoord(new Coordonnees((byte)(pi.getCoordX()-1),(byte)(pi.getCoordY()-1)));
 					}
 					surUnAdversaire=false;
+
+					//on supprime l'adversaire de la liste de pions
+					byte adv = searchPionI(pi.getCoord());
+					lstPions[adv] = null;
+					//On met à jour le plateau
+					plateau[pi.getCoordX()][pi.getCoordY()] = false;
+
+					if(pi.isWhite())
+					{
+						plateau[pi.getCoordX()-1][pi.getCoordY()+1] = true;
+						plateau[pi.getCoordX()+1][pi.getCoordY()-1] = false;
+					}else{
+						plateau[pi.getCoordX()-1][pi.getCoordY()-1] = true;
+						plateau[pi.getCoordX()+1][pi.getCoordY()+1] = false;
+					}
 				}else{
 					surMemeTrace = true;
 				}
@@ -233,7 +247,7 @@ public class jeuDames {
 		}else{
 			//On regarde a droite
 			byte b = canMove(pi,false);
-			
+
 			switch(b)
 			{
 			case 0:
@@ -244,8 +258,8 @@ public class jeuDames {
 				onArrete = false;
 			case 2:
 				//Place suivante est un pion adverse, tout depend si on vient d'un pion adverse ou d'une case libre
-				//si case libre, alors on peut envisager de prendre ce pion-là
 				//si pion adverse, on ne peut pas le prendre selon les regles internationnales
+				//si case libre, alors on peut envisager de prendre ce pion-là				
 				if(surUnAdversaire)
 				{
 					onArrete = false;
@@ -272,6 +286,23 @@ public class jeuDames {
 						tmp.setCoord(new Coordonnees((byte)(pi.getCoordX()+1),(byte)(pi.getCoordY()-1)));
 					}
 					surUnAdversaire=false;
+					surMemeTrace = false;
+
+					//on supprime l'adversaire de la liste de pions
+					byte adv = searchPionI(pi.getCoord());
+					lstPions[adv] = null;
+					//On met à jour le plateau
+					plateau[pi.getCoordX()][pi.getCoordY()] = false;
+
+					if(pi.isWhite())
+					{
+						plateau[pi.getCoordX()+1][pi.getCoordY()+1] = true;
+						
+						plateau[pi.getCoordX()-1][pi.getCoordY()-1] = false;
+					}else{
+						plateau[pi.getCoordX()+1][pi.getCoordY()-1] = true;
+						plateau[pi.getCoordX()-1][pi.getCoordY()+1] = false;
+					}
 				}else{
 					onArrete = false;
 				}
