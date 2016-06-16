@@ -47,13 +47,15 @@ LANGUAGE : FRENCH - ENGLISH (still in translating)
 LAUNCH CONDITION : The game DON'T have a gui for a all the feature (graphical user interface).
                    For now, you must open it in a terminal
                    
+To run this program, you need **Java 7** or more installed on your computer
+                   
 #### List of contributors
 
 * THE GREAT INQUISITOR: vinsifroid
 * THE FINDER OF CLUES: Bivisi
 * THE MASTER OF THE DICTIONNARY: melvinmajor
 * OCCASIONNAL CONTRIBUTOR : Lazyboy007
-* THE MUSE * : OrvalInspiration
+* THE MUSE : OrvalInspiration
 
 ## HOW TO START THIS PROJECT
 
@@ -96,6 +98,7 @@ you can use with
 ```shell
   $ java -jar Challenge.jar
 ```
+or use the shell script (if are on a UNIX-like system) launch.sh
 
 ## LIST OF AVAILABLE GAMES
 
