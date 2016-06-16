@@ -7,7 +7,7 @@
     <target name="info">
       <echo>Challenge installing ANT</echo>
     </target>
-  	
+
   	<target name="build" description="Compile source tree java fileset">
   		<mkdir dir="${build.dir}/res"/>
   		<mkdir dir="${build.dir}/saves"/>
@@ -28,7 +28,7 @@
   			<fileset dir="src/lang"/>
   		</copy>
   	</target>
-  	
+
   	<target name="jar" depends="build" description="Create a Jar file">
   		<jar destfile="Challenge.jar" basedir="${build.dir}" keepcompression="true">
   			<manifest>
@@ -36,8 +36,9 @@
   				<attribute name="Class-Path" value="."/>
   		    </manifest>
   		</jar>
+      <chmod file="Challenge.jar" perm="+x"/>
   	</target>
-  	
+
   	<target name="clean" description="Clean output directories" depends="jar">
   		<delete>
   	    	<fileset dir="${build.dir}">
