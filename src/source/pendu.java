@@ -23,6 +23,7 @@ public class pendu {
 	 */
 	public static void menu()
 	{
+		LSD = challenge.getResbundle();
 		byte choix = 0; 
 
 		do
@@ -54,7 +55,7 @@ public class pendu {
 	/**
 	 * print the settings menu and redirect with the choice of the player
 	 */
-	public static void menuOption()
+	private static void menuOption()
 	{
 		byte choix = 0;     
 		do
@@ -143,7 +144,7 @@ public class pendu {
 		byte choix=0;
 		do{
 			choix=InOut.getByte();
-		}while(choix!=1 || choix!=2);
+		}while(choix!=1 && choix!=2);
 		Dico.setChoixDico(choix);
 	}
 	/**
@@ -151,7 +152,7 @@ public class pendu {
 	 * @pre : number of lifes (n>0) and number of players (1 or 2)
 	 * @post: play the game
 	 */
-	public static void jeu()
+	private static void jeu()
 	{   
 		int score = 0;
 		if(joueurs == 1)
@@ -187,7 +188,7 @@ public class pendu {
 	 * This function is determined for the choice of the two differents two-players mode
 	 * @return the score of the player this game- 
 	 */
-	public static int choix2Jr()
+	private static int choix2Jr()
 	{
 		byte choix = 0;
 		do
@@ -210,7 +211,7 @@ public class pendu {
 	 * Is the main game for the one player game
 	 * @return the score of the game
 	 */
-	public static int UnJoueur()
+	private static int UnJoueur()
 	{
 		String MotUser = "";
 		String LettresFausses = "";
@@ -267,7 +268,7 @@ public class pendu {
 		}
 		return 0;
 	}
-	public static int DeuxJoueur()
+	private static int DeuxJoueur()
 	{
 		String LettresFausses1 = "";
 		String LettresFausses2 = "";
@@ -390,7 +391,7 @@ public class pendu {
 	 * @param a is wich message to print
 	 * @return le mot secret
 	 */
-	public static String intro(byte a)
+	private static String intro(byte a)
 	{
 		String MotSecret = "zygote";
 		if(a==1)
@@ -427,7 +428,7 @@ public class pendu {
 	 * @param MotSecret is the Word that the user must discover
 	 * @return a String with the same number of character that the Secret Word with Stars *
 	 */
-	public static String remplaceEtoiles(String MotSecret)
+	private static String remplaceEtoiles(String MotSecret)
 	{
 		String MotUser = "";
 		for (byte o = 0; o < MotSecret.length(); o++) // loop to have the same number of * than the letters in the "MotSecret"
@@ -447,7 +448,7 @@ public class pendu {
 	 * @param a correspond a quel type de message afficher
 	 * @return le choix de l'utilisateur
 	 */
-	public static char interaction(short vies_tmp, String MotUser, String LettresFausses, byte a)
+	private static char interaction(short vies_tmp, String MotUser, String LettresFausses, byte a)
 	{
 		challenge.clear();
 		penduExt.pendre(vies_tmp);
@@ -458,9 +459,9 @@ public class pendu {
 		{
 			System.out.println(LSD.getString("pen_inter_msg2"));
 		}
-		System.out.println(String.format("\n\n\n" + LSD.getString("pen_inter_msg3") + "%d" + LSD.getString("pen_inter_msg4"),(vies_tmp)));
+		System.out.println(String.format("\n\n\n" + LSD.getString("pen_inter_msg3") + " " + "%d" + " " + LSD.getString("pen_inter_msg4"),(vies_tmp)));
 		System.out.println(MotUser);
-		System.out.println(LSD.getString("pen_inter_msg5") + LettresFausses);
+		System.out.println(LSD.getString("pen_inter_msg5") + " " + LettresFausses);
 		System.out.println(LSD.getString("pen_inter_msg6"));
 
 		final char LettreUser = InOut.getChar();
@@ -476,20 +477,20 @@ public class pendu {
 	 * @param vies_tmp is the number of lifes of the player
 	 * @return
 	 */
-	public static boolean victoire(String mU, String mS, short vies_tmp)
+	private static boolean victoire(String mU, String mS, short vies_tmp)
 	{
 		if(mU.equals(mS))
 		{
 			challenge.clear();
 			penduExt.pendre(vies_tmp);
 			System.out.println(LSD.getString("pen_vict_msg1"));
-			System.out.println(LSD.getString("pen_vict_msg2") + mU + LSD.getString("pen_vict_msg3") + (vies_tmp) + LSD.getString("pen_vict_msg4"));
+			System.out.println(LSD.getString("pen_vict_msg2") + " " + mU + " " + LSD.getString("pen_vict_msg3") + " " + (vies_tmp) + " " + LSD.getString("pen_vict_msg4"));
 			return true;
 		}
 		return false;
 	}
 
-	public static int gameOver(short vies_tmp, String MotSecret, byte a)
+	private static int gameOver(short vies_tmp, String MotSecret, byte a)
 	{
 		challenge.clear();
 		penduExt.pendre(vies_tmp);
@@ -511,7 +512,7 @@ public class pendu {
 	/**
 	 * @return replace a char in a string in at a certain position
 	 */
-	public static String replaceCharAt(String s, char c, int pos)
+	private static String replaceCharAt(String s, char c, int pos)
 	{
 		return s.substring(0,pos) + c + s.substring(pos+1);
 	}
@@ -520,7 +521,7 @@ public class pendu {
 	 * @param l Take a char
 	 * @return the LowerCase of the char if it's an UpperCase and the char itself if it's a LowerCase.
 	 */
-	public static char minuscule(char l){
+	private static char minuscule(char l){
 		if ((int)l <=90 && (int)l >= 65)
 		{return (char)((int)l + 32);}
 		else 
@@ -533,7 +534,7 @@ public class pendu {
 	 * add the score to the playerProfile
 	 * @param score is the score earned by the precedent game
 	 */
-	public static void ajouteScore(int score)
+	private static void ajouteScore(int score)
 	{
 		profilGestion.ajoutePtsPendu(score);
 	}
@@ -543,7 +544,7 @@ public class pendu {
 	 * @param nbrVies est le nombre de vies qui restaient à la fin de la partie
 	 * @return le score final de la partie actuelle
 	 */
-	public static int calculScore(int lgTab, int nbrVies)
+	private static int calculScore(int lgTab, int nbrVies)
 	{
 		if(lgTab < 5)
 		{

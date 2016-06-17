@@ -13,6 +13,9 @@ import graph.MThread;
  */
 public class challenge
 {
+	/**
+	 * 1 for french, 2 for english
+	 */
 	private static byte language = 1;
 	private static ResourceBundle LSD = null;
 	public static MThread musique = new MThread("Musique");
@@ -20,8 +23,18 @@ public class challenge
 	public static boolean continuons = true;
 	public static void main (String [] args)
 	{
-		LSD = ResourceBundle.getBundle("lang.challenge", new Locale("en"));
 		profilGestion.confDefautLoad();
+		Locale loc = null;
+		switch(language)
+		{
+		case 1:
+			loc = new Locale("fr", "BE");
+			break;
+		case 2:
+			loc = new Locale("en");
+			break;
+		}
+		LSD = ResourceBundle.getBundle("lang.challenge", loc);		
 		HighScoreGestion.gestion();
 		boolean mode_Affichage = messageAcceuil();
 		musique.start();
@@ -38,7 +51,7 @@ public class challenge
 	 * ou en console
 	 * @return true si c'est la GUI et false si c'est la console
 	 */
-	public static boolean messageAcceuil()
+	private static boolean messageAcceuil()
 	{
 		String[] options = new String[]{"GUI","Console"};
 		String message = LSD.getString("mesAc_msg");
@@ -52,7 +65,7 @@ public class challenge
 			return false;
 		}
 	}
-	public static String connecte()
+	private static String connecte()
 	{
 		if(profilGestion.existe())
 		{
@@ -110,7 +123,7 @@ public class challenge
 		}while(choix != 7);
 	}
 
-	public static void menuJeu()
+	private static void menuJeu()
 	{
 		byte choix = 0;
 		do
@@ -145,14 +158,14 @@ public class challenge
 			}
 		}while(choix != 5);
 	}
-	public static void credit()
+	private static void credit()
 	{
 		clear();		
 		System.out.println(LSD.getString("cred_msg1"));
 		System.out.println(LSD.getString("cred_msg2"));
 		dormirSystem(4000);
 	}
-	public static void choseLanguage()
+	private static void choseLanguage()
 	{
 		byte choix = 0;
 		clear();
@@ -213,7 +226,7 @@ public class challenge
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 			System.out.println(LSD.getString("prMeMsg_msg1"));
-			System.out.println(LSD.getString("prMeMsg_msg2"));
+			System.out.println(LSD.getString("prMeMsg_msg2") + connecte());
 			System.out.println(LSD.getString("prMeMsg_msg3"));
 		}else if(i==2){
 			System.out.println(LSD.getString("prMeMsg_msg4"));

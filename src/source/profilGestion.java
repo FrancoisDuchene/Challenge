@@ -33,6 +33,7 @@ public class profilGestion {
 	 */
 	public static void gestion(byte md)
 	{		
+		LSD = challenge.getResbundle();
 		mode = md;
 		if(md==3)
 			mode = (byte)1;
@@ -138,7 +139,7 @@ public class profilGestion {
 		return nom;
 	}
 
-	public static void menuGestion()
+	private static void menuGestion()
 	{		
 		byte choix = 0;
 		do
@@ -180,7 +181,7 @@ public class profilGestion {
 		}while(choix != 8);
 	}
 
-	public static void afficheMenu()
+	private static void afficheMenu()
 	{
 		System.out.println(LSD.getString("prGe_affMe_msg1") + name + " ####");
 		System.out.println(playerOne.toString() + LSD.getString("prGe_affMe_msg2"));
@@ -237,6 +238,7 @@ public class profilGestion {
 	 */
 	public static void afficheProfil()
 	{
+		LSD = challenge.getResbundle();
 		if(mode == 0)
 		{
 			System.out.println(LSD.getString("prGe_affMe_msg2") + LSD.getString("prGe_affPr_msg1") + playerOne.getName());
@@ -299,7 +301,7 @@ public class profilGestion {
 	/**
 	 * Charge the player Profile
 	 */
-	public static void chargeProfil()
+	private static void chargeProfil()
 	{
 		if(Fichier.fichierExiste("saves/", name + ".sav"))
 		{			
@@ -366,6 +368,7 @@ public class profilGestion {
 	public static void optionConfigurationMenu()
 	{
 		byte choix = 0;
+		LSD = challenge.getResbundle();
 		System.out.println("###CONFIGURATION MENU###");
 		System.out.println(LSD.getString("optConfMe_msg1"));
 		do{
