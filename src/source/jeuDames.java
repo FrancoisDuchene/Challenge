@@ -320,7 +320,7 @@ public class jeuDames {
 	 * @param pi le pion à jouer
 	 * @param sens dans quel sens le joueur veut il faire avancer son pion - 
 	 * true à gauche et false à droite (avec le plateau ou les blancs sont toujours les plus proches
-	 * @return 0 si il s'agit du bord, 1 si il y a un pion du même camp, 2 si y a un pion adverse et 3 si il peut avancer
+	 * @return 0 si il s'agit du bord, 1 si il y a un pion du meme camp, 2 si y a un pion adverse et 3 si il peut avancer
 	 */
 	private byte canMove(pion pi, boolean sens)
 	{

@@ -10,6 +10,7 @@ import graph.MThread;
 /**
  * @author Vinsifroid && Bivisi
  * @version 1.0 delta
+ * @since v1.0 alpha
  */
 public class challenge
 {
@@ -54,7 +55,7 @@ public class challenge
 	private static boolean messageAcceuil()
 	{
 		String[] options = new String[]{"GUI","Console"};
-		String message = LSD.getString("mesAc_msg");
+		String message = LSD.getString("chal_mesAc_msg");
 
 		String choix = (String)JOptionPane.showInputDialog(null,message,
 				"IMPORTANT",JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
@@ -69,11 +70,11 @@ public class challenge
 	{
 		if(profilGestion.existe())
 		{
-			return LSD.getString("conne_msg1");
+			return LSD.getString("chal_conne_msg1");
 		}
 		else
 		{
-			return LSD.getString("conne_msg2");
+			return LSD.getString("chal_conne_msg2");
 		}
 	}
 	public static void menuPrincipal()
@@ -117,7 +118,7 @@ public class challenge
 				System.exit(0);
 				break;
 			default :
-				System.out.println(LSD.getString("mePri_msg"));
+				System.out.println(LSD.getString("chal_mePri_msg"));
 				break;
 			}
 		}while(choix != 7);
@@ -153,7 +154,7 @@ public class challenge
 				menuPrincipal();
 				break;
 			default :
-				System.out.println(LSD.getString("meJeu_msg"));
+				System.out.println(LSD.getString("chal_meJeu_msg"));
 				break;
 			}
 		}while(choix != 5);
@@ -161,8 +162,8 @@ public class challenge
 	private static void credit()
 	{
 		clear();		
-		System.out.println(LSD.getString("cred_msg1"));
-		System.out.println(LSD.getString("cred_msg2"));
+		System.out.println(LSD.getString("chal_cred_msg1"));
+		System.out.println(LSD.getString("chal_cred_msg2"));
 		dormirSystem(4000);
 	}
 	private static void choseLanguage()
@@ -178,18 +179,18 @@ public class challenge
 			case 1:
 				language = 1;
 				LSD = ResourceBundle.getBundle("lang.challenge", new Locale("fr", "BE"));
-				System.out.println(LSD.getString("chLa_msg2"));
+				System.out.println(LSD.getString("chal_chLa_msg2"));
 				break;
 			case 2:
 				language = 2;
 				LSD = ResourceBundle.getBundle("lang.challenge", new Locale("en"));
-				System.out.println(LSD.getString("chLa_msg2"));
+				System.out.println(LSD.getString("chal_chLa_msg2"));
 				break;
 			}
 		}while(choix != 1 && choix != 2);
 		if(!profilGestion.getPremierOuverture())
 		{
-			System.out.println(LSD.getString("chLa_msg3"));
+			System.out.println(LSD.getString("chal_chLa_msg3"));
 			byte bleu = 0;
 			do{
 				bleu = InOut.getByte();
@@ -201,7 +202,7 @@ public class challenge
 				case 2:
 					break;
 				default:
-					System.out.println(LSD.getString("chLa_msg4"));
+					System.out.println(LSD.getString("chal_chLa_msg4"));
 					break;
 				}
 			}while(bleu < 2 && bleu > 1);
@@ -225,12 +226,12 @@ public class challenge
 			System.out.println("\t\tCHALLENGE - MINIGAMES");
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
-			System.out.println(LSD.getString("prMeMsg_msg1"));
-			System.out.println(LSD.getString("prMeMsg_msg2") + connecte());
-			System.out.println(LSD.getString("prMeMsg_msg3"));
+			System.out.println(LSD.getString("chal_prMeMsg_msg1"));
+			System.out.println(LSD.getString("chal_prMeMsg_msg2") + connecte());
+			System.out.println(LSD.getString("chal_prMeMsg_msg3"));
 		}else if(i==2){
-			System.out.println(LSD.getString("prMeMsg_msg4"));
-			System.out.println(LSD.getString("prMeMsg_msg5"));
+			System.out.println(LSD.getString("chal_prMeMsg_msg4"));
+			System.out.println(LSD.getString("chal_prMeMsg_msg5"));
 		}
 	}
 	/**

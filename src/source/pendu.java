@@ -44,7 +44,7 @@ public class pendu {
 			case 3 :               
 				break;          
 			default :
-				System.out.println(LSD.getString("optConfMe_msg2"));
+				System.out.println(LSD.getString("prGe_optConfMe_msg2"));
 				break;
 			}
 
@@ -144,6 +144,10 @@ public class pendu {
 		byte choix=0;
 		do{
 			choix=InOut.getByte();
+			if(choix!=1 && choix!=2)
+			{
+				System.out.println(LSD.getString("pen_opt4_mg4"));
+			}
 		}while(choix!=1 && choix!=2);
 		Dico.setChoixDico(choix);
 	}

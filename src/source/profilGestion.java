@@ -10,6 +10,11 @@ import fichier.InOut;
 import graph.Profil_Windows;
 import graph.SimpleFenetre;
 
+/**
+ * 
+ * @author vinsifroid
+ * @since v1.0-gamma
+ */
 public class profilGestion {
 
 	private static ResourceBundle LSD = challenge.getResbundle();
@@ -53,7 +58,7 @@ public class profilGestion {
 			//Pour différencier les boutons 'se connecter' et 'creer un nouveau compte'
 			if(md==3 && !Fichier.fichierExiste("saves/", nom + ".sav"))
 			{
-				final String message = LSD.getString("gesti_msg");
+				final String message = LSD.getString("prGe_gesti_msg");
 				JOptionPane.showMessageDialog(null, message, "Avertissement", JOptionPane.WARNING_MESSAGE, null);
 				return;
 			}
@@ -107,14 +112,14 @@ public class profilGestion {
 		String nom = "";
 		do
 		{
-			System.out.println(LSD.getString("dNoCo_msg1"));		
+			System.out.println(LSD.getString("prGe_dNoCo_msg1"));		
 			nom = InOut.Mot(InOut.getLine());
 			if(nom.contains(" "))
 			{
-				System.out.println(LSD.getString("dNoCo_msg2"));
+				System.out.println(LSD.getString("prGe_dNoCo_msg2"));
 			}else if(nom.equals("default"))
 			{
-				System.out.println(LSD.getString("dNoCo_msg3"));
+				System.out.println(LSD.getString("prGe_dNoCo_msg3"));
 			}
 		}while(nom.contains(" ") || nom.equals("default"));
 		return nom;
@@ -128,11 +133,11 @@ public class profilGestion {
 			nom = (String) JOptionPane.showInputDialog(null, "Quel est votre nom ?", "Gestion de profil", JOptionPane.QUESTION_MESSAGE);
 			if(nom.contains(" "))
 			{
-				final String messageE1 = LSD.getString("deNoGui_msg1"), titleE1 = LSD.getString("deNoGUI_msg2");
+				final String messageE1 = LSD.getString("prGe_deNoGui_msg1"), titleE1 = LSD.getString("prGe_deNoGUI_msg2");
 				JOptionPane.showMessageDialog(null, messageE1, titleE1, JOptionPane.WARNING_MESSAGE, null);        		
 			}else if(nom.equals("default"))
 			{
-				final String messageE2 = LSD.getString("deNoGUI_msg3"), titleE2 = LSD.getString("deNoGUI_msg2");
+				final String messageE2 = LSD.getString("prGe_deNoGUI_msg3"), titleE2 = LSD.getString("prGe_deNoGUI_msg2");
 				JOptionPane.showMessageDialog(null, messageE2, titleE2, JOptionPane.WARNING_MESSAGE, null);       		
 			}
 		}while(nom.contains(" ") || nom.equals("default"));
@@ -175,7 +180,7 @@ public class profilGestion {
 			case 8:
 				break;
 			default:
-				System.out.println(LSD.getString("meGest_msg"));
+				System.out.println(LSD.getString("prGe_meGest_msg"));
 				break;
 			}
 		}while(choix != 8);
@@ -370,7 +375,7 @@ public class profilGestion {
 		byte choix = 0;
 		LSD = challenge.getResbundle();
 		System.out.println("###CONFIGURATION MENU###");
-		System.out.println(LSD.getString("optConfMe_msg1"));
+		System.out.println(LSD.getString("prGe_optConfMe_msg1"));
 		do{
 			choix = InOut.getByte();
 			switch(choix)
@@ -384,7 +389,7 @@ public class profilGestion {
 			case 3:
 				break;
 			default:
-				System.out.println(LSD.getString("optConfMe_msg2"));
+				System.out.println(LSD.getString("prGe_optConfMe_msg2"));
 				break;
 			}
 		}while(choix != 3);
