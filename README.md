@@ -26,13 +26,10 @@ As other features, we have a profile user system that can saves the score and
 preference into two files in the saves repertories.
 
 We have also a soundplayer that can play musics of ".wav" format.
-It is possible for the user to add his own musics in wav format into the
-"sound" folder, in the "res" repertorie. To make it good, it is also
-necessary to add the filename of the music into the file "mus.ls".
+The musics are customizable by the user, for more information read below.
 
 You can help if you want but remember that we work on this project only
 for fun, don't take it too seriously.
-
 
 ## TECHNICAL DETAILS
 
@@ -69,29 +66,37 @@ To run this program, you need **Java 7** or more installed on your computer
     - Download the source code from one of the few releases of the program. 
       They are considered as "stable version" 
       and they contains (most likely) not any bugs
+      NB : After the delta version, two compressed archive are able
+           a .jar excutable who is normally excutable by the user
+           and a regular archive
+           Choose the regular archive if you just want to contribute to the project and
+           the jar either way.
 2. Unzip the Archive in the folder of your choice
-   tip : in the versions **After** the release 1.0 gamma, you need to create yourself
-        a folder named "saves" in the current folder. 
-        We gonna try to fix this in the future.
-3. Compile the source on your computer.
-   To do that, use the command : javac "filename"
-     * Windows Users : open a cmd windows (execute -> cmd) and go to
-                    the installation folder with "cd "pathname" " command.
-     * Linux Users : open the terminal with ctrl+t and tape the command
-                  `$javac <...>`
-                  with the <...> that is the file to compile
-                  
-    **Compilate all the .java files, NOT the others !**
+    
+    NB : If at the precedent step, you chose the .jar, you will just have to decompress yourself two folders
+         from the jar to be able to use the app, the folder named *saves* and *res*
   
-## HOW TO 'INSTALL' THE PROGRAM
+3. For 'install' the program
 
-It is not possible to 'install' the program. If you chose the version v1.0 gamma,
+**Don't use these methods if you dowloaded the .jar, it's already done for use**
+
+- Use ANT directly
+It is not possible to 'install' the program. If you chose the version v1.0 delta,
 there still no possibilities to install properly the program.
-If you use now the last versions of the source and if you have jdk7/ANT installed,
+If you use now the last versions of the source and if you have jdk7/ANT (from the Apache foundation project) installed,
 you can yourself use the command :
 ```shell
   $ ant
 ```
+- Use the script install.sh
+For UNIX-Type system users, a script wrote in Bash is already done, you can use it with the command below (`ctrl+T`)
+```shell
+  $ bash install.sh
+```
+It will create you .jar excutable archive
+
+#### TO LAUNCH THE PROGRAM
+
 in you favourite command prompt/shell (depends of your Operating System)
 It will automatically compile your sources et create a executable jar that
 you can use with
@@ -124,3 +129,17 @@ in a text file.
 - A Graphical User Interface (GUI) - Still in dev
 We are actually developping a graphical interface for the program. But there still
 need to be implemented in various places of the program
+
+#### HOW TO ADD MUSICS TO THE SOUND PLAYER
+
+The music player is customizable in the sens that the user can, if he want, add his own musicsto the "playlist". 
+As the SoundPlayer play music in a random order, the music chooses by the user can be played at anytimes.
+
+The file format of the musics is _.wav **only**_
+
+######Instructions :
+- Copy-paste your music in the folder res/sound/ `cd res/sound/`
+- Copy-paste the name of the music **Without the extension** 
+  | ex: "yourMusic" and **Not** "yourMusic.wav"
+- Go to the folder res/data/ `cd ..` and `cd data`
+- open 'mus.ls' with an editor, paste to a new line of the file   _Be careful to not let a carriage letter between the last      song and the end of the file
