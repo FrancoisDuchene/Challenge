@@ -19,49 +19,109 @@ import fichier.InOut;
  */
 public class jeuDames {
 
-	private static boolean[][] plateau = new boolean[10][10];
 	private static pion[] lstPions = new pion[40];
 
 	public static void jeu()
 	{
 		boolean victoire = false;
 		boolean change = true;
+		//boolean controleur de la deuxième boucle
+		//deuxième boucle qui sert si jamais le joueur veut choisir un autre pion
+		boolean retourner = false;
+
 		debutJeu();
 		//Par convention Joueur 1 = blancs et Joueur 2 = noirs
 
 		do{
-			//Tour des blancs
-			byte indice = interaction(true);
-			pion pi = lstPions[indice];
-			
-			System.out.println("Vous avez choisi le pion - " + pi.toString());
-			System.out.println("Voulez-vous le bouger a gauche en (" + (pi.getCoordX()-1) + "," + (pi.getCoordY()+1) +
-					") ou a droite en (" + (pi.getCoordX()+1) + "," + (pi.getCoordY()+1) + ") ?");
-			System.out.println("gauche (1) ou droite (2) ?");
-			do{
-				byte choix = 0;
-				do{
-					choix = InOut.getByte();
-				}while(choix!=1 && choix!=2);
-				boolean sens = true;
-				if(choix==2){sens=false;}
-				byte etat = deplacerPion(pi,sens);
-				if(etat == 0 || etat == 1){
-					System.err.println("Donnez l'autre direction ou changer de pion");
-				}else{
-					change=false;
-				}
-			}while(change);
+			pion pi = null;
+
+			System.out.println("Pions blancs");
 			printEtatSonJeu(true);
+			System.out.println("Pions noirs");
+			printEtatSonJeu(false);
 			
+			//Tour des blancs
+			do{
+				pi = interaction(true);
+
+				System.out.println("Vous avez choisi le pion - " + pi.toString());
+				System.out.println("Voulez-vous le bouger a gauche en (" + (pi.getCoordX()-1) + "," + (pi.getCoordY()+1) +
+						") ou a droite en (" + (pi.getCoordX()+1) + "," + (pi.getCoordY()+1) + ") ?");
+				System.out.println("gauche (1) ou droite (2) ? - ou changer de pion a bouger ? (3)");
+				do{
+					byte choix = 0;
+					do{
+						choix = InOut.getByte();
+					}while(choix!=1 && choix!=2 && choix!=3);
+					if(choix==3)
+					{
+						change = false;
+						retourner = true;
+					}else{
+						retourner = false;
+						boolean sens = true;
+						if(choix==2){sens=false;}
+						byte etat = deplacerPion(pi,sens);
+						if(etat == 0 || etat == 1){
+							System.err.println("Donnez l'autre direction ou changer de pion");
+						}else{
+							change=false;
+						}
+					}				
+				}while(change);
+				printEtatSonJeu(true);
+
+				victoire = victory(true);
+				if(victoire)
+				{
+					System.out.println("Les Blancs ont gagne !!!");
+				}
+			}while(retourner);
+
 			//Tour des Noirs
-			indice = interaction(false);
-			pi = lstPions[indice];
-			
-			System.out.println("Voulez-vous le bouger a gauche en (" + (pi.getCoordX()-1) + "," + (pi.getCoordY()+1) +
-					") ou a droite en (" + (pi.getCoordX()+1) + "," + (pi.getCoordY()+1) + ") ?");
-			System.out.println("gauche (1) ou droite (2) ?");
+
+			//On rajoute un if pour que si le joueur blanc a gagne, que le joueur noir ne puisse plus jouer du tout
+			if(!victoire)
+			{				
+				do{
+					pi = interaction(false);
+
+					System.out.println("Vous avez choisi le pion - " + pi.toString());
+					System.out.println("Voulez-vous le bouger a gauche en (" + (pi.getCoordX()-1) + "," + (pi.getCoordY()-1) +
+							") ou a droite en (" + (pi.getCoordX()+1) + "," + (pi.getCoordY()-1) + ") ?");
+					System.out.println("gauche (1) ou droite (2) ? - ou changer de pion a bouger ? (3)");
+					do{
+						byte choix = 0;
+						do{
+							choix = InOut.getByte();
+						}while(choix!=1 && choix!=2 && choix!=3);
+						if(choix==3)
+						{
+							change = false;
+							retourner = true;
+						}else{
+							retourner = false;
+							boolean sens = true;
+							if(choix==2){sens=false;}
+							byte etat = deplacerPion(pi,sens);
+							if(etat == 0 || etat == 1){
+								System.err.println("Donnez l'autre direction ou changer de pion");
+							}else{
+								change=false;
+							}
+						}
+					}while(change);
+					printEtatSonJeu(true);
+
+					victoire = victory(false);
+					if(victoire)
+					{
+						System.out.println("Les noirs ont gagne !!!");
+					}
+				}while(retourner);
+			}
 		}while(victoire!=true);
+
 	}
 	/**
 	 * Fonction qui prepare le jeu, il remplit le plateau de false,
@@ -69,13 +129,6 @@ public class jeuDames {
 	 */
 	private static void debutJeu()
 	{
-		for(int i=0;i<10;i++)
-		{
-			for(int j=0;i<10;i++)
-			{
-				plateau[i][j] = false;
-			}
-		}
 		//Initialisation des blancs
 		byte Xtmp = 1;
 		byte Ytmp = 1;
@@ -83,7 +136,6 @@ public class jeuDames {
 		{
 			String name = "PN_" + Integer.toString(i);
 			lstPions[i] = new pion(Xtmp, Ytmp, true, name);
-			plateau[Xtmp][Ytmp] = true;
 			Xtmp = (byte) (Xtmp +2);		
 			if(Xtmp==11)
 			{
@@ -102,7 +154,6 @@ public class jeuDames {
 		{
 			String name = "PN_" + Integer.toString(i-20);
 			lstPions[i] = new pion(Xtmp, Ytmp, false,name);
-			plateau[Xtmp][Ytmp] = true;
 			Xtmp = (byte) (Xtmp +2);
 			if(Xtmp==11)
 			{
@@ -133,7 +184,6 @@ public class jeuDames {
 			return 1;
 		case 2:
 			System.err.println("Erreur - Pion deja present sur la case et appartenant a l'adversaire");
-
 			//TODO faire une option pour prendre les pions de l'adversaire
 			//TODO trouver une meilleure facon de faire pour prendre le pion d'un adversaire
 			//Pour pouvoir verifier qu'on puisse prendre le pion adverse, on doit d'abord regarder
@@ -155,6 +205,11 @@ public class jeuDames {
 					tmp.setCoord(new Coordonnees((byte)(coord.getCoordX()+1),(byte)(coord.getCoordY()-1)));
 				}
 			}
+			byte test = canMove(tmp,sens);
+			if(test==3)
+			{
+				System.out.println("Possbilite de prendre l'adversaire, voulez-vous le faire");
+			}
 			pion sd = prAdversaire(tmp,true,!sens,true);
 			System.out.println("Votre pion est desormais situe aux coordonnees : " + sd.getCoordX() + " , " + sd.getCoordY());
 			return 2;
@@ -175,15 +230,26 @@ public class jeuDames {
 					nouveau.setCoord(new Coordonnees((byte)(coco.getCoordX()+1),(byte)(coco.getCoordY()-1)));
 				}
 			}
+			if(nouveau.isWhite())
+			{
+				if(nouveau.getCoordY()==10)
+				{
+					nouveau.becomeDame();
+				}
+			}else{
+				if(nouveau.getCoordY()==0)
+				{
+					nouveau.becomeDame();
+				}
+			}
 			byte indice = searchPionI(coco);
 			lstPions[indice] = nouveau;
-			plateau[nouveau.getCoordX()][nouveau.getCoordY()] = true;
 			return 3;
 		}
 		return 0;
 	}
 	/**
-	 * 
+	 * [Fonction recyclee pour plus tard lors de l'elaboration de l'IA]
 	 * @param pi le pion avec les coodornnes de l'adversaire que l'on veut prendre
 	 * @param surUnAdversaire mettre a true
 	 * @param sMT mettre a false si l'adversaire est a gauche et a true si a droite
@@ -261,17 +327,6 @@ public class jeuDames {
 					//on supprime l'adversaire de la liste de pions
 					byte adv = searchPionI(pi.getCoord());
 					lstPions[adv] = null;
-					//On met à jour le plateau
-					plateau[pi.getCoordX()][pi.getCoordY()] = false;
-
-					if(pi.isWhite())
-					{
-						plateau[pi.getCoordX()-1][pi.getCoordY()+1] = true;
-						plateau[pi.getCoordX()+1][pi.getCoordY()-1] = false;
-					}else{
-						plateau[pi.getCoordX()-1][pi.getCoordY()-1] = true;
-						plateau[pi.getCoordX()+1][pi.getCoordY()+1] = false;
-					}
 				}else{
 					surMemeTrace = true;
 				}
@@ -324,18 +379,6 @@ public class jeuDames {
 					//on supprime l'adversaire de la liste de pions
 					byte adv = searchPionI(pi.getCoord());
 					lstPions[adv] = null;
-					//On met à jour le plateau
-					plateau[pi.getCoordX()][pi.getCoordY()] = false;
-
-					if(pi.isWhite())
-					{
-						plateau[pi.getCoordX()+1][pi.getCoordY()+1] = true;
-
-						plateau[pi.getCoordX()-1][pi.getCoordY()-1] = false;
-					}else{
-						plateau[pi.getCoordX()+1][pi.getCoordY()-1] = true;
-						plateau[pi.getCoordX()-1][pi.getCoordY()+1] = false;
-					}
 				}else{
 					onArrete = false;
 				}
@@ -353,74 +396,77 @@ public class jeuDames {
 	 */
 	private static byte canMove(pion pi, boolean sens)
 	{
-		Coordonnees meh = pi.getCoord();
-		boolean blip = false;
+		final Coordonnees meh = pi.getCoord();
 
 		if(pi.isWhite())
 		{
 			if(sens)
 			{
-				if(meh.getCoordX()==0)
+				if(meh.getCoordX()==0 || meh.getCoordY()==10)
 					return 0;
-				blip = plateau[meh.getCoordX()-1][meh.getCoordY()+1];
-				if(blip)
+
+				pion tmp = searchPion(new Coordonnees((byte) (meh.getCoordX()-1),(byte) (meh.getCoordY()+1)));
+				if(tmp==null)
 				{
-					pion tmp = searchPion(new Coordonnees((byte) (meh.getCoordX()-1),(byte) (meh.getCoordY()+1)));
-					if(tmp.isWhite()){
-						return 1;
-					}else{
-						return 2;
-					}
+					return 3;
+				}else if(tmp.isWhite()){
+					return 1;
+				}else{
+					return 2;
 				}
 			}else{
-				if(meh.getCoordX()==10)
+				if(meh.getCoordX()==10 || meh.getCoordY()==10)
 					return 0;
-				blip = plateau[meh.getCoordX()+1][meh.getCoordY()+1];
-				if(blip)
+
+				pion tmp = searchPion(new Coordonnees((byte) (meh.getCoordX()+1),(byte) (meh.getCoordY()+1)));
+				if(tmp ==null)
 				{
-					pion tmp = searchPion(new Coordonnees((byte) (meh.getCoordX()+1),(byte) (meh.getCoordY()+1)));
-					if(tmp.isWhite()){
-						return 1;
-					}else{
-						return 2;
-					}
+					return 3;
 				}
+				else if(tmp.isWhite()){
+					return 1;
+				}else{
+					return 2;
+				}
+
 			}			
 		}else{
 			if(sens)
 			{
-				if(meh.getCoordX()==0)
+				if(meh.getCoordX()==0 || meh.getCoordY()==0)
 					return 0;
-				blip = plateau[meh.getCoordX()-1][meh.getCoordY()-1];
-				if(blip)
+
+				pion tmp = searchPion(new Coordonnees((byte) (meh.getCoordX()-1),(byte) (meh.getCoordY()-1)));
+				if(tmp==null)
 				{
-					pion tmp = searchPion(new Coordonnees((byte) (meh.getCoordX()-1),(byte) (meh.getCoordY()-1)));
-					if(tmp.isWhite())
-					{
-						return 1;
-					}
-					else{
-						return 2;
-					}
+					return 3;
 				}
-			}else{
-				if(meh.getCoordX()==10)
-					return 0;
-				blip = plateau[meh.getCoordX()+1][meh.getCoordY()-1];
-				if(blip)
+				else if(tmp.isWhite())
 				{
-					pion tmp = searchPion(new Coordonnees((byte) (meh.getCoordX()+1),(byte) (meh.getCoordY()-1)));
-					if(tmp.isWhite())
-					{
-						return 1;
-					}
-					else{
-						return 2;
-					}
+					return 1;
+				}
+				else{
+					return 2;
+				}
+
+			}else{
+				if(meh.getCoordX()==10 || meh.getCoordY()==0)
+					return 0;
+
+				pion tmp = searchPion(new Coordonnees((byte) (meh.getCoordX()+1),(byte) (meh.getCoordY()-1)));
+				if(tmp==null)
+				{
+					return 3;
+				}
+				else if(tmp.isWhite())
+				{
+					return 1;
+				}
+				else{
+					return 2;
 				}
 			}			
-		}		
-		return 3;
+		}
 	}
 	private static pion searchPion(Coordonnees co)
 	{
@@ -459,7 +505,7 @@ public class jeuDames {
 	 * @param joueur - true pour les blanc, false pour les noirs
 	 * @return l'indice dans le tableau lstPions correspondant au pions que le joueur a decide de bouger
 	 */
-	private static byte interaction(boolean joueur)
+	private static pion interaction(boolean joueur)
 	{
 		// Ici on affiche seulement tous les pions de l'utilisateur
 		printEtatSonJeu(joueur);
@@ -504,8 +550,13 @@ public class jeuDames {
 				gdBoucle = false;
 			}
 		}while(gdBoucle);
-		return indice;
+		final pion resultat = lstPions[indice];
+		return resultat;
 	}
+	/**
+	 * cette fonction affiche l'etat des pions d'un joueur
+	 * @param joueur par convention, blanc = true et noir = false
+	 */
 	private static void printEtatSonJeu(boolean joueur)
 	{
 		System.out.println(joueur?"Joueur 1 - blanc":"Joueur 2 - noir");
@@ -530,5 +581,167 @@ public class jeuDames {
 				System.out.print(lstPions[i].toString() + " | ");
 			}
 		}
+	}
+	/**
+	 * 
+	 * @param joueur par convention, blanc = true et noir = false
+	 * @return true si le joueur a gagne et false si la partie n'est toujours pas terminee
+	 */
+	private static boolean victory(boolean joueur)
+	{
+		boolean resultat = true;
+		if(joueur)
+		{
+			for(int i=0; i<20;i++)
+			{
+				if(lstPions[i] != null)
+				{
+					resultat = false;
+				}
+			}
+		}else{
+			for(int i=20;i<40;i++)
+			{
+				if(lstPions[i] != null)
+				{
+					resultat = false;
+				}
+			}
+		}
+		return resultat;
+	}
+}
+/**
+ * 
+ * @author vinsifroid
+ * @version indev
+ */
+class Coordonnees{
+	private byte X;
+	private byte Y;
+
+	public Coordonnees(byte X, byte Y)
+	{
+		this.X = X;
+		this.Y = Y;
+	}
+	public void setX(byte X)
+	{
+		this.X = X;
+	}
+	public void setY(byte Y)
+	{
+		this.Y = Y;
+	}
+	public byte getCoordX()
+	{
+		return X;
+	}
+	public byte getCoordY()
+	{
+		return Y;
+	}
+}
+
+/**
+ * 
+ * @author vinsifroid
+ * @version indev
+ */
+class pion{
+	private Coordonnees Coo;
+	private String ID;
+	private boolean couleur;
+	private boolean dame;
+
+	/**
+	 * 
+	 * @param X
+	 * @param Y
+	 * @param couleur true for white, false for black
+	 * @category constructor
+	 */
+	public pion(byte X, byte Y, boolean couleur)
+	{
+		Coo.setX(X);
+		Coo.setY(Y);
+		this.couleur = couleur;
+		this.dame = false;
+		ID = "name";
+	}
+	/**
+	 * 
+	 * @param X
+	 * @param Y
+	 * @param couleur true for white, false for black
+	 * @param ID un identifiant (par ex: PN1)
+	 * @category constructor
+	 */
+	public pion(byte X, byte Y, boolean couleur, String ID)
+	{
+		Coo.setX(X);
+		Coo.setY(Y);
+		this.couleur = couleur;
+		this.dame = false;
+		this.ID = ID;
+	}
+	public String toString()
+	{
+		String msg= "";
+		if(couleur)
+		{
+			msg = "Blanc";
+		}else{
+			msg = "Noir";
+		}
+		return ID + " - " + msg +  " - X: " + Coo.getCoordX() + ",Y: " + Coo.getCoordY();
+	}
+	/**
+	 * 
+	 * @return true if white and false if black
+	 */
+	public boolean isWhite()
+	{
+		return couleur;
+	}
+	public boolean isDame()
+	{
+		return dame;
+	}
+	public byte getCoordX()
+	{
+		return Coo.getCoordX();
+	}
+	public byte getCoordY()
+	{
+		return Coo.getCoordY();
+	}
+	public Coordonnees getCoord()
+	{
+		return Coo;
+	}
+	public String getID()
+	{
+		return ID;
+	}
+	public void becomeDame()
+	{
+		dame = true;
+	}		
+	public void setX(byte X)
+	{
+		Coo.setX(X);
+	}
+	public void setY(byte Y)
+	{
+		Coo.setY(Y);
+	}
+	public void setCoord(Coordonnees hey)
+	{
+		Coo = hey;
+	}
+	public void setName(String name)
+	{
+		this.ID = name;
 	}
 }
