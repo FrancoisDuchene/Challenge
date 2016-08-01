@@ -190,7 +190,7 @@ public class jeuDames {
 			//en fonction des 4 possibilitees qu'il ne se trouve rien de l'autre cote pour pouvoir bouger
 
 			// On charge un curseur sur l'adversaire et ensuite on l'envoie a la fonction dediee pour tuer les adversaires
-			pion tmp = new pion((byte)0,(byte)0,true);
+			pion tmp = new pion((byte)0,(byte)0,pi.isWhite());
 			Coordonnees coord = pi.getCoord();
 			if(sens){
 				if(pi.isWhite()){
@@ -208,10 +208,52 @@ public class jeuDames {
 			byte test = canMove(tmp,sens);
 			if(test==3)
 			{
-				System.out.println("Possbilite de prendre l'adversaire, voulez-vous le faire");
+				System.out.println("Possbilite de prendre l'adversaire, voulez-vous le faire ?"
+						+ "\n(1)Oui (2)Non");
+				byte choix = 0;
+				do{
+					choix = InOut.getByte();
+					if(choix !=1 || choix !=2)
+					{
+						System.out.println("Veuillez indiquer 1 ou 2 !");
+					}
+				}while(choix!=1 && choix!=2);
+				if(choix==1)
+				{
+					byte ennemi = searchPionI(tmp.getCoord());
+					lstPions[ennemi] = null;
+					coord = tmp.getCoord();
+					if(sens){
+						if(pi.isWhite()){
+							tmp.setCoord(new Coordonnees((byte)(coord.getCoordX()-1),(byte)(coord.getCoordY()+1)));
+						}else{
+							tmp.setCoord(new Coordonnees((byte)(coord.getCoordX()-1),(byte)(coord.getCoordY()-1)));
+						}				
+					}else{
+						if(pi.isWhite()){
+							tmp.setCoord(new Coordonnees((byte)(coord.getCoordX()+1),(byte)(coord.getCoordY()+1)));
+						}else{
+							tmp.setCoord(new Coordonnees((byte)(coord.getCoordX()+1),(byte)(coord.getCoordY()-1)));
+						}
+					}
+					if(tmp.isWhite())
+					{
+						if(tmp.getCoordY()==10)
+						{
+							tmp.becomeDame();
+						}
+					}else{
+						if(tmp.getCoordY()==0)
+						{
+							tmp.becomeDame();
+						}
+					}
+					byte indicePion = searchPionI(pi.getCoord());
+					lstPions[indicePion] = tmp;	
+				}
 			}
-			pion sd = prAdversaire(tmp,true,!sens,true);
-			System.out.println("Votre pion est desormais situe aux coordonnees : " + sd.getCoordX() + " , " + sd.getCoordY());
+			//pion sd = prAdversaire(tmp,true,!sens,true);
+			System.out.println("Votre pion est desormais situe aux coordonnees : " + tmp.getCoordX() + " , " + tmp.getCoordY());
 			return 2;
 		case 3:
 			Coordonnees coco = pi.getCoord();
@@ -230,6 +272,7 @@ public class jeuDames {
 					nouveau.setCoord(new Coordonnees((byte)(coco.getCoordX()+1),(byte)(coco.getCoordY()-1)));
 				}
 			}
+			//Pour les dames
 			if(nouveau.isWhite())
 			{
 				if(nouveau.getCoordY()==10)
@@ -651,6 +694,7 @@ class Coordonnees{
 class pion{
 	private Coordonnees Coo;
 	private String ID;
+	private String unicodeDessin;
 	private boolean couleur;
 	private boolean dame;
 
@@ -668,6 +712,12 @@ class pion{
 		this.couleur = couleur;
 		this.dame = false;
 		ID = "name";
+		if(couleur)
+		{
+			unicodeDessin = "U+26C0";
+		}else{
+			unicodeDessin = "U+26C2";
+		}
 	}
 	/**
 	 * 
@@ -684,6 +734,12 @@ class pion{
 		this.couleur = couleur;
 		this.dame = false;
 		this.ID = ID;
+		if(couleur)
+		{
+			unicodeDessin = "U+26C0";
+		}else{
+			unicodeDessin = "U+26C2";
+		}	
 	}
 	public String toString()
 	{
@@ -724,10 +780,20 @@ class pion{
 	{
 		return ID;
 	}
+	public String getUnicodeDessin()
+	{
+		return unicodeDessin;
+	}
 	public void becomeDame()
 	{
 		dame = true;
-	}		
+		if(couleur)
+		{
+			unicodeDessin = "U+26C1";
+		}else{
+			unicodeDessin = "U+26C3";
+		}
+	}
 	public void setX(byte X)
 	{
 		Coo.setX(X);
