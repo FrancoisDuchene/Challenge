@@ -1,6 +1,5 @@
 package source;
 import exceptions.INVALID_MODE;
-import fichier.Fichier;
 import fichier.InOut;
 
 public class HighScoreGestion {
@@ -32,25 +31,25 @@ public class HighScoreGestion {
 			// si oui, on les charge, c'est sense etre les plus recents
 			// si non, on les cree
 
-			if(!(Fichier.fichierExiste("saves/", "HighScore/pendu.hg"))){
+			if(!(InOut.fichierExiste("saves/", "HighScore/pendu.hg"))){
 				HGpendu.save();
 			}else{
 				HGpendu.charge();
 			}
 
-			if(!(Fichier.fichierExiste("saves/", "HighScore/plusMoins.hg"))){
+			if(!(InOut.fichierExiste("saves/", "HighScore/plusMoins.hg"))){
 				HGplusMoins.save();
 			}else{
 				HGplusMoins.charge();
 			}
 
-			if(!(Fichier.fichierExiste("saves/", "HighScore/mastermind.hg"))){
+			if(!(InOut.fichierExiste("saves/", "HighScore/mastermind.hg"))){
 				HGmastermind.save();
 			}else{
 				HGmastermind.charge();
 			}
 
-			if(!(Fichier.fichierExiste("saves/", "HighScore/puissance4.hg"))){
+			if(!(InOut.fichierExiste("saves/", "HighScore/puissance4.hg"))){
 				HGpuissance4.save();
 			}else{
 				HGpuissance4.charge();
@@ -112,19 +111,19 @@ public class HighScoreGestion {
 		case 1:
 			if(HGpendu.addValeur(nom, valeur))
 			{return true;}
-			else{return false;}
+			return false;
 		case 2:
 			if(HGplusMoins.addValeur(nom, valeur))
 			{return true;}
-			else{return false;}
+			return false;
 		case 3:
 			if(HGmastermind.addValeur(nom, valeur))
 			{return true;}
-			else{return false;}
+			return false;
 		case 4:
 			if(HGpuissance4.addValeur(nom, valeur))
 			{return true;}
-			else{return false;}
+			return false;
 		default:
 			throw new INVALID_MODE("Erreur mode rentre incorrect");
 		}

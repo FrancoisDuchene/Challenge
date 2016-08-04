@@ -57,8 +57,7 @@ public class Config
 		//force.list(System.out); si on veut les le documents
 
 		try {
-			File fichier = new File(filename);
-			luke = new FileOutputStream(fichier);
+			luke = new FileOutputStream(new File(filename));
 			force.store(luke, " Proprietes");			
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
@@ -84,8 +83,7 @@ public class Config
 		FileInputStream leia = null;
 
 		try {
-			File fichier = new File(filename);
-			leia = new FileInputStream(fichier);
+			leia = new FileInputStream(new File(filename));
 			force.load(leia);
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();

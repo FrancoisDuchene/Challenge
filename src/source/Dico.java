@@ -1,6 +1,7 @@
 package source;
 
-import fichier.Fichier;
+import fichier.FichierR;
+import fichier.FichierW;
 
 public class Dico {
 	private static byte choixDico=challenge.getLanguage();	
@@ -12,19 +13,19 @@ public class Dico {
 		//Gestion des Flux I/O
 
 		String str = "";
-		Fichier fi = ouvrirDico();
-		final int longueur = fi.longueurFichier();
-		int nbrRandom = nbrRandom(longueur);			
+		FichierR fi = ouvrirDicoR();
+		final long longueur = fi.length();
+		final int nbrRandom = nbrRandom(longueur);			
 		str = fi.lire(nbrRandom);		
-		fi.fermer();		
+		fi.fermerFluxReader();		
 		return str;
 	}
 	/**
 	 * This function open the dico with the path per default "res/data/dico_fr.txt"
 	 * @return a file describing the dico 
 	 */
-	public static Fichier ouvrirDico() {
-		String nomFichier = "res/data/dico_fr.txt";
+	public static FichierR ouvrirDicoR() {
+		String nomFichier = null;
 		switch(choixDico)
 		{
 		case 1:
@@ -34,20 +35,35 @@ public class Dico {
 			nomFichier = "res/data/dico_en.txt";
 			break;
 		}
-		
-		Fichier fi = new Fichier();
-		fi.ouvrir(nomFichier, "Lecture",true);
-		return fi;
+		FichierR f = new FichierR(nomFichier);
+		f.ouvrirFluxReader();
+		return f;
+	}
+	
+	public static FichierW ouvrirDicoW(){
+		String nomFichier = null;
+		switch(choixDico)
+		{
+		case 1:
+			nomFichier = "res/data/dico_fr.txt";
+			break;
+		case 2:
+			nomFichier = "res/data/dico_en.txt";
+			break;
+		}
+		FichierW f = new FichierW(nomFichier);
+		f.ouvrirFuxWriter(true);
+		return f;
 	}
 	/**
 	 * This function write a word gived in parameter to the end of the current file
 	 * @param mot a word to write
 	 */
 	public static void ecritureMot(String mot) {
-		Fichier fi = ouvrirDico();
-		if(fi.equalsMots(mot))
-		{			
-			fi.toEnd();
+		FichierR f = ouvrirDicoR();
+		FichierW fi = ouvrirDicoW();
+		if(f.equalsMots(mot))
+		{
 			fi.introduireEspace();			
 			fi.ecrireString(mot);			
 		}
@@ -60,7 +76,7 @@ public class Dico {
 	 * @param longueur the length of the file currently used
 	 * @return a random number between 0 and the file length
 	 */
-	private static int nbrRandom(int longueur) {
+	private static int nbrRandom(long longueur) {
 		double nbr = Math.random();
 		nbr = nbr*longueur;
 		int nbrRandom = (int) nbr;

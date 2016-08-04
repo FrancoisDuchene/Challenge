@@ -256,11 +256,10 @@ public class HighScore {
 											if(val<val10)
 											{
 												return false;
-											}else{
-												val10=val;
-
-												val10Player = nom;
 											}
+											val10=val;
+
+											val10Player = nom;
 										}else{
 											val10=val9;
 											val9=val;

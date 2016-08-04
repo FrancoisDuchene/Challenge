@@ -62,9 +62,8 @@ public class challenge
 		if(choix.equals(options[0]))
 		{
 			return true;
-		}else{
-			return false;
 		}
+		return false;
 	}
 	private static String connecte()
 	{
@@ -72,10 +71,7 @@ public class challenge
 		{
 			return LSD.getString("chal_conne_msg1");
 		}
-		else
-		{
-			return LSD.getString("chal_conne_msg2");
-		}
+		return LSD.getString("chal_conne_msg2");
 	}
 	public static void menuPrincipal()
 	{

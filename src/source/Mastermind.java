@@ -253,8 +253,7 @@ public class Mastermind
 	public static char majuscule(char l){
 		if ((int)l <=122 && (int)l >= 97)
 		{return (char)((int)l - 32);}
-		else 
-			return l;
+		return l;
 	}
 
 	public static void menu()

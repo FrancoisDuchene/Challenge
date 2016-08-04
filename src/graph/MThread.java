@@ -4,6 +4,7 @@ import sound.SoundPlayer;
 public class MThread extends Thread
 {
 	private String name;
+	private PageAccueil pageAccueil;
 
 	public MThread(String name)
 	{

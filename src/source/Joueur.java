@@ -1,6 +1,6 @@
 package source;
 
-import fichier.Fichier;
+import fichier.FichierW;
 
 public class Joueur {
 	//Attributs
@@ -374,8 +374,7 @@ public class Joueur {
 			}
 			return false;			
 		}
-		else
-		{return false;}
+		return false;
 	}
 	/**
 	 * This method save the current player into a file named by "saves/" + name + ".sav"
@@ -385,30 +384,30 @@ public class Joueur {
 	 */
 	public void savePlayer()
 	{
-		Fichier fl = new Fichier();
-		fl.ouvrir("saves/" + name + ".sav", "w", false);
-		fl.ecrireString(name);
-		fl.ecrireString(".A");
+		FichierW f = new FichierW("saves/" + name + ".sav");
+		f.ouvrirFuxWriter(false);
+		f.ecrireString(name);
+		f.ecrireString(".A");
 		for(int i=0; i<scorePendu.length;i++)
 		{
-			fl.ecrireInt(scorePendu[i]);
+			f.ecrireInt(scorePendu[i]);
 		}
-		fl.ecrireString(".B");
+		f.ecrireString(".B");
 		for(int i=0; i<scorePlusMoins.length;i++)
 		{
-			fl.ecrireInt(scorePlusMoins[i]);
+			f.ecrireInt(scorePlusMoins[i]);
 		}
-		fl.ecrireString(".C");
+		f.ecrireString(".C");
 		for(int i=0; i<scoreMaster.length;i++)
 		{
-			fl.ecrireInt(scoreMaster[i]);
+			f.ecrireInt(scoreMaster[i]);
 		}
-		fl.ecrireString(".D");
+		f.ecrireString(".D");
 		for(int i=0; i<scorePuissance.length;i++)
 		{
-			fl.ecrireInt(scorePuissance[i]);
+			f.ecrireInt(scorePuissance[i]);
 		}
-		fl.ecrireString(".end");
-		fl.fermer();
+		f.ecrireString(".end");
+		f.fermerFluxWriter();
 	}
 }

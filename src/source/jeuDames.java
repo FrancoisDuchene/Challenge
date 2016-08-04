@@ -457,58 +457,56 @@ public class jeuDames {
 				}else{
 					return 2;
 				}
-			}else{
-				if(meh.getCoordX()==10 || meh.getCoordY()==10)
-					return 0;
+			}
+			if(meh.getCoordX()==10 || meh.getCoordY()==10)
+				return 0;
 
-				pion tmp = searchPion(new Coordonnees((byte) (meh.getCoordX()+1),(byte) (meh.getCoordY()+1)));
-				if(tmp ==null)
-				{
-					return 3;
-				}
-				else if(tmp.isWhite()){
-					return 1;
-				}else{
-					return 2;
-				}
-
-			}			
-		}else{
-			if(sens)
+			pion tmp = searchPion(new Coordonnees((byte) (meh.getCoordX()+1),(byte) (meh.getCoordY()+1)));
+			if(tmp ==null)
 			{
-				if(meh.getCoordX()==0 || meh.getCoordY()==0)
-					return 0;
-
-				pion tmp = searchPion(new Coordonnees((byte) (meh.getCoordX()-1),(byte) (meh.getCoordY()-1)));
-				if(tmp==null)
-				{
-					return 3;
-				}
-				else if(tmp.isWhite())
-				{
-					return 1;
-				}
-				else{
-					return 2;
-				}
-
+				return 3;
+			}
+			else if(tmp.isWhite()){
+				return 1;
 			}else{
-				if(meh.getCoordX()==10 || meh.getCoordY()==0)
-					return 0;
-
-				pion tmp = searchPion(new Coordonnees((byte) (meh.getCoordX()+1),(byte) (meh.getCoordY()-1)));
-				if(tmp==null)
-				{
-					return 3;
-				}
-				else if(tmp.isWhite())
-				{
-					return 1;
-				}
-				else{
-					return 2;
-				}
+				return 2;
 			}			
+		}
+		
+		if(sens)
+		{
+			if(meh.getCoordX()==0 || meh.getCoordY()==0)
+				return 0;
+
+			pion tmp = searchPion(new Coordonnees((byte) (meh.getCoordX()-1),(byte) (meh.getCoordY()-1)));
+			if(tmp==null)
+			{
+				return 3;
+			}
+			else if(tmp.isWhite())
+			{
+				return 1;
+			}
+			else{
+				return 2;
+			}
+
+		}
+		
+		if(meh.getCoordX()==10 || meh.getCoordY()==0)
+			return 0;
+
+		pion tmp = searchPion(new Coordonnees((byte) (meh.getCoordX()+1),(byte) (meh.getCoordY()-1)));
+		if(tmp==null)
+		{
+			return 3;
+		}
+		else if(tmp.isWhite())
+		{
+			return 1;
+		}
+		else{
+			return 2;
 		}
 	}
 	private static pion searchPion(Coordonnees co)
@@ -527,14 +525,13 @@ public class jeuDames {
 	 * @param co des coordonnees
 	 * @return l'indice du tableau ou se trouve le pion
 	 */
-	@SuppressWarnings("unused")
 	private static byte searchPionI(Coordonnees co)
 	{
 		pion tmp;
 		for(int i=0;i<lstPions.length;i++)
 		{
 			tmp = lstPions[i];
-			if(tmp.getCoordX() == co.getCoordX() && tmp.getCoordY() == co.getCoordY());
+			if(tmp.getCoordX() == co.getCoordX() && tmp.getCoordY() == co.getCoordY())
 			{return (byte)i;}
 		}
 		return -1;

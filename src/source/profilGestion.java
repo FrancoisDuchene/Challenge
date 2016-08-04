@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import fichier.Fichier;
+import fichier.FichierR;
 import fichier.InOut;
 import graph.Profil_Windows;
 import graph.SimpleFenetre;
@@ -56,7 +56,7 @@ public class profilGestion {
 			}
 
 			//Pour différencier les boutons 'se connecter' et 'creer un nouveau compte'
-			if(md==3 && !Fichier.fichierExiste("saves/", nom + ".sav"))
+			if(md==3 && !InOut.fichierExiste("saves/", nom + ".sav"))
 			{
 				final String message = LSD.getString("prGe_gesti_msg");
 				JOptionPane.showMessageDialog(null, message, "Avertissement", JOptionPane.WARNING_MESSAGE, null);
@@ -65,10 +65,10 @@ public class profilGestion {
 			name = nom;
 			playerOne.setName(nom);
 
-			if(Fichier.fichierExiste("saves/",nom + ".sav" ))
+			if(InOut.fichierExiste("saves/",nom + ".sav" ))
 			{
 				existe = true;
-				if(Fichier.fichierExiste("saves/", nom + ".cf"))
+				if(InOut.fichierExiste("saves/", nom + ".cf"))
 				{
 					confExiste = true;
 				}
@@ -308,21 +308,21 @@ public class profilGestion {
 	 */
 	private static void chargeProfil()
 	{
-		if(Fichier.fichierExiste("saves/", name + ".sav"))
+		if(InOut.fichierExiste("saves/", name + ".sav"))
 		{			
 			String str = "";
-			Fichier fi = new Fichier();
-			fi.ouvrir("saves/" + name + ".sav", "L",true);
-			str = fi.lire();
+			FichierR f = new FichierR("saves/" + name + ".sav");
+			f.ouvrirFluxReader();
+			str = f.lire();
 			playerOne.setName(str);
-			fi.lire();
+			f.lire();
 			int [] scorePendu = new int[10];
 			int [] scorePlusMoins = new int[10];
 			int [] scoreMasterMind = new int[10];
 			int [] scorePuissance =new int[10];
 			for(int i=0;!(str.equals(".B"));i++)
 			{
-				str = fi.lire();
+				str = f.lire();
 				if(!str.equals(".B"))
 				{
 					scorePendu[i] = Integer.parseInt(str);
@@ -331,7 +331,7 @@ public class profilGestion {
 			playerOne.setScorePendu(scorePendu);
 			for(int i=0;!(str.equals(".C"));i++)
 			{
-				str = fi.lire();
+				str = f.lire();
 				if(!str.equals(".C"))
 				{
 					scorePlusMoins[i] = Integer.parseInt(str);
@@ -340,7 +340,7 @@ public class profilGestion {
 			playerOne.setScorePlusMoins(scorePlusMoins);
 			for(int i=0;!(str.equals(".D"));i++)
 			{
-				str = fi.lire();
+				str = f.lire();
 				if(!str.equals(".D"))
 				{
 					scoreMasterMind[i] = Integer.parseInt(str);
@@ -349,21 +349,21 @@ public class profilGestion {
 			playerOne.setScoreMasterMind(scoreMasterMind);
 			for(int i=0;!(str.equals(".end"));i++)
 			{
-				str = fi.lire();
+				str = f.lire();
 				if(!str.equals(".end"))
 				{
 					scorePuissance[i] = Integer.parseInt(str);
 				}				
 			}
 			playerOne.setScorePuissance4(scorePuissance);
-			fi.fermer();
+			f.fermerFluxReader();
 		}
 	}
 
 	public static void confDefautLoad()
 	{
 		playerConf = new Config("default");
-		if(Fichier.fichierExiste("saves/", "default.properties"))
+		if(InOut.fichierExiste("saves/", "default.properties"))
 		{
 			playerConf.chargeConfig();
 			playerConf.paramExo();				

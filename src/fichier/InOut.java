@@ -182,4 +182,26 @@ public class InOut
         }
         return sb.toString();
     }
+    
+    // Methode liees a la lecture de fichiers
+    
+    /**
+	 * 
+	 * @param path le chemin du dossier dans lequel chercher
+	 * @param fileName le fichier a trouver
+	 * @return true si le fichier existe et false si il n'existe pas dans le dossier specifie
+	 */
+	public static boolean fichierExiste(String path, String fileName)
+	{
+		File folder = new File(path);
+		File[] files = folder.listFiles();
+		for(int i=0; i < files.length; i++)
+		{
+			if(files[i].isFile() && files[i].getName().equals(fileName))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 }

@@ -55,8 +55,7 @@ public class TabAligne3
                 {
                     if(tab[i].joueur == false)
                     {return tab[i].y;}
-                    else
-                    {bool[tab[i].y] = true;}
+					bool[tab[i].y] = true;
                 }
             }
         }
@@ -72,8 +71,7 @@ public class TabAligne3
                     {
                         if(tab[i].joueur == false)
                         {return tab[i].y-1;}
-                        else
-                        {bool[tab[i].y-1] = true;}
+						bool[tab[i].y-1] = true;
                     }
                     else if(!Puissance4.caseIsEmpty(tab[i].x+2, tab[i].y-1) && tab[i].joueur == true)
                     {non[tab[i].y-1] = false;}
@@ -84,8 +82,7 @@ public class TabAligne3
                     {
                         if(tab[i].joueur == false)
                         {return tab[i].y+3;}
-                        else
-                        {bool[tab[i].y+3] = true;}
+						bool[tab[i].y+3] = true;
                     }
                     else if(!Puissance4.caseIsEmpty(tab[i].x+2, tab[i].y+3) && tab[i].joueur == true)
                     {non[tab[i].y+3] = false;}
@@ -98,8 +95,7 @@ public class TabAligne3
                     {
                         if(tab[i].joueur == false)
                         {return tab[i].y+1;}
-                        else
-                        {bool[tab[i].y+1] = true;}
+						bool[tab[i].y+1] = true;
                     }
                     else if(!Puissance4.caseIsEmpty(tab[i].x+2, tab[i].y+1) && tab[i].joueur == true)
                     {non[tab[i].y+1] = false;}
@@ -112,8 +108,7 @@ public class TabAligne3
                     {
                         if(tab[i].joueur == false)
                         {return tab[i].y+2;}
-                        else
-                        {bool[tab[i].y+2] = true;}
+						bool[tab[i].y+2] = true;
                     }
                     else if(!Puissance4.caseIsEmpty(tab[i].x+2, tab[i].y+2) && tab[i].joueur == true)
                     {non[tab[i].y+2] = false;}
@@ -132,8 +127,7 @@ public class TabAligne3
                     {
                         if(tab[i].joueur == false)
                         {return tab[i].y-1;}
-                        else
-                        {bool[tab[i].y-1] = true;}
+						bool[tab[i].y-1] = true;
                     }
                     else if(!Puissance4.caseIsEmpty(tab[i].x+1, tab[i].y-1) && tab[i].joueur == true)
                     {non[tab[i].y-1] = false;}
@@ -144,8 +138,7 @@ public class TabAligne3
                     {
                         if(tab[i].joueur == false)
                         {return tab[i].y+3;}
-                        else
-                        {bool[tab[i].y+3] = true;}
+						bool[tab[i].y+3] = true;
                     }
                     else if(!Puissance4.caseIsEmpty(tab[i].x+5, tab[i].y+3) && tab[i].joueur == true)
                     {non[tab[i].y+3] = false;}
@@ -158,8 +151,7 @@ public class TabAligne3
                     {
                         if(tab[i].joueur == false)
                         {return tab[i].y+1;}
-                        else
-                        {bool[tab[i].y+1] = true;}
+						bool[tab[i].y+1] = true;
                     }
                     else if(!Puissance4.caseIsEmpty(tab[i].x+3, tab[i].y+1) && tab[i].joueur == true)
                     {non[tab[i].y+1] = false;}
@@ -172,8 +164,7 @@ public class TabAligne3
                     {
                         if(tab[i].joueur == false)
                         {return tab[i].y+2;}
-                        else
-                        {bool[tab[i].y+2] = true;}
+						bool[tab[i].y+2] = true;
                     }
                     else if(!Puissance4.caseIsEmpty(tab[i].x+4, tab[i].y+2) && tab[i].joueur == true)
                     {non[tab[i].y+2] = false;}
@@ -192,8 +183,7 @@ public class TabAligne3
                     {
                         if(tab[i].joueur == false)
                         {return tab[i].y-1;}
-                        else
-                        {bool[tab[i].y-1] = true;}
+						bool[tab[i].y-1] = true;
                     }
                     else if(!Puissance4.caseIsEmpty(tab[i].x+3, tab[i].y-1) && tab[i].joueur == true)
                     {non[tab[i].y-1] = false;}
@@ -204,8 +194,7 @@ public class TabAligne3
                     {
                         if(tab[i].joueur == false)
                         {return tab[i].y+3;}
-                        else
-                        {bool[tab[i].y+3] = true;}
+						bool[tab[i].y+3] = true;
                     }
                     else if(!Puissance4.caseIsEmpty(tab[i].x-1, tab[i].y+3) && tab[i].joueur == true)
                     {non[tab[i].y+3] = false;}
@@ -218,8 +207,7 @@ public class TabAligne3
                     {
                         if(tab[i].joueur == false)
                         {return tab[i].y+1;}
-                        else
-                        {bool[tab[i].y+1] = true;}
+						bool[tab[i].y+1] = true;
                     }
                     else if(!Puissance4.caseIsEmpty(tab[i].x+1, tab[i].y+1) && tab[i].joueur == true)
                     {non[tab[i].y+1] = false;}
@@ -232,8 +220,7 @@ public class TabAligne3
                     {
                         if(tab[i].joueur == false)
                         {return tab[i].y+2;}
-                        else
-                        {bool[tab[i].y+2] = true;}
+						bool[tab[i].y+2] = true;
                     }
                     else if(!Puissance4.caseIsEmpty(tab[i].x, tab[i].y+2) && tab[i].joueur == true)
                     {non[tab[i].y+2] = false;}

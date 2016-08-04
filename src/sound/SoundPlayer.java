@@ -9,14 +9,14 @@ import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
-import fichier.Fichier;
+import fichier.FichierR;
 import source.challenge;
 
 public class SoundPlayer extends Thread
 {
 	private Position curPosition;
 	private final int EXTERNAL_BUFFER_SIZE = 524288; // 128Kb
-	enum Position {LEFT, RIGHT, NORMAL};
+	enum Position {LEFT, RIGHT, NORMAL}
 
 	public SoundPlayer()
 	{
@@ -84,14 +84,14 @@ public class SoundPlayer extends Thread
 	public File rdmMusique()
 	{
 		final String filenameL = "res/data/mus.ls";
-		Fichier fi = new Fichier();
-		fi.ouvrir(filenameL, "L");
-		int nbrRdm = nbrRandom(fi.longueurFichier());
+		FichierR f = new FichierR(filenameL);
+		f.ouvrirFluxReader();
+		int nbrRdm = nbrRandom(f.length());
 		for(int i=0;i<nbrRdm;i++)
 		{
-			fi.lire();
+			f.lire();
 		}
-		final String fileName = "res/sound/" + fi.lire();
+		final String fileName = "res/sound/" + f.lire();
 		File soundFile = new File(fileName);
 		if (!soundFile.exists()) {
 			System.err.println("Wave file not found: " + fileName);
@@ -104,7 +104,7 @@ public class SoundPlayer extends Thread
 	 * @param longueur the length of the file currently used
 	 * @return a random number between 0 and the file length
 	 */
-	private static int nbrRandom(int nbMusique) {
+	private static int nbrRandom(long nbMusique) {
 		double nbr = Math.random();
 		nbr = nbr*nbMusique;
 		int nbrRandom = (int) nbr;
