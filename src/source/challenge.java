@@ -149,6 +149,9 @@ public class challenge
 			case 5 :
 				menuPrincipal();
 				break;
+			case 6 :
+				jeuDames.jeu();
+				break;
 			default :
 				System.out.println(LSD.getString("chal_meJeu_msg"));
 				break;

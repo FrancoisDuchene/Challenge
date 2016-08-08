@@ -9,8 +9,7 @@ import java.io.IOException;
 /**
  * Une classe qui gère les flux de lecture d'un fichier
  * @author vinsifroid
- * @since v1.0-delta
- *
+ * @since v1.0-eta
  */
 @SuppressWarnings("serial")
 public class FichierR extends File
@@ -20,12 +19,15 @@ public class FichierR extends File
 	 */
 	private String filename;
 	private BufferedReader BR;
+	/**
+	 * true quand un flux est ouvert et false quand un flux est ferme
+	 */
 	private boolean ouvert;
 
 	public FichierR(String filename)
 	{
 		super(filename);
-		if(exists() && isFile())
+		if(!exists() && !isFile())
 		{
 			try {
 				throw new FileNotFoundException(filename + " - wrong filename or path");
@@ -152,5 +154,23 @@ public class FichierR extends File
 		do {
 			str1 = lire();
 		}while(str1 != null);
+	}
+	
+	/**
+	 * @return Int
+	 *  The function return the length of the file currently used 
+	 */
+	public int longueurFichier() {
+		String str1 = "";
+		int longueur = 0;
+		for(int i=0; ;i++) {
+			str1 = lire();
+			if(str1 == null) {
+				longueur = i;
+				setNewBufferedReader();
+				break;
+			}
+		}		
+		return longueur;
 	}
 }

@@ -66,15 +66,20 @@ public class SoundPlayer extends Thread
 				}
 			} catch (LineUnavailableException e) {
 				e.printStackTrace();
-				return;
+				System.exit(-1);
 			} catch (IOException e) {
 				e.printStackTrace();
-				return;
+				System.exit(-1);
 			} catch (Exception e) {
 				e.printStackTrace();
-				return;
+				System.exit(-1);
 			} finally {
 				auline.drain();
+				try {
+					audioInputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				auline.close();
 			}
 		}
@@ -83,10 +88,10 @@ public class SoundPlayer extends Thread
 	
 	public File rdmMusique()
 	{
-		final String filenameL = "res/data/mus.ls";
+		final String filenameL = "res/data/mus.txt";
 		FichierR f = new FichierR(filenameL);
 		f.ouvrirFluxReader();
-		int nbrRdm = nbrRandom(f.length());
+		int nbrRdm = nbrRandom(f.longueurFichier());
 		for(int i=0;i<nbrRdm;i++)
 		{
 			f.lire();
@@ -104,7 +109,7 @@ public class SoundPlayer extends Thread
 	 * @param longueur the length of the file currently used
 	 * @return a random number between 0 and the file length
 	 */
-	private static int nbrRandom(long nbMusique) {
+	private static int nbrRandom(int nbMusique) {
 		double nbr = Math.random();
 		nbr = nbr*nbMusique;
 		int nbrRandom = (int) nbr;

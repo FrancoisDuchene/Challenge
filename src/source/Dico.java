@@ -14,7 +14,7 @@ public class Dico {
 
 		String str = "";
 		FichierR fi = ouvrirDicoR();
-		final long longueur = fi.length();
+		final int longueur = fi.longueurFichier();
 		final int nbrRandom = nbrRandom(longueur);			
 		str = fi.lire(nbrRandom);		
 		fi.fermerFluxReader();		
@@ -76,7 +76,7 @@ public class Dico {
 	 * @param longueur the length of the file currently used
 	 * @return a random number between 0 and the file length
 	 */
-	private static int nbrRandom(long longueur) {
+	private static int nbrRandom(int longueur) {
 		double nbr = Math.random();
 		nbr = nbr*longueur;
 		int nbrRandom = (int) nbr;
