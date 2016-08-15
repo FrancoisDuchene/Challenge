@@ -23,25 +23,27 @@ public class jeuDames {
 
 	public static void jeu()
 	{
+		System.out.println();
 		boolean victoire = false;
-		boolean change = true;
-		//boolean controleur de la deuxième boucle
-		//deuxième boucle qui sert si jamais le joueur veut choisir un autre pion
-		boolean retourner = false;
 
 		debutJeu();
 		//Par convention Joueur 1 = blancs et Joueur 2 = noirs
 
 		do{
+			boolean change = true;
+			//boolean controleur de la deuxième boucle
+			//deuxième boucle qui sert si jamais le joueur veut choisir un autre pion
+			boolean retourner = false;
+
 			pion pi = null;
 
-			System.out.println("Pions blancs");
-			printEtatSonJeu(true);
-			System.out.println("Pions noirs");
-			printEtatSonJeu(false);
-			
+			printEtatSonJeu(true); // les blancs
+			System.out.println();
+			printEtatSonJeu(false); // les noirs
+
 			//Tour des blancs
 			do{
+				System.out.println();
 				pi = interaction(true);
 
 				System.out.println("Vous avez choisi le pion - " + pi.toString());
@@ -50,6 +52,7 @@ public class jeuDames {
 				System.out.println("gauche (1) ou droite (2) ? - ou changer de pion a bouger ? (3)");
 				do{
 					byte choix = 0;
+					change = true;
 					do{
 						choix = InOut.getByte();
 					}while(choix!=1 && choix!=2 && choix!=3);
@@ -64,12 +67,13 @@ public class jeuDames {
 						byte etat = deplacerPion(pi,sens);
 						if(etat == 0 || etat == 1){
 							System.err.println("Donnez l'autre direction ou changer de pion");
+						}else if(etat ==2){
+							System.err.println("Impossible de prendre l'adversaire  !");
 						}else{
 							change=false;
 						}
 					}				
 				}while(change);
-				printEtatSonJeu(true);
 
 				victoire = victory(true);
 				if(victoire)
@@ -92,6 +96,7 @@ public class jeuDames {
 					System.out.println("gauche (1) ou droite (2) ? - ou changer de pion a bouger ? (3)");
 					do{
 						byte choix = 0;
+						change = true;
 						do{
 							choix = InOut.getByte();
 						}while(choix!=1 && choix!=2 && choix!=3);
@@ -106,12 +111,13 @@ public class jeuDames {
 							byte etat = deplacerPion(pi,sens);
 							if(etat == 0 || etat == 1){
 								System.err.println("Donnez l'autre direction ou changer de pion");
+							}else if(etat ==2){
+								System.err.println("Impossible de prendre l'adversaire  !");
 							}else{
 								change=false;
 							}
 						}
 					}while(change);
-					printEtatSonJeu(true);
 
 					victoire = victory(false);
 					if(victoire)
@@ -121,7 +127,6 @@ public class jeuDames {
 				}while(retourner);
 			}
 		}while(victoire!=true);
-
 	}
 	/**
 	 * Fonction qui prepare le jeu, il remplit le plateau de false,
@@ -129,6 +134,9 @@ public class jeuDames {
 	 */
 	private static void debutJeu()
 	{
+		// Par convention, la case en bas à gauche de l'échiquier est la case de coordonnées (1,1)
+		// la case en haut à droite est la case (10,10)
+
 		//Initialisation des blancs
 		byte Xtmp = 1;
 		byte Ytmp = 1;
@@ -169,7 +177,8 @@ public class jeuDames {
 	/**
 	 * @param pi
 	 * @param sens true si gauche et false si droit
-	 * @return 0 si il s'agit du bord, 1 si il y a un pion du meme camp, 2 si y a un pion adverse et 3 si il peut avancer
+	 * @return 0 si il s'agit du bord, 1 si il y a un pion du meme camp, 2 si y a un pion adverse, 3 si il peut avancer et 4 
+	 * si un pion adverse a été pris dans le processus
 	 */
 	private static byte deplacerPion(pion pi, boolean sens)
 	{
@@ -183,7 +192,7 @@ public class jeuDames {
 			System.err.println("Erreur - Pion deja present sur la case et appartenant au joueur");
 			return 1;
 		case 2:
-			System.err.println("Erreur - Pion deja present sur la case et appartenant a l'adversaire");
+			System.out.println("Pion deja present sur la case et appartenant a l'adversaire");
 			//TODO faire une option pour prendre les pions de l'adversaire
 			//TODO trouver une meilleure facon de faire pour prendre le pion d'un adversaire
 			//Pour pouvoir verifier qu'on puisse prendre le pion adverse, on doit d'abord regarder
@@ -213,7 +222,7 @@ public class jeuDames {
 				byte choix = 0;
 				do{
 					choix = InOut.getByte();
-					if(choix !=1 || choix !=2)
+					if(choix !=1 && choix !=2)
 					{
 						System.out.println("Veuillez indiquer 1 ou 2 !");
 					}
@@ -249,11 +258,17 @@ public class jeuDames {
 						}
 					}
 					byte indicePion = searchPionI(pi.getCoord());
-					lstPions[indicePion] = tmp;	
+					lstPions[indicePion].setCoord(tmp.getCoord());
+					if(tmp.isDame())
+					{
+						lstPions[indicePion].becomeDame();
+					}
+					System.out.println("Votre pion est desormais situe aux coordonnees : " + tmp.getCoordX() + " , " + tmp.getCoordY());
+					return 4;
 				}
+				System.out.println("Votre pion est desormais situe aux coordonnees : " + tmp.getCoordX() + " , " + tmp.getCoordY());
 			}
-			//pion sd = prAdversaire(tmp,true,!sens,true);
-			System.out.println("Votre pion est desormais situe aux coordonnees : " + tmp.getCoordX() + " , " + tmp.getCoordY());
+			//pion sd = prAdversaire(tmp,true,!sens,true);			
 			return 2;
 		case 3:
 			Coordonnees coco = pi.getCoord();
@@ -285,8 +300,6 @@ public class jeuDames {
 					nouveau.becomeDame();
 				}
 			}
-			byte indice = searchPionI(coco);
-			lstPions[indice] = nouveau;
 			return 3;
 		}
 		return 0;
@@ -434,7 +447,7 @@ public class jeuDames {
 	 * Cette methode regarde si le pion peut bouger
 	 * @param pi le pion à jouer
 	 * @param sens dans quel sens le joueur veut il faire avancer son pion - 
-	 * true à gauche et false à droite (avec le plateau ou les blancs sont toujours les plus proches
+	 * true à gauche et false à droite (quand les blancs sont disposés en bas)
 	 * @return 0 si il s'agit du bord, 1 si il y a un pion du meme camp, 2 si y a un pion adverse et 3 si il peut avancer
 	 */
 	private static byte canMove(pion pi, boolean sens)
@@ -445,7 +458,7 @@ public class jeuDames {
 		{
 			if(sens)
 			{
-				if(meh.getCoordX()==0 || meh.getCoordY()==10)
+				if(meh.getCoordX()==1 || meh.getCoordY()==10)
 					return 0;
 
 				pion tmp = searchPion(new Coordonnees((byte) (meh.getCoordX()-1),(byte) (meh.getCoordY()+1)));
@@ -472,10 +485,13 @@ public class jeuDames {
 				return 2;
 			}			
 		}
-		
+
+		// Pour les pions noirs
+
+		// A Gauche
 		if(sens)
 		{
-			if(meh.getCoordX()==0 || meh.getCoordY()==0)
+			if(meh.getCoordX()==1 || meh.getCoordY()==1)
 				return 0;
 
 			pion tmp = searchPion(new Coordonnees((byte) (meh.getCoordX()-1),(byte) (meh.getCoordY()-1)));
@@ -483,7 +499,7 @@ public class jeuDames {
 			{
 				return 3;
 			}
-			else if(tmp.isWhite())
+			else if(!tmp.isWhite())
 			{
 				return 1;
 			}
@@ -492,7 +508,8 @@ public class jeuDames {
 			}
 
 		}
-		
+
+		// A Droite
 		if(meh.getCoordX()==10 || meh.getCoordY()==0)
 			return 0;
 
@@ -501,7 +518,7 @@ public class jeuDames {
 		{
 			return 3;
 		}
-		else if(tmp.isWhite())
+		else if(!tmp.isWhite())
 		{
 			return 1;
 		}
@@ -515,15 +532,18 @@ public class jeuDames {
 		for(int i=0;i<lstPions.length;i++)
 		{
 			tmp = lstPions[i];
-			if(tmp.getCoordX()== co.getCoordX() && tmp.getCoordY() == co.getCoordY())
-				return tmp;			
+			if(tmp!=null)
+			{
+				if(tmp.getCoordX()== co.getCoordX() && tmp.getCoordY() == co.getCoordY())
+					return tmp;
+			}						
 		}
 		return null;
 	}
 	/**
 	 * 
 	 * @param co des coordonnees
-	 * @return l'indice du tableau ou se trouve le pion
+	 * @return l'indice du tableau ou se trouve le pion Retourne -1 quand on ne le trouve pas
 	 */
 	private static byte searchPionI(Coordonnees co)
 	{
@@ -531,10 +551,67 @@ public class jeuDames {
 		for(int i=0;i<lstPions.length;i++)
 		{
 			tmp = lstPions[i];
-			if(tmp.getCoordX() == co.getCoordX() && tmp.getCoordY() == co.getCoordY())
-			{return (byte)i;}
+			if(tmp!=null)
+			{
+				if(tmp.getCoordX() == co.getCoordX() && tmp.getCoordY() == co.getCoordY())
+				{return (byte)i;}
+			}			
 		}
 		return -1;
+	}
+
+	/**
+	 * 
+	 * @param ID l'ID du ppion que le Joueur souhaite deplacer
+	 * @param joueur pour savoir dans quelle partie du tableau rechercher
+	 * @return
+	 */
+	private static pion searchPion(byte ID, boolean joueur)
+	{
+		pion tmp;
+		if(joueur)
+		{
+			for(int i=0;i<20;i++)
+			{
+				tmp = lstPions[i];
+				if(tmp!=null)
+				{
+					final String tm = tmp.getID().substring(3);
+					if(ID == Byte.parseByte(tm))
+						return tmp;
+				}				
+			}
+		}else{
+			for(int i=20;i<40;i++)
+			{
+				tmp = lstPions[i];
+				if(tmp!=null)
+				{
+					final String tm = tmp.getID().substring(3);
+					if(ID == Byte.parseByte(tm))
+						return tmp;
+				}				
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * 
+	 * @param que joueur il s'agit. True pour les blancs, false pour les noirs
+	 * @return le nombre de pions null
+	 */
+	private static byte nbrNull(boolean joueur)
+	{
+		byte comp=0,compteur=0;
+		if(!joueur)
+			comp=20;
+		for(byte i=comp;i<(comp+20);i++)
+		{
+			if(lstPions[i]==null)
+				compteur++;
+		}
+		return compteur;
 	}
 
 	// Interaction avec l'utilisateur
@@ -547,51 +624,109 @@ public class jeuDames {
 	 */
 	private static pion interaction(boolean joueur)
 	{
-		// Ici on affiche seulement tous les pions de l'utilisateur
-		printEtatSonJeu(joueur);
+		// En fonction de l'utilisateur, on affiche quels pions sont disponible pour le'utilisateur
 
-		// Maintenant on va prendre des coordonnees
+		final byte longueurTabD = (byte) (20-nbrNull(joueur));
+		pion[] tabDispo = new pion[longueurTabD];
+		byte comp=0;
+		if(!joueur)
+			comp=20;
 
-		System.out.println("Indiquez les coordonnees du pion que vous voulez bouger");
-		byte X = 0;
-		byte Y = 0;
-		byte indice;
-		boolean boucle = true, gdBoucle = true;
-		do
+		for(byte i=comp,ctmp=0;i<(comp+20);i++)
 		{
-			do{
-				System.out.println("X : ");
-				X = InOut.getByte();
-				if(X>=10 || X<0)
-				{
-					System.out.println("X est en dehors du plateau, Reesayez un autre s'il vous plait");
-				}else{
-					boucle = false;
-				}
-			}while(boucle);
-			boucle = true;
-			do{
-				System.out.println("Y : ");
-				Y = InOut.getByte();
-				if(Y>=10 || Y<0)
-				{
-					System.out.println("Y est en dehors du plateau, Reesayez un autre s'il vous plait");
-				}else{
-					boucle = false;
-				}
-			}while(boucle);
-			Coordonnees coo = new Coordonnees(X,Y);
-			indice = searchPionI(coo);
-			if(indice == -1)
+			// Cette solution bien qu'elle soit déjà réduite en cout spatiale, utilise quand même des ressources inutiles de la part du tableau
+			// surtout au début du jeu, peut-être penser a réimplémenter cette méthode avec un tableau dynamique pour éviter d'éventuelles
+			// ressources inutilisées
+			if(lstPions[i] != null)
 			{
-				System.out.println("Ce pion n'existe pas !");
+				//On controle d'abord si tout simplement, il y a une voie libre
+				if(canMove(lstPions[i],true) == 3 || canMove(lstPions[i],false) == 3){
+					tabDispo[ctmp] = lstPions[i];
+					ctmp++;
+				}
+				//Si il y a un adversaire, on est obligé de vérifier si il y a le moyen de le prendre
+				//Avant de l'ajouter sur la liste
+				else if(canMove(lstPions[i],true) == 2)
+				{
+					pion tmp = null;
+					if(joueur)
+					{
+						tmp = new pion((byte) (lstPions[i].getCoordX()-2) ,(byte) (lstPions[i].getCoordY()+2),true);
+						if(canMove(tmp,true) == 3)
+						{
+							tabDispo[ctmp] = lstPions[i];
+							ctmp++;
+						}
+					}else{
+						tmp = new pion((byte) (lstPions[i].getCoordX()-2) ,(byte) (lstPions[i].getCoordY()-2),true);
+						if(canMove(tmp,true) == 3)
+						{
+							tabDispo[ctmp] = lstPions[i];
+							ctmp++;
+						}
+					}
+				}else if(canMove(lstPions[i],false) == 2){
+					pion tmp = null;
+					if(joueur)
+					{
+						tmp = new pion((byte) (lstPions[i].getCoordX()+2) ,(byte) (lstPions[i].getCoordY()+2),false);
+						if(canMove(tmp,false) == 3)
+						{
+							tabDispo[ctmp] = lstPions[i];
+							ctmp++;
+						}
+					}else{
+						tmp = new pion((byte) (lstPions[i].getCoordX()+2) ,(byte) (lstPions[i].getCoordY()-2),false);
+						if(canMove(tmp,false) == 3)
+						{
+							tabDispo[ctmp] = lstPions[i];
+							ctmp++;
+						}
+					}
+				}				
 			}
-			else{
-				gdBoucle = false;
+		}
+		byte lg=0;
+		for(byte i=0;i<longueurTabD;i++)
+		{
+			if(tabDispo[i] != null)
+				lg++;
+		}
+		byte demi = (byte) (lg/2);
+		System.out.println();
+		System.out.println();
+		System.out.println("Voici les pions qui peuvent (possiblement) bouger"); 
+		for(byte i=0;i<demi;i++)
+		{
+			System.out.print(tabDispo[i].toString() + " | ");
+		}
+		System.out.println();
+		//la condition est un peu speciale ici, on est obligé de diminuer demi de 1 pour ne pas "oublier" des pions jouables
+		if(lg%2 == 1){demi++;}
+		for(byte i=(byte) (lg-demi);i<lg;i++)
+		{
+			System.out.print(tabDispo[i].toString() + " | ");
+		}
+
+		// On fait la demande a l'utilisateur pour savoir quel pion bouger
+
+		System.out.println();
+		byte choix;
+		boolean OK = true;
+		pion resul = null;
+
+		do{
+			System.out.println("Choisis quel pion tu veux bouger de 0 à 19");
+			choix = InOut.getByte();
+			resul = searchPion(choix, joueur);
+			if(resul == null)
+			{
+				System.out.println("Desolé mais ce pion n'est pas disponible !");
+			}else{
+				OK=false;
 			}
-		}while(gdBoucle);
-		final pion resultat = lstPions[indice];
-		return resultat;
+		}while(OK);
+		return resul;
 	}
 	/**
 	 * cette fonction affiche l'etat des pions d'un joueur
@@ -599,26 +734,28 @@ public class jeuDames {
 	 */
 	private static void printEtatSonJeu(boolean joueur)
 	{
-		System.out.println(joueur?"Joueur 1 - blanc":"Joueur 2 - noir");
-		System.out.println();
+		System.out.print(joueur?"Joueur 1 - blanc":"Joueur 2 - noir");
+		System.out.println(" - Etat Actuel");
 		if(joueur)
 		{
 			for(int i=0;i<10;i++)
 			{
-				System.out.print(lstPions[i].toString() + " | ");
+				if(lstPions[i]!=null){System.out.print(lstPions[i].toString() + " | ");}
 			}
+			System.out.println();
 			for(int i=10;i<20;i++)
 			{
-				System.out.print(lstPions[i].toString() + " | ");
+				if(lstPions[i]!=null){System.out.print(lstPions[i].toString() + " | ");}
 			}
 		}else{
 			for(int i=20;i<30;i++)
 			{
-				System.out.print(lstPions[i].toString() + " | ");
+				if(lstPions[i]!=null){System.out.print(lstPions[i].toString() + " | ");}
 			}
+			System.out.println();
 			for(int i=30;i<40;i++)
 			{
-				System.out.print(lstPions[i].toString() + " | ");
+				if(lstPions[i]!=null){System.out.print(lstPions[i].toString() + " | ");}
 			}
 		}
 	}
@@ -704,8 +841,7 @@ class pion{
 	 */
 	public pion(byte X, byte Y, boolean couleur)
 	{
-		Coo.setX(X);
-		Coo.setY(Y);
+		Coo = new Coordonnees(X,Y);
 		this.couleur = couleur;
 		this.dame = false;
 		ID = "name";
@@ -726,8 +862,7 @@ class pion{
 	 */
 	public pion(byte X, byte Y, boolean couleur, String ID)
 	{
-		Coo.setX(X);
-		Coo.setY(Y);
+		Coo = new Coordonnees(X,Y);
 		this.couleur = couleur;
 		this.dame = false;
 		this.ID = ID;
@@ -747,7 +882,7 @@ class pion{
 		}else{
 			msg = "Noir";
 		}
-		return ID + " - " + msg +  " - X: " + Coo.getCoordX() + ",Y: " + Coo.getCoordY();
+		return ID + "-" + msg +  " - X:" + Coo.getCoordX() + ",Y:" + Coo.getCoordY();
 	}
 	/**
 	 * 
