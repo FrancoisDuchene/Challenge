@@ -205,41 +205,25 @@ public class Joueur {
 	 */
 	public void afficheScoreSPd()
 	{
-		for(int i=0; i<scorePendu.length ;i++)
-		{
-			System.out.print("[" + i + "] ");
-			System.out.println((scorePendu[i] == -1)?" - ":scorePendu[i]);
-		}
+		for(int v : scorePendu)System.out.println("[" + v + "] " + ((scorePendu[v] == -1)?" - ":scorePendu[v]));
 	}
 	/**
 	 * Print at screen all the values of the score array of the HighLow
 	 */
 	public void afficheScoreSPM()
 	{
-		for(int i=0; i<scorePlusMoins.length ;i++)
-		{
-			System.out.print("[" + i + "] ");
-			System.out.println((scorePlusMoins[i] == -1)?" - ":scorePlusMoins[i]);
-		}
+		for(int v : scorePlusMoins)System.out.println("[" + v + "] " + ((scorePlusMoins[v] == -1)?" - ":scorePlusMoins[v]));
 	}
 	/**
 	 * Print at screen all the values of the score array of the MasterMind
 	 */
 	public void afficheScoreSMM()
 	{
-		for(int i=0; i<scoreMaster.length ;i++)
-		{
-			System.out.print("[" + i + "] ");
-			System.out.println((scoreMaster[i] == -1)?" - ":scoreMaster[i]);
-		}
+		for(int v : scoreMaster)System.out.println("[" + v + "] " + ((scoreMaster[v] == -1)?" - ":scoreMaster[v]));
 	}
 	public void afficheScoreSPU()
-	{
-		for(int i=0; i<scorePuissance.length ;i++)
-		{
-			System.out.print("[" + i + "] ");
-			System.out.println((scorePuissance[i] == -1)?" - ":scorePuissance[i]);
-		}
+	{	
+		for(int v : scorePuissance)System.out.println("[" + v + "] " + ((scorePuissance[v] == -1)?" - ":scorePuissance[v]));
 	}
 	/**
 	 * Print the name of the player

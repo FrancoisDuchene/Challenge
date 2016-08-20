@@ -266,7 +266,7 @@ public class jeuDames {
 					System.out.println("Votre pion est desormais situe aux coordonnees : " + tmp.getCoordX() + " , " + tmp.getCoordY());
 					return 4;
 				}
-				System.out.println("Votre pion est desormais situe aux coordonnees : " + tmp.getCoordX() + " , " + tmp.getCoordY());
+				System.out.println("Votre pion se trouve toujours aux coordonnees : " + tmp.getCoordX() + " , " + tmp.getCoordY());
 			}
 			//pion sd = prAdversaire(tmp,true,!sens,true);			
 			return 2;
@@ -300,6 +300,7 @@ public class jeuDames {
 					nouveau.becomeDame();
 				}
 			}
+			System.out.println("Votre pion est desormais situe aux coordonnees : " + nouveau.getCoordX() + " , " + nouveau.getCoordY());
 			return 3;
 		}
 		return 0;
@@ -658,7 +659,7 @@ public class jeuDames {
 							ctmp++;
 						}
 					}else{
-						tmp = new pion((byte) (lstPions[i].getCoordX()-2) ,(byte) (lstPions[i].getCoordY()-2),true);
+						tmp = new pion((byte) (lstPions[i].getCoordX()-2) ,(byte) (lstPions[i].getCoordY()-2),false);
 						if(canMove(tmp,true) == 3)
 						{
 							tabDispo[ctmp] = lstPions[i];
@@ -669,7 +670,7 @@ public class jeuDames {
 					pion tmp = null;
 					if(joueur)
 					{
-						tmp = new pion((byte) (lstPions[i].getCoordX()+2) ,(byte) (lstPions[i].getCoordY()+2),false);
+						tmp = new pion((byte) (lstPions[i].getCoordX()+2) ,(byte) (lstPions[i].getCoordY()+2),true);
 						if(canMove(tmp,false) == 3)
 						{
 							tabDispo[ctmp] = lstPions[i];

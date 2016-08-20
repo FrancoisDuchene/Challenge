@@ -4,7 +4,6 @@ import sound.SoundPlayer;
 public class MThread extends Thread
 {
 	private String name;
-	private PageAccueil pageAccueil;
 
 	public MThread(String name)
 	{
@@ -17,6 +16,7 @@ public class MThread extends Thread
 		if(name.equals("Musique"))
 		{
 			SoundPlayer leia = new SoundPlayer();
+			leia.setDaemon(true);
 			leia.start();
 		}
 		else

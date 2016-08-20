@@ -56,11 +56,16 @@ public class profilGestion {
 			}
 
 			//Pour différencier les boutons 'se connecter' et 'creer un nouveau compte'
-			if(md==3 && !InOut.fichierExiste("saves/", nom + ".sav"))
+			while(md==3 && !InOut.fichierExiste("saves/", nom + ".sav"))
 			{
 				final String message = LSD.getString("prGe_gesti_msg");
 				JOptionPane.showMessageDialog(null, message, "Avertissement", JOptionPane.WARNING_MESSAGE, null);
-				return;
+				if(md == 1 || md == 3)
+				{
+					nom = demandeNomGUI();
+				}else{
+					nom = demandeNomConsole();
+				}
 			}
 			name = nom;
 			playerOne.setName(nom);
@@ -101,7 +106,9 @@ public class profilGestion {
 
 		if(md == 1 || md == 3)
 		{
-			new Profil_Windows();
+			Profil_Windows pw = new Profil_Windows();
+			pw.isAlwaysOnTop();
+
 		}else{
 			menuGestion();
 		}		

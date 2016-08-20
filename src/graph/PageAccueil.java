@@ -239,7 +239,7 @@ public class PageAccueil extends JFrame
 		menu();
 	}
 
-	public void menu()
+	private void menu()
 	{
 		this.setJMenuBar(menuBar);
 		bouton.setVisible(false);
@@ -247,7 +247,7 @@ public class PageAccueil extends JFrame
 		this.setVisible(true);
 	}
 
-	public class ActionBouton implements ActionListener
+	private class ActionBouton implements ActionListener
 	{
 		public void actionPerformed(ActionEvent event)
 		{
