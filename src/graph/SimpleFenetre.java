@@ -29,7 +29,7 @@ public class SimpleFenetre extends JFrame {
 	{
 		chewie = new JPanel();
 		chewie.setLayout(new GridLayout(lignes,colonnes));
-		chewie.setBackground(new Color(0.85f, 0.9f, 1.0f));	
+		chewie.setBackground(new Color(0.85f, 0.9f, 1.0f));
 		
 		return chewie;
 	}

@@ -1,7 +1,11 @@
 package graph;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Properties;
@@ -11,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import source.profilGestion;
 
@@ -26,96 +31,120 @@ public class Profil_Windows extends JFrame {
 	public Profil_Windows()
 	{
 		super();
-		build();
-	}
-
-	/**
-	 * Build the profil_windows
-	 */
-	private void build()
-	{
 		setTitle("Profil");
 		setSize(1200,750);
 		setLocationRelativeTo(null);
 		setResizable(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setContentPane(buildContentPane());
-		setVisible(true);
-	}
-	private JPanel buildContentPane()
-	{		
-		JPanel panel = new JPanel();
-		panel.setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
-		panel.setBackground(Color.magenta);
+		
+		/*
+		 * On va maintenant faire le contenu du panel
+		 */
+		JPanel card = new JPanel();	//JPanel qui va contenir le CardLayout
+		JPanel panelTxtPrinc = new JPanel();	//Panneau pour tous les boutons et les textes
+		
+		CardLayout cl = new CardLayout(30,10);
+		card.setLayout(cl);
+		
+		GridLayout gd = new GridLayout();
+		gd.setColumns(3);
+		gd.setRows(7);
+		gd.setHgap(50);
+		gd.setVgap(30);
+		panelTxtPrinc.setLayout(gd);
 		
 		String nom = profilGestion.getName();
 		
-		c.fill = GridBagConstraints.VERTICAL;
-		
 		JLabel label1 = new JLabel("PROFIL - " + nom);
-		c.weightx = 0.5;
-		c.weighty = 1;
-		c.fill = GridBagConstraints.VERTICAL;
-		c.gridx = 2;
-		c.gridy = 0;
-		panel.add(label1,  c);
-		
+		label1.setHorizontalAlignment(SwingConstants.CENTER);
+		label1.setFont(new Font("Courier", Font.BOLD,20));		
+
 		JButton bouton1 = new JButton("Tableau des scores general");
-		c.fill = GridBagConstraints.VERTICAL;
-		c.weightx = 0.5;	
-		c.weighty = 0.5;
-		c.gridx = 2;
-		c.gridy = 1;
-		panel.add(bouton1,  c);
-		
-		JButton bouton2= new JButton("Score Pendu");
-		c.fill = GridBagConstraints.VERTICAL;
-		c.weightx = 0.5;	
-		c.weighty = 0.5;
-		c.gridx = 2;
-		c.gridy = 2;
-		panel.add(bouton2,  c);
-		
+		panelTxtPrinc.add(bouton1);
+
+		JButton bouton2= new JButton("Score Pendu");	
+		panelTxtPrinc.add(bouton2);
+
 		JButton bouton3= new JButton("Score PlusMoins");
-		c.fill = GridBagConstraints.VERTICAL;
-		c.weightx = 0.5;	
-		c.weighty = 0.5;
-		c.gridx = 2;
-		c.gridy = 3;
-		panel.add(bouton3,  c);
+		panelTxtPrinc.add(bouton3);
+
+		JButton bouton4= new JButton("Score MasterMind");		
+		panelTxtPrinc.add(bouton4);
+
+		JButton bouton5= new JButton("Score Puissance4");		
+		panelTxtPrinc.add(bouton5);
+
+		JButton bouton6= new JButton("Configuration");		
+		panelTxtPrinc.add(bouton6);
+
+		JButton bouton7= new JButton("Changer d'utilisateur");		
+		panelTxtPrinc.add(bouton7);
 		
-		JButton bouton4= new JButton("Score MasterMind");
-		c.fill = GridBagConstraints.VERTICAL;
-		c.weightx = 0.5;
-		c.weighty = 0.5;
-		c.gridx = 2;
-		c.gridy = 4;
-		panel.add(bouton4,  c);
+		panelTxtPrinc.setBackground(Color.lightGray);
+		card.add(panelTxtPrinc, "debut");
 		
-		JButton bouton5= new JButton("Score Puissance4");
-		c.fill = GridBagConstraints.VERTICAL;
-		c.weightx = 0.5;
-		c.weighty = 0.5;
-		c.gridx = 2;
-		c.gridy = 5;
-		panel.add(bouton5,  c);
+		// Constructions des autres panneaux du card
 		
-		JButton bouton6= new JButton("Configuration");
-		c.fill = GridBagConstraints.VERTICAL;
-		c.weightx = 0.5;
-		c.weighty = 0.5;
-		c.gridx = 2;
-		c.gridy = 6;
-		panel.add(bouton6,  c);
+		//Option 2
+		JPanel pan2 = new JPanel();
+		pan2.setLayout(new GridLayout(10,2));
 		
-		JButton bouton7= new JButton("Changer d'utilisateur");
-		c.fill = GridBagConstraints.VERTICAL;
-		c.weightx = 0.5;
-		c.weighty = 0.8;
-		c.gridx = 2;
-		c.gridy = 7;
-		panel.add(bouton7,  c);
+		final int[] tab = profilGestion.playerOne.getScorePendu();
+		pan2.add(new JLabel("Score Pendu")); pan2.add(new JLabel("")); 
+		pan2.add(new JLabel((tab[1]!=-1)?Integer.toString(tab[1]):" - ")); pan2.add(new JLabel((tab[2]!=-1)?Integer.toString(tab[2]):" - "));
+		pan2.add(new JLabel((tab[3]!=-1)?Integer.toString(tab[3]):" - ")); pan2.add(new JLabel((tab[4]!=-1)?Integer.toString(tab[4]):" - ")); 
+		pan2.add(new JLabel("Score Pendu total : ")); pan2.add(new JLabel(Integer.toString(profilGestion.playerOne.scorePenduTotal())));
+		pan2.add(new JLabel(""));pan2.add(new JLabel(""));
+		JButton retourB1 = new JButton("retour");
+		pan2.add(retourB1);pan2.add(new JLabel(""));
+		
+		card.add(pan2, "bouton2");
+		//Option 3
+		JPanel pan3 = new JPanel();
+		pan3.setLayout(new GridLayout(10,2));
+		
+		final int[] tab2 = profilGestion.playerOne.getScorePlusMoins();
+		pan3.add(new JLabel("Score Plus ou Moins"));	pan3.add(new JLabel(""));
+		pan3.add(new JLabel((tab[1]!=-1)?Integer.toString(tab[1]):" - ")); pan3.add(new JLabel((tab[2]!=-1)?Integer.toString(tab[2]):" - "));
+		pan3.add(new JLabel((tab[3]!=-1)?Integer.toString(tab[3]):" - ")); pan3.add(new JLabel((tab[4]!=-1)?Integer.toString(tab[4]):" - "));		
+		pan3.add(new JLabel("Score PlusMoins total : "));	pan3.add(new JLabel(Integer.toString(profilGestion.playerOne.scorePlusMoinsTotal())));
+		pan3.add(new JLabel(""));pan3.add(new JLabel(""));
+		JButton retourB2 = new JButton("retour");
+		pan3.add(retourB2);pan3.add(new JLabel(""));
+		
+		card.add(pan3, "bouton3");
+		//Option 4
+		JPanel pan4 = new JPanel();
+		pan4.setLayout(new GridLayout(10,2));
+		
+		final int[] tab3 = profilGestion.playerOne.getScoreMasterMind();
+		pan4.add(new JLabel("Score Mastermind"));	pan4.add(new JLabel(""));
+		pan4.add(new JLabel((tab[1]!=-1)?Integer.toString(tab[1]):" - ")); pan4.add(new JLabel((tab[2]!=-1)?Integer.toString(tab[2]):" - "));
+		pan4.add(new JLabel((tab[3]!=-1)?Integer.toString(tab[3]):" - ")); pan4.add(new JLabel((tab[4]!=-1)?Integer.toString(tab[4]):" - "));
+		pan4.add(new JLabel("Score Mastermind total : "));	pan4.add(new JLabel(Integer.toString(profilGestion.playerOne.scoreMasterMindTotal())));
+		pan4.add(new JLabel(""));pan4.add(new JLabel(""));
+		JButton retourB3 = new JButton("retour");
+		pan4.add(retourB3);pan4.add(new JLabel(""));
+		
+		card.add(pan4, "bouton4");
+		//Option 5
+		JPanel pan5 = new JPanel();
+		pan5.setLayout(new GridLayout(10,2));
+		
+		final int[] tab4 = profilGestion.playerOne.getScorePuissance4();
+		pan5.add(new JLabel("Puissance 4"));	pan5.add(new JLabel(""));
+		pan5.add(new JLabel((tab[1]!=-1)?Integer.toString(tab[1]):" - ")); pan5.add(new JLabel((tab[2]!=-1)?Integer.toString(tab[2]):" - "));
+		pan5.add(new JLabel((tab[3]!=-1)?Integer.toString(tab[3]):" - ")); pan5.add(new JLabel((tab[4]!=-1)?Integer.toString(tab[4]):" - "));
+		pan5.add(new JLabel("Score Puissance 4 total : ")); pan5.add(new JLabel(Integer.toString(profilGestion.playerOne.scorePuissanceTotal())));
+		pan5.add(new JLabel(""));pan5.add(new JLabel(""));
+		JButton retourB4 = new JButton("retour");
+		pan5.add(retourB4);pan5.add(new JLabel(""));
+		
+		card.add(pan5, "bouton5");
+		
+		/*
+		 * Les actions des boutons
+		 */
 
 		bouton1.addActionListener(new ActionListener(){
 			@Override
@@ -127,25 +156,25 @@ public class Profil_Windows extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent event) 
 			{
-				optionBouton2();
+				cl.show(card, "bouton2");
 			}});
 		bouton3.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) 
 			{
-				optionBouton3();
+				cl.show(card, "bouton3");
 			}});
 		bouton4.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) 
 			{
-				optionBouton4();
+				cl.show(card, "bouton4");
 			}});
 		bouton5.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) 
 			{
-				optionBouton5();
+				cl.show(card, "bouton5");
 			}});
 		bouton6.addActionListener(new ActionListener(){
 			@Override
@@ -163,54 +192,41 @@ public class Profil_Windows extends JFrame {
 				profilGestion.setConfExiste(false);
 				profilGestion.gestion((byte)1);
 			}});
+		retourB1.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent event)
+			{
+				cl.show(card, "debut");
+			}
+		});
+		retourB2.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent event)
+			{
+				cl.show(card, "debut");
+			}
+		});
+		retourB3.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent event)
+			{
+				cl.show(card, "debut");
+			}
+		});
+		retourB4.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent event)
+			{
+				cl.show(card, "debut");
+			}
+		});
+		
+		this.getContentPane().add(label1, BorderLayout.NORTH);
+		this.getContentPane().add(card, BorderLayout.CENTER);
+		cl.show(card, "debut");
+		setVisible(true);
+	}
 
-		return panel;
-	}
-	
-	private void optionBouton2()
-	{
-		int[] tab = profilGestion.playerOne.getScorePendu();
-		
-		SimpleFenetre SF = new SimpleFenetre("Score Pendu",8,2);
-		
-		SF.addJlabel(new JLabel("Score Pendu")); SF.addJlabel(new JLabel(""));				
-		SF.addJlabel(new JLabel(Integer.toString(tab[1])));	SF.addJlabel(new JLabel(Integer.toString(tab[2])));
-		SF.addJlabel(new JLabel(Integer.toString(tab[3])));	SF.addJlabel(new JLabel(Integer.toString(tab[4])));		
-		SF.addJlabel(new JLabel("Score Pendu total : "));	SF.addJlabel(new JLabel(Integer.toString(profilGestion.playerOne.scorePenduTotal())));		
-	}
-	private void optionBouton3()
-	{
-		int[] tab2 = profilGestion.playerOne.getScorePlusMoins();
-		
-		SimpleFenetre SF = new SimpleFenetre("Score Pendu",8,2);
-		
-		SF.addJlabel(new JLabel("Score Plus ou Moins"));	SF.addJlabel(new JLabel(""));		
-		SF.addJlabel(new JLabel(Integer.toString(tab2[1])));	SF.addJlabel(new JLabel(Integer.toString(tab2[2])));
-		SF.addJlabel(new JLabel(Integer.toString(tab2[3])));	SF.addJlabel(new JLabel(Integer.toString(tab2[4])));		
-		SF.addJlabel(new JLabel("Score PlusMoins total : "));	SF.addJlabel(new JLabel(Integer.toString(profilGestion.playerOne.scorePlusMoinsTotal())));
-	}
-	private void optionBouton4()
-	{
-		int[] tab3 = profilGestion.playerOne.getScoreMasterMind();
-		
-		SimpleFenetre SF = new SimpleFenetre("Score Pendu",8,2);
-		
-		SF.addJlabel(new JLabel("Score Mastermind"));	SF.addJlabel(new JLabel(""));
-		SF.addJlabel(new JLabel(Integer.toString(tab3[1])));	SF.addJlabel(new JLabel(Integer.toString(tab3[2])));
-		SF.addJlabel(new JLabel(Integer.toString(tab3[3])));	SF.addJlabel(new JLabel(Integer.toString(tab3[4])));
-		SF.addJlabel(new JLabel("Score Mastermind total : "));	SF.addJlabel(new JLabel(Integer.toString(profilGestion.playerOne.scoreMasterMindTotal())));
-	}
-	private void optionBouton5()
-	{
-		int[] tab4 = profilGestion.playerOne.getScorePuissance4();
-		
-		SimpleFenetre SF = new SimpleFenetre("Score Pendu",8,2);
-		
-		SF.addJlabel(new JLabel("Puissance 4"));	SF.addJlabel(new JLabel(""));
-		SF.addJlabel(new JLabel(Integer.toString(tab4[1])));	SF.addJlabel(new JLabel(Integer.toString(tab4[2])));
-		SF.addJlabel(new JLabel(Integer.toString(tab4[3])));	SF.addJlabel(new JLabel(Integer.toString(tab4[4])));
-		SF.addJlabel(new JLabel("Score Puissance 4 total : ")); SF.addJlabel(new JLabel(Integer.toString(profilGestion.playerOne.scorePuissanceTotal())));
-	}
 	private void optionBouton6()
 	{
 		//TODO ici une fenetre contenant le text brut s'affiche et une autre boite de dialogue

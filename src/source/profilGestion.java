@@ -283,22 +283,22 @@ public class profilGestion {
 			SF.addJlabel(new JLabel(Integer.toString(tab1[3])));	SF.addJlabel(new JLabel(Integer.toString(tab1[4])));		
 			SF.addJlabel(new JLabel(LSD.getString("prGe_affPr_msg3")));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scorePenduTotal())));
 
-			SF.addJlabel(new JLabel(LSD.getString("prGe_affMe_msg4")));	SF.addJlabel(new JLabel(""));		
+			SF.addJlabel(new JLabel(LSD.getString("prGe_affPr_msg4")));	SF.addJlabel(new JLabel(""));		
 			SF.addJlabel(new JLabel(Integer.toString(tab2[1])));	SF.addJlabel(new JLabel(Integer.toString(tab2[2])));
 			SF.addJlabel(new JLabel(Integer.toString(tab2[3])));	SF.addJlabel(new JLabel(Integer.toString(tab2[4])));		
-			SF.addJlabel(new JLabel(LSD.getString("prGe_affMe_msg5")));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scorePlusMoinsTotal())));
+			SF.addJlabel(new JLabel(LSD.getString("prGe_affPr_msg5")));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scorePlusMoinsTotal())));
 
-			SF.addJlabel(new JLabel(LSD.getString("prGe_affMe_msg6")));	SF.addJlabel(new JLabel(""));
+			SF.addJlabel(new JLabel(LSD.getString("prGe_affPr_msg6")));	SF.addJlabel(new JLabel(""));
 			SF.addJlabel(new JLabel(Integer.toString(tab3[1])));	SF.addJlabel(new JLabel(Integer.toString(tab3[2])));
 			SF.addJlabel(new JLabel(Integer.toString(tab3[3])));	SF.addJlabel(new JLabel(Integer.toString(tab3[4])));
-			SF.addJlabel(new JLabel(LSD.getString("prGe_affMe_msg7")));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scoreMasterMindTotal())));
+			SF.addJlabel(new JLabel(LSD.getString("prGe_affPr_msg7")));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scoreMasterMindTotal())));
 
-			SF.addJlabel(new JLabel(LSD.getString("prGe_affMe_msg8")));	SF.addJlabel(new JLabel(""));
+			SF.addJlabel(new JLabel(LSD.getString("prGe_affPr_msg8")));	SF.addJlabel(new JLabel(""));
 			SF.addJlabel(new JLabel(Integer.toString(tab4[1])));	SF.addJlabel(new JLabel(Integer.toString(tab4[2])));
 			SF.addJlabel(new JLabel(Integer.toString(tab4[3])));	SF.addJlabel(new JLabel(Integer.toString(tab4[4])));
-			SF.addJlabel(new JLabel(LSD.getString("prGe_affMe_msg9"))); SF.addJlabel(new JLabel(Integer.toString(playerOne.scorePuissanceTotal())));
+			SF.addJlabel(new JLabel(LSD.getString("prGe_affPr_msg9"))); SF.addJlabel(new JLabel(Integer.toString(playerOne.scorePuissanceTotal())));
 
-			SF.addJlabel(new JLabel(LSD.getString("prGe_affMe_msg10")));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scoreTotal())));
+			SF.addJlabel(new JLabel(LSD.getString("prGe_affPr_msg10")));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scoreTotal())));
 			SF.repaintSimpleF();
 		}
 	}
