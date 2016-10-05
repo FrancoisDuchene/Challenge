@@ -22,13 +22,16 @@ public class SimpleFenetre extends JFrame {
 		setLocationRelativeTo(null);
 		setResizable(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setContentPane(buildContentPane(lignes, colonnes));		
+		setContentPane(buildContentPane(lignes, colonnes));
 		this.setVisible(true);
 	}
 	private JPanel buildContentPane(int lignes, int colonnes)
 	{
 		chewie = new JPanel();
-		chewie.setLayout(new GridLayout(lignes,colonnes));
+		GridLayout gd = new GridLayout(lignes,colonnes);
+		gd.setHgap(50);
+		gd.setVgap(10);
+		chewie.setLayout(gd);
 		chewie.setBackground(new Color(0.85f, 0.9f, 1.0f));
 		
 		return chewie;

@@ -541,7 +541,7 @@ electrique
 teinture
 ivoire
 jais
-coblt
+cobalt
 canari
 chartreuse
 kaki

@@ -38,7 +38,7 @@ public class Mastermind
 
 	public static byte language = 1;
 
-	public static void jeu()
+	private static void jeu()
 	{
 		gagne = false;
 		boolean avancer = true;
@@ -128,7 +128,7 @@ public class Mastermind
 	 * return the score and add to the playerProfile
 	 * @return the score of the game
 	 */
-	public static int calculScore()
+	private static int calculScore()
 	{
 		int score = difficulte*vies;
 		if(profilGestion.existe())
@@ -150,7 +150,7 @@ public class Mastermind
 	 * @pre couleur[] et entree[] != null
 	 * @post modifie les variables globales.
 	 */
-	public static void verification(char[] couleur, char[] entree)
+	private static void verification(char[] couleur, char[] entree)
 	{
 		bienPlace = 0;
 		malPlace = 0;
@@ -196,7 +196,7 @@ public class Mastermind
 	/**
 	 * Creer un tableau de char aleatoire avec les char venant du tableau c[] en fonction de la difficulte.
 	 */
-	public static void creerCouleur(char[] couleur)
+	private static void creerCouleur(char[] couleur)
 	{
 		int longueur = (difficulte == 1)? 4: (difficulte == 2)? 7: 10;
 		int a = 0;
@@ -209,7 +209,7 @@ public class Mastermind
 		}
 	}
 
-	public static void messageFin(boolean gagne, char[] couleur)
+	private static void messageFin(boolean gagne, char[] couleur)
 	{
 		if(gagne)
 		{
@@ -230,7 +230,7 @@ public class Mastermind
 		}
 	}
 
-	public static void messageAcceuil()
+	private static void messageAcceuil()
 	{
 		if(language==1){
 			System.out.println("Vous jouez au Mastemind, tapez :");
@@ -250,7 +250,7 @@ public class Mastermind
 	 * @param l Take a char
 	 * @return the LowerCase of the char if it's an UpperCase and the char itself if it's a LowerCase.
 	 */
-	public static char majuscule(char l){
+	private static char majuscule(char l){
 		if ((int)l <=122 && (int)l >= 97)
 		{return (char)((int)l - 32);}
 		return l;
@@ -278,7 +278,6 @@ public class Mastermind
 				messageAcceuil();
 				jeu();
 				messageFin(gagne, couleur);
-				menu();
 				break;
 			case 2:
 				menuOption();
@@ -296,7 +295,7 @@ public class Mastermind
 		}while(choix !=4);
 	}
 
-	public static void menuOption()
+	private static void menuOption()
 	{
 		byte choix = 0;
 		do
@@ -330,7 +329,7 @@ public class Mastermind
 		}while(choix!= 4);
 	}
 
-	public static void option1()
+	private static void option1()
 	{
 		boolean re = true;
 		challenge.clear();
@@ -359,7 +358,7 @@ public class Mastermind
 		}
 	}
 
-	public static void option2()
+	private static void option2()
 	{
 		boolean re = true;
 		challenge.clear();
@@ -392,7 +391,7 @@ public class Mastermind
 		}
 	}
 
-	public static void regles()
+	private static void regles()
 	{
 		challenge.clear();
 		if(language==1)

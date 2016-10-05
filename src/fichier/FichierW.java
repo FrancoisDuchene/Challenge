@@ -21,7 +21,7 @@ public class FichierW extends File
 	public FichierW(String filename)
 	{
 		super(filename);
-		if(exists() && isFile())
+		if(!exists() && !isFile())
 		{
 			try {
 				throw new FileNotFoundException(filename + " - wrong filename or path");

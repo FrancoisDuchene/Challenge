@@ -289,12 +289,11 @@ public class Puissance4
 						challenge.clear();
 						TabAligne3.afficheTab(longueur, ch);
 						int score = calculScore(true);
-						if(language==1){System.out.println("Vous avez gagne!");}
+						if(language==1){System.out.println("Vous avez gagne !");}
 						else{System.out.println("You win !");}
 						if(language==1)
 						{
-							System.out.println("Vous avez gagne !");
-							System.out.println("\n\nVous obtenez " + score + "points !");
+							System.out.println("\n\nVous obtenez " + score + " points !");
 							if(!profilGestion.getPremierOuverture())
 							{
 								System.out.println(score + " points ajoutes au profil");

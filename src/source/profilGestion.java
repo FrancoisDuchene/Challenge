@@ -1,14 +1,10 @@
 package source;
 
 import java.util.ResourceBundle;
-
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import fichier.FichierR;
 import fichier.InOut;
 import graph.Profil_Windows;
-import graph.SimpleFenetre;
 
 /**
  * 
@@ -251,56 +247,21 @@ public class profilGestion {
 	public static void afficheProfil()
 	{
 		LSD = challenge.getResbundle();
-		if(mode == 0)
-		{
-			System.out.println(LSD.getString("prGe_affMe_msg2") + LSD.getString("prGe_affPr_msg1") + playerOne.getName());
-			System.out.println(LSD.getString("prGe_affPr_msg2"));
-			playerOne.afficheScoreSPd();
-			System.out.println(LSD.getString("prGe_affPr_msg3") + playerOne.scorePenduTotal());
-			System.out.println(LSD.getString("prGe_affMe_msg2") + LSD.getString("prGe_affPr_msg4") + LSD.getString("prGe_affMe_msg2"));
-			playerOne.afficheScoreSPM();
-			System.out.println(LSD.getString("prGe_affPr_msg5") + playerOne.scorePlusMoinsTotal());
-			System.out.println(LSD.getString("prGe_affMe_msg2") + LSD.getString("prGe_affPr_msg6") + LSD.getString("prGe_affMe_msg2"));
-			playerOne.afficheScoreSMM();
-			System.out.println(LSD.getString("prGe_affPr_msg7") + playerOne.scoreMasterMindTotal());
-			System.out.println(LSD.getString("prGe_affMe_msg2") + LSD.getString("prGe_affPr_msg8") + LSD.getString("prGe_affMe_msg2"));
-			playerOne.afficheScoreSPU();
-			System.out.println(LSD.getString("prGe_affPr_msg9") + playerOne.scorePuissanceTotal());
-			System.out.println(LSD.getString("prGe_affPr_msg10") + playerOne.scoreTotal());
-		}else if(mode == 1)
-		{		
-			int[] tab1 = playerOne.getScorePendu();
-			int[] tab2 = playerOne.getScorePlusMoins();
-			int[] tab3 = playerOne.getScoreMasterMind();
-			int[] tab4 = playerOne.getScorePuissance4();
-
-			SimpleFenetre SF = new SimpleFenetre("Profil -"+ name,18,2);
-
-			SF.addJlabel(new JLabel(LSD.getString("prGe_affPr_msg1") + name));	SF.addJlabel(new JLabel(""));	
-
-			SF.addJlabel(new JLabel(LSD.getString("prGe_affPr_msg2"))); SF.addJlabel(new JLabel(""));				
-			SF.addJlabel(new JLabel(Integer.toString(tab1[1])));	SF.addJlabel(new JLabel(Integer.toString(tab1[2])));
-			SF.addJlabel(new JLabel(Integer.toString(tab1[3])));	SF.addJlabel(new JLabel(Integer.toString(tab1[4])));		
-			SF.addJlabel(new JLabel(LSD.getString("prGe_affPr_msg3")));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scorePenduTotal())));
-
-			SF.addJlabel(new JLabel(LSD.getString("prGe_affPr_msg4")));	SF.addJlabel(new JLabel(""));		
-			SF.addJlabel(new JLabel(Integer.toString(tab2[1])));	SF.addJlabel(new JLabel(Integer.toString(tab2[2])));
-			SF.addJlabel(new JLabel(Integer.toString(tab2[3])));	SF.addJlabel(new JLabel(Integer.toString(tab2[4])));		
-			SF.addJlabel(new JLabel(LSD.getString("prGe_affPr_msg5")));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scorePlusMoinsTotal())));
-
-			SF.addJlabel(new JLabel(LSD.getString("prGe_affPr_msg6")));	SF.addJlabel(new JLabel(""));
-			SF.addJlabel(new JLabel(Integer.toString(tab3[1])));	SF.addJlabel(new JLabel(Integer.toString(tab3[2])));
-			SF.addJlabel(new JLabel(Integer.toString(tab3[3])));	SF.addJlabel(new JLabel(Integer.toString(tab3[4])));
-			SF.addJlabel(new JLabel(LSD.getString("prGe_affPr_msg7")));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scoreMasterMindTotal())));
-
-			SF.addJlabel(new JLabel(LSD.getString("prGe_affPr_msg8")));	SF.addJlabel(new JLabel(""));
-			SF.addJlabel(new JLabel(Integer.toString(tab4[1])));	SF.addJlabel(new JLabel(Integer.toString(tab4[2])));
-			SF.addJlabel(new JLabel(Integer.toString(tab4[3])));	SF.addJlabel(new JLabel(Integer.toString(tab4[4])));
-			SF.addJlabel(new JLabel(LSD.getString("prGe_affPr_msg9"))); SF.addJlabel(new JLabel(Integer.toString(playerOne.scorePuissanceTotal())));
-
-			SF.addJlabel(new JLabel(LSD.getString("prGe_affPr_msg10")));	SF.addJlabel(new JLabel(Integer.toString(playerOne.scoreTotal())));
-			SF.repaintSimpleF();
-		}
+		
+		System.out.println(LSD.getString("prGe_affMe_msg2") + LSD.getString("prGe_affPr_msg1") + playerOne.getName());
+		System.out.println(LSD.getString("prGe_affPr_msg2"));
+		playerOne.afficheScoreSPd();
+		System.out.println(LSD.getString("prGe_affPr_msg3") + playerOne.scorePenduTotal());
+		System.out.println(LSD.getString("prGe_affMe_msg2") + LSD.getString("prGe_affPr_msg4") + LSD.getString("prGe_affMe_msg2"));
+		playerOne.afficheScoreSPM();
+		System.out.println(LSD.getString("prGe_affPr_msg5") + playerOne.scorePlusMoinsTotal());
+		System.out.println(LSD.getString("prGe_affMe_msg2") + LSD.getString("prGe_affPr_msg6") + LSD.getString("prGe_affMe_msg2"));
+		playerOne.afficheScoreSMM();
+		System.out.println(LSD.getString("prGe_affPr_msg7") + playerOne.scoreMasterMindTotal());
+		System.out.println(LSD.getString("prGe_affMe_msg2") + LSD.getString("prGe_affPr_msg8") + LSD.getString("prGe_affMe_msg2"));
+		playerOne.afficheScoreSPU();
+		System.out.println(LSD.getString("prGe_affPr_msg9") + playerOne.scorePuissanceTotal());
+		System.out.println(LSD.getString("prGe_affPr_msg10") + playerOne.scoreTotal());
 	}
 	/**
 	 * Save the player Profile with the score and the name
@@ -403,7 +364,6 @@ public class profilGestion {
 	}
 
 	/**
-	 * 
 	 * @param mode true pour sauvegarder et false pour charger
 	 */
 	public static void gestionConfig(boolean mode)
@@ -424,7 +384,6 @@ public class profilGestion {
 		return playerOne.getName();
 	}
 	/**
-	 * 
 	 * @return true if the player profile already exist and false if not
 	 */
 	public static boolean existe()

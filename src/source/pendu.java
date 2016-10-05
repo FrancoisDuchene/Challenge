@@ -288,10 +288,10 @@ public class pendu {
 
 		String motUser1 = remplaceEtoiles(MotSecret1);
 		String motUser2 = remplaceEtoiles(MotSecret2);
+		boolean perdu = false;
 
 		while(vies_tmp1 != 0 || vies_tmp2 != 0)
 		{          
-			boolean perdu = false;
 			if(perdu == false)
 			{
 				//PLAYER 1
