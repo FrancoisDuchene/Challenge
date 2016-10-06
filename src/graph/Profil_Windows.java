@@ -35,7 +35,7 @@ public class Profil_Windows extends JFrame {
 	{
 		super();
 		LSD = challenge.getResbundle();
-		setTitle("Profil");
+		setTitle(LSD.getString("prW_cstr_msg1"));
 		setSize(1200,750);
 		setLocationRelativeTo(null);
 		setResizable(true);
@@ -58,29 +58,29 @@ public class Profil_Windows extends JFrame {
 
 		final String nom = profilGestion.getName();
 
-		JLabel label1 = new JLabel("PROFIL - " + nom);
+		JLabel label1 = new JLabel(LSD.getString("prW_cstr_msg2") + nom);
 		label1.setHorizontalAlignment(SwingConstants.CENTER);
 		label1.setFont(new Font("Courier", Font.BOLD,20));		
 
-		JButton bouton1 = new JButton("Tableau des scores general");
+		JButton bouton1 = new JButton(LSD.getString("prW_cstr_msg3"));
 		panelTxtPrinc.add(bouton1);
 
-		JButton bouton2= new JButton("Score Pendu");	
+		JButton bouton2= new JButton(LSD.getString("prW_cstr_msg4"));	
 		panelTxtPrinc.add(bouton2);
 
-		JButton bouton3= new JButton("Score PlusMoins");
+		JButton bouton3= new JButton(LSD.getString("prW_cstr_msg5"));
 		panelTxtPrinc.add(bouton3);
 
-		JButton bouton4= new JButton("Score MasterMind");		
+		JButton bouton4= new JButton(LSD.getString("prW_cstr_msg6"));		
 		panelTxtPrinc.add(bouton4);
 
-		JButton bouton5= new JButton("Score Puissance4");		
+		JButton bouton5= new JButton(LSD.getString("prW_cstr_msg7"));		
 		panelTxtPrinc.add(bouton5);
 
-		JButton bouton6= new JButton("Configuration");		
+		JButton bouton6= new JButton(LSD.getString("prW_cstr_msg8"));		
 		panelTxtPrinc.add(bouton6);
 
-		JButton bouton7= new JButton("Changer d'utilisateur");		
+		JButton bouton7= new JButton(LSD.getString("prW_cstr_msg9"));		
 		panelTxtPrinc.add(bouton7);
 
 		panelTxtPrinc.setBackground(Color.lightGray);
@@ -97,15 +97,15 @@ public class Profil_Windows extends JFrame {
 		panConf.setLayout(gdPanConf);		
 		Properties pop = profilGestion.playerConf.getProp();
 
-		panConf.add(new JLabel("Language : ")); panConf.add(new JLabel(pop.getProperty("Language")));
-		panConf.add(new JLabel("joueurs_PlusMoins : ")); panConf.add(new JLabel(pop.getProperty("joueurs_PlusMoins")));
-		panConf.add(new JLabel("limMax_PlusMoins : ")); panConf.add(new JLabel(pop.getProperty("joueurs_PlusMoins")));
-		panConf.add(new JLabel("vies_pendu : ")); panConf.add(new JLabel(pop.getProperty("vies_pendu")));
-		panConf.add(new JLabel("joueurs_pendu : ")); panConf.add(new JLabel(pop.getProperty("joueurs_pendu")));
-		panConf.add(new JLabel("vies_MasterMind : ")); panConf.add(new JLabel(pop.getProperty("vies_MasterMind")));
-		panConf.add(new JLabel("difficulty_MasterMind : ")); panConf.add(new JLabel(pop.getProperty("difficulty_MasterMind")));
-		panConf.add(new JLabel("joueurs_Puissance : ")); panConf.add(new JLabel(pop.getProperty("joueurs_Puissance")));
-		panConf.add(new JLabel("difficulty_Puissance : ")); panConf.add(new JLabel(pop.getProperty("difficulty_Puissance")));
+		panConf.add(new JLabel(LSD.getString("prW_cstr_msg10"))); panConf.add(new JLabel(pop.getProperty("Language")));
+		panConf.add(new JLabel(LSD.getString("prW_cstr_msg11"))); panConf.add(new JLabel(pop.getProperty("joueurs_PlusMoins")));
+		panConf.add(new JLabel(LSD.getString("prW_cstr_msg12"))); panConf.add(new JLabel(pop.getProperty("joueurs_PlusMoins")));
+		panConf.add(new JLabel(LSD.getString("prW_cstr_msg13"))); panConf.add(new JLabel(pop.getProperty("vies_pendu")));
+		panConf.add(new JLabel(LSD.getString("prW_cstr_msg14"))); panConf.add(new JLabel(pop.getProperty("joueurs_pendu")));
+		panConf.add(new JLabel(LSD.getString("prW_cstr_msg15"))); panConf.add(new JLabel(pop.getProperty("vies_MasterMind")));
+		panConf.add(new JLabel(LSD.getString("prW_cstr_msg16"))); panConf.add(new JLabel(pop.getProperty("difficulty_MasterMind")));
+		panConf.add(new JLabel(LSD.getString("prW_cstr_msg17"))); panConf.add(new JLabel(pop.getProperty("joueurs_Puissance")));
+		panConf.add(new JLabel(LSD.getString("prW_cstr_msg18"))); panConf.add(new JLabel(pop.getProperty("difficulty_Puissance")));
 		
 		JButton retourB6 = new JButton("retour");
 		retourB6.addActionListener(new BoutonListenerRetour());
@@ -160,7 +160,7 @@ public class Profil_Windows extends JFrame {
 
 		JGen.add(new JLabel(LSD.getString("prGe_affPr_msg10")));	JGen.add(new JLabel(Integer.toString(profilGestion.playerOne.scoreTotal())));
 		JGen.add(new JLabel(""));
-		JButton retour = new JButton("retour");
+		JButton retour = new JButton(LSD.getString("prW_cstr_msg19"));
 		retour.addActionListener(new BoutonListenerRetour());
 		JGen.add(retour);
 
@@ -203,9 +203,9 @@ public class Profil_Windows extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent event) 
 			{
-				String[] options = new String[]{"Listing des propriétés", "Charger la configuration"};
+				String[] options = new String[]{LSD.getString("prW_cstr_msg20"), LSD.getString("prW_cstr_msg21")};
 
-				String choix = (String)JOptionPane.showInputDialog(null, "Choisissez votre option", "Menu de Configuration", 
+				String choix = (String)JOptionPane.showInputDialog(null, LSD.getString("prW_cstr_msg22"), LSD.getString("prW_cstr_msg23"), 
 						JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
 
 				if(choix.equals(options[0]))
@@ -237,14 +237,14 @@ public class Profil_Windows extends JFrame {
 		jp.add(new JLabel(nom));	jp.add(new JLabel(""));
 		jp.add(new JLabel((tabS[1]!=-1)?Integer.toString(tabS[1]):" - ")); jp.add(new JLabel((tabS[2]!=-1)?Integer.toString(tabS[2]):" - "));
 		jp.add(new JLabel((tabS[3]!=-1)?Integer.toString(tabS[3]):" - ")); jp.add(new JLabel((tabS[4]!=-1)?Integer.toString(tabS[4]):" - "));
-		jp.add(new JLabel("Score " + nom + " total : ")); 
+		jp.add(new JLabel(LSD.getString("prW_cstr_msg24") + nom + LSD.getString("prW_cstr_msg25"))); 
 		if(nom.equals("Puissance 4")){jp.add(new JLabel(Integer.toString(profilGestion.playerOne.scorePuissanceTotal())));}
 		else if(nom.equals("Score Mastermind")){jp.add(new JLabel(Integer.toString(profilGestion.playerOne.scoreMasterMindTotal())));}
 		else if(nom.equals("Score Plus ou Moins")){jp.add(new JLabel(Integer.toString(profilGestion.playerOne.scorePlusMoinsTotal())));}
 		else if(nom.equals("Score Pendu")){jp.add(new JLabel(Integer.toString(profilGestion.playerOne.scorePenduTotal())));}
 
 		jp.add(new JLabel(""));jp.add(new JLabel(""));
-		JButton retour = new JButton("retour");
+		JButton retour = new JButton(LSD.getString("prW_cstr_msg19"));
 		retour.addActionListener(new BoutonListenerRetour());
 		jp.add(retour);jp.add(new JLabel(""));
 		jp.setBackground(Color.lightGray);

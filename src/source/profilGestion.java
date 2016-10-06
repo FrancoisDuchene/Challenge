@@ -14,13 +14,12 @@ import graph.Profil_Windows;
 public class profilGestion {
 
 	private static ResourceBundle LSD = challenge.getResbundle();
-	public static boolean premierOuverture = true;
-	public static boolean existe = false;
-	public static boolean confExiste = false;
+	private static boolean premierOuverture = true;
+	private static boolean existe = false;
+	private static boolean confExiste = false;
 	public static Joueur playerOne = new Joueur();
-	public static String name = "";
+	private static String name = "";
 	public static Config playerConf = null;
-	public static int language = 1;
 	/**
 	 * if mode == 0, it's the console mode that is activated
 	 * if mode == 1, it's the GUI mode that is activated
@@ -40,7 +39,6 @@ public class profilGestion {
 			mode = (byte)1;
 
 		//pour la premiere ouverture de cette fonction dans ce programme
-		language = challenge.getLanguage();
 		if(premierOuverture)
 		{			
 			String nom = "";

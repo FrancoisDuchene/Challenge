@@ -80,6 +80,13 @@ public class InOut
             {System.err.println("NumberFormatException readInteger() InOut :" + e2.getMessage());}
             catch(Exception e3)
             {System.err.println("Exception readInteger() InOut :" + e3.getMessage());}
+            finally{
+            	try {
+    				bf.close();
+    			} catch (IOException e) {
+    				System.err.println("readInteger() - Exception in closing the buffer :" + e.getMessage());
+    			}
+            }
         }
         if(x > max || x < min)
         {
@@ -104,7 +111,14 @@ public class InOut
         {System.err.println("IOException getChar() InOut :" + e1.getMessage());}
         catch(Exception e2)
         {System.err.println("Exception getChar() InOut :" + e2.getMessage());}
-
+        finally{
+        	try {
+				bf.close();
+			} catch (IOException e) {
+				System.err.println("getChar() - Exception in closing the buffer :" + e.getMessage());
+			}
+        }
+        
         if(x == ' ')
         {
             x = getChar();
@@ -116,7 +130,7 @@ public class InOut
      * @pre --
      * @post return the word that was in the console. Skip blanks.
      */
-    public static String getWord()// fonctionne pas
+    public static String getWord()
     {
         BufferedReader bf = null;
         String x = null;
@@ -127,7 +141,7 @@ public class InOut
             while(fin)
             {
                 char s = (char)bf.read();
-                if(x == null || !Character.isLetter(s))
+                if(s == ' ' || !Character.isLetter(s))
                 {
                     fin = false;
                 }
@@ -141,6 +155,13 @@ public class InOut
         {System.err.println("IOException getWord() InOut :" + e1.getMessage());}
         catch(Exception e2)
         {System.err.println("Exception getWord() InOut :" + e2.getMessage());}
+        finally{
+        	try {
+				bf.close();
+			} catch (IOException e) {
+				System.err.println("getWord() - Exception in closing the buffer :" + e.getMessage());
+			}
+        }
 
         if(x.equals(" "))
         {
@@ -158,11 +179,42 @@ public class InOut
             x = bf.readLine();
         }
         catch(IOException e1)
-        {System.err.println("IOException getWord() InOut :" + e1.getMessage());}
+        {System.err.println("IOException getLine() InOut :" + e1.getMessage());}
         catch(Exception e2)
-        {System.err.println("Exception getWord() InOut :" + e2.getMessage());}
+        {System.err.println("Exception getline() InOut :" + e2.getMessage());}
+        finally{
+        	try {
+				bf.close();
+			} catch (IOException e) {
+				System.err.println("getLine() - Exception in closing the buffer :" + e.getMessage());
+			}
+        }
 
         return x;
+    }
+    
+    public static double getDouble()
+    {
+    	BufferedReader bf = null;
+    	double x = Double.NaN;
+    	try{
+    		bf = new BufferedReader(new InputStreamReader(System.in));
+    		String s = bf.readLine();
+    		x = Double.parseDouble(s);
+    	}catch(IOException e1){
+    		System.err.println("IOException getDouble() InOut :" + e1.getMessage());
+    	}catch(NumberFormatException e2){
+    		System.err.println("NumberFormatException getDouble() InOut :" + e2.getMessage());
+    	}catch(Exception e3){
+    		System.err.println("Exception getDouble() InOut :" + e3.getMessage());
+    	}finally{
+        	try {
+				bf.close();
+			} catch (IOException e) {
+				System.err.println(" getDouble() - Exception in closing the buffer :" + e.getMessage());
+			}
+        }
+    	return x;
     }
 
     public static String Mot(String s)

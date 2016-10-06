@@ -414,7 +414,7 @@ public class pendu {
 			System.out.println(LSD.getString("pen_intro_msg3"));
 			challenge.dormirSystem(2500);
 			System.out.println(LSD.getString("pen_intro_msg4"));
-			MotSecret = InOut.Mot(InOut.getLine());
+			MotSecret = InOut.Mot(InOut.getWord());
 			challenge.clear();
 		}else{
 			System.out.println(LSD.getString("pen_intro_msg5"));
