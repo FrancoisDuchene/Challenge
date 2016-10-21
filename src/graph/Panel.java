@@ -49,7 +49,7 @@ public class Panel extends JPanel
             g.fillRect(0,0,this.getWidth(),this.getHeight());
             Font font = new Font("Helvetica", Font.BOLD, (int)(this.getHeight()/1.5));
             g.setFont(font);g.setColor(Color.red);
-            g.drawString("Menu", this.getWidth()/2-this.name.length()*50,(int)(this.getHeight() /1.5));
+            g.drawString("Menu", this.getWidth()/2-this.name.length()*75 , (int)(this.getHeight() /1.5));
         }
     }
 

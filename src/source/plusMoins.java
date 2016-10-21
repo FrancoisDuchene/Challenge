@@ -45,14 +45,7 @@ public class plusMoins {
 		byte ee = 0;
 		boolean victoire = false;
 
-		if(joueurs == 1) 
-		{
-			nbrAleatoire = nbrRandom() ;
-			if(language==1){System.out.println("Le nombre que vous recherchez est compris entre 0 et " + limMax + "\n");}
-			else{System.out.println("The number you are looking for is between 0 and " + limMax + "\n");}
-			
-		}
-		else if (joueurs == 2) 
+		if (joueurs == 2) 
 		{
 			if(language==1){System.out.println("Joueur 1. Intoduisez une valeur pour le 2eme joueur :");}
 			else{System.out.println("Player 1. Introduce a value for the second player :");}			
@@ -63,6 +56,9 @@ public class plusMoins {
 		else
 		{
 			joueurs = 1;
+			nbrAleatoire = nbrRandom() ;
+			if(language==1){System.out.println("Le nombre que vous recherchez est compris entre 0 et " + limMax + "\n");}
+			else{System.out.println("The number you are looking for is between 0 and " + limMax + "\n");}
 		}
 		do 
 		{
@@ -75,16 +71,26 @@ public class plusMoins {
 			nbrUser = InOut.getInt();
 			if(nbrUser == -1) 
 			{break;}
-			if(nbrUser < nbrAleatoire) 
+			if(Math.abs(nbrUser-nbrAleatoire) < (limMax/20))
 			{
-				if(language==1){System.out.println("Plus");}
-				else{System.out.println("More");}
-				
+				if(language==1){System.out.println("Vous êtes très chaud !!!");}
+				else{System.out.println("You are very close !!!");}				
+			}else if(Math.abs(nbrUser-nbrAleatoire) < (limMax/10) && Math.abs(nbrUser-nbrAleatoire) >= (limMax/20) )
+			{
+				if(language==1){System.out.println("Vous chauffez !!");}
+				else{System.out.println("You're closer !!");}				
+			}else if(Math.abs(nbrUser-nbrAleatoire) < (limMax/7) && Math.abs(nbrUser-nbrAleatoire) >= (limMax/10))
+			{
+				if(language==1){System.out.println("Vous commencez à être chaud !");}
+				else{System.out.println("You start getting near !");}				
 			}
-			else if(nbrUser > nbrAleatoire) 
+			else if(Math.abs(nbrUser-nbrAleatoire) < (limMax/4) && Math.abs(nbrUser-nbrAleatoire) >= (limMax/7))
 			{
-				if(language==1){System.out.println("Moins");}
-				else{System.out.println("Less");}
+				if(language==1){System.out.println("Vous êtes tiède");}
+				else{System.out.println("You are middle way");}				
+			}else{
+				if(language==1){System.out.println("Vous êtes froid");}
+				else{System.out.println("You are far, far away");}				
 			}
 			switch(nbrUser) 
 			{

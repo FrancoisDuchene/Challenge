@@ -26,7 +26,7 @@ import source.plusMoins;
 import source.profilGestion;
 
 
-public class PageAccueil extends JFrame
+public class PageAccueil extends Challenge_JFrame
 {
 	private static final long serialVersionUID = -8435323211801706775L;
 	JPanel pageMenu = new JPanel();
@@ -57,12 +57,8 @@ public class PageAccueil extends JFrame
 
 	public PageAccueil()
 	{
+		super("Challenge",(byte)3);
 		langue = challenge.getLanguage();
-		this.setTitle("Challenge");
-		this.setSize(1200,750);
-		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(true);
 
 		this.navigation.add(nav1);
 		this.navigation.add(nav2);

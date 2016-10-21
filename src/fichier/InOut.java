@@ -80,13 +80,6 @@ public class InOut
             {System.err.println("NumberFormatException readInteger() InOut :" + e2.getMessage());}
             catch(Exception e3)
             {System.err.println("Exception readInteger() InOut :" + e3.getMessage());}
-            finally{
-            	try {
-    				bf.close();
-    			} catch (IOException e) {
-    				System.err.println("readInteger() - Exception in closing the buffer :" + e.getMessage());
-    			}
-            }
         }
         if(x > max || x < min)
         {
@@ -111,13 +104,6 @@ public class InOut
         {System.err.println("IOException getChar() InOut :" + e1.getMessage());}
         catch(Exception e2)
         {System.err.println("Exception getChar() InOut :" + e2.getMessage());}
-        finally{
-        	try {
-				bf.close();
-			} catch (IOException e) {
-				System.err.println("getChar() - Exception in closing the buffer :" + e.getMessage());
-			}
-        }
         
         if(x == ' ')
         {
@@ -155,13 +141,6 @@ public class InOut
         {System.err.println("IOException getWord() InOut :" + e1.getMessage());}
         catch(Exception e2)
         {System.err.println("Exception getWord() InOut :" + e2.getMessage());}
-        finally{
-        	try {
-				bf.close();
-			} catch (IOException e) {
-				System.err.println("getWord() - Exception in closing the buffer :" + e.getMessage());
-			}
-        }
 
         if(x.equals(" "))
         {
@@ -182,14 +161,6 @@ public class InOut
         {System.err.println("IOException getLine() InOut :" + e1.getMessage());}
         catch(Exception e2)
         {System.err.println("Exception getline() InOut :" + e2.getMessage());}
-        finally{
-        	try {
-				bf.close();
-			} catch (IOException e) {
-				System.err.println("getLine() - Exception in closing the buffer :" + e.getMessage());
-			}
-        }
-
         return x;
     }
     
@@ -207,13 +178,7 @@ public class InOut
     		System.err.println("NumberFormatException getDouble() InOut :" + e2.getMessage());
     	}catch(Exception e3){
     		System.err.println("Exception getDouble() InOut :" + e3.getMessage());
-    	}finally{
-        	try {
-				bf.close();
-			} catch (IOException e) {
-				System.err.println(" getDouble() - Exception in closing the buffer :" + e.getMessage());
-			}
-        }
+    	}
     	return x;
     }
 

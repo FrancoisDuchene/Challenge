@@ -10,7 +10,6 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -24,7 +23,7 @@ import source.profilGestion;
  * @author vinsifroid
  * @version 1.0
  */
-public class Profil_Windows extends JFrame {
+public class Profil_Windows extends Challenge_JFrame {
 
 	private static final long serialVersionUID = 5288800453009819186L;
 	private CardLayout cl;
@@ -33,13 +32,9 @@ public class Profil_Windows extends JFrame {
 
 	public Profil_Windows()
 	{
-		super();
+		super((byte)2);
 		LSD = challenge.getResbundle();
 		setTitle(LSD.getString("prW_cstr_msg1"));
-		setSize(1200,750);
-		setLocationRelativeTo(null);
-		setResizable(true);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		/*
 		 * On va maintenant faire le contenu du panel
 		 */
