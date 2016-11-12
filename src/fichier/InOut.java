@@ -142,7 +142,7 @@ public class InOut
         catch(Exception e2)
         {System.err.println("Exception getWord() InOut :" + e2.getMessage());}
 
-        if(x.equals(" "))
+        if(x != null && x.equals(" "))
         {
             x = getWord();
         }

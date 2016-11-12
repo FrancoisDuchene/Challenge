@@ -3,6 +3,7 @@ import java.util.ResourceBundle;
 
 import exceptions.INVALID_MODE;
 import fichier.InOut;
+import graph.Pendu_Window;
 
 
 /**
@@ -18,6 +19,21 @@ public class pendu {
 
 	// Les Fonctions suivantes sont utilisees pour la naviguation et non pas
 	// pour le fonctionnement du jeu en lui-même
+
+	/**
+	 * 
+	 * @param gui true if in Graphic mode and false if in console mode
+	 */
+	public static void redirection(boolean gui)
+	{
+		if(gui)
+		{
+			//Pendu_Window pw = new Pendu_Window();
+			//pw.setVisible(true);
+		}else{
+			menu();
+		}
+	}
 	/**
 	 *  give a menu to user and then redirect him
 	 */
@@ -29,6 +45,7 @@ public class pendu {
 		do
 		{
 			System.out.println(LSD.getString("pen_menu_msg1"));
+			challenge.dormirSystem(500);
 			System.out.println(LSD.getString("pen_menu_msg2"));
 
 			choix = InOut.getByte();
@@ -95,19 +112,8 @@ public class pendu {
 	{   
 		System.out.println((LSD.getString("pen_opt1_msg1") + vies + LSD.getString("pen_opt1_msg2")));
 		System.out.println(LSD.getString("pen_opt1_msg3"));
-		vies = InOut.getShort();
-		if(vies <= 0)
-		{
-			vies = 1;
-		}
-		else if(vies > 26)
-		{
-			vies = 26;
-		}
-		if(!profilGestion.getPremierOuverture())
-		{
-			profilGestion.gestionConfig(true);
-		}
+		final short vie = InOut.getShort();
+		setVies(vie);
 	}
 	/**
 	 *  change the value of the member variable joueurs
@@ -116,16 +122,8 @@ public class pendu {
 	{   
 		System.out.println(LSD.getString("pen_opt2_msg1") + joueurs + LSD.getString("pen_opt2_msg2"));
 		System.out.println(LSD.getString("pen_opt2_msg3"));
-		joueurs = InOut.getByte();
-		if(joueurs>2)
-		{joueurs=2;}
-		if(joueurs<1)
-		{joueurs=1;}
-		
-		if(!profilGestion.getPremierOuverture())
-		{
-			profilGestion.gestionConfig(true);
-		}
+		final byte joueur = InOut.getByte();
+		setJoueurs(joueur);
 	}
 	/**
 	 * add a word to the dictionary
@@ -573,9 +571,42 @@ public class pendu {
 	{
 		return joueurs;
 	}
+	/**
+	 * 
+	 * @param vies_p 
+	 * @param J le nombre de joueurs
+	 */
 	public static void setParam(short vies_p, byte J)
 	{
 		vies = vies_p;
 		joueurs = J;
+	}
+	public static void setVies(short vie)
+	{
+		if(vie <= 0){
+			vies = 1;
+		}else if(vie > 26){
+			vies = 26;
+		}else{
+			vies = vie;
+		}
+		if(!profilGestion.getPremierOuverture())
+		{
+			profilGestion.gestionConfig(true);
+		}
+	}
+	public static void setJoueurs(byte J)
+	{
+		if(J>2){
+			joueurs=2;
+		}else if(J<1){
+			joueurs=1;
+		}else{
+			joueurs = J;
+		}
+		if(!profilGestion.getPremierOuverture())
+		{
+			profilGestion.gestionConfig(true);
+		}
 	}
 }

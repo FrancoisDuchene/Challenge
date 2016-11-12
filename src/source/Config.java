@@ -70,6 +70,7 @@ public class Config
 			System.err.println(e3.getMessage());
 		}finally{
 			try{
+				if(luke != null)
 				luke.close();
 			}catch(Exception e4){
 				e4.printStackTrace();
@@ -96,6 +97,7 @@ public class Config
 			System.err.println(e3.getMessage());
 		}finally{
 			try{
+				if(leia != null)
 				leia.close();
 			}catch(Exception e4){
 				e4.printStackTrace();

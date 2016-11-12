@@ -27,7 +27,7 @@ public class SoundPlayer extends Thread
 	{
 		while(challenge.continuons)
 		{
-			
+
 			File soundFile = rdmMusique();
 			if(soundFile==null)
 				return;
@@ -74,18 +74,24 @@ public class SoundPlayer extends Thread
 				e.printStackTrace();
 				System.exit(-1);
 			} finally {
-				auline.drain();
-				try {
-					audioInputStream.close();
-				} catch (IOException e) {
-					e.printStackTrace();
+				if(auline != null)
+				{
+					auline.drain();
+					try {
+						if(audioInputStream != null)
+						{
+							audioInputStream.close();
+						}					
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					auline.close();
 				}
-				auline.close();
 			}
 		}
 	}
-	
-	
+
+
 	public File rdmMusique()
 	{
 		final String filenameL = "res/data/mus.txt";
@@ -115,7 +121,7 @@ public class SoundPlayer extends Thread
 		int nbrRandom = (int) nbr;
 		return Math.abs(nbrRandom);
 	}
-	
+
 	public void setCurToLeft()
 	{
 		curPosition = Position.LEFT;

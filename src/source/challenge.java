@@ -176,14 +176,10 @@ public class challenge
 			switch(choix)
 			{
 			case 1:
-				language = 1;
-				LSD = ResourceBundle.getBundle("lang.challenge", new Locale("fr", "BE"));
-				System.out.println(LSD.getString("chal_chLa_msg2"));
+				setLanguageToFrench();
 				break;
 			case 2:
-				language = 2;
-				LSD = ResourceBundle.getBundle("lang.challenge", new Locale("en"));
-				System.out.println(LSD.getString("chal_chLa_msg2"));
+				setLanguageToEnglish();
 				break;
 			}
 		}while(choix != 1 && choix != 2);
@@ -206,6 +202,18 @@ public class challenge
 				}
 			}while(bleu < 2 && bleu > 1);
 		}
+	}
+	private static void setLanguageToFrench()
+	{
+		language = 1;
+		LSD = ResourceBundle.getBundle("lang.challenge", new Locale("fr", "BE"));
+		System.out.println(LSD.getString("chal_chLa_msg2"));
+	}
+	private static void setLanguageToEnglish()
+	{
+		language = 2;
+		LSD = ResourceBundle.getBundle("lang.challenge", new Locale("en"));
+		System.out.println(LSD.getString("chal_chLa_msg2"));
 	}
 	/**
 	 * This function just print the Menu at the screen
@@ -242,7 +250,18 @@ public class challenge
 	}
 	public static void setLanguage(byte lang)
 	{
-		language = lang;
+		switch(lang)
+		{
+		case 1:
+			setLanguageToFrench();
+			break;
+		case 2:
+			setLanguageToEnglish();
+			break;
+		default:
+			System.err.println("Bad language selected");
+			break;
+		}
 	}
 	public static ResourceBundle getResbundle()
 	{

@@ -158,6 +158,7 @@ public class HighScore {
 			System.err.println(e3.getMessage());
 		}finally{
 			try{
+				if(Solo != null)
 				Solo.close();
 			}catch(Exception e4){
 				e4.printStackTrace();
@@ -188,6 +189,7 @@ public class HighScore {
 			System.err.println(e3.getMessage());
 		}finally{
 			try{
+				if(C3PO != null)
 				C3PO.close();
 			}catch(Exception e4){
 				e4.printStackTrace();
