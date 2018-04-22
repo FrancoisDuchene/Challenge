@@ -48,7 +48,7 @@ To run this program, you need **Java 7** or more installed on your computer
                    
 #### List of contributors
 
-* THE GREAT INQUISITOR: vinsifroid
+* THE GREAT INQUISITOR: FrancoisDuchene
 * THE FINDER OF CLUES: Bivisi
 * THE MASTER OF THE DICTIONNARY: melvinmajor
 * OCCASIONNAL CONTRIBUTOR : Lazyboy007
